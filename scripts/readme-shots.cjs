@@ -9,9 +9,11 @@ const out = "docs/screens";
   await desk.goto(base + "/", { waitUntil: "load" });
   await desk.waitForTimeout(5200);
   await desk.screenshot({ path: `${out}/home.png` });
-  await desk.locator("#how-h").evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 60));
-  await desk.waitForTimeout(500);
-  await desk.screenshot({ path: `${out}/how.png` });
+  for (const [id, name] of [["#wall-h", "wall"], ["#spec-h", "anatomy"], ["#codes-h", "codes"]]) {
+    await desk.locator(id).evaluate((el) => window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 90));
+    await desk.waitForTimeout(2200);
+    await desk.screenshot({ path: `${out}/${name}.png` });
+  }
 
   await desk.goto(`${base}/check/${CHECK}`, { waitUntil: "load" });
   await desk.waitForTimeout(1500);
