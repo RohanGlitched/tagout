@@ -26,6 +26,11 @@ export default function Board({ entries, caption }: { entries: BoardEntry[]; cap
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // Nothing to play under reduced motion: show the tags at once.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setHung(true);
+      return;
+    }
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
