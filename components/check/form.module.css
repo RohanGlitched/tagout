@@ -1,0 +1,148 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 560px;
+}
+.ask {
+  font-weight: 600;
+  font-size: 15px;
+}
+.box {
+  width: 100%;
+  resize: vertical;
+  min-height: 118px;
+  padding: 14px 16px;
+  font: 500 16px/1.6 var(--font-mono), ui-monospace, monospace;
+  color: var(--ink);
+  background: var(--stock);
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(21, 25, 30, 0.05) inset;
+}
+.box::placeholder {
+  color: #9aa1aa;
+}
+.box:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.18);
+}
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  align-items: center;
+}
+.try {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-right: 2px;
+}
+.chip {
+  border: 1px solid var(--rule);
+  background: transparent;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 32px;
+}
+.chip:hover {
+  border-color: var(--ink);
+  background: var(--stock);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.go {
+  min-height: 50px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  font-variation-settings: "wdth" 108;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+.go:hover:not(:disabled) {
+  background: #000;
+}
+.go:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.photo {
+  min-height: 50px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  background: transparent;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+.photo:hover:not(:disabled) {
+  background: var(--stock);
+}
+.photo:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.photos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+.photos li {
+  position: relative;
+}
+.photos img {
+  display: block;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+}
+.photos button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.error {
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: 600;
+}
+.compact .box {
+  min-height: 90px;
+}
+@media (max-width: 520px) {
+  .go,
+  .photo {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

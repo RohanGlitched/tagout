@@ -1,0 +1,156 @@
+.tag {
+  --tone: var(--danger);
+  --tone-deep: var(--danger-deep);
+  --w: 236px;
+  --hole: 15px;
+  --hole-top: 16px;
+  position: relative;
+  width: var(--w);
+  transform-origin: 50% calc(var(--hole-top) + var(--hole) / 2);
+  transform: rotate(var(--rest, -3deg));
+  filter: drop-shadow(0 14px 14px rgba(21, 25, 30, 0.18)) drop-shadow(0 2px 2px rgba(21, 25, 30, 0.12));
+}
+.tag[data-level="warning"] {
+  --tone: var(--warning);
+  --tone-deep: var(--warning-deep);
+}
+.tag[data-level="inspected"] {
+  --tone: var(--inspected);
+  --tone-deep: var(--inspected-deep);
+}
+.sm {
+  --w: 168px;
+  --hole: 11px;
+  --hole-top: 11px;
+}
+.lg {
+  --w: 300px;
+  --hole: 18px;
+  --hole-top: 19px;
+}
+
+/* Card stock with chamfered top corners, like a cut shipping or lockout tag. */
+.card {
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.6), transparent 60%),
+    #fdfdfc;
+  clip-path: polygon(16% 0, 84% 0, 100% 9%, 100% 100%, 0 100%, 0 9%);
+  padding-top: calc(var(--hole-top) + var(--hole) + 10px);
+  display: flex;
+  flex-direction: column;
+}
+.sm .card {
+  clip-path: polygon(18% 0, 82% 0, 100% 11%, 100% 100%, 0 100%, 0 11%);
+}
+
+/* The reinforced eyelet. The hole shows what's behind the tag. */
+.grommet {
+  position: absolute;
+  top: var(--hole-top);
+  left: 50%;
+  width: var(--hole);
+  height: var(--hole);
+  margin-left: calc(var(--hole) / -2);
+  border-radius: 50%;
+  background: var(--galv);
+  box-shadow:
+    0 0 0 3.5px #b9bfc6,
+    0 0 0 4.5px #8d959e,
+    0 1px 2px 4px rgba(255, 255, 255, 0.6),
+    inset 0 2px 3px rgba(0, 0, 0, 0.35);
+}
+.sm .grommet {
+  box-shadow:
+    0 0 0 2.5px #b9bfc6,
+    0 0 0 3.5px #8d959e,
+    inset 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.head {
+  background: var(--tone);
+  color: #fff;
+  padding: 10px 14px 9px;
+  text-align: center;
+  border-top: 3px solid var(--tone-deep);
+  border-bottom: 3px solid var(--tone-deep);
+}
+.word {
+  display: block;
+  font-weight: 800;
+  font-variation-settings: "wdth" 125;
+  font-size: 22px;
+  line-height: 1.02;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+}
+.sm .head {
+  padding: 6px 10px 5px;
+}
+.sm .word {
+  font-size: 14px;
+}
+.lg .word {
+  font-size: 27px;
+}
+
+.body {
+  padding: 13px 16px 4px;
+  font-size: 14px;
+  line-height: 1.42;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.sm .body {
+  padding: 9px 11px 2px;
+  font-size: 12px;
+  gap: 5px;
+}
+.foot {
+  margin-top: 8px;
+  padding: 9px 16px 13px;
+  border-top: 1px dashed var(--rule);
+  font-size: 11px;
+  font-variation-settings: var(--narrow);
+  color: var(--ink-soft);
+  line-height: 1.35;
+}
+.sm .foot {
+  padding: 6px 11px 9px;
+  font-size: 10px;
+}
+
+/* Hung once: dropped onto its string, swings, settles. */
+.swing {
+  animation: swing 1.9s cubic-bezier(0.2, 0.7, 0.3, 1) var(--delay, 0ms) both;
+}
+@keyframes swing {
+  0% {
+    opacity: 0;
+    transform: translateY(-26px) rotate(-62deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  32% {
+    transform: translateY(0) rotate(19deg);
+  }
+  50% {
+    transform: rotate(-11deg);
+  }
+  66% {
+    transform: rotate(6deg);
+  }
+  80% {
+    transform: rotate(calc(var(--rest, -3deg) - 3deg));
+  }
+  100% {
+    transform: rotate(var(--rest, -3deg));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .swing {
+    animation: none;
+  }
+}

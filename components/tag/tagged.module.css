@@ -1,0 +1,73 @@
+.tagged {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+}
+
+/* A zero-size anchor at the label's tie point (just inside its top-right corner). */
+.hang {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 0;
+  height: 0;
+  z-index: 2;
+}
+.tie {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #59616b, #22272d 70%);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+.string {
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 3;
+}
+.string path {
+  fill: none;
+  stroke: #2b3036;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.stringIn path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: tie 0.45s ease-out var(--delay, 0ms) forwards;
+}
+@keyframes tie {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* The tag is placed so its grommet centre lands at (dx, dy) from the tie point. */
+.tagSlot {
+  --tw: 236px;
+  --gy: 23.5px;
+  position: absolute;
+  left: calc(var(--dx) - var(--tw) / 2);
+  top: calc(var(--dy) - var(--gy));
+}
+[data-size="sm"] .tagSlot {
+  --tw: 168px;
+  --gy: 16.5px;
+}
+[data-size="lg"] .tagSlot {
+  --tw: 300px;
+  --gy: 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stringIn path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

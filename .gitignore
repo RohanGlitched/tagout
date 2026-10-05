@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.vercel
+.env*
+!.env.example
+*.log
+next-env.d.ts
+test-results
+.data
+tsconfig.tsbuildinfo
