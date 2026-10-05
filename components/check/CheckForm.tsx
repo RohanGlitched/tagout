@@ -117,7 +117,11 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
       <div className={s.examples}>
         <span className={s.try}>Try:</span>
         {examples.map((x) => (
-          <button key={x.label} type="button" className={s.chip} onClick={() => setText((t) => (t.trim() ? `${t.trim()}\n${x.text}` : x.text))}>
+          <button key={x.label} type="button" className={s.chip} onClick={() => {
+              setError(null);
+              setText((t) => (t.trim() ? `${t.trim()}\n${x.text}` : x.text));
+            }}
+          >
             {x.label}
           </button>
         ))}
