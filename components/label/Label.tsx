@@ -138,7 +138,7 @@ function Sticker({ item, marks }: BodyProps) {
 
 /** Short identifier codes only ("TYPE SRTH" → "SRTH"); ratings like "120V~ 60Hz 1500W" aren't codes. */
 function typeCodes(codes?: string[]): string | undefined {
-  const ids = (codes ?? []).map((c) => c.replace(/^type\s*/i, "").trim()).filter((c) => c.length <= 16 && !/\d\s*(v|w|hz|a)b|~/i.test(c));
+  const ids = (codes ?? []).map((c) => c.replace(/^type\s*/i, "").trim()).filter((c) => c.length <= 16 && !/\d\s*(v|w|hz|a)\b|~/i.test(c));
   return ids.length ? ids.join(", ") : undefined;
 }
 
