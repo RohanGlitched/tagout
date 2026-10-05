@@ -67,9 +67,9 @@ All model calls go to **Nebius Token Factory**'s OpenAI-compatible API (`https:/
 | Search agent | `nvidia/Nemotron-3-Ultra-550b-a55b` | OpenAI-style `tools`, parallel tool calls, up to 6 rounds, forced `finish` on the last |
 | Read each recall notice | `nvidia/Nemotron-3-Ultra-550b-a55b` | Strict `json_schema`; codes verified against the notice text |
 | Fallback for all three | `nvidia/nemotron-3-super-120b-a12b` | Same calls; used when Ultra errors or times out |
-| Read label photos | `Qwen/Qwen3.8-27B`, then `zai-org/GLM-5.3-Flash` | Vision chat with `json_schema` |
+| Read label photos | `Qwen/Qwen3.8-27B`, then `google/gemma-3-27b-it` | Vision chat with `json_schema` |
 
-Why Ultra everywhere: on day one we measured all four Nemotron models on Token Factory with the same tool call and the same strict-JSON task. Ultra was the fastest *and* the cleanest (0.5 s for a tool call, 0.9 s for structured output). Super sometimes leaked reasoning into JSON strings, which the code verifier caught and struck. The model chain is set by env (`NEBIUS_AGENT_MODELS`, `NEBIUS_READER_MODELS`, `NEBIUS_VISION_MODELS`), and the page names the model that actually answered.
+Why Ultra everywhere: on day one we measured all four Nemotron models on Token Factory with the same tool call and the same strict-JSON task. Ultra was the fastest *and* the cleanest (0.5 s for a tool call, 0.9 s for structured output). Super sometimes leaked reasoning into JSON strings, which the code verifier caught and struck. The model chain is set by env (`NEBIUS_AGENT_MODELS`, `NEBIUS_READER_MODELS`, `NEBIUS_VISION_MODELS`), and the page names the model that actually answered, with the number of calls and tokens the check took. The five-item example check makes about 33 calls and uses about 104k tokens, about 13 cents at Ultra's list price.
 
 If Token Factory is unreachable, or the demo's daily budget (`DAILY_MODEL_CAP`) is spent, checks run a fixed search plan with the same matcher, and say so.
 
@@ -87,7 +87,7 @@ If Token Factory is unreachable, or the demo's daily budget (`DAILY_MODEL_CAP`) 
 | NHTSA vPIC | `vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues` | VIN → make, model, year |
 | NHTSA recalls | `api.nhtsa.gov/recalls/recallsByVehicle`, `api.nhtsa.gov/childSeats/bySearch` | Vehicle and child seat recalls, "do not drive" flags |
 | CPSC | `saferproducts.gov/RestWebServices/Recall`, CPSC recalls RSS | Consumer products |
-| FDA | `api.fda.gov/{drug,food,device}/enforcement.json` | Drugs, food and supplements, medical devices |
+| FDA | `api.fda.gov/{drug,food,device}/enforcement.json` | Drugs, food and supplements, medical devices (an optional `OPENFDA_API_KEY` raises the per-IP limit) |
 | Tavily | `api.tavily.com/search`, `/extract` | The newest recalls, USDA FSIS, full recall pages |
 
 All are public and keyless except Tavily and Token Factory.
@@ -140,7 +140,8 @@ npx tsx --conditions=react-server scripts/try-check.ts "Vornado heater TYPE SRTH
 - U.S. recalls only. A product sold only elsewhere may be recalled there without a U.S. notice.
 - Green means nothing was found that day, not that a product is safe.
 - CPSC's API returns a fake error record and caches it per URL, so every call carries a cache-buster and retries. Its `Model` field is always empty, which is why model numbers are read from the prose.
-- The demo has per-visitor and daily limits on model calls; past them, checks use the fixed plan.
+- The demo has per-visitor and daily limits on model calls (12 checks per 10 minutes and 40 a day per address, 150 a day in all); past them, checks use the fixed plan.
+- The vision fallback changed on Oct 5: GLM-5.3-Flash took over three minutes to answer a one-line prompt, so Gemma 3 27B (7 s on the sample label) now backs up Qwen3.8 27B.
 - Tagout isn't affiliated with NHTSA, CPSC, FDA or USDA. Always confirm with the recall notice; every tag links to it.
 
 ## License

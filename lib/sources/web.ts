@@ -11,9 +11,22 @@ const API = "https://api.tavily.com";
 
 export const OFFICIAL_DOMAINS = ["cpsc.gov", "nhtsa.gov", "fda.gov", "fsis.usda.gov", "recalls.gov", "foodsafety.gov"];
 
+const KEYLESS = { "x-tavily-access-mode": "keyless", "content-type": "application/json" };
+
 function headers(): Record<string, string> {
   const key = process.env.TAVILY_API_KEY;
-  return key ? { authorization: `Bearer ${key}`, "content-type": "application/json" } : { "x-tavily-access-mode": "keyless", "content-type": "application/json" };
+  return key ? { authorization: `Bearer ${key}`, "content-type": "application/json" } : KEYLESS;
+}
+
+/**
+ * One Tavily call. 429 is the rate limit, 432 and 433 mean the key's plan or pay-as-you-go limit is spent: the
+ * demo then falls back to Tavily's keyless mode (slower, smaller quota) rather than lose the web half of a check.
+ */
+async function tavily(path: string, body: Record<string, unknown>, timeoutMs: number): Promise<Response> {
+  const r = await fetch(`${API}${path}`, { method: "POST", headers: headers(), body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
+  if (!process.env.TAVILY_API_KEY || ![429, 432, 433].includes(r.status)) return r;
+  console.error(`[tavily] HTTP ${r.status} with the key; retrying keyless`);
+  return fetch(`${API}${path}`, { method: "POST", headers: KEYLESS, body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
 }
 
 const SITE: Record<string, string> = {
@@ -37,7 +50,7 @@ export async function webSearch(q: WebQuery): Promise<{ notices: Notice[]; answe
     include_answer: false,
   };
   if (q.days) body.time_range = q.days <= 7 ? "week" : q.days <= 31 ? "month" : "year";
-  const r = await fetch(`${API}/search`, { method: "POST", headers: headers(), body: JSON.stringify(body), signal: AbortSignal.timeout(15_000) });
+  const r = await tavily("/search", body, 15_000);
   if (!r.ok) throw new Error(`Tavily search failed (HTTP ${r.status}).`);
   const j = (await r.json()) as { results: SearchResult[] };
   const notices = (j.results ?? [])
@@ -65,12 +78,7 @@ export async function webSearch(q: WebQuery): Promise<{ notices: Notice[]; answe
 export async function webExtract(urls: string[]): Promise<Map<string, string>> {
   const out = new Map<string, string>();
   if (!urls.length) return out;
-  const r = await fetch(`${API}/extract`, {
-    method: "POST",
-    headers: headers(),
-    body: JSON.stringify({ urls: urls.slice(0, 5), extract_depth: "basic", format: "text" }),
-    signal: AbortSignal.timeout(20_000),
-  });
+  const r = await tavily("/extract", { urls: urls.slice(0, 5), extract_depth: "basic", format: "text" }, 20_000);
   if (!r.ok) return out;
   const j = (await r.json()) as { results: { url: string; raw_content: string }[] };
   for (const x of j.results ?? []) out.set(x.url, clean(x.raw_content).slice(0, 16_000));

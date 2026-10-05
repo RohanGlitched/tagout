@@ -115,7 +115,7 @@ function label(tool: string, a: Record<string, unknown>): { text: string; source
       return { text: `NHTSA car seat recalls for ${q(a.query)}`, source: "nhtsa" };
     case "search_cpsc": {
       const parts = [a.title && `title ${q(a.title)}`, a.product && `product ${q(a.product)}`, a.description && `text ${q(a.description)}`, a.manufacturer && `maker ${q(a.manufacturer)}`].filter(Boolean);
-      return { text: `CPSC recalls, ${parts.join(", ")}`, source: "cpsc" };
+      return { text: parts.length ? `CPSC recalls, ${parts.join(", ")}` : "CPSC recalls, with no search terms", source: "cpsc" };
     }
     case "search_fda": {
       const parts = [a.ndc && `NDC ${a.ndc}`, a.lot && `lot ${a.lot}`, a.upc && `UPC ${a.upc}`, a.brand && `brand ${q(a.brand)}`, a.words && q(a.words)].filter(Boolean);

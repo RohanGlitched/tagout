@@ -29,6 +29,9 @@ type Rec = {
 
 const iso = (d: string) => (/^\d{8}$/.test(d) ? `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6)}` : d);
 
+/** openFDA's keyless limit is per IP, and a serverless host's egress IPs are shared; a free key raises it to 120,000 a day. */
+const apiKey = () => (process.env.OPENFDA_API_KEY ? `&api_key=${encodeURIComponent(process.env.OPENFDA_API_KEY)}` : "");
+
 /** NDCs and UPCs printed in the description: these are the product's identifiers, read without a model. */
 export function codesIn(text: string): { ndcs: string[]; upcs: string[] } {
   const ndcs = [...text.matchAll(/\b\d{4,5}-\d{3,4}-\d{1,2}\b/g)].map((m) => m[0]);
@@ -109,7 +112,7 @@ export async function searchFda(q: FdaQuery, limit = 10): Promise<Notice[]> {
   const since = q.since ? `+AND+report_date:[${q.since.replace(/-/g, "")}+TO+20991231]` : "";
   const results = await Promise.all(
     searches.map((s) =>
-      getJson<{ results: Rec[] }>(`${base}?search=${encodeURIComponent(s).replace(/%20/g, "+").replace(/%2B/g, "+")}${since}&sort=report_date:desc&limit=${limit}`, { timeoutMs: 12_000 })
+      getJson<{ results: Rec[] }>(`${base}?search=${encodeURIComponent(s).replace(/%20/g, "+").replace(/%2B/g, "+")}${since}&sort=report_date:desc&limit=${limit}${apiKey()}`, { timeoutMs: 12_000 })
         .then((j) => j?.results ?? [])
         .catch(() => [] as Rec[]),
     ),
@@ -124,6 +127,6 @@ export async function searchFda(q: FdaQuery, limit = 10): Promise<Notice[]> {
 
 /** The newest enforcement reports of a kind (for the "Recalls today" board). */
 export async function latestFda(kind: FdaKind, limit = 20): Promise<Notice[]> {
-  const j = await getJson<{ results: Rec[] }>(`https://api.fda.gov/${kind}/enforcement.json?sort=report_date:desc&limit=${limit}`, { timeoutMs: 12_000 });
+  const j = await getJson<{ results: Rec[] }>(`https://api.fda.gov/${kind}/enforcement.json?sort=report_date:desc&limit=${limit}${apiKey()}`, { timeoutMs: 12_000 });
   return (j?.results ?? []).map(toNotice);
 }

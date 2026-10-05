@@ -130,7 +130,7 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
         <button type="submit" className={s.go} disabled={busy}>
           {busy ? "Starting the check…" : "Check my things"}
         </button>
-        <input ref={fileRef} type="file" accept="image/*" capture="environment" multiple hidden onChange={(e) => addPhotos(e.target.files)} />
+        <input ref={fileRef} type="file" accept="image/*" multiple hidden onChange={(e) => addPhotos(e.target.files)} />
         <button type="button" className={s.photo} onClick={() => fileRef.current?.click()} disabled={photos.length >= MAX_PHOTOS || busy}>
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />

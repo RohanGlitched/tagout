@@ -1,4 +1,5 @@
 import "server-only";
+import { AsyncLocalStorage } from "node:async_hooks";
 
 /**
  * Nebius Token Factory (OpenAI-compatible) with NVIDIA Nemotron. Each role names a chain of models so one
@@ -16,7 +17,7 @@ export const MODELS = {
    *  fastest and cleanest at strict JSON here; Super is the fallback. */
   reader: list(process.env.NEBIUS_READER_MODELS, ["nvidia/Nemotron-3-Ultra-550b-a55b", "nvidia/nemotron-3-super-120b-a12b"]),
   /** Reads label photos. There is no NVIDIA vision model on Token Factory today, so this is the one non-Nemotron role. */
-  vision: list(process.env.NEBIUS_VISION_MODELS, ["Qwen/Qwen3.8-27B", "zai-org/GLM-5.3-Flash"]),
+  vision: list(process.env.NEBIUS_VISION_MODELS, ["Qwen/Qwen3.8-27B", "google/gemma-3-27b-it"]),
 };
 
 /** "nvidia/Nemotron-3-Ultra-550b-a55b" → "Nemotron 3 Ultra". */
@@ -27,6 +28,7 @@ export function modelLabel(id: string): string {
   if (/lightning/i.test(n)) return "Nemotron 3.5 Lightning";
   if (/nano/i.test(n)) return "Nemotron 3 Nano";
   if (/qwen/i.test(n)) return "Qwen3.8 27B";
+  if (/gemma/i.test(n)) return "Gemma 3 27B";
   if (/glm/i.test(n)) return "GLM-5.3 Flash";
   return n;
 }
@@ -41,11 +43,16 @@ export type ToolDef = { type: "function"; function: { name: string; description:
 
 export type ChatResult = { model: string; content: string; toolCalls: ToolCall[]; usage?: { prompt_tokens: number; completion_tokens: number } };
 
+/** Token Factory calls and tokens spent inside one check, so the page can say what the check cost. */
+export type Usage = { calls: number; prompt: number; completion: number };
+export const usageScope = new AsyncLocalStorage<Usage>();
+
 export function hasKey(): boolean {
   return Boolean(process.env.NEBIUS_API_KEY);
 }
 
 async function once(model: string, body: Record<string, unknown>, timeoutMs: number): Promise<ChatResult> {
+  const t0 = Date.now();
   const r = await fetch(`${BASE}/chat/completions`, {
     method: "POST",
     headers: { authorization: `Bearer ${process.env.NEBIUS_API_KEY}`, "content-type": "application/json" },
@@ -60,6 +67,13 @@ async function once(model: string, body: Record<string, unknown>, timeoutMs: num
   const j = (await r.json()) as { choices: { message: { content: string | null; tool_calls?: ToolCall[] } }[]; usage?: ChatResult["usage"] };
   const m = j.choices?.[0]?.message;
   if (!m) throw new Error("empty response");
+  const tally = usageScope.getStore();
+  if (tally && j.usage) {
+    tally.calls++;
+    tally.prompt += j.usage.prompt_tokens ?? 0;
+    tally.completion += j.usage.completion_tokens ?? 0;
+  }
+  console.log(`[nebius] ${model} ${Date.now() - t0}ms ${j.usage?.prompt_tokens ?? "?"}+${j.usage?.completion_tokens ?? "?"} tokens`);
   return { model, content: (m.content ?? "").trim(), toolCalls: m.tool_calls ?? [], usage: j.usage };
 }
 

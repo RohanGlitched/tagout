@@ -204,7 +204,9 @@ function Engine({ rec }: { rec: Pub }) {
           {e.reader ? `${e.reader} read your list. ` : ""}
           {e.vision ? `${e.vision} read your label photos. ` : ""}
           {e.agent ? `${e.agent} planned the searches and chose the relevant recalls. ` : ""}
-          All of it ran on Nebius Token Factory. Tavily searched the web. Whether a tag is red was decided by comparing your codes with each recall&apos;s list, not by a model.
+          All of it ran on Nebius Token Factory
+          {e.tokens?.calls ? `: ${plural(e.tokens.calls, "call")}, ${((e.tokens.prompt + e.tokens.completion) / 1000).toFixed(0)}k tokens` : ""}. Tavily searched the web. Whether a tag is red was
+          decided by comparing your codes with each recall&apos;s list, not by a model.
         </p>
       )}
     </section>

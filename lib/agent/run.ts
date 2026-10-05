@@ -1,6 +1,6 @@
 import "server-only";
 import type { Item, Verdict } from "../types";
-import { modelLabel } from "../nebius";
+import { modelLabel, usageScope, type Usage } from "../nebius";
 import { readItems } from "./intake";
 import { investigate, type Step } from "./investigate";
 import { readNotice } from "./read-notice";
@@ -13,7 +13,7 @@ import { buildVerdict } from "./verdict";
  * notice text → the deterministic matcher hangs the tag.
  */
 
-export type Engine = { reader?: string; agent?: string; vision?: string; planned: "model" | "fixed" };
+export type Engine = { reader?: string; agent?: string; vision?: string; planned: "model" | "fixed"; tokens?: Usage };
 
 export type Event =
   | { t: "items"; items: Item[]; dropped: number; engine: Engine }
@@ -51,7 +51,21 @@ function channel<T>() {
   };
 }
 
+/** One check, with every Token Factory call inside it counted onto the engine. */
 export async function* runCheck(input: { text: string; photos: string[] }, useModel: boolean): AsyncGenerator<Event> {
+  const usage: Usage = { calls: 0, prompt: 0, completion: 0 };
+  const ch = channel<Event>();
+  usageScope.run(usage, () =>
+    (async () => {
+      for await (const e of run(input, useModel)) ch.push(e);
+    })()
+      .catch((e) => ch.push({ t: "error", message: (e as Error).message }))
+      .finally(() => ch.close()),
+  );
+  yield* ch.drain();
+}
+
+async function* run(input: { text: string; photos: string[] }, useModel: boolean): AsyncGenerator<Event> {
   const engine: Engine = { planned: useModel ? "model" : "fixed" };
   const intake = await readItems(input.text, input.photos, useModel);
   if (intake.model) engine.reader = modelLabel(intake.model);
@@ -107,5 +121,7 @@ export async function* runCheck(input: { text: string; photos: string[] }, useMo
   });
   Promise.all(workers).finally(() => ch.close());
   yield* ch.drain();
+  const used = usageScope.getStore();
+  if (used?.calls) engine.tokens = { ...used };
   yield { t: "done", at: new Date().toISOString(), engine };
 }

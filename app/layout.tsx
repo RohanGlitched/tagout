@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   description:
     "Tell Tagout what you own, or photograph the label. An agent on NVIDIA Nemotron reads it, searches NHTSA, CPSC, FDA and USDA recalls and the web, and tags out anything recalled with what to do.",
   openGraph: { type: "website", siteName: "Tagout" },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = { themeColor: "#e9ecef" };
