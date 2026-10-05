@@ -21,11 +21,12 @@ const SCHEMA = {
     made_from: { type: ["string", "null"], description: "first affected manufacture date, YYYY-MM-DD, only if the notice gives a window" },
     made_to: { type: ["string", "null"], description: "last affected manufacture date, YYYY-MM-DD" },
     where_to_look: { type: ["string", "null"], description: "where the deciding code is printed on the product, in the notice's words, short" },
+    announced: { type: ["string", "null"], description: "the date the recall was announced, YYYY-MM-DD, only if the notice states it" },
   },
-  required: ["models", "lots", "upcs", "made_from", "made_to", "where_to_look"],
+  required: ["models", "lots", "upcs", "made_from", "made_to", "where_to_look", "announced"],
 };
 
-type Read = { models: string[]; lots: string[]; upcs: string[]; made_from: string | null; made_to: string | null; where_to_look: string | null };
+type Read = { models: string[]; lots: string[]; upcs: string[]; made_from: string | null; made_to: string | null; where_to_look: string | null; announced: string | null };
 
 const SYSTEM = `You read one official recall notice and list exactly which units it covers.
 Copy codes EXACTLY as printed (model numbers, TYPE codes, item/style numbers, lot or batch numbers, serial or date-code ranges, UPCs). Never invent, complete or reformat a code. Leave lists empty when the notice names no codes (for example when every unit of a product is recalled).
@@ -78,6 +79,8 @@ export async function readNotice(n: Notice, useModel: boolean): Promise<ReadResu
         upcs: [...new Set([...n.upcs, ...upcs])],
         madeRanges: range ?? n.madeRanges,
         whereToLook: r.data.where_to_look || n.whereToLook,
+        // A web page often has no date in its metadata; take the announcement date when its year is in the text.
+        date: n.date || (inText(r.data.announced) ? r.data.announced! : ""),
       },
       struck,
       model: r.model,

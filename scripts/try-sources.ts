@@ -1,6 +1,6 @@
 // Live smoke test of every source client. Usage: npx tsx --conditions=react-server scripts/try-sources.ts
 import fs from "node:fs";
-for (const l of fs.readFileSync(".env.local", "utf8").split("\n")) { const m = l.match(/^(\w+)=(.*)$/); if (m) process.env[m[1]] ??= m[2]; }
+for (const l of fs.readFileSync(".env.local", "utf8").split("\n")) { const m = l.match(/^(\w+)=(.*)$/); if (m) process.env[m[1]] ??= m[2].trim().replace(/^"(.*)"$/, "$1"); }
 const { searchCpsc, cpscFeed } = await import("../lib/sources/cpsc.ts");
 const { decodeVin, vehicleRecalls, childSeatRecalls } = await import("../lib/sources/nhtsa.ts");
 const { searchFda } = await import("../lib/sources/fda.ts");

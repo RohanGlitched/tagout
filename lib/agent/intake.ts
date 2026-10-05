@@ -162,10 +162,16 @@ export function parseLine(line: string, n: number): Raw {
   if (vin || (make && year)) kind = "vehicle";
   else if (/car seat|booster|infant seat|snugride|keyfit/.test(low)) kind = "car-seat";
   else if (/tablet|caplet|capsule|syrup|suspension|ibuprofen|acetaminophen|tylenol|advil|motrin|medicine|mg\b|ndc|eye drops|inhaler/.test(low)) kind = "drug";
-  else if (/formula|cereal|cheese|meat|chicken|beef|salad|snack|juice|milk|butter|food|supplement|cookie|bar\b/.test(low)) kind = "food";
+  else if (/formula|cereal|cheese|meat|chicken|beef|pork|sausage|ham\b|hot dog|bacon|jerky|turkey|salad|snack|juice|milk|butter|food|supplement|cookie|bar\b/.test(low)) kind = "food";
   else if (/cpap|glucose|insulin|pump|monitor|thermometer|catheter/.test(low)) kind = "device";
   const words = l.replace(/\b(model|lot|batch|upc|vin)\b.*$/i, "").replace(/[,;]+$/, "").trim();
-  const brand = kind === "vehicle" ? (make ? make[0].toUpperCase() + make.slice(1) : null) : words.split(/\s+/)[0] ?? null;
-  const product = kind === "vehicle" && make ? words.replace(new RegExp(`.*\\b${make}\\b\\s*`, "i"), "").split(/[,;]/)[0].trim() || null : words.split(/\s+/).slice(1).join(" ") || null;
+  // Without the model, a brand is only the leading run of capitalised words ("Baby Trend stroller" → "Baby
+  // Trend"); "my old couch" has none, so it isn't matched to a "My …" brand by accident.
+  const caps = words.match(/^(?:[A-Z][\w'&.-]*\s*)+/)?.[0].trim().split(/\s+/) ?? [];
+  const brand = kind === "vehicle" ? (make ? make[0].toUpperCase() + make.slice(1) : null) : caps.join(" ") || null;
+  const product =
+    kind === "vehicle" && make
+      ? words.replace(new RegExp(`.*\\b${make}\\b\\s*`, "i"), "").split(/[,;]/)[0].trim() || null
+      : words.slice(caps.join(" ").length).replace(/^[\s,]+/, "").split(/[,;]/)[0].trim() || null;
   return { line: n, kind, said: l, brand, product, model, lot, vin, year, made: null, upc, ndc, serial: null, codes: [] };
 }

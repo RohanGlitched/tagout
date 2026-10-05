@@ -28,15 +28,26 @@ export async function decodeVin(vin: string): Promise<Decoded | null> {
   };
 }
 
-/** NHTSA spells models its own way ("CR-V", "F-150"); pick the closest name it lists for that make and year. */
-export async function nhtsaModelName(make: string, model: string, year: number): Promise<string> {
+/**
+ * The names NHTSA lists for a make and year that could be this model, best first: an exact spelling ("CR-V"),
+ * then longer variants ("F-150 (SUPER CREW) GAS" for "F-150"), then shorter ones.
+ */
+export async function nhtsaModelNames(make: string, model: string, year: number): Promise<string[]> {
   const j = await getJson<{ results: { model: string }[] }>(
     `https://api.nhtsa.gov/products/vehicle/models?modelYear=${year}&make=${encodeURIComponent(make)}&issueType=r`,
     { timeoutMs: 8_000 },
   ).catch(() => null);
-  const names = j?.results?.map((r) => r.model) ?? [];
+  const names = [...new Set(j?.results?.map((r) => r.model) ?? [])];
   const want = norm(model);
-  return names.find((n) => norm(n) === want) ?? names.find((n) => norm(n).startsWith(want) || want.startsWith(norm(n))) ?? model;
+  return [...names.filter((n) => norm(n) === want), ...names.filter((n) => norm(n) !== want && norm(n).startsWith(want)), ...names.filter((n) => want.startsWith(norm(n)) && norm(n) !== want)];
+}
+
+async function recallsFor(make: string, model: string, year: number): Promise<VRec[]> {
+  const j = await getJson<{ results: VRec[] }>(
+    `https://api.nhtsa.gov/recalls/recallsByVehicle?make=${encodeURIComponent(make)}&model=${encodeURIComponent(model)}&modelYear=${year}`,
+    { timeoutMs: 10_000, retries: 0 },
+  ).catch(() => null);
+  return j?.results ?? [];
 }
 
 type VRec = {
@@ -73,12 +84,16 @@ function vehicleTitle(r: VRec): string {
 const titleCase = (s: string) => s.toLowerCase().replace(/(^|[\s:/-])([a-z])/g, (_, a, b) => a + b.toUpperCase());
 
 export async function vehicleRecalls(make: string, model: string, year: number): Promise<Notice[]> {
-  const name = await nhtsaModelName(make, model, year);
-  const j = await getJson<{ results: VRec[] }>(
-    `https://api.nhtsa.gov/recalls/recallsByVehicle?make=${encodeURIComponent(make)}&model=${encodeURIComponent(name)}&modelYear=${year}`,
-    { timeoutMs: 10_000 },
-  );
-  return (j?.results ?? [])
+  // The name as people write it usually works ("F-150"); when it finds nothing, try NHTSA's own spellings and
+  // merge their campaigns (one campaign often covers several cab variants).
+  let recs = await recallsFor(make, model, year);
+  if (!recs.length) {
+    const names = (await nhtsaModelNames(make, model, year)).slice(0, 4);
+    const all = await Promise.all(names.map((n) => recallsFor(make, n, year)));
+    const seen = new Set<string>();
+    recs = all.flat().filter((r) => (seen.has(r.NHTSACampaignNumber) ? false : (seen.add(r.NHTSACampaignNumber), true)));
+  }
+  return recs
     .map(
       (r): Notice => ({
         source: "nhtsa",

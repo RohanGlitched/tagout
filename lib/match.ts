@@ -102,10 +102,17 @@ export function compareId(yours: string, listed: string): IdMatch {
 export function brandIn(brand: string | undefined, notice: Notice): boolean {
   if (!brand) return false;
   const b = normBrand(brand);
-  if (b.length < 2) return false;
+  // Too short or too common to identify a maker ("my", "baby", "home").
+  if (b.length < 3 || /^(my|our|the|old|new|hello|this|that|kids?|baby|home|children s?)$/.test(b)) return false;
   const hay = ` ${normBrand([notice.firm, notice.title, notice.make, ...notice.models].filter(Boolean).join(" "))} `;
-  return hay.includes(` ${b} `) || hay.includes(` ${b.replace(/ /g, "")} `);
+  if (hay.includes(` ${b} `) || hay.includes(` ${b.replace(/ /g, "")} `)) return true;
+  // A product brand and its company often share only the first word ("Hillshire Farm" / "Hillshire Brands").
+  // Accept that when the word is long enough to be a name rather than an ordinary word.
+  const first = b.split(" ")[0];
+  return b.includes(" ") && first.length >= 6 && !COMMON.has(first) && hay.includes(` ${first} `);
 }
+
+const COMMON = new Set(["little", "simple", "nature", "natural", "healthy", "family", "global", "classic", "original", "premium", "summer", "golden", "garden", "kitchen", "comfort", "sunset", "spring", "silver", "united", "modern", "better", "bright"]);
 
 export type Match = {
   level: TagLevel | null;
@@ -201,7 +208,9 @@ export function matchItem(item: Item, notice: Notice): Match {
     return {
       level: "warning",
       proof,
-      why: item.model ? "This recall doesn't print model numbers. Compare the product photo and description." : "This product line is recalled. Check the model number on yours.",
+      why: item.model
+        ? "This recall doesn't print model numbers. Compare the product photo and description."
+        : `This product line is recalled. Check the ${item.kind === "food" ? "lot code and dates" : item.kind === "drug" ? "lot number" : "model number"} on yours.`,
     };
   }
   return { level: null, proof, why: "Nothing on your label ties it to this recall." };

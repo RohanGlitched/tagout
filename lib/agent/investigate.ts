@@ -101,6 +101,7 @@ How to work:
 - Use read_page when a relevant result's snippet doesn't show which models, lots or dates are affected.
 - Then call finish with the results that could cover this product: same kind of product, same brand. Brand alone is not enough: a recall of a Vornado garment steamer is not about a Vornado heater. But when the person didn't give a model or lot, keep every recall of that kind of product from that brand: you are not deciding whether their unit is covered.
 - Make several tool calls at once when they're independent. Stop after at most 4 rounds of searching.
+- Stay on this item: search its own brand, maker and product only. Never search other brands or similar products.
 - Never decide whether the person's exact unit is affected: a separate matcher compares model and lot numbers.`;
 
 type Pool = Map<string, Notice>;
@@ -299,6 +300,10 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
         if (finish) {
           const { relevant } = parseJson<{ relevant: { ref: string; reason: string }[] }>(finish.function.arguments || "{}");
           const chosen = (relevant ?? []).map((x) => pool.get(x.ref)).filter((n): n is Notice => Boolean(n));
+          // The agency database that covers this kind of item is always searched, even if the agent didn't.
+          for (const [tool, args] of fixedPlan(item)) {
+            if (tool !== "search_web" && !steps.some((s) => s.tool === tool && !s.error)) await exec(tool, args);
+          }
           const notices = newestFirst([...new Set([...chosen, ...mustKeep(item, pool)])]).slice(0, 8);
           return { notices, searched: [...searched], steps, model, planned: "model" };
         }

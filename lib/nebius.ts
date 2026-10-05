@@ -67,12 +67,17 @@ async function once(model: string, body: Record<string, unknown>, timeoutMs: num
 export async function chat(chain: string[], body: { messages: Msg[]; tools?: ToolDef[]; tool_choice?: unknown; response_format?: unknown; max_tokens?: number; temperature?: number }, timeoutMs = 30_000): Promise<ChatResult> {
   if (!hasKey()) throw new Error("NEBIUS_API_KEY is not set");
   let last: unknown;
-  for (const model of chain) {
-    try {
-      return await once(model, { temperature: 0.2, max_tokens: 2000, ...body }, timeoutMs);
-    } catch (e) {
-      last = e;
-      console.error(`[nebius] ${model} failed: ${(e as Error).message}`);
+  // Two passes over the chain: Token Factory has answered 401 to every model for a few seconds at a time
+  // (measured Oct 5) and then recovered, so one short pause saves the check from the fixed plan.
+  for (let pass = 0; pass < 2; pass++) {
+    if (pass) await new Promise((r) => setTimeout(r, 1500));
+    for (const model of chain) {
+      try {
+        return await once(model, { temperature: 0.2, max_tokens: 2000, ...body }, timeoutMs);
+      } catch (e) {
+        last = e;
+        console.error(`[nebius] ${model} failed: ${(e as Error).message}`);
+      }
     }
   }
   throw last instanceof Error ? last : new Error("All models failed");

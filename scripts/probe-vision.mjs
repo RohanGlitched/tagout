@@ -1,5 +1,5 @@
 import fs from "node:fs";
-for (const l of fs.readFileSync(".env.local", "utf8").split("\n")) { const m = l.match(/^(\w+)=(.*)$/); if (m) process.env[m[1]] ??= m[2]; }
+for (const l of fs.readFileSync(".env.local", "utf8").split("\n")) { const m = l.match(/^(\w+)=(.*)$/); if (m) process.env[m[1]] ??= m[2].trim().replace(/^"(.*)"$/, "$1"); }
 const img = "data:image/jpeg;base64," + fs.readFileSync(process.argv[2]).toString("base64");
 for (const model of (process.argv[3] || "zai-org/GLM-5.3-Flash,Qwen/Qwen3.8-27B,google/gemma-3-27b-it").split(",")) {
   const t = Date.now();
