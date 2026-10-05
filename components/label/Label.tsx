@@ -136,6 +136,12 @@ function Sticker({ item, marks }: BodyProps) {
   );
 }
 
+/** Short identifier codes only ("TYPE SRTH" → "SRTH"); ratings like "120V~ 60Hz 1500W" aren't codes. */
+function typeCodes(codes?: string[]): string | undefined {
+  const ids = (codes ?? []).map((c) => c.replace(/^type\s*/i, "").trim()).filter((c) => c.length <= 16 && !/\d\s*(v|w|hz|a)|~/i.test(c));
+  return ids.length ? ids.join(", ") : undefined;
+}
+
 /** A brushed aluminium rating plate, riveted to an appliance. */
 function Plate({ item, marks }: BodyProps) {
   return (
@@ -148,7 +154,7 @@ function Plate({ item, marks }: BodyProps) {
       <div className={s.plateProduct}>{item.product ?? item.said}</div>
       <div className={s.plateGrid}>
         <F k="model" name="MODEL" value={item.model} marks={marks} />
-        <F k="model" name="TYPE" value={item.codes?.map((c) => c.replace(/^type\s*/i, "")).join(", ")} marks={marks} />
+        <F k="model" name="TYPE" value={typeCodes(item.codes)} marks={marks} />
         <F name="SERIAL" value={item.serial} marks={marks} />
         <F k="lot" name="DATE CODE" value={item.made ?? item.lot} marks={marks} />
         <F k="upc" name="UPC" value={item.upc} marks={marks} />

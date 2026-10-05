@@ -48,7 +48,7 @@ Rules:
 
 const VISION = `Read this product label photo for a recall check. Return one item.
 Copy every printed identifier EXACTLY, character for character: model or model number, TYPE, lot or batch, serial, VIN, UPC (the digits under the barcode), NDC, date code or date of manufacture, expiry. Use null for anything not printed. Never guess a character you can't read; leave the field null instead.
-codes: any other printed code (TYPE, style, item number). said: a short plain description, e.g. "Vornado heater (from a photo)".`;
+codes: other identifier codes only (a TYPE code, style or item number), each as printed, e.g. "TYPE SRTH". Never put electrical ratings (volts, watts, amps, Hz), addresses or warnings in codes; a date code goes in made. said: a short plain description, e.g. "Vornado heater (from a photo)".`;
 
 /** Each identifier must be in the line the person typed (ignoring case, spaces and dashes). */
 function keepTyped(raw: Raw, lines: string[]): Raw {
