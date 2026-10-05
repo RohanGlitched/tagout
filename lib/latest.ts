@@ -33,4 +33,4 @@ async function load(): Promise<{ notices: Notice[]; at: string; failed: string[]
   return { notices, at: new Date().toISOString(), failed };
 }
 
-export const latestRecalls = unstable_cache(load, ["latest-recalls-v1"], { revalidate: 3600 });
+export const latestRecalls = unstable_cache(load, ["latest-recalls-v2"], { revalidate: 3600 });

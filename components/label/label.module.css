@@ -253,3 +253,6 @@
 .pack {
   background: linear-gradient(180deg, #fff 0%, #fbfbf9 100%);
 }
+.stickerFoot {
+  height: 12px;
+}

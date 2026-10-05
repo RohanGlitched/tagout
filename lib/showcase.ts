@@ -10,4 +10,4 @@ async function load() {
   return rec && rec.status === "done" ? publicCheck(rec) : null;
 }
 
-export const showcase = unstable_cache(load, ["showcase-v3"], { revalidate: 600 });
+export const showcase = unstable_cache(load, ["showcase-v4"], { revalidate: 600 });

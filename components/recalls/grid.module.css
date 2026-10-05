@@ -1,0 +1,250 @@
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+.card {
+  --c: #7d858f;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.card[data-h="fire"] {
+  --c: #c8102e;
+}
+.card[data-h="breath"] {
+  --c: #1f5aa6;
+}
+.card[data-h="ingest"] {
+  --c: #c99700;
+}
+.card[data-h="injury"] {
+  --c: #f26b0f;
+}
+.card[data-h="shock"] {
+  --c: #6e2c91;
+}
+.band {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px 7px;
+  border-top: 5px solid var(--c);
+  font-size: 12.5px;
+  font-weight: 700;
+  font-variation-settings: "wdth" 108;
+  color: var(--c);
+}
+.when {
+  color: var(--ink-soft);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.photo {
+  height: 220px;
+  background: #f4f5f6;
+  display: grid;
+  place-items: center;
+  border-block: 1px solid var(--rule-soft);
+}
+.photo img {
+  max-width: 88%;
+  max-height: 192px;
+  object-fit: contain;
+}
+/* An FDA recall drawn as a pharmacy label. */
+.rx {
+  height: 196px;
+  box-sizing: border-box;
+  margin: 0 14px;
+  padding: 16px 16px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background:
+    linear-gradient(var(--ink) 0 0) top / 100% 26px no-repeat,
+    var(--stock);
+}
+.rxKind {
+  margin: -12px -12px 6px;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variation-settings: "wdth" 116;
+  letter-spacing: 0.02em;
+}
+.rxName {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-variation-settings: "wdth" 92;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.rxNo {
+  margin-top: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px 16px;
+}
+.title {
+  font-weight: 650;
+  font-size: 15.5px;
+  line-height: 1.38;
+  text-decoration: none;
+}
+.title:hover {
+  text-decoration: underline;
+}
+.meta {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.own {
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--focus);
+  align-self: flex-start;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px 0 26px;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--stock);
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tab span {
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.tab[aria-selected="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.tab[aria-selected="true"] span {
+  color: #c4cad1;
+}
+
+/* Announced this week: a compact list above the grid. */
+.fresh {
+  margin-bottom: 40px;
+  border-top: 2px solid var(--ink);
+}
+.freshH {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  padding: 16px 0 6px;
+  font-size: 22px;
+  font-variation-settings: "wdth" 112;
+}
+.freshH span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-variation-settings: normal;
+}
+.freshList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.freshRow {
+  --c: #7d858f;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) 190px auto;
+  gap: 14px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px;
+}
+.freshRow[data-h="fire"] {
+  --c: #c8102e;
+}
+.freshRow[data-h="breath"] {
+  --c: #1f5aa6;
+}
+.freshRow[data-h="ingest"] {
+  --c: #c99700;
+}
+.freshRow[data-h="injury"] {
+  --c: #f26b0f;
+}
+.freshRow[data-h="shock"] {
+  --c: #6e2c91;
+}
+.freshRow a {
+  text-decoration: none;
+  line-height: 1.4;
+}
+.freshRow a:hover {
+  text-decoration: underline;
+}
+.dot {
+  width: 10px;
+  height: 14px;
+  background: linear-gradient(var(--stock) 0 30%, var(--c) 30% 64%, var(--stock) 64%);
+  clip-path: polygon(20% 0, 80% 0, 100% 16%, 100% 100%, 0 100%, 0 16%);
+  filter: drop-shadow(0 0 0.6px rgba(0, 0, 0, 0.6));
+  align-self: center;
+}
+.freshMeta {
+  font-size: 13px;
+  color: var(--c);
+  font-weight: 600;
+}
+.ownSmall {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--focus) !important;
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .freshRow {
+    grid-template-columns: 12px minmax(0, 1fr);
+  }
+  .freshMeta,
+  .ownSmall {
+    grid-column: 2;
+  }
+}

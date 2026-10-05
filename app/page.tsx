@@ -3,9 +3,13 @@ import Header from "@/components/chrome/Header";
 import Footer from "@/components/chrome/Footer";
 import CheckForm from "@/components/check/CheckForm";
 import Board, { type BoardEntry } from "@/components/home/Board";
+import Specimen from "@/components/home/Specimen";
+import TagWall from "@/components/home/TagWall";
+import WhereCodes from "@/components/home/WhereCodes";
 import Tag from "@/components/tag/Tag";
 import { latestRecalls } from "@/lib/latest";
 import { showcase } from "@/lib/showcase";
+import { yearWall } from "@/lib/wall";
 import { AGENCY, fmtDate, noticeRef, plural } from "@/lib/format";
 import type { Proof } from "@/lib/types";
 import s from "./home.module.css";
@@ -20,7 +24,7 @@ const EXAMPLES = [
 ];
 
 export default async function Home() {
-  const [demo, latest] = await Promise.all([showcase().catch(() => null), latestRecalls().catch(() => null)]);
+  const [demo, latest, wall] = await Promise.all([showcase().catch(() => null), latestRecalls().catch(() => null), yearWall().catch(() => null)]);
 
   const entries: BoardEntry[] = [];
   if (demo?.items && demo.verdicts) {
@@ -44,7 +48,16 @@ export default async function Home() {
 
   // A mix of agencies: CPSC publishes in weekly batches, so the newest eight would otherwise be all CPSC.
   const all = latest?.notices ?? [];
-  const week = [...all.filter((n) => n.source === "cpsc").slice(0, 5), ...all.filter((n) => n.source === "fda").slice(0, 3)].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  // The FDA often files one recall per strength or pack size; show one per firm and product.
+  const seen = new Set<string>();
+  const distinct = all.filter((n) => {
+    const k = `${n.firm ?? ""}|${n.title.split(/,|\s\d/)[0].toLowerCase()}`;
+    return seen.has(k) ? false : (seen.add(k), true);
+  });
+  const week = [...distinct.filter((n) => n.source === "cpsc").slice(0, 5), ...distinct.filter((n) => n.source === "fda").slice(0, 3)].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+  const months = wall ? wall.months.length : 0;
+  const monthWords = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
 
   return (
     <>
@@ -62,66 +75,77 @@ export default async function Home() {
           </div>
           {entries.length ? (
             <div className={s.boardCol}>
-              <Board
-                entries={entries}
-                caption={
-                  <>
-                    A real check from {fmtDate(demo!.createdAt)}: {plural(demo!.items!.length, "thing")}, {counts.danger} tagged do not use.{" "}
-                    <Link href={`/check/${demo!.id}`}>See the whole check</Link>
-                  </>
-                }
-              />
+              <div className={s.peg}>
+                <Board entries={entries} />
+              </div>
+              <p className={s.caption}>
+                A real check from {fmtDate(demo!.createdAt)}: {plural(demo!.items!.length, "thing")}, {counts.danger} tagged do not use.{" "}
+                <Link href={`/check/${demo!.id}`}>See the whole check</Link>
+              </p>
             </div>
           ) : null}
         </section>
 
-        <section className={s.how} aria-labelledby="how-h">
-          <div className={s.howHead}>
-            <h2 id="how-h" className={s.h2}>
-              How a tag is decided
+        {wall ? (
+          <section className={s.band} aria-labelledby="wall-h">
+            <div className={s.bandHead}>
+              <h2 id="wall-h" className={s.h2}>
+                {wall.total} recalls in {monthWords[months] ?? months} months.
+              </h2>
+              <p className={s.sub}>
+                Every Consumer Product Safety Commission recall of {wall.year} so far, one tag each, hung by month and coloured by hazard. Point at a tag to read it; pick a hazard to
+                see how often it comes up.
+              </p>
+            </div>
+            <TagWall wall={wall} />
+          </section>
+        ) : null}
+
+        <section className={s.band} aria-labelledby="spec-h">
+          <div className={s.bandHead}>
+            <h2 id="spec-h" className={s.h2}>
+              Anatomy of a red tag
             </h2>
-            <p className={s.sub}>NVIDIA Nemotron on Nebius Token Factory does the reading and the searching. The final call is made by rules you can check.</p>
+            <p className={s.sub}>NVIDIA Nemotron on Nebius Token Factory does the reading and the searching. The final call is a comparison you can check yourself.</p>
           </div>
-          <ol className={s.steps}>
+          <Specimen />
+        </section>
+
+        <section className={s.band} aria-labelledby="codes-h">
+          <div className={s.bandHead}>
+            <h2 id="codes-h" className={s.h2}>
+              The code is on the product. You just need to know where.
+            </h2>
+            <p className={s.sub}>Every recall says which models or lots it covers and where that code is printed. These are the agencies&apos; own words.</p>
+          </div>
+          <WhereCodes />
+        </section>
+
+        <section className={s.band} aria-labelledby="tags-h">
+          <div className={s.bandHead}>
+            <h2 id="tags-h" className={s.h2}>
+              Three tags
+            </h2>
+            <p className={s.sub}>Red only when a code on your product is on the recall&apos;s list. When Tagout can&apos;t be sure, it says what to check instead of guessing.</p>
+          </div>
+          <ul className={s.legend}>
             <li>
-              <h3>Read what you own</h3>
-              <p>Nemotron turns your list into brand, model, lot and VIN. A code it returns that isn&apos;t in what you typed is dropped. Label photos are read by a vision model.</p>
+              <Tag level="danger" rest={-3}>
+                <b>A code on your product is on the recall&apos;s list.</b>
+                <span className={s.legendNote}>You get the remedy, the firm&apos;s contact and the notice.</span>
+              </Tag>
             </li>
             <li>
-              <h3>Search like an investigator</h3>
-              <p>
-                Nemotron 3 Ultra calls the agencies&apos; own databases as tools, reads what comes back and searches again with better words. Tavily searches the agencies&apos; newsrooms
-                and makers&apos; recall pages for anything the databases haven&apos;t caught up with.
-              </p>
+              <Tag level="warning" rest={2}>
+                <b>The product line is recalled; yours isn&apos;t confirmed either way.</b>
+                <span className={s.legendNote}>The tag says where the code is printed. Cars stop here: only NHTSA&apos;s VIN lookup can say.</span>
+              </Tag>
             </li>
             <li>
-              <h3>Read each notice&apos;s list</h3>
-              <p>The affected models, lots and dates are read from the notice&apos;s own wording, then checked character by character against it. A code the notice doesn&apos;t print is struck.</p>
-            </li>
-            <li>
-              <h3>Match the codes</h3>
-              <p>Your codes are compared with each recall&apos;s list by plain rules, not by a model. A tag is red only when a code printed on your product is on the list.</p>
-            </li>
-          </ol>
-          <ul className={s.legend} aria-label="What the tags mean">
-            <li>
-              <Tag level="danger" size="sm" rest={-3} />
-              <p>
-                <b>Do not use.</b> A model, lot or UPC on your product is on the recall&apos;s list. You get the remedy and who to contact.
-              </p>
-            </li>
-            <li>
-              <Tag level="warning" size="sm" rest={2} />
-              <p>
-                <b>Check the label.</b> That product line is recalled but yours isn&apos;t confirmed either way, or it&apos;s a car (only NHTSA&apos;s VIN lookup can say). You&apos;re told
-                exactly where the code is printed.
-              </p>
-            </li>
-            <li>
-              <Tag level="inspected" size="sm" rest={-1} />
-              <p>
-                <b>Checked.</b> No recall lists it on the day of the check. The tag says which sources were searched and when.
-              </p>
+              <Tag level="inspected" rest={-1}>
+                <b>No recall lists it on the day of the check.</b>
+                <span className={s.legendNote}>The tag names the sources searched and the date.</span>
+              </Tag>
             </li>
           </ul>
         </section>
@@ -132,7 +156,10 @@ export default async function Home() {
               <h2 id="week-h" className={s.h2}>
                 Recalled lately
               </h2>
-              <p className={s.sub}>The newest recalls from CPSC and the FDA, updated hourly. Most people never hear about them.</p>
+              <p className={s.sub}>The newest recalls from CPSC and the FDA, updated hourly.</p>
+              <Link href="/recalls" className={s.more}>
+                All recent recalls
+              </Link>
             </div>
             <ul className={s.feed}>
               {week.map((n) => (
@@ -145,11 +172,39 @@ export default async function Home() {
                 </li>
               ))}
             </ul>
-            <Link href="/recalls" className={s.more}>
-              All recent recalls
-            </Link>
           </section>
         ) : null}
+
+        <section className={s.close} aria-labelledby="close-h">
+          <div className={s.closeInner}>
+            <div className={s.closeCopy}>
+              <h2 id="close-h" className={s.closeH}>
+                Check the things you own.
+              </h2>
+              <p>Type what&apos;s in the house, or photograph a few labels. Every check gets its own link, so you can send it to whoever needs it.</p>
+              <Link href="/#check" className={s.closeGo}>
+                Check my things
+              </Link>
+            </div>
+            <div className={s.closeTags} aria-hidden="true">
+              <div className={s.hanger}>
+                <Tag level="inspected" size="lg" rest={-4}>
+                  <b>No recall found for Lasko model CT22425.</b>
+                </Tag>
+              </div>
+              <div className={s.hanger}>
+                <Tag level="warning" size="lg" rest={3}>
+                  <b>Some Evenflo car seats are recalled. Check the model number under the seat.</b>
+                </Tag>
+              </div>
+              <div className={s.hanger}>
+                <Tag level="danger" size="lg" rest={-2}>
+                  <b>Lot EJA022 is listed in this recall.</b>
+                </Tag>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

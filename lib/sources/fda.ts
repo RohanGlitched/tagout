@@ -79,6 +79,8 @@ function toNotice(r: Rec): Notice {
     models: [...codes.ndcs, ...(r.openfda?.package_ndc ?? [])],
     lots: lotsIn(`${r.code_info}\n${r.more_code_info ?? ""}`),
     upcs: codes.upcs,
+    category: r.product_type,
+    severity: r.classification,
     text: `${desc}\n${clean(r.code_info)}\n${clean(r.more_code_info)}`,
   };
 }

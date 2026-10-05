@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Header from "@/components/chrome/Header";
 import Footer from "@/components/chrome/Footer";
+import Specimen from "@/components/home/Specimen";
 import Tag from "@/components/tag/Tag";
 import { MODELS, modelLabel } from "@/lib/nebius";
 import { REPO_URL } from "@/lib/site";
@@ -23,6 +24,11 @@ export default function How() {
             looking for you, and shows its work.
           </p>
         </header>
+
+        <section className={s.section}>
+          <h2 className={s.h2}>One red tag, taken apart</h2>
+          <Specimen />
+        </section>
 
         <section className={s.section}>
           <h2 className={s.h2}>The check, step by step</h2>

@@ -1,0 +1,66 @@
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.bench {
+  display: grid;
+  place-items: center;
+  min-height: 230px;
+  padding: 26px 18px;
+  border-radius: 6px 6px 0 0;
+  background:
+    radial-gradient(circle at center, rgba(21, 25, 30, 0.14) 1.2px, transparent 1.7px) 0 0 / 16px 16px,
+    #dde1e6;
+}
+.bench > figure {
+  max-width: 300px;
+  transform: rotate(-1.2deg);
+}
+.card:nth-child(2n) .bench > figure {
+  transform: rotate(1deg);
+}
+.quote {
+  margin: 0;
+  flex: 1;
+  padding: 18px 20px 20px;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-top: 0;
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.quote p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #2c333b;
+}
+.quote cite {
+  margin-top: auto;
+  font-style: normal;
+  font-size: 13px;
+}
+.quote a {
+  color: var(--ink-soft);
+  text-underline-offset: 3px;
+}
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

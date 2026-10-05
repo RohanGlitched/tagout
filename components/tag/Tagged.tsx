@@ -12,6 +12,7 @@ export default function Tagged({
   level,
   marks,
   hits,
+  variant,
   swing,
   delay,
   rest,
@@ -26,6 +27,7 @@ export default function Tagged({
   level?: TagLevel;
   marks?: Partial<Record<Proof["field"], "match" | "miss" | "reading">>;
   hits?: string[];
+  variant?: "sticker";
   swing?: boolean;
   delay?: number;
   rest?: number;
@@ -40,7 +42,7 @@ export default function Tagged({
   const sag = `M0 0 Q ${dx * 0.35} ${dy * 0.85} ${dx} ${dy}`;
   return (
     <div className={`${s.tagged} ${className}`} data-size={size}>
-      <Label item={item} marks={marks} hits={hits} />
+      <Label item={item} marks={marks} hits={hits} variant={variant} />
       {level ? (
         <div className={s.hang} style={{ "--dx": `${dx}px`, "--dy": `${dy}px` } as React.CSSProperties}>
           <div className={s.tagSlot}>

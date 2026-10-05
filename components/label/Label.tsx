@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext } from "react";
 import type { Item, Proof } from "@/lib/types";
 import { norm } from "@/lib/match";
@@ -15,8 +17,8 @@ type Marks = Partial<Record<Proof["field"], Mark>>;
  * white label under a car seat, the aluminium rating plate on an appliance, the lot imprint on a medicine
  * carton, the back of a food pack. Fields a recall turns on can be marked as matched, missed or being read.
  */
-export default function Label({ item, marks = {}, hits, className = "" }: { item: Item; marks?: Marks; hits?: string[]; className?: string }) {
-  const Body = BODIES[item.kind] ?? Plate;
+export default function Label({ item, marks = {}, hits, variant, className = "" }: { item: Item; marks?: Marks; hits?: string[]; variant?: "sticker"; className?: string }) {
+  const Body = variant === "sticker" ? Sticker : (BODIES[item.kind] ?? Plate);
   return (
     <figure className={`${s.label} ${s[item.kind] ?? ""} ${className}`} aria-label={labelText(item)}>
       <HitContext.Provider value={hits?.map(norm).filter(Boolean) ?? null}>
@@ -111,6 +113,25 @@ function Seat({ item, marks }: BodyProps) {
       </div>
       <p className={s.seatNote}>Register this product so the manufacturer can reach you about a recall.</p>
       {item.upc ? <Barcode code={item.upc} className={s.bar} /> : null}
+    </div>
+  );
+}
+
+/** A plain printed product label: brand bar, then the codes. Power banks, helmets, small electronics. */
+function Sticker({ item, marks }: BodyProps) {
+  return (
+    <div className={s.seat}>
+      <div className={s.seatHead}>
+        <span className={s.seatBrand}>{item.brand ?? "Product label"}</span>
+        <span className={s.seatKind}>{item.product}</span>
+      </div>
+      <div className={s.seatGrid}>
+        <F k="model" name="Model no." value={item.model} marks={marks} />
+        <F k="lot" name="Lot / Ref" value={item.lot} marks={marks} />
+        <F name="Date" value={item.made} marks={marks} />
+        <F name="Serial no." value={item.serial} marks={marks} />
+      </div>
+      {item.upc ? <Barcode code={item.upc} className={s.bar} /> : <div className={s.stickerFoot} />}
     </div>
   );
 }

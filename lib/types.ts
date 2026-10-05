@@ -57,6 +57,9 @@ export type Notice = {
   urgent?: string;
   /** Where to find the deciding code on the product, when the notice says. */
   whereToLook?: string;
+  /** FDA: "Drugs", "Food" or "Devices"; FDA severity class ("Class I" is the most serious). */
+  category?: string;
+  severity?: string;
   /** The agency's own wording the identifiers were read from; every extracted code must appear in it. */
   text?: string;
 };
