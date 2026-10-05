@@ -6,7 +6,7 @@ export async function getJson<T>(url: string, init: RequestInit & { timeoutMs?: 
   let last: unknown;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const r = await fetch(url, { ...rest, signal: AbortSignal.timeout(timeoutMs), headers: { accept: "application/json", "user-agent": "Tagout/1.0 (+https://tagout.vercel.app)", ...(rest.headers ?? {}) } });
+      const r = await fetch(url, { ...rest, signal: AbortSignal.timeout(timeoutMs), headers: { accept: "application/json", "user-agent": "Tagout/1.0 (+https://tagout-recalls.vercel.app)", ...(rest.headers ?? {}) } });
       if (r.status === 404) return null;
       if (r.status >= 500 || r.status === 429) throw new Error(`HTTP ${r.status}`);
       if (!r.ok) throw Object.assign(new Error(`HTTP ${r.status}`), { fatal: true });

@@ -9,3 +9,6 @@ next-env.d.ts
 test-results
 .data
 tsconfig.tsbuildinfo
+
+.vercel
+.env*
