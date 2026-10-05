@@ -94,6 +94,14 @@ All are public and keyless except Tavily and Token Factory.
 
 ## Screens
 
+**Every CPSC recall of 2026, one tag each**, by month and hazard (live, on the home page):
+
+![A wall of small tags, one per CPSC recall in 2026, grouped by month and coloured by hazard](docs/screens/wall.png)
+
+**Anatomy of a red tag:** the notice's own wording, the code read from it, the same code on the plate.
+
+![CPSC recall 26-532's text with TYPE SRTH highlighted, joined by an equals sign to the Vornado rating plate with a red tag](docs/screens/anatomy.png)
+
 | Check with the agent's log | Phone |
 |---|---|
 | ![A check: the Vornado heater's label with a red tag, the agent's searches, the matching code next to CPSC recall 26-532, and what to do](docs/screens/check-log.png) | ![The same check on a phone](docs/screens/phone-check.png) |
