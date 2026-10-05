@@ -1,6 +1,8 @@
 import "server-only";
 import type { Notice } from "../types";
+import { unstable_cache } from "next/cache";
 import { clean, getJson } from "./http";
+import { webSearch } from "./web";
 
 /**
  * U.S. Consumer Product Safety Commission recalls, through SaferProducts.gov's public REST API.
@@ -95,8 +97,9 @@ export async function latestCpsc(since: string): Promise<Notice[]> {
  * become notices without model lists; Tavily Extract can fill in the page when one looks relevant.
  */
 export async function cpscFeed(): Promise<Notice[]> {
-  const r = await fetch("https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS", { signal: AbortSignal.timeout(10_000), headers: { "user-agent": "Tagout/1.0" } });
-  if (!r.ok) return [];
+  const r = await fetch("https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS", { signal: AbortSignal.timeout(10_000), headers: { "user-agent": "Tagout/1.0" } }).catch(() => null);
+  // cpsc.gov turns away some cloud hosts (measured from Vercel); find the week's recall pages through Tavily instead.
+  if (!r?.ok) return newsroomViaWeb();
   const xml = await r.text();
   const out: Notice[] = [];
   for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
@@ -119,3 +122,18 @@ export async function cpscFeed(): Promise<Notice[]> {
   }
   return out;
 }
+
+/**
+ * The newsroom's latest recall pages through a Tavily search, cached for six hours (about 120 searches a month).
+ * Tavily gives no publish date for these, so they carry none and stay off the dated wall.
+ */
+const newsroomViaWeb = unstable_cache(
+  async (): Promise<Notice[]> => {
+    const { notices } = await webSearch({ query: "CPSC recalls this week", domains: ["cpsc.gov"], days: 7, max: 15 }).catch(() => ({ notices: [] as Notice[] }));
+    return notices
+      .filter((n) => /cpsc\.gov\/Recalls\/\d{4}\//i.test(n.url))
+      .map((n) => ({ ...n, source: "cpsc" as const, id: n.url.split("/").pop() ?? n.url, date: n.date || "" }));
+  },
+  ["cpsc-newsroom-web-v1"],
+  { revalidate: 6 * 3600 },
+);
