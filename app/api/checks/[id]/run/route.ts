@@ -43,8 +43,11 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
         await updateCheck(id, (r) => ({ ...r, ...patch, ...(final ? { photos: undefined } : {}) })).catch((e) => console.error("[run] save failed", e));
       };
       try {
+        let done: Event | null = null;
         for await (const e of runCheck(input, useModel)) {
-          send(e);
+          // "done" goes out only after the final save, so a reload right after it shows the finished check.
+          if (e.t === "done") done = e;
+          else send(e);
           if (e.t === "items") {
             acc.items = e.items;
             acc.dropped = e.dropped;
@@ -67,6 +70,10 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
           }
         }
         if (!acc.status) acc.status = "done";
+        await save(true);
+        if (done) send(done);
+        controller.close();
+        return;
       } catch (err) {
         console.error("[run] check failed", err);
         acc.status = "failed";
