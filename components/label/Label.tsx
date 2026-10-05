@@ -1,6 +1,11 @@
+import { createContext, useContext } from "react";
 import type { Item, Proof } from "@/lib/types";
+import { norm } from "@/lib/match";
 import Barcode from "./Barcode";
 import s from "./label.module.css";
+
+/** The codes that matched, normalised; null when every field of a matched kind should be marked. */
+const HitContext = createContext<string[] | null>(null);
 
 type Mark = "match" | "miss" | "reading" | undefined;
 type Marks = Partial<Record<Proof["field"], Mark>>;
@@ -10,11 +15,13 @@ type Marks = Partial<Record<Proof["field"], Mark>>;
  * white label under a car seat, the aluminium rating plate on an appliance, the lot imprint on a medicine
  * carton, the back of a food pack. Fields a recall turns on can be marked as matched, missed or being read.
  */
-export default function Label({ item, marks = {}, className = "" }: { item: Item; marks?: Marks; className?: string }) {
+export default function Label({ item, marks = {}, hits, className = "" }: { item: Item; marks?: Marks; hits?: string[]; className?: string }) {
   const Body = BODIES[item.kind] ?? Plate;
   return (
     <figure className={`${s.label} ${s[item.kind] ?? ""} ${className}`} aria-label={labelText(item)}>
-      <Body item={item} marks={marks} />
+      <HitContext.Provider value={hits?.map(norm).filter(Boolean) ?? null}>
+        <Body item={item} marks={marks} />
+      </HitContext.Provider>
     </figure>
   );
 }
@@ -27,8 +34,11 @@ export function labelText(item: Item): string {
 
 /** One printed field. `k` ties it to a proof field so a match can mark exactly the characters that matched. */
 function F({ k, name, value, marks, mono = true, wide = false }: { k?: Proof["field"]; name: string; value?: string | number; marks: Marks; mono?: boolean; wide?: boolean }) {
+  const hits = useContext(HitContext);
   if (value === undefined || value === "") return null;
-  const mark = k ? marks[k] : undefined;
+  let mark = k ? marks[k] : undefined;
+  // A matched code marks only the field that actually holds it (a TYPE, not the model next to it).
+  if (mark === "match" && hits && !hits.some((h) => norm(String(value)).includes(h))) mark = undefined;
   return (
     <div className={`${s.field} ${wide ? s.wideField : ""}`}>
       <span className={s.fname}>{name}</span>

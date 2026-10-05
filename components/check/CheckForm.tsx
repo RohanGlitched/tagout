@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import s from "./form.module.css";
 
@@ -30,6 +30,20 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const boxRef = useRef<HTMLTextAreaElement>(null);
+
+  // "I might own this" on the recalls page arrives as ?own=…: start the list with it and add a model line hint.
+  useEffect(() => {
+    const own = new URLSearchParams(window.location.search).get("own");
+    if (!own) return;
+    setText(`${own.slice(0, 200)}, model `);
+    requestAnimationFrame(() => {
+      const el = boxRef.current;
+      if (!el) return;
+      el.focus({ preventScroll: true });
+      el.setSelectionRange(el.value.length, el.value.length);
+    });
+  }, []);
 
   const lines = text.split("\n").filter((l) => l.trim()).length;
   const ready = lines > 0 || photos.length > 0;
@@ -70,6 +84,7 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
       </label>
       <textarea
         id="owned"
+        ref={boxRef}
         className={s.box}
         value={text}
         onChange={(e) => setText(e.target.value)}

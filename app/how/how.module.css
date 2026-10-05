@@ -1,0 +1,150 @@
+.main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 48px var(--gutter) 0;
+}
+.top {
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--ink);
+}
+.h1 {
+  font-size: clamp(38px, 5vw, 60px);
+  font-variation-settings: "wdth" 118;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.lede {
+  margin-top: 12px;
+  max-width: 40em;
+  font-size: 18px;
+  color: #39414a;
+}
+.section {
+  margin-top: 56px;
+}
+.h2 {
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-variation-settings: "wdth" 114;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.flow {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: s;
+  max-width: 820px;
+}
+.flow li {
+  counter-increment: s;
+  position: relative;
+  padding: 0 0 26px 52px;
+}
+.flow li::before {
+  content: counter(s);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 14px;
+}
+.flow li::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 34px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--rule);
+}
+.flow li:last-child::after {
+  display: none;
+}
+.flow h3 {
+  font-size: 19px;
+  font-variation-settings: "wdth" 110;
+  margin: 3px 0 6px;
+}
+.flow p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #39414a;
+}
+.tags {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+.tags b {
+  line-height: 1.35;
+}
+.tagNote {
+  color: var(--ink-soft);
+}
+.table {
+  width: 100%;
+  max-width: 980px;
+  border-collapse: collapse;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  font-size: 15px;
+}
+.table th,
+.table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.table th {
+  font-size: 13px;
+  color: var(--ink-soft);
+  background: #f6f7f8;
+}
+.table td:first-child {
+  font-weight: 700;
+  white-space: nowrap;
+}
+.limits {
+  max-width: 760px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  color: #39414a;
+}
+.more {
+  margin-top: 22px;
+  font-size: 16px;
+}
+.more a {
+  color: var(--focus);
+}
+@media (max-width: 860px) {
+  .tags {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+  }
+  .table thead {
+    display: none;
+  }
+  .table tr {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .table td {
+    display: block;
+    border: 0;
+    padding: 4px 14px;
+  }
+}

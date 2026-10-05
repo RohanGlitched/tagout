@@ -12,10 +12,11 @@ export type BoardEntry = {
   line?: string;
   foot?: string;
   marks?: Partial<Record<Proof["field"], "match" | "miss" | "reading">>;
+  hits?: string[];
 };
 
 /**
- * The hero: a real household's labels laid on the bench. When the board is mostly in view, each tag is hung in
+ * The hero: a real household's labels laid on the bench. When the board is a fifth in view (the stacked phone board is taller than the screen), each tag is hung in
  * turn, red ones first, as if the check had just ruled on them.
  */
 export default function Board({ entries, caption }: { entries: BoardEntry[]; caption?: React.ReactNode }) {
@@ -32,7 +33,7 @@ export default function Board({ entries, caption }: { entries: BoardEntry[]; cap
           io.disconnect();
         }
       },
-      { threshold: 0.45 },
+      { threshold: 0.2 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -46,6 +47,7 @@ export default function Board({ entries, caption }: { entries: BoardEntry[]; cap
             item={e.item}
             level={hung ? e.level : undefined}
             marks={hung ? e.marks : undefined}
+            hits={e.hits}
             swing
             delay={250 + i * 650}
             rest={[-4, 3, -2, 5][i % 4]}

@@ -36,7 +36,7 @@ export default async function Home() {
     for (const { item, v } of pick.slice(0, 3)) {
       const marks: Partial<Record<Proof["field"], "match">> = {};
       if (v!.level === "danger") for (const p of v!.proof) if (p.matched) marks[p.field] = "match";
-      entries.push({ item, level: v!.level, headline: v!.headline, line: v!.notice ? noticeRef(v!.notice) : undefined, marks });
+      entries.push({ item, level: v!.level, headline: v!.headline, line: v!.notice ? noticeRef(v!.notice) : undefined, marks, hits: v!.proof.filter((p) => p.matched).map((p) => p.yours) });
     }
   }
   const counts = { danger: 0, warning: 0, inspected: 0 };

@@ -36,7 +36,11 @@ export default function ItemRow({ item, verdict, log, running, swing }: { item: 
   return (
     <li className={s.row} data-level={verdict?.level ?? "pending"}>
       <div className={s.left}>
-        <Tagged item={item} level={verdict?.level} marks={marks} swing={swing} size="md" dx={64} dy={44} rest={verdict?.level === "danger" ? -4 : verdict?.level === "warning" ? 3 : -2} foot={verdict ? `Checked ${fmtDate(verdict.checkedAt)}` : undefined}>
+        <p className={s.said}>
+          {item.said}
+          {item.readFrom === "photo" ? <span className={s.from}>read from your photo</span> : item.readFrom === "vin" ? <span className={s.from}>decoded from the VIN</span> : null}
+        </p>
+        <Tagged item={item} level={verdict?.level} marks={marks} hits={verdict?.proof.filter((p) => p.matched).map((p) => p.yours)} swing={swing} size="md" dx={64} dy={44} rest={verdict?.level === "danger" ? -4 : verdict?.level === "warning" ? 3 : -2} foot={verdict ? `Checked ${fmtDate(verdict.checkedAt)}` : undefined}>
           {verdict ? (
             <>
               <b className={s.tagHead}>{verdict.headline}</b>
@@ -44,10 +48,6 @@ export default function ItemRow({ item, verdict, log, running, swing }: { item: 
             </>
           ) : null}
         </Tagged>
-        <p className={s.said}>
-          {item.said}
-          {item.readFrom === "photo" ? <span className={s.from}>read from your photo</span> : item.readFrom === "vin" ? <span className={s.from}>decoded from the VIN</span> : null}
-        </p>
       </div>
 
       <div className={s.right}>
