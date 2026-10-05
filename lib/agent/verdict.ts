@@ -1,5 +1,5 @@
 import type { Item, Notice, Source, Verdict } from "../types";
-import { decide, matchItem } from "../match";
+import { brandIn, decide, matchItem } from "../match";
 
 export const SOURCE_NAME: Record<Source, string> = {
   nhtsa: "NHTSA",
@@ -37,7 +37,9 @@ function greenHeadline(item: Item, cleared: Notice[], what: string, old: Notice[
   }
   const code = item.kind === "drug" || item.kind === "food" ? item.lot : item.model ?? item.codes?.[0];
   const listing = cleared.filter((n) => n.models.length || n.lots.length || n.upcs.length);
-  if (code && listing.length) return `${listing.length === 1 ? "A recall exists" : "Recalls exist"} for this brand, but none lists your ${FIELD_NAME[item.kind]}.`;
+  const sameBrand = listing.filter((n) => brandIn(item.brand, n));
+  if (code && sameBrand.length) return `${sameBrand.length === 1 ? "A recall exists" : "Recalls exist"} for this brand, but none lists your ${FIELD_NAME[item.kind]}.`;
+  if (code && listing.length) return `Similar products are recalled, but none of those recalls lists your ${FIELD_NAME[item.kind]}.`;
   if (old.length) {
     const year = old.map((n) => n.date.slice(0, 4)).filter(Boolean).sort().at(-1);
     return `Only older recalls found${year ? ` (latest ${year})` : ""}, too old to cover what you have now.`;
@@ -66,7 +68,11 @@ export function buildVerdict(item: Item, notices: Notice[], searched: Source[], 
       ...base,
       level: "inspected",
       headline: greenHeadline(item, cleared, what, old),
-      proof: cleared.length ? results.flatMap((r) => r.match.proof.filter((p) => !p.matched)).slice(0, 3) : [],
+      // Only compare against the item's own brand: "CT22425 ≠ SRTH" (a Vornado list) says nothing about a Lasko heater.
+      proof: results
+        .filter((r) => r.match.level === null && brandIn(item.brand, r.notice))
+        .flatMap((r) => r.match.proof.filter((p) => !p.matched))
+        .slice(0, 3),
       steps: [
         `Searched ${[...new Set(where)].join(", ") || "the agency databases"}${searched.includes("web") ? " and the web" : ""} on ${checkedAt.slice(0, 10)}.`,
         item.kind === "vehicle"
