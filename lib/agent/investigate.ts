@@ -123,7 +123,7 @@ function label(tool: string, a: Record<string, unknown>): { text: string; source
     case "search_web":
       return { text: `Tavily web search ${q(a.query)}${a.extra_domain ? ` (+${a.extra_domain})` : ""}`, source: "web" };
     case "read_page":
-      return { text: `Tavily read the recall page ${a.ref}`, source: "web" };
+      return { text: `Tavily read the page “${String(a.title ?? a.ref)}”`, source: "web" };
     default:
       return { text: tool, source: "web" };
   }
@@ -154,15 +154,23 @@ async function runTool(tool: string, a: Record<string, unknown>, item: Item, poo
       return { notices: await vehicleRecalls(String(a.make), String(a.model), Number(a.year)) };
     case "search_car_seat_recalls":
       return { notices: await childSeatRecalls(String(a.query)) };
-    case "search_cpsc":
-      return {
-        notices: await searchCpsc({
-          product: (a.product as string) || undefined,
-          title: (a.title as string) || undefined,
-          description: (a.description as string) || undefined,
-          manufacturer: (a.manufacturer as string) || undefined,
-        }),
+    case "search_cpsc": {
+      const q = {
+        product: (a.product as string) || undefined,
+        title: (a.title as string) || undefined,
+        description: (a.description as string) || undefined,
+        manufacturer: (a.manufacturer as string) || undefined,
       };
+      const notices = await searchCpsc(q);
+      const fields = Object.entries(q).filter(([, v]) => v);
+      if (notices.length || fields.length < 2) return { notices };
+      // CPSC's filters are ANDed and its product names are its own ("tower heaters", not "space heater"):
+      // when the combination finds nothing, try each field alone and say so.
+      const alone = await Promise.all(fields.map(([k, v]) => searchCpsc({ [k]: v }).catch(() => [] as Notice[])));
+      const seen = new Set<string>();
+      const merged = alone.flat().filter((n) => (seen.has(n.id) ? false : (seen.add(n.id), true)));
+      return { notices: merged, note: "Nothing matched all the fields together, so each field was searched on its own." };
+    }
     case "search_fda":
       return {
         notices: await searchFda({
@@ -179,10 +187,10 @@ async function runTool(tool: string, a: Record<string, unknown>, item: Item, poo
       const { notices } = await webSearch({ query: String(a.query), domains: [...OFFICIAL_DOMAINS, ...extra], days: typeof a.recent_days === "number" ? a.recent_days : undefined });
       // Results already found through an agency API are the same recall; keep the API's copy.
       const known = new Set([...pool.values()].map((n) => n.url.toLowerCase()));
-      return { notices: notices.filter((n) => !known.has(n.url.toLowerCase())) };
+      return { notices: await officialCopies(notices.filter((n) => !known.has(n.url.toLowerCase()))) };
     }
     case "read_page": {
-      const n = pool.get(String(a.ref));
+      const n = findRef(pool, a.ref);
       if (!n) return { notices: [], note: "No result has that ref." };
       const pages = await webExtract([n.url]);
       const text = pages.get(n.url);
@@ -194,6 +202,29 @@ async function runTool(tool: string, a: Record<string, unknown>, item: Item, poo
     }
   }
   return { notices: [], note: "Unknown tool." };
+}
+
+/** A result by its ref ("R3"), or by its URL when the model passes that instead. */
+function findRef(pool: Pool, ref: unknown): Notice | undefined {
+  const r = String(ref ?? "");
+  return pool.get(r) ?? [...pool.values()].find((n) => n.url === r);
+}
+
+/**
+ * A cpsc.gov recall page found on the web is usually also in CPSC's database, which carries the recall number,
+ * date, hazard and photo: swap in that record when the titles match. Newsroom pages the database hasn't caught
+ * up with stay as web results.
+ */
+async function officialCopies(notices: Notice[]): Promise<Notice[]> {
+  return Promise.all(
+    notices.map(async (n) => {
+      if (!/cpsc\.gov\/Recalls\//i.test(n.url)) return n;
+      const words = n.title.split(/\s+/).slice(0, 6).join(" ");
+      const hits = await searchCpsc({ title: words }, 5).catch(() => [] as Notice[]);
+      const same = hits.find((h) => h.title.toLowerCase() === n.title.toLowerCase() || h.url.toLowerCase() === n.url.toLowerCase());
+      return same ?? n;
+    }),
+  );
 }
 
 /**
@@ -222,7 +253,8 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
 
   const exec = async (tool: string, args: Record<string, unknown>) => {
     const t = Date.now();
-    const { text, source } = label(tool, args);
+    const page = tool === "read_page" ? findRef(pool, args.ref) : undefined;
+    const { text, source } = label(tool, page ? { ...args, title: page.title.length > 70 ? `${page.title.slice(0, 68).trimEnd()}…` : page.title } : args);
     try {
       const r = await runTool(tool, args, item, pool);
       const refs: ReturnType<typeof compact>[] = [];
