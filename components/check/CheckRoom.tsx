@@ -113,7 +113,7 @@ export default function CheckRoom({ initial }: { initial: Pub }) {
   const sorted = rec.status === "done" ? [...items].sort((a, b) => order[verdicts.get(a.id)?.level ?? "inspected"] - order[verdicts.get(b.id)?.level ?? "inspected"]) : items;
 
   return (
-    <main className={s.room}>
+    <main className={s.room} data-status={rec.status}>
       <section className={s.top} aria-live="polite">
         <div className={s.titleCol}>
           <h1 className={s.h1}>{headline(rec.status, items.length, counts, pending)}</h1>

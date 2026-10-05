@@ -23,7 +23,7 @@ const [base, photo, out] = process.argv.slice(2);
     await page.getByRole("button", { name: "Check my things" }).click();
     await page.waitForURL(/\/check\//, { timeout: 30000 });
     const id = page.url().split("/").pop();
-    await page.waitForFunction(() => /stop using|to check on the label|Nothing you listed/.test(document.querySelector("h1")?.textContent ?? ""), null, { timeout: 180000 });
+    await page.locator("main[data-status=done]").waitFor({ timeout: 180000 });
     await page.waitForTimeout(2500);
     const h1 = await page.locator("h1").textContent();
     const tags = await page.locator("[data-level]").evaluateAll((els) => els.map((e) => e.getAttribute("data-level")));
