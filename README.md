@@ -1,15 +1,24 @@
-# Tagout
+<div align="center">
 
-**Is anything you own recalled?** List what you own, or photograph the label. An agent on **NVIDIA Nemotron** (served by **Nebius Token Factory**) searches the official U.S. recall databases and the web, reads each recall's list of affected models and lots, and a deterministic matcher tags anything recalled, with what to do.
+<img src="docs/cover.png" alt="Tagout: is anything you own recalled? A Vornado heater tagged Do not use, a Honda CR-V tagged Check the label, a Lasko heater tagged Checked." width="100%">
 
-**Live:** https://tagout-recalls.vercel.app &nbsp;·&nbsp; **Demo video:** _link added at submission_
-
-![Tagout: a household's labels, each with a tag. A Vornado heater is tagged Do not use, a Honda CR-V Check the label, a Lasko heater Checked.](docs/screens/home.png)
+<br>
 
 [![CI](https://github.com/RohanGlitched/tagout/actions/workflows/ci.yml/badge.svg)](https://github.com/RohanGlitched/tagout/actions/workflows/ci.yml)
-![License: MIT](https://img.shields.io/badge/license-MIT-blue)
-![Nemotron 3 Ultra on Nebius Token Factory](https://img.shields.io/badge/model-Nemotron%203%20Ultra%20on%20Nebius%20Token%20Factory-76b900)
-![Tavily](https://img.shields.io/badge/web%20search-Tavily-2b6cb0)
+[![Nemotron 3 Ultra on Nebius Token Factory](https://img.shields.io/badge/model-Nemotron%203%20Ultra%20on%20Nebius%20Token%20Factory-76b900)](#how-nemotron-and-nebius-token-factory-are-used)
+[![Tavily](https://img.shields.io/badge/web%20search-Tavily-2b6cb0)](#how-tavily-is-used)
+[![Sources](https://img.shields.io/badge/recalls-NHTSA%20%C2%B7%20CPSC%20%C2%B7%20openFDA-c8102e)](#data-sources)
+[![License: MIT](https://img.shields.io/badge/license-MIT-15191e)](LICENSE)
+
+**[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/fdjj2pxifw)** · **[Recalls today](https://tagout-recalls.vercel.app/recalls)** · **[How it works](https://tagout-recalls.vercel.app/how)**
+
+**Demo video:** _link added at submission_
+
+</div>
+
+---
+
+**Is anything you own recalled?** List what you own, or photograph the label. An agent on **NVIDIA Nemotron** (served by **Nebius Token Factory**) searches the official U.S. recall databases and the web, reads each recall's list of affected models and lots, and a deterministic matcher tags anything recalled, with what to do.
 
 ## Try it in one minute
 
@@ -93,6 +102,10 @@ If Token Factory is unreachable, or the demo's daily budget (`DAILY_MODEL_CAP`) 
 All are public and keyless except Tavily and Token Factory.
 
 ## Screens
+
+**The home page**: a real check pinned to the pegboard, one tag per thing.
+
+![Tagout's home page: a household's labels, each with a tag. A Vornado heater is tagged Do not use, a Honda CR-V Check the label, a Lasko heater Checked.](docs/screens/home.png)
 
 **Every CPSC recall of 2026, one tag each**, by month and hazard (live, on the home page):
 
