@@ -294,8 +294,18 @@
     gap: 28px;
   }
 }
+/* On a phone the label and its tag are drawn at 80% (zoom keeps the layout box honest) with room for the tag. */
 @media (max-width: 520px) {
   .left {
-    padding-right: 120px;
+    padding-right: 0;
+    min-height: 0;
+  }
+  .tagWrap {
+    zoom: 0.8;
+    padding-right: 174px;
+    min-height: 330px;
+  }
+  .row[data-level="pending"] .tagWrap {
+    min-height: 0;
   }
 }

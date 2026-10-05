@@ -111,3 +111,8 @@
     gap: 10px;
   }
 }
+@media (max-width: 520px) {
+  .tally {
+    zoom: 0.7;
+  }
+}
