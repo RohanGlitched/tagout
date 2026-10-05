@@ -63,7 +63,12 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!ready || busy) return;
+    if (busy) return;
+    if (!ready) {
+      setError("Type one thing you own, tap an example, or add a photo of a label.");
+      boxRef.current?.focus();
+      return;
+    }
     setBusy(true);
     setError(null);
     try {
@@ -87,7 +92,10 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
         ref={boxRef}
         className={s.box}
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+          if (error) setError(null);
+        }}
         rows={compact ? 3 : 4}
         maxLength={1200}
         placeholder={"2019 Honda CR-V\nGraco car seat, model 2074735\nSpace heater, Lasko CT22425"}
@@ -115,7 +123,7 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
         ))}
       </div>
       <div className={s.actions}>
-        <button type="submit" className={s.go} disabled={!ready || busy}>
+        <button type="submit" className={s.go} disabled={busy}>
           {busy ? "Starting the check…" : "Check my things"}
         </button>
         <input ref={fileRef} type="file" accept="image/*" capture="environment" multiple hidden onChange={(e) => addPhotos(e.target.files)} />
