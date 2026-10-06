@@ -46,7 +46,7 @@ async function readCount(d: string): Promise<{ count: number; etag?: string }> {
   const r = await get(key(d), { access: "private", useCache: false }).catch(() => null);
   if (!r?.stream) return { count: 0 };
   const j = JSON.parse(await new Response(r.stream).text()) as { count: number };
-  return { count: j.count ?? 0, etag: r.blob.etag };
+  return { count: j.count ?? 0, etag: r.blob.etag?.replace(/^W\//, "") }; // If-Match needs the strong form
 }
 
 async function flush(): Promise<void> {
