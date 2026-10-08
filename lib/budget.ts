@@ -1,5 +1,5 @@
 import "server-only";
-import { get, put } from "@vercel/blob";
+import { storage } from "./storage";
 
 /**
  * Spend guards for the public demo, so visitors can't run up the model bill. A five-item check measured 33
@@ -42,25 +42,21 @@ const today = () => new Date().toISOString().slice(0, 10);
 const key = (d: string) => `usage/${d}.json`;
 
 async function readCount(d: string): Promise<{ count: number; etag?: string }> {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return { count: 0 };
-  const r = await get(key(d), { access: "private", useCache: false }).catch(() => null);
-  if (!r?.stream) return { count: 0 };
-  const j = JSON.parse(await new Response(r.stream).text()) as { count: number };
-  return { count: j.count ?? 0, etag: r.blob.etag?.replace(/^W\//, "") }; // If-Match needs the strong form
+  const s = storage();
+  if (!s) return { count: 0 };
+  const r = await s.read(key(d)).catch(() => null);
+  if (!r) return { count: 0 };
+  const j = JSON.parse(r.text) as { count: number };
+  return { count: j.count ?? 0, etag: r.etag };
 }
 
 async function flush(): Promise<void> {
-  if (!process.env.BLOB_READ_WRITE_TOKEN || local === 0) return;
+  const s = storage();
+  if (!s || local === 0) return;
   for (let i = 0; i < 3; i++) {
     const cur = await readCount(day);
     try {
-      await put(key(day), JSON.stringify({ count: cur.count + local }), {
-        access: "private",
-        contentType: "application/json",
-        addRandomSuffix: false,
-        allowOverwrite: true,
-        ...(cur.etag ? { ifMatch: cur.etag } : {}),
-      });
+      await s.write(key(day), JSON.stringify({ count: cur.count + local }), { ifMatch: cur.etag });
       persisted = cur.count + local;
       local = 0;
       return;
