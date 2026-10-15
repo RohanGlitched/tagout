@@ -134,10 +134,15 @@ export default function How() {
             <li>There is no public API to check a single VIN&apos;s open recalls, so a car can be orange at most. The check links to NHTSA&apos;s VIN lookup.</li>
             <li>Tagout covers U.S. recalls. A product sold only elsewhere may be recalled there without a U.S. notice.</li>
             <li>Green means nothing was found on that day, not that a product is safe. Register products with their makers so they can reach you.</li>
-            <li>When the model is unavailable or the demo&apos;s daily budget is spent, checks run on a fixed search plan; the matcher is the same.</li>
+            <li>
+              When the demo&apos;s daily Nemotron 3 Ultra budget is spent, checks run a fixed search plan with Nemotron 3 Nano reading the notices (98 of 105 right in the eval, against
+              104 for the full agent). Past that budget too, or if Token Factory is down, the fixed plan runs with no model. Each check says which way it ran.
+            </li>
+            <li>A watched list is checked again only when its link is opened, at most once a day. Nothing runs in the background and nothing is emailed yet.</li>
           </ul>
           <p className={s.more}>
-            The code is open source: <a href={REPO_URL}>{REPO_URL.replace("https://", "")}</a>. <Link href="/#check">Check your things</Link>.
+            How well it works, measured on 105 real cases: <Link href="/proof">the eval</Link>. The code is open source: <a href={REPO_URL}>{REPO_URL.replace("https://", "")}</a>.{" "}
+            <Link href="/#check">Check your things</Link>.
           </p>
         </section>
       </main>
