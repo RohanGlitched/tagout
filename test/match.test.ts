@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { compareId, decide, matchItem, norm, parseMade, printedIn, splitIds } from "../lib/match.ts";
+import { compareId, decide, looksLikeCode, matchItem, norm, parseMade, printedIn, splitIds } from "../lib/match.ts";
 import type { Item, Notice } from "../lib/types.ts";
 
 const notice = (n: Partial<Notice>): Notice => ({ source: "cpsc", id: "25-001", title: "Heaters recalled", date: "2025-01-01", url: "https://example.org", models: [], lots: [], upcs: [], ...n });
@@ -136,4 +136,9 @@ test("a trailing X in a lot is a letter, not a family code", () => {
   assert.equal(matchItem(softgels, n).level, null);
   assert.equal(matchItem({ ...softgels, lot: "YH9X" }, n).level, "danger");
   assert.equal(compareId("5160B", "5160X"), "wildcard");
+});
+
+test("only code-like strings are reported as struck codes", () => {
+  for (const c of ["SRTH", "CT-22425", "EJA022", "0 12345 67890 5", "LOT 2301A through LOT 2399Z", "Model 7110"]) assert.equal(looksLikeCode(c), true, c);
+  for (const c of ["/usr/local/bin/python", "/home/user/script.py", "C:\\tools\\x.exe", "the notice lists every unit sold since spring", "n/a", "-"]) assert.equal(looksLikeCode(c), false, c);
 });

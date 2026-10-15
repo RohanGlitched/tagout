@@ -1,6 +1,6 @@
 import "server-only";
 import type { Notice } from "../types";
-import { norm } from "../match";
+import { looksLikeCode, norm } from "../match";
 import { MODELS, structured } from "../nebius";
 import { webExtract } from "../sources/web";
 
@@ -63,7 +63,7 @@ export async function readNotice(n: Notice, useModel: boolean, chain: string[] =
         // "A through B": both ends must be printed.
         const ends = c.split(/\s+(?:through|thru|to)\s+|\s*[–—]\s*/i);
         const ok = ends.every((e) => norm(e).length >= 2 && hay.includes(norm(e)));
-        if (!ok) struck.push(c);
+        if (!ok && looksLikeCode(c)) struck.push(c); // junk (paths, prose) is dropped without a mention
         return ok;
       });
     const models = keep(r.data.models);

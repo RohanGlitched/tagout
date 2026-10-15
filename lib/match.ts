@@ -16,6 +16,19 @@ export function norm(s: string): string {
 }
 
 /** Lower-case words for brand comparison, with corporate suffixes dropped. */
+/**
+ * Whether a string a reader returned could be a product code (model, lot, UPC, or a range of them). A reader
+ * that strays sometimes returns file paths or sentences; those are dropped quietly instead of being shown as
+ * "struck codes".
+ */
+export function looksLikeCode(s: string): boolean {
+  const t = s.trim();
+  if (t.length < 2 || t.length > 60 || !/^[A-Za-z0-9#]/.test(t) || /^(n\/?a|none|null|unknown|tbd|all)$/i.test(t)) return false;
+  if (/(^|\s)\/|\\|\.(py|js|ts|sh|exe|json|txt|html?)\b|\b(usr|bin|home|tmp|var|etc)\//i.test(t)) return false;
+  if (t.split(/\s+/).filter((w) => !/^(through|thru|to|and|[–—-])$/i.test(w)).length > 4) return false;
+  return true;
+}
+
 export function normBrand(s: string): string {
   return s
     .toLowerCase()
