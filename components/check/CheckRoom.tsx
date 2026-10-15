@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { CheckRecord } from "@/lib/checks";
 import type { Event } from "@/lib/agent/run";
 import type { Item, Verdict } from "@/lib/types";
@@ -17,7 +18,7 @@ type LogEntry = NonNullable<CheckRecord["log"]>[number];
  * item's searches appear under it, and its tag is hung when the matcher decides. Anyone else opening the link
  * mid-run polls the saved record instead.
  */
-export default function CheckRoom({ initial }: { initial: Pub }) {
+export default function CheckRoom({ initial, onDone, embedded = false }: { initial: Pub; onDone?: (rec: Pub) => void; embedded?: boolean }) {
   const [rec, setRec] = useState<Pub>(initial);
   const [live, setLive] = useState(false);
   const [error, setError] = useState<string | null>(initial.status === "failed" ? initial.error ?? "This check didn't finish." : null);
@@ -103,6 +104,15 @@ export default function CheckRoom({ initial }: { initial: Pub }) {
     });
   }
 
+  // Tell a watch page when the check it started has finished, so it can show what changed.
+  const told = useRef(initial.status === "done");
+  useEffect(() => {
+    if (rec.status === "done" && !told.current) {
+      told.current = true;
+      onDone?.(rec);
+    }
+  }, [rec, onDone]);
+
   const items: Item[] = rec.items ?? [];
   const verdicts = useMemo(() => new Map((rec.verdicts ?? []).map((v) => [v.itemId, v])), [rec.verdicts]);
   const counts = { danger: 0, warning: 0, inspected: 0 };
@@ -113,7 +123,7 @@ export default function CheckRoom({ initial }: { initial: Pub }) {
   const sorted = rec.status === "done" ? [...items].sort((a, b) => order[verdicts.get(a.id)?.level ?? "inspected"] - order[verdicts.get(b.id)?.level ?? "inspected"]) : items;
 
   return (
-    <main className={s.room} data-status={rec.status}>
+    <Shell embedded={embedded} status={rec.status}>
       <section className={s.top} aria-live="polite">
         <div className={s.titleCol}>
           <h1 className={s.h1}>{headline(rec.status, items.length, counts, pending)}</h1>
@@ -164,7 +174,70 @@ export default function CheckRoom({ initial }: { initial: Pub }) {
       ) : null}
 
       <Engine rec={rec} />
+      {!embedded && rec.status === "done" && rec.input.text.trim() ? <WatchOffer checkId={rec.id} photos={rec.input.photoCount} /> : null}
+    </Shell>
+  );
+}
+
+function Shell({ embedded, status, children }: { embedded: boolean; status: Pub["status"]; children: React.ReactNode }) {
+  return embedded ? (
+    <section className={s.room} data-status={status} data-embedded="">
+      {children}
+    </section>
+  ) : (
+    <main className={s.room} data-status={status}>
+      {children}
     </main>
+  );
+}
+
+/** Saved watches live in this browser only, as a convenience; the watch link itself is what matters. */
+export const WATCH_KEY = "tagout.watches";
+export function rememberWatch(id: string) {
+  try {
+    const list = JSON.parse(localStorage.getItem(WATCH_KEY) ?? "[]") as string[];
+    localStorage.setItem(WATCH_KEY, JSON.stringify([id, ...list.filter((x) => x !== id)].slice(0, 5)));
+  } catch {}
+}
+
+/** Turns a one-off check into a watched list: re-checked on each visit (at most daily), with what changed. */
+function WatchOffer({ checkId, photos }: { checkId: string; photos: number }) {
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  async function watch() {
+    if (busy) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const r = await fetch("/api/watches", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ checkId }) });
+      const j = (await r.json().catch(() => ({}))) as { id?: string; error?: string };
+      if (!r.ok || !j.id) throw new Error(j.error || "The watch couldn't be saved. Try again in a moment.");
+      rememberWatch(j.id);
+      router.push(`/watch/${j.id}`);
+    } catch (e) {
+      setError((e as Error).message);
+      setBusy(false);
+    }
+  }
+  return (
+    <section className={s.watch} aria-labelledby="watch-h">
+      <div>
+        <h2 id="watch-h">Watch these things</h2>
+        <p>
+          Recalls keep coming: CPSC announces new ones every week. Save this list as a watch and keep its link. Each time you open it, Tagout checks the list again (at most once a
+          day) and shows what&apos;s new since the last check.{photos ? " Photos aren't kept, so only the typed lines are watched." : ""}
+        </p>
+        {error ? (
+          <p className={s.watchError} role="alert">
+            {error}
+          </p>
+        ) : null}
+      </div>
+      <button type="button" className={s.watchGo} onClick={watch} disabled={busy}>
+        {busy ? "Saving the watch…" : "Watch these things"}
+      </button>
+    </section>
   );
 }
 

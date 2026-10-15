@@ -1,0 +1,146 @@
+.main {
+  overflow-x: clip;
+}
+.top,
+.since {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 40px var(--gutter) 0;
+}
+.kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.h1 {
+  margin-top: 6px;
+  font-size: clamp(32px, 4.6vw, 54px);
+  font-variation-settings: "wdth" 116;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+.meta {
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+}
+.how {
+  margin-top: 20px;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px 24px;
+  align-items: center;
+  padding: 16px 18px;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--ink);
+  border-radius: 3px;
+  font-size: 15px;
+  color: #39414a;
+}
+.copy {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.copy:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.since {
+  padding-top: 36px;
+}
+.h2 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-variation-settings: "wdth" 114;
+  font-weight: 800;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+}
+.note {
+  margin-top: 14px;
+  max-width: 760px;
+  font-size: 16px;
+  color: #39414a;
+}
+.changes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.changes li {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) auto;
+  grid-template-areas: "kind said move" "kind refs refs";
+  gap: 4px 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.kind {
+  grid-area: kind;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.changes li[data-kind="worse"] .kind,
+.changes li[data-kind="new-recall"] .kind {
+  color: var(--danger-deep);
+}
+.said {
+  grid-area: said;
+  font-weight: 600;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.move {
+  grid-area: move;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.move i {
+  font-style: normal;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 3px;
+  color: #fff;
+}
+.move i[data-level="danger"] {
+  background: var(--danger);
+}
+.move i[data-level="warning"] {
+  background: var(--warning-deep);
+}
+.move i[data-level="inspected"] {
+  background: var(--inspected);
+}
+.refs {
+  grid-area: refs;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+@media (max-width: 720px) {
+  .how {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .changes li {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "kind" "said" "move" "refs";
+  }
+  .move {
+    white-space: normal;
+  }
+}

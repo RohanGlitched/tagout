@@ -5,6 +5,7 @@ import CheckForm from "@/components/check/CheckForm";
 import Board, { type BoardEntry } from "@/components/home/Board";
 import Specimen from "@/components/home/Specimen";
 import TagWall from "@/components/home/TagWall";
+import MyWatches from "@/components/watch/MyWatches";
 import WhereCodes from "@/components/home/WhereCodes";
 import Tag from "@/components/tag/Tag";
 import { latestRecalls } from "@/lib/latest";
@@ -72,6 +73,7 @@ export default async function Home() {
             </p>
             <CheckForm examples={EXAMPLES} />
             <p className={s.fine}>Searches NHTSA, CPSC, FDA and the web. No account, nothing to install.</p>
+            <MyWatches className={s.fine} />
           </div>
           {entries.length ? (
             <div className={s.boardCol}>
