@@ -14,7 +14,7 @@
 **[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/kj6iutme8c)** · **[The eval](https://tagout-recalls.vercel.app/proof)** · **[A watched household](https://tagout-recalls.vercel.app/watch/5ehharz7sr)** · **[Caught on the web](https://tagout-recalls.vercel.app/check/vk9vuyk3zi)** · **[How it works](https://tagout-recalls.vercel.app/how)**
 
 <!-- TODO(video): swap in the public YouTube URL once the video is set to Public or re-uploaded -->
-**Demo video:** https://youtu.be/YVw1EcY3eVU (2:31)
+**Demo video:** https://youtu.be/kqVtw3pK6nw (2:45)
 
 </div>
 
