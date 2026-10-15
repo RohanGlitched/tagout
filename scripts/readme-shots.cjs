@@ -1,7 +1,7 @@
 // Product screenshots for the README and the gallery: node scripts/readme-shots.cjs [base] [checkId]
 const { chromium } = require("I:/Programs/ListofHackathon/hackathons/01-arbitrum-open-house/submission/video/node_modules/playwright");
 const base = process.argv[2] || "https://tagout-recalls.vercel.app";
-const CHECK = process.argv[3] || "fdjj2pxifw";
+const CHECK = process.argv[3] || "kj6iutme8c";
 const out = "docs/screens";
 (async () => {
   const b = await chromium.launch({ args: ["--enable-gpu", "--ignore-gpu-blocklist", "--use-angle=d3d11"] });
