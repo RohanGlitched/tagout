@@ -199,7 +199,9 @@ function WebNote({ n, checkedAt }: { n: NonNullable<Verdict["notice"]>; checkedA
       <span className={s.webBadge}>{n.notInDb ? "Ahead of the database" : "Found by Tavily"}</span>
       {n.notInDb === "cpsc"
         ? `Tavily found this notice on ${host}. CPSC's recall database didn't return it on ${fmtDate(checkedAt)}, so only the web search could catch it.`
-        : /fsis\.usda\.gov$/.test(host)
+        : n.notInDb === "fda"
+          ? `Tavily found this company announcement on ${host}. FDA's enforcement reports (openFDA) had nothing from this firm in the 90 days before ${fmtDate(checkedAt)}, so only the web search could catch it.`
+          : /fsis\.usda\.gov$/.test(host)
           ? `Tavily found this notice on ${host}. USDA's recall API turns away automated clients, so the web search is the only way to reach meat and poultry recalls.`
           : `Tavily found this notice on ${host}.`}
     </p>

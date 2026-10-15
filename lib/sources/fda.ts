@@ -132,3 +132,22 @@ export async function latestFda(kind: FdaKind, limit = 20): Promise<Notice[]> {
   const j = await getJson<{ results: Rec[] }>(`https://api.fda.gov/${kind}/enforcement.json?sort=report_date:desc&limit=${limit}${apiKey()}`, { timeoutMs: 12_000 });
   return (j?.results ?? []).map(toNotice);
 }
+
+/**
+ * Does openFDA have any enforcement report from this firm since a date? Company announcements on fda.gov come
+ * weeks before the enforcement report, so a recall page with no report behind it is one only the web search found.
+ * Returns null when openFDA didn't answer (which says nothing either way).
+ */
+export async function firmReported(firm: string, since: string): Promise<boolean | null> {
+  const q = `recalling_firm:${quote(firm)}+AND+report_date:[${since.replace(/-/g, "")}+TO+20991231]`;
+  try {
+    const all = await Promise.all(
+      (["food", "drug", "device"] as FdaKind[]).map((k) =>
+        getJson<{ results: Rec[] }>(`https://api.fda.gov/${k}/enforcement.json?search=${encodeURIComponent(q).replace(/%20/g, "+").replace(/%2B/g, "+")}&limit=1${apiKey()}`, { timeoutMs: 12_000 }).then((j) => (j?.results ?? []).length > 0),
+      ),
+    );
+    return all.some(Boolean);
+  } catch {
+    return null;
+  }
+}

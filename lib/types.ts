@@ -62,7 +62,7 @@ export type Notice = {
   severity?: string;
   /** Web results only: the agency database Tavily's page was looked up in and didn't come back from, on the
    *  day of the check (a recall the newsroom has published but the database hasn't ingested yet). */
-  notInDb?: "cpsc";
+  notInDb?: "cpsc" | "fda";
   /** The agency's own wording the identifiers were read from; every extracted code must appear in it. */
   text?: string;
 };

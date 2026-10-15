@@ -4,7 +4,7 @@ import { brandIn, norm, normBrand } from "../match";
 import { chat, MODELS, parseJson, type Msg, type ToolDef } from "../nebius";
 import { searchCpsc } from "../sources/cpsc";
 import { childSeatRecalls, vehicleRecalls } from "../sources/nhtsa";
-import { searchFda, type FdaKind } from "../sources/fda";
+import { firmReported, searchFda, type FdaKind } from "../sources/fda";
 import { webExtract, webSearch, OFFICIAL_DOMAINS } from "../sources/web";
 
 /**
@@ -225,6 +225,13 @@ function findRef(pool: Pool, ref: unknown): Notice | undefined {
 async function officialCopies(notices: Notice[]): Promise<Notice[]> {
   return Promise.all(
     notices.map(async (n) => {
+      if (/fda\.gov\/safety\/recalls-market-withdrawals-safety-alerts\//i.test(n.url)) {
+        // "Gardeners Basics Recalls Waltham 29 …": the firm is what comes before the verb.
+        const firm = n.title.split(/\s+(?:Recalls|Issues|Announces|Expands|Is Recalling|Voluntarily)\b/i)[0].trim();
+        if (!firm || firm === n.title || firm.length < 3) return n;
+        const since = new Date(Date.now() - 90 * 86_400_000).toISOString().slice(0, 10);
+        return (await firmReported(firm, since)) === false ? { ...n, notInDb: "fda" as const } : n;
+      }
       if (!/cpsc\.gov\/Recalls\//i.test(n.url)) return n;
       const words = n.title.split(/\s+/).slice(0, 6).join(" ");
       const hits = await searchCpsc({ title: words }, 5).catch(() => null);
