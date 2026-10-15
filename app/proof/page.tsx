@@ -369,7 +369,10 @@ export default function Proof() {
               Each arm ran each case once, on {fmtRun(summary.at)}. Model answers vary between runs; this is one sample, not an average. Every HTTP response was cached, so all arms read
               the same agency data and the whole run can be replayed for free.
             </li>
-            <li>The eval called Tavily in its keyless mode so the live demo keeps its credits. Same index, same results.</li>
+            <li>
+              Two changes made after this run are not in its numbers: an agency&apos;s page listing many recalls no longer stands in for one notice, and an FDA company
+              announcement with no enforcement report behind it is marked as ahead of the database.
+            </li>
             <li>
               We chose the cases. Recalled units come from recent notices that print a code, which is the case Tagout is built for; a product whose notice prints no code can only ever
               be orange.
