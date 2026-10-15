@@ -4,8 +4,8 @@ import { storage } from "./storage";
 /**
  * Spend guards for the public demo, so visitors can't run up the model bill. A five-item check measured 33
  * Token Factory calls and about 104k tokens (about 13 cents at Nemotron 3 Ultra's list price), so:
- * - per visitor (IP): 12 checks per 10 minutes and IP_DAILY_MODEL_CAP a day (default 40), kept in memory per server instance;
- * - per day: DAILY_MODEL_CAP checks in total (default 400; production sets 150), counted in memory and
+ * - per visitor (IP): 12 checks per 10 minutes and IP_DAILY_MODEL_CAP a day (default 40; production sets 15), kept in memory per server instance;
+ * - per day: DAILY_MODEL_CAP checks in total (default 400; production sets 60), counted in memory and
  *   flushed to a private blob every 10 calls (every call once 80% is spent) so the cap holds across instances.
  * When either runs out, checks still run on the fixed search plan and the deterministic matcher.
  */

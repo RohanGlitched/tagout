@@ -10,9 +10,10 @@
 [![Sources](https://img.shields.io/badge/recalls-NHTSA%20%C2%B7%20CPSC%20%C2%B7%20openFDA-c8102e)](#data-sources)
 [![License: MIT](https://img.shields.io/badge/license-MIT-15191e)](LICENSE)
 
-**[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/fdjj2pxifw)** · **[Recalls today](https://tagout-recalls.vercel.app/recalls)** · **[How it works](https://tagout-recalls.vercel.app/how)**
+**[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/kj6iutme8c)** · **[Recalls today](https://tagout-recalls.vercel.app/recalls)** · **[How it works](https://tagout-recalls.vercel.app/how)**
 
-**Demo video:** _link added at submission_
+<!-- TODO(video): swap in the public YouTube URL once the video is set to Public or re-uploaded -->
+**Demo video:** https://youtu.be/YVw1EcY3eVU (2:31)
 
 </div>
 
@@ -127,7 +128,7 @@ cp .env.example .env.local   # add NEBIUS_API_KEY and TAVILY_API_KEY
 npm run dev                  # http://localhost:3000
 ```
 
-Checks are stored as JSON under `.data/` locally, or in a private Vercel Blob store when `BLOB_READ_WRITE_TOKEN` is set.
+Checks are stored as JSON under `.data/` locally. In production they live in a private Google Cloud Storage bucket, reached keylessly: the function's Vercel OIDC token is exchanged for a Google access token through a workload identity pool (`GCS_BUCKET`, `GCS_WIF_AUDIENCE`), so no key exists anywhere. A Vercel Blob store (`BLOB_READ_WRITE_TOKEN`) also works; it was the first store, until the Hobby account's shared monthly Blob allowance ran out on Oct 8. See [`lib/storage.ts`](lib/storage.ts).
 
 ```bash
 npm test           # matcher unit tests
@@ -153,7 +154,7 @@ npx tsx --conditions=react-server scripts/try-check.ts "Vornado heater TYPE SRTH
 - U.S. recalls only. A product sold only elsewhere may be recalled there without a U.S. notice.
 - Green means nothing was found that day, not that a product is safe.
 - CPSC's API returns a fake error record and caches it per URL, so every call carries a cache-buster and retries. Its `Model` field is always empty, which is why model numbers are read from the prose.
-- The demo has per-visitor and daily limits on model calls (12 checks per 10 minutes and 40 a day per address, 150 a day in all); past them, checks use the fixed plan.
+- The demo has per-visitor and daily limits on model calls (12 checks per 10 minutes and 15 a day per address, 60 a day in all, set by `IP_DAILY_MODEL_CAP` and `DAILY_MODEL_CAP`); past them, checks use the fixed plan.
 - The vision fallback changed on Oct 5: GLM-5.3-Flash took over three minutes to answer a one-line prompt, so Gemma 3 27B (7 s on the sample label) now backs up Qwen3.8 27B.
 - Tagout isn't affiliated with NHTSA, CPSC, FDA or USDA. Always confirm with the recall notice; every tag links to it.
 

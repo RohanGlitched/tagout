@@ -2,17 +2,17 @@ import "server-only";
 import { createSign } from "node:crypto";
 
 /**
- * Where tours, the usage counters and the capacity cache live: one small key-value interface over
+ * Where checks, the showcase markers and the daily usage counter live: one small key-value interface over
  * Google Cloud Storage or Vercel Blob (BLOB_READ_WRITE_TOKEN), whichever is configured. Every read returns a
  * version tag (the GCS generation, or the Blob ETag with its weak marker stripped) and every write may demand
- * it, so two instances can't overwrite each other's update. With neither configured, store.ts keeps tours as
+ * it, so two instances can't overwrite each other's update. With neither configured, store.ts keeps checks as
  * files and the counters stay in memory.
  *
  * GCS needs GCS_BUCKET and one of two credentials, keyless first: GCS_WIF_AUDIENCE, the workload identity
  * provider that trusts Vercel's OIDC issuer (the function's own VERCEL_OIDC_TOKEN is exchanged at Google's STS
  * for an access token, so no key exists anywhere); or GCS_SA_KEY, a base64 service-account JSON, where keys
- * are allowed. Routed moved from Blob to GCS on Oct 8 2026: a Hobby account's monthly Blob allowance is shared
- * by every project on it, and when it ran out the store was suspended and every saved tour vanished at once.
+ * are allowed. Tagout moved from Blob to GCS on Oct 8 2026: a Hobby account's monthly Blob allowance is shared
+ * by every project on it, and when it ran out the store was suspended and every saved check vanished at once.
  */
 export type Stored = { text: string; etag?: string };
 
@@ -155,7 +155,7 @@ function blob(): Storage {
 
 let chosen: Storage | null | undefined;
 
-/** The configured backend, or null when tours live in files and counters in memory. */
+/** The configured backend, or null when checks live in files and counters in memory. */
 export function storage(): Storage | null {
   if (chosen !== undefined) return chosen;
   if (process.env.GCS_BUCKET && (process.env.GCS_WIF_AUDIENCE || process.env.GCS_SA_KEY)) chosen = gcs(process.env.GCS_BUCKET);
