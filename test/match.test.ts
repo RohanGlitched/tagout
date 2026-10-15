@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { compareId, decide, matchItem, norm, parseMade, splitIds } from "../lib/match.ts";
+import { compareId, decide, matchItem, norm, parseMade, printedIn, splitIds } from "../lib/match.ts";
 import type { Item, Notice } from "../lib/types.ts";
 
 const notice = (n: Partial<Notice>): Notice => ({ source: "cpsc", id: "25-001", title: "Heaters recalled", date: "2025-01-01", url: "https://example.org", models: [], lots: [], upcs: [], ...n });
@@ -90,4 +90,50 @@ test("parseMade reads common date forms and refuses bare codes", () => {
   assert.deepEqual(parseMade("03/14/2023"), { start: "2023-03-14", end: "2023-03-14" });
   assert.deepEqual(parseMade("03/2023"), { start: "2023-03-01", end: "2023-03-31" });
   assert.equal(parseMade("2211"), null);
+});
+
+test("a model match is orange when the notice limits the recall to date codes and yours isn't printed", () => {
+  const n = notice({ models: ["LTD-SM23"], text: "Only units with model number LTD-SM23 and date code 7W15TN are included in this recall." });
+  const item: Item = { id: "s", kind: "product", said: "sleep machine", brand: "Love To Dream", model: "LTD-SM23", made: "7W16TN" };
+  assert.equal(matchItem(item, n).level, "warning");
+  assert.equal(matchItem({ ...item, made: "7W15TN" }, n).level, "danger");
+  // A calendar date isn't a date code, and a notice that names no codes stays red on the model.
+  assert.equal(matchItem({ ...item, made: "2025-03" }, n).level, "danger");
+  assert.equal(matchItem(item, notice({ models: ["LTD-SM23"], text: "All LTD-SM23 sleep machines are recalled." })).level, "danger");
+});
+
+test("printedIn finds whole codes outside 'not included' sentences", () => {
+  const text = "Lot #: 9T20, 9T50, Exp Date: 4/30/2026; 4V15, Exp Date: 8/31/2026. Units with lot 7V99 are not included in this recall.";
+  assert.equal(printedIn("4V15", text), true);
+  assert.equal(printedIn("4v-15", text), true);
+  assert.equal(printedIn("4V1", text), false);
+  assert.equal(printedIn("7V99", text), false);
+  assert.equal(printedIn("SRTH", "model TYPE SRTH"), false);
+});
+
+test("the notice's text outranks a reader's list that was cut short", () => {
+  const n = notice({ source: "fda", title: "GenTeal Tears lubricant eye gel", lots: ["9T20", "9T50"], text: "GenTeal Tears. Lot #: 9T20, 9T50, Exp Date: 4/30/2026; 4V15, Exp Date: 8/31/2026." });
+  const gel: Item = { id: "g", kind: "drug", said: "gel", brand: "GenTeal", lot: "4V15" };
+  assert.equal(matchItem(gel, n).level, "danger");
+  assert.equal(matchItem({ ...gel, lot: "4V16" }, n).level, null);
+  // A model the reader missed entirely, printed in the description.
+  const brush = notice({ title: "Cuisinart grill brushes recalled", firm: "Conair", text: "Cuisinart grill brushes. Model numbers CCB-100, CCB-5014 and CSBS-777 are included." });
+  assert.equal(matchItem({ id: "b", kind: "product", said: "brush", brand: "Cuisinart", model: "CCB-5014" }, brush).level, "danger");
+  assert.equal(matchItem({ id: "b", kind: "product", said: "brush", brand: "Cuisinart", model: "CCB-5015" }, brush).level, "warning");
+});
+
+test("a one-sided date window reads as before or after", () => {
+  const jar = notice({ models: ["SK3000"], madeRanges: [{ from: "1900-01-01", to: "2023-07-31" }], text: "Model SK3000 manufactured before July 2023." });
+  const item: Item = { id: "t", kind: "product", said: "jar", brand: "Thermos", model: "SK3000" };
+  assert.equal(matchItem({ ...item, made: "2022-05" }, jar).level, "danger");
+  assert.equal(matchItem({ ...item, made: "2024-02" }, jar).level, null);
+  assert.match(matchItem(item, jar).why, /before 2023-07-31/);
+});
+
+test("a trailing X in a lot is a letter, not a family code", () => {
+  const n = notice({ source: "fda", title: "Gas-X Extra Strength softgels", lots: ["TL8K", "YH9X", "YH9Y"], text: "Gas-X. Lots: TL8K, YH9X, YH9Y." });
+  const softgels: Item = { id: "x", kind: "drug", said: "Gas-X", brand: "Gas-X", lot: "YH9Z" };
+  assert.equal(matchItem(softgels, n).level, null);
+  assert.equal(matchItem({ ...softgels, lot: "YH9X" }, n).level, "danger");
+  assert.equal(compareId("5160B", "5160X"), "wildcard");
 });

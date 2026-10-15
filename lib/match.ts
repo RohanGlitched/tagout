@@ -72,10 +72,10 @@ export type IdMatch = "exact" | "range" | "wildcard" | "variant" | null;
  * Compare one of the household's identifiers to one listed by a notice.
  * - exact: same characters after normalisation.
  * - range: inside "A100..A150" (same prefix and suffix, same digit count).
- * - wildcard: the notice prints "5160X" or "5160*" for a family.
+ * - wildcard: the notice prints "5160X" (models only) or "5160*" for a family.
  * - variant: one is the other plus a short suffix ("CT22425" vs "CT22425B"). Never enough for a red tag.
  */
-export function compareId(yours: string, listed: string): IdMatch {
+export function compareId(yours: string, listed: string, family = true): IdMatch {
   const y = norm(yours);
   if (y.length < 3) return null;
   if (listed.includes("..")) {
@@ -91,7 +91,8 @@ export function compareId(yours: string, listed: string): IdMatch {
   if (!l) return null;
   if (y === l) return "exact";
   const wild = l.match(/^([A-Z0-9]{3,}?)(X+|\*+)$/);
-  if (wild && y.startsWith(wild[1]) && y.length === l.length && wild[2][0] === "X") return "wildcard";
+  // A trailing X is a family code in model lists ("5160X"), but in a lot list it is just a letter ("YH9X").
+  if (family && wild && y.startsWith(wild[1]) && y.length === l.length && wild[2][0] === "X") return "wildcard";
   if (wild && wild[2][0] === "*" && y.startsWith(wild[1])) return "wildcard";
   const [short, long] = y.length < l.length ? [y, l] : [l, y];
   if (short.length >= 4 && long.startsWith(short) && long.length - short.length <= 2 && /^[A-Z]+$/.test(long.slice(short.length))) return "variant";
@@ -126,11 +127,11 @@ const listedIds = (list: string[], dashRanges: boolean) => [...new Set(list.flat
 const RANK = { exact: 4, range: 3, wildcard: 2, variant: 1 } as const;
 
 /** Find the best match of `yours` among the notice's listed ids. */
-function best(yours: string | undefined, listed: string[]): { how: IdMatch; theirs: string } | null {
+function best(yours: string | undefined, listed: string[], family = true): { how: IdMatch; theirs: string } | null {
   if (!yours) return null;
   let found: { how: IdMatch; theirs: string } | null = null;
   for (const l of listed) {
-    const how = compareId(yours, l);
+    const how = compareId(yours, l, family);
     if (how && (!found || RANK[how] > RANK[found.how!])) found = { how, theirs: l.replace("..", " through ") };
   }
   return found;
@@ -163,19 +164,30 @@ export function matchItem(item: Item, notice: Notice): Match {
       mYours = c;
     }
   }
-  const l = best(item.lot, lots);
+  const l = best(item.lot, lots, false);
   const u = item.upc ? upcs.find((x) => x.replace(/^0+/, "") === norm(item.upc!).replace(/^0+/, "")) : undefined;
 
   if (m) proof.push({ field: "model", yours: mYours!, theirs: m.theirs, matched: m.how !== "variant" });
   if (l) proof.push({ field: "lot", yours: item.lot!, theirs: l.theirs, matched: l.how !== "variant" });
   if (u) proof.push({ field: "upc", yours: item.upc!, theirs: u, matched: true });
 
-  const strongModel = m && m.how !== "variant";
+  let strongModel = Boolean(m && m.how !== "variant");
   const strongLot = l && l.how !== "variant";
+
+  // The reader can miss a code the notice prints (a long lot list cut short, a model in a sentence it skipped).
+  // A code of yours that the notice's own text prints, as a whole word and not in a "not included" sentence,
+  // counts as listed: the text outranks the reader's list.
+  const ownBrand = !item.brand || brandIn(item.brand, notice);
+  const inText = (c: string | undefined) => Boolean(c && (ownBrand || distinctive(c)) && printedIn(c, notice.text));
+  const lotInText = !strongLot && inText(item.lot);
 
   // When a notice lists lots, the lot decides. A model match alone isn't enough for a lot-limited recall.
   if (lots.length && item.lot) {
     if (strongLot) return { level: "danger", proof, why: `Lot ${item.lot} is listed in this recall.` };
+    if (lotInText) {
+      proof.push({ field: "lot", yours: item.lot, theirs: `${item.lot} (in the notice's text)`, matched: true });
+      return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.` };
+    }
     proof.push({ field: "lot", yours: item.lot, theirs: lots.slice(0, 4).join(", ").replace(/\.\./g, " through "), matched: false });
     return { level: null, proof, why: `Lot ${item.lot} isn't among the lots this recall lists.` };
   }
@@ -183,16 +195,38 @@ export function matchItem(item: Item, notice: Notice): Match {
     return { level: "warning", proof, why: "This recall is limited to certain lots. Check the lot number printed on yours." };
   }
 
+  if (!strongModel && !u && m?.how !== "variant") {
+    const printed = [...mine, ...mine.flatMap((c) => splitIds(c, false))].find(inText);
+    if (printed) {
+      strongModel = true;
+      mYours = printed;
+      proof.push({ field: "model", yours: printed, theirs: `${printed} (in the notice's text)`, matched: true });
+    }
+  }
+  if (!lots.length && lotInText && !strongModel && !u) {
+    proof.push({ field: "lot", yours: item.lot!, theirs: `${item.lot} (in the notice's text)`, matched: true });
+    return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.` };
+  }
+
   if (strongModel || u) {
     const what = strongModel ? `${/^\d/.test(mYours!) ? "Model " : ""}${mYours}` : `UPC ${item.upc}`;
     const window = notice.madeRanges?.[0];
     if (window) {
       const made = parseMade(item.made);
-      const span = `${window.from} and ${window.to}`;
-      if (!made) return { level: "warning", proof, why: `${what} is listed, but only units made between ${span}. Check the date of manufacture on the label.` };
+      const span = window.from <= "1901" ? `before ${window.to}` : window.to >= "2998" ? `after ${window.from}` : `between ${window.from} and ${window.to}`;
+      if (!made) return { level: "warning", proof, why: `${what} is listed, but only units made ${span}. Check the date of manufacture on the label.` };
       const inside = made.end >= window.from && made.start <= window.to;
-      proof.push({ field: "made", yours: item.made!, theirs: `${window.from} to ${window.to}`, matched: inside });
-      if (!inside) return { level: null, proof, why: `${what} is listed, but yours was made outside the recalled window (${span}).` };
+      proof.push({ field: "made", yours: item.made!, theirs: `made ${span}`, matched: inside });
+      if (!inside) return { level: null, proof, why: `${what} is listed, but only units made ${span} are recalled, and yours was made ${item.made}.` };
+    }
+    // The notice limits the recall to certain lots or date codes, but the list it was read into has none: the
+    // notice's own text decides. A lot or date code on the label that the notice doesn't print can't be red.
+    const limited = !lots.length && /\b(lot|batch|date code|serial number)s?\b/i.test(notice.text ?? "");
+    const hay = norm(notice.text ?? "");
+    const unlisted = limited ? labelCodes(item).find((c) => !hay.includes(norm(c))) : undefined;
+    if (unlisted) {
+      proof.push({ field: "lot", yours: unlisted, theirs: "not printed in the notice", matched: false });
+      return { level: "warning", proof, why: `${what} is listed, but this recall names particular lot or date codes and ${unlisted} isn't one the notice prints. Compare the code on yours with the notice.` };
     }
     return { level: "danger", proof, why: `${what} is listed in this recall${m?.how === "range" ? " range" : ""}.` };
   }
@@ -214,6 +248,36 @@ export function matchItem(item: Item, notice: Notice): Match {
     };
   }
   return { level: null, proof, why: "Nothing on your label ties it to this recall." };
+}
+
+/** Long enough and mixed enough (letters and digits, 6+ characters) that finding it in another brand's notice isn't chance. */
+const distinctive = (c: string) => {
+  const n = norm(c);
+  return n.length >= 6 && /[A-Z]/.test(n) && /\d/.test(n);
+};
+
+const EXCLUDED = /\bnot\b[^.]{0,40}\b(included|affected|part of|subject|recalled|covered)\b|\bexclud(ed|es|ing)\b/i;
+
+/**
+ * Is this code printed in the text as a whole word (ignoring case, dashes and dots), outside any sentence that
+ * says some units are not included? Codes shorter than four characters, or without a digit, are too easy to find
+ * by accident and never count.
+ */
+export function printedIn(code: string | undefined, text: string | undefined): boolean {
+  if (!code || !text) return false;
+  const c = norm(code);
+  if (c.length < 4 || !/\d/.test(c)) return false;
+  for (const sentence of text.split(/(?<=[.;!?])\s+|\n+/)) {
+    if (EXCLUDED.test(sentence)) continue;
+    if (sentence.split(/[^A-Za-z0-9./+-]+/).some((t) => norm(t) === c)) return true;
+  }
+  return false;
+}
+
+/** The lot, serial or date code printed on the item (a date code that isn't a calendar date, like "7W16TN"). */
+function labelCodes(item: Item): string[] {
+  const made = item.made && !parseMade(item.made) && /[A-Z]/i.test(item.made) && /\d/.test(item.made) && norm(item.made).length >= 4 ? item.made : undefined;
+  return [item.lot, item.serial, made].filter((c): c is string => Boolean(c && norm(c).length >= 3));
 }
 
 /**

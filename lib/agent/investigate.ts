@@ -200,7 +200,9 @@ async function runTool(tool: string, a: Record<string, unknown>, item: Item, poo
       const pages = await webExtract([n.url]);
       const text = pages.get(n.url);
       if (!text) return { notices: [], note: "The page couldn't be read." };
-      n.text = `${n.title}\n${text}`;
+      // A web result's snippet is replaced by the full page. An agency record keeps its own text (its code list)
+      // and gains the page: FDA's enforcement page is mostly navigation and once replaced a record's lot list.
+      n.text = n.source === "web" ? `${n.title}\n${text}` : `${n.text ?? n.title}\n${text}`;
       const hay = norm(text);
       const mentions = itemCodes(item).filter((c) => hay.includes(norm(c)));
       return { notices: [], note: `Read ${text.length} characters of ${n.url}.${mentions.length ? ` It mentions ${mentions.join(", ")}.` : ""} Excerpt: ${text.replace(/\s+/g, " ").slice(0, 900)}` };
@@ -241,7 +243,8 @@ const sameTitle = (a: string, b: string) => normBrand(a.replace(/\|.*$/, "")) ==
  * Kept whatever the model chose:
  * - results whose text contains one of the item's own codes;
  * - for vehicles, NHTSA recalls already filtered to the item's make, model and year;
- * - for car seats, NHTSA child-seat campaigns (numbers ending C…000) from the item's brand.
+ * - for car seats, NHTSA child-seat campaigns (numbers ending C…000) from the item's brand;
+ * - for medicine, food and devices with no lot, UPC or NDC given, the brand's FDA recalls of that product.
  * The model narrows what's left; it can't drop a recall these rules say could cover the item.
  */
 function mustKeep(item: Item, pool: Pool): Notice[] {
@@ -249,6 +252,9 @@ function mustKeep(item: Item, pool: Pool): Notice[] {
   return [...pool.values()].filter((n) => {
     if (item.kind === "vehicle" && n.vehicleModel) return true;
     if (item.kind === "car-seat" && n.source === "nhtsa" && /^\d{2}C\d{3}000$/.test(n.id) && brandIn(item.brand, n)) return true;
+    // Medicine, food or a device with no lot given: the brand's own FDA recalls of that product stay, so the tag
+    // can say "check the lot" instead of clearing it (the eval caught Clear Eyes drops cleared this way).
+    if ((item.kind === "drug" || item.kind === "food" || item.kind === "device") && !item.lot && !item.upc && !item.ndc && n.source === "fda" && productWords(item, n)) return true;
     if (!codes.length) return false;
     const hay = norm(n.text ?? "");
     return codes.some((c) => hay.includes(c));

@@ -106,7 +106,9 @@ export async function searchFda(q: FdaQuery, limit = 10): Promise<Notice[]> {
     const u = q.upc.replace(/\D/g, "");
     searches.push(`code_info:${quote(u)}`, `product_description:${quote(u)}`);
   }
-  if (q.brand) searches.push(q.kind === "drug" ? `openfda.brand_name:${quote(q.brand)}` : `product_description:${quote(q.brand)}`);
+  // The openfda brand block is empty on many recent drug records (Clear Eyes' Sept 2026 recall has none), so the
+  // brand is also searched in the description.
+  if (q.brand) searches.push(...(q.kind === "drug" ? [`openfda.brand_name:${quote(q.brand)}`] : []), `product_description:${quote(q.brand)}`);
   if (q.words) searches.push(`product_description:${quote(q.words)}`);
   if (!searches.length) return [];
   const since = q.since ? `+AND+report_date:[${q.since.replace(/-/g, "")}+TO+20991231]` : "";

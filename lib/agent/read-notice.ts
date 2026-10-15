@@ -36,7 +36,7 @@ export type ReadResult = { notice: Notice; struck: string[]; model?: string };
 
 const OFFICIAL = /(^|\.)(cpsc|nhtsa|fda|fsis\.usda|recalls)\.gov$/;
 
-export async function readNotice(n: Notice, useModel: boolean): Promise<ReadResult> {
+export async function readNotice(n: Notice, useModel: boolean, chain: string[] = MODELS.reader): Promise<ReadResult> {
   // A web result's snippet is too short to list models; read the page first when it's an official or maker site.
   if (n.source === "web" && (n.text?.length ?? 0) < 1500) {
     const page = (await webExtract([n.url]).catch(() => new Map<string, string>())).get(n.url);
@@ -46,7 +46,7 @@ export async function readNotice(n: Notice, useModel: boolean): Promise<ReadResu
   if (!useModel || !text || n.vehicleModel) return { notice: n, struck: [] };
 
   try {
-    const r = await structured<Read>(MODELS.reader, {
+    const r = await structured<Read>(chain, {
       name: "notice",
       schema: SCHEMA,
       messages: [
@@ -70,7 +70,9 @@ export async function readNotice(n: Notice, useModel: boolean): Promise<ReadResu
     const lots = keep(r.data.lots);
     const upcs = keep(r.data.upcs);
     const inText = (d: string | null) => Boolean(d && /^\d{4}-\d{2}-\d{2}$/.test(d) && text.includes(d.slice(0, 4)));
-    const range = inText(r.data.made_from) && inText(r.data.made_to) ? [{ from: r.data.made_from!, to: r.data.made_to! }] : undefined;
+    // A window can be open at one end ("made before July 2023"); readers also answer "July 2023" for a date.
+    const from = isoDay(r.data.made_from, "start"), to = isoDay(r.data.made_to, "end");
+    const range = (from || to) && (!from || inText(from)) && (!to || inText(to)) ? [{ from: from ?? "1900-01-01", to: to ?? "2999-12-31" }] : undefined;
     return {
       notice: {
         ...n,
@@ -88,6 +90,30 @@ export async function readNotice(n: Notice, useModel: boolean): Promise<ReadResu
   } catch {
     return { notice: n, struck: [] };
   }
+}
+
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+/** "2023-07-14", "July 2023", "07/2023" or "2023-07" as an ISO day; a month alone is its first or last day. */
+export function isoDay(d: string | null, side: "start" | "end"): string | null {
+  if (!d) return null;
+  const t = d.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
+  let y: number | undefined, mo: number | undefined;
+  let m = t.match(/^([A-Za-z]{3,})\.?,?\s+(\d{4})$/);
+  if (m) {
+    mo = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase()) + 1;
+    y = Number(m[2]);
+  } else if ((m = t.match(/^(\d{4})-(\d{1,2})$/))) {
+    y = Number(m[1]);
+    mo = Number(m[2]);
+  } else if ((m = t.match(/^(\d{1,2})\/(\d{4})$/))) {
+    y = Number(m[2]);
+    mo = Number(m[1]);
+  }
+  if (!y || !mo || mo < 1 || mo > 12) return null;
+  const last = new Date(Date.UTC(y, mo, 0)).getUTCDate();
+  return `${y}-${String(mo).padStart(2, "0")}-${side === "start" ? "01" : String(last).padStart(2, "0")}`;
 }
 
 export const isOfficial = (url: string) => {
