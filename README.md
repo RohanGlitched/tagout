@@ -165,6 +165,14 @@ All are public and keyless except Tavily and Token Factory.
 
 ![CPSC recall 26-532's text with TYPE SRTH highlighted, joined by an equals sign to the Vornado rating plate with a red tag](docs/screens/anatomy.png)
 
+**The eval** ([/proof](https://tagout-recalls.vercel.app/proof)): the same 105 cases five ways, then every case and every answer.
+
+![The proof page: five plates comparing Tagout, Nemotron with Tavily, Nemotron alone, the fixed plan with Nano, and no model, on right answers, false alarms, recalled units cleared and cost](docs/screens/proof.png)
+
+**A watch** checked again a week later: what changed since the last check, then the tags.
+
+![A watch page: watching 5 things, what changed since 8 Oct 2026, and the check's tags](docs/screens/watch.png)
+
 | Check with the agent's log | Phone |
 |---|---|
 | ![A check: the Vornado heater's label with a red tag, the agent's searches, the matching code next to CPSC recall 26-532, and what to do](docs/screens/check-log.png) | ![The same check on a phone](docs/screens/phone-check.png) |
