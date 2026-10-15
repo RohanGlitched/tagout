@@ -68,7 +68,7 @@ export default function ItemRow({ item, verdict, log, running, swing }: { item: 
                   {l.step.tool === "read_page" ? "Page" : AGENCY[l.step.source]}
                 </span>
                 <span className={s.stepText}>{l.step.label}</span>
-                <span className={s.found}>{l.step.error ? "didn't answer" : l.step.tool === "read_page" ? "read" : l.step.found ? `${l.step.found} found` : "none"}</span>
+                <span className={s.found}>{foundText(l.step)}</span>
               </li>
             ))}
             {reads.map((r, i) => (
@@ -148,6 +148,7 @@ function Detail({ verdict, struck }: { verdict: Verdict; struck: string[] }) {
               {n.units ? `. ${fmtUnits(n.units)}` : ""}
             </p>
             {n.hazard ? <p className={s.hazard}>{n.hazard}</p> : null}
+            {n.source === "web" ? <WebNote n={n} checkedAt={verdict.checkedAt} /> : null}
           </div>
         </article>
       ) : null}
@@ -185,6 +186,36 @@ function Detail({ verdict, struck }: { verdict: Verdict; struck: string[] }) {
       ) : null}
     </div>
   );
+}
+
+/** A recall that reached this check only through Tavily: say where it was found, and when the database lagged. */
+function WebNote({ n, checkedAt }: { n: NonNullable<Verdict["notice"]>; checkedAt: string }) {
+  let host = "the web";
+  try {
+    host = new URL(n.url).hostname.replace(/^www\./, "");
+  } catch {}
+  return (
+    <p className={s.webNote}>
+      <span className={s.webBadge}>{n.notInDb ? "Ahead of the database" : "Found by Tavily"}</span>
+      {n.notInDb === "cpsc"
+        ? `Tavily found this notice on ${host}. CPSC's recall database didn't return it on ${fmtDate(checkedAt)}, so only the web search could catch it.`
+        : /fsis\.usda\.gov$/.test(host)
+          ? `Tavily found this notice on ${host}. USDA's recall API turns away automated clients, so the web search is the only way to reach meat and poultry recalls.`
+          : `Tavily found this notice on ${host}.`}
+    </p>
+  );
+}
+
+/**
+ * What a search returned. A Tavily page about a recall the agency database already returned is the same recall,
+ * so "6 found, 2 new" says Tavily confirmed four and added two. Checks saved before Oct 15 have no `fresh` count.
+ */
+function foundText(step: Extract<LogEntry, { t: "step" }>["step"]): string {
+  if (step.error) return "didn't answer";
+  if (step.tool === "read_page") return "read";
+  if (!step.found) return "none";
+  if (step.fresh === undefined || step.fresh === step.found) return `${step.found} found`;
+  return `${step.found} found, ${step.fresh} new`;
 }
 
 /** Turns bare site names in a step ("nhtsa.gov/recalls", "recalls.vornado.com") into links. */

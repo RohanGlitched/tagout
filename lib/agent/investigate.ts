@@ -14,7 +14,9 @@ import { webExtract, webSearch, OFFICIAL_DOMAINS } from "../sources/web";
  * tool runs on the server against the agencies' public APIs; the model only sees compact results.
  */
 
-export type Step = { itemId: string; tool: string; label: string; found: number; ms: number; source: Source; error?: string };
+/** `found` is what the tool returned; `fresh` how many of those weren't already among this item's results
+ *  (a Tavily page about a recall CPSC's database also returned is the same recall, so it isn't new). */
+export type Step = { itemId: string; tool: string; label: string; found: number; fresh?: number; ms: number; source: Source; error?: string };
 
 export type Investigation = { notices: Notice[]; searched: Source[]; steps: Step[]; model?: string; planned: "model" | "fixed" };
 
@@ -149,7 +151,7 @@ function compact(n: Notice, ref: string, item: Item) {
   };
 }
 
-async function runTool(tool: string, a: Record<string, unknown>, item: Item, pool: Pool): Promise<{ notices: Notice[]; note?: string }> {
+async function runTool(tool: string, a: Record<string, unknown>, item: Item, pool: Pool): Promise<{ notices: Notice[]; raw?: number; note?: string }> {
   switch (tool) {
     case "search_vehicle_recalls":
       return { notices: await vehicleRecalls(String(a.make), String(a.model), Number(a.year)) };
@@ -188,7 +190,8 @@ async function runTool(tool: string, a: Record<string, unknown>, item: Item, poo
       const { notices } = await webSearch({ query: String(a.query), domains: [...OFFICIAL_DOMAINS, ...extra], days: typeof a.recent_days === "number" ? a.recent_days : undefined });
       // Results already found through an agency API are the same recall; keep the API's copy.
       const known = new Set([...pool.values()].map((n) => n.url.toLowerCase()));
-      return { notices: await officialCopies(notices.filter((n) => !known.has(n.url.toLowerCase()))) };
+      const unseen = await officialCopies(notices.filter((n) => !known.has(n.url.toLowerCase())));
+      return { notices: unseen, raw: notices.length, ...(notices.length > unseen.length ? { note: `${notices.length - unseen.length} of the ${notices.length} pages are recalls already in the results above.` } : {}) };
     }
     case "read_page": {
       const n = findRef(pool, a.ref);
@@ -221,12 +224,17 @@ async function officialCopies(notices: Notice[]): Promise<Notice[]> {
     notices.map(async (n) => {
       if (!/cpsc\.gov\/Recalls\//i.test(n.url)) return n;
       const words = n.title.split(/\s+/).slice(0, 6).join(" ");
-      const hits = await searchCpsc({ title: words }, 5).catch(() => [] as Notice[]);
-      const same = hits.find((h) => h.title.toLowerCase() === n.title.toLowerCase() || h.url.toLowerCase() === n.url.toLowerCase());
-      return same ?? n;
+      const hits = await searchCpsc({ title: words }, 5).catch(() => null);
+      // A database that didn't answer says nothing about whether it has the recall.
+      if (!hits) return n;
+      const same = hits.find((h) => sameTitle(h.title, n.title) || h.url.toLowerCase() === n.url.toLowerCase());
+      return same ?? { ...n, notInDb: "cpsc" as const };
     }),
   );
 }
+
+/** Titles compared on their words, so punctuation and a trailing "| CPSC.gov" don't make one recall look like two. */
+const sameTitle = (a: string, b: string) => normBrand(a.replace(/\|.*$/, "")) === normBrand(b.replace(/\|.*$/, ""));
 
 /**
  * Kept whatever the model chose:
@@ -259,6 +267,10 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
     try {
       const r = await runTool(tool, args, item, pool);
       const refs: ReturnType<typeof compact>[] = [];
+      // New to this item: not already in the pool (the agency's own copy of a web page counts as the same recall).
+      const keyOf = (n: Notice) => `${n.source}|${n.id}|${n.url}`;
+      const before = new Set([...pool.values()].map(keyOf));
+      const fresh = new Set(r.notices.map(keyOf).filter((k) => !before.has(k))).size;
       for (const n of r.notices.slice(0, 10)) {
         const dup = [...pool.entries()].find(([, p]) => p.source === n.source && p.id === n.id && p.url === n.url);
         const ref = dup?.[0] ?? `R${++refN}`;
@@ -266,7 +278,7 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
         refs.push(compact(dup?.[1] ?? n, ref, item));
       }
       if (tool !== "read_page") searched.add(source);
-      const step: Step = { itemId: item.id, tool, label: text, found: r.notices.length, ms: Date.now() - t, source };
+      const step: Step = { itemId: item.id, tool, label: text, found: r.raw ?? r.notices.length, fresh, ms: Date.now() - t, source };
       steps.push(step);
       onStep(step);
       return JSON.stringify(r.note && !refs.length ? { note: r.note } : { found: r.notices.length, results: refs, ...(r.note ? { note: r.note } : {}) });
