@@ -13,7 +13,7 @@ import { buildVerdict } from "./verdict";
  * notice text → the deterministic matcher hangs the tag.
  */
 
-export type Engine = { reader?: string; agent?: string; vision?: string; planned: "model" | "fixed"; tokens?: Usage };
+export type Engine = { reader?: string; agent?: string; vision?: string; noticeReader?: string; planned: "model" | "fixed"; mode?: "full" | "lite" | "rules"; tokens?: Usage };
 
 export type Event =
   | { t: "items"; items: Item[]; dropped: number; engine: Engine }
@@ -51,8 +51,9 @@ function channel<T>() {
   };
 }
 
-/** `agent: false` keeps the model readers but searches by the fixed plan: the eval's "no agent" arm. */
-export type RunOptions = { agent?: boolean };
+/** `agent: false` keeps the model readers but searches by the fixed plan (the eval's "no agent" arm, and the lite
+ *  tier); `reader` names the notice reader's model chain for this check. */
+export type RunOptions = { agent?: boolean; reader?: string[]; mode?: Engine["mode"] };
 
 /** One check, with every Token Factory call inside it counted onto the engine. */
 export async function* runCheck(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions = {}): AsyncGenerator<Event> {
@@ -69,7 +70,7 @@ export async function* runCheck(input: { text: string; photos: string[] }, useMo
 }
 
 async function* run(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions): AsyncGenerator<Event> {
-  const engine: Engine = { planned: useModel ? "model" : "fixed" };
+  const engine: Engine = { planned: useModel && opts.agent !== false ? "model" : "fixed", mode: opts.mode };
   const intake = await readItems(input.text, input.photos, useModel);
   if (intake.model) engine.reader = modelLabel(intake.model);
   if (intake.visionModel) engine.vision = modelLabel(intake.visionModel);
@@ -87,7 +88,9 @@ async function* run(input: { text: string; photos: string[] }, useModel: boolean
       const inv = await investigate(item, useModel && opts.agent !== false, (step) => ch.push({ t: "step", step }));
       if (inv.model) engine.agent = modelLabel(inv.model);
       if (inv.planned === "fixed") engine.planned = "fixed";
-      const reads = await Promise.all(inv.notices.map((n) => readNotice(n, useModel)));
+      const reads = await Promise.all(inv.notices.map((n) => readNotice(n, useModel, opts.reader)));
+      const reader = reads.find((r) => r.model)?.model;
+      if (reader) engine.noticeReader = modelLabel(reader);
       for (const r of reads) {
         if (r.notice.vehicleModel) continue;
         ch.push({ t: "read", itemId: item.id, noticeId: r.notice.id, source: r.notice.source, codes: r.notice.models.length + r.notice.lots.length + r.notice.upcs.length, struck: r.struck });

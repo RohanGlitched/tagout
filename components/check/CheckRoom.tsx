@@ -270,7 +270,14 @@ function Engine({ rec }: { rec: Pub }) {
   return (
     <section className={s.engine} aria-label="How this check ran">
       <h2>How this check ran</h2>
-      {e.planned === "fixed" ? (
+      {e.mode === "lite" ? (
+        <p>
+          Today&apos;s Nemotron 3 Ultra budget for the demo was spent, so this check ran the lighter way:{e.reader ? ` ${e.reader} read your list,` : ""} a fixed search plan
+          ran the same agency and Tavily searches, and {e.noticeReader ?? "Nemotron 3 Nano"} read the notices
+          {e.tokens?.calls ? ` (${plural(e.tokens.calls, "call")}, ${((e.tokens.prompt + e.tokens.completion) / 1000).toFixed(0)}k tokens on Nebius Token Factory)` : ""}. In the eval this
+          way got 98 of 105 cases right and cleared no recalled unit, against 104 for the full agent. Whether a tag is red was decided by the same rules.
+        </p>
+      ) : e.planned === "fixed" ? (
         <p>The model was unavailable or today&apos;s demo budget was spent, so this check used Tagout&apos;s fixed search plan. The matcher works the same way.</p>
       ) : (
         <p>

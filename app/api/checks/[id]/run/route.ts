@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { runCheck, type Event } from "@/lib/agent/run";
+import { runCheck, type Event, type RunOptions } from "@/lib/agent/run";
 import type { CheckRecord } from "@/lib/checks";
 import { takeModelCall } from "@/lib/budget";
-import { hasKey } from "@/lib/nebius";
+import { hasKey, MODELS } from "@/lib/nebius";
 import { loadCheck, updateCheck } from "@/lib/store";
 import { clientIp } from "@/lib/visitor";
 
@@ -29,7 +29,10 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
     return NextResponse.json({ error: rec ? "This check is already running or done." : "No check with that link.", status: rec?.status }, { status: rec ? 409 : 404 });
   }
 
-  const useModel = hasKey() && (await takeModelCall(await clientIp()));
+  // Full (Ultra everywhere) while the day's allowance lasts, then lite (fixed plan, Nano notice reader), then rules.
+  const mode = hasKey() ? await takeModelCall(await clientIp()) : "rules";
+  const useModel = mode !== "rules";
+  const opts: RunOptions = mode === "lite" ? { agent: false, reader: MODELS.lite, mode } : { mode };
   const input = { text: claimed.input.text, photos: claimed.photos ?? [] };
   const enc = new TextEncoder();
 
@@ -44,7 +47,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
       };
       try {
         let done: Event | null = null;
-        for await (const e of runCheck(input, useModel)) {
+        for await (const e of runCheck(input, useModel, opts)) {
           // "done" goes out only after the final save, so a reload right after it shows the finished check.
           if (e.t === "done") done = e;
           else send(e);

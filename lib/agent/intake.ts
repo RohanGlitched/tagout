@@ -98,7 +98,7 @@ export async function readItems(text: string, photos: string[], useModel: boolea
   if (lines.length) {
     if (useModel) {
       try {
-        const r = await structured<{ items: Raw[] }>(MODELS.reader, {
+        const r = await structured<{ items: Raw[] }>(MODELS.intake, {
           name: "items",
           schema: SCHEMA,
           messages: [

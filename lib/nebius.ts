@@ -13,9 +13,14 @@ const list = (v: string | undefined, d: string[]) => (v ? v.split(",").map((s) =
 export const MODELS = {
   /** Plans the searches and judges which recalls are about the item: the serious reasoning. */
   agent: list(process.env.NEBIUS_AGENT_MODELS, ["nvidia/Nemotron-3-Ultra-550b-a55b", "nvidia/nemotron-3-super-120b-a12b"]),
-  /** Reads what people typed into items, and reads model and lot lists out of recall notices. Ultra measured both
-   *  fastest and cleanest at strict JSON here; Super is the fallback. */
+  /** Reads model and lot lists out of recall notices. In the eval (eval/, /proof) Ultra was right on 104 of 105
+   *  cases; Super as the notice reader wrongly tagged one unit red, Nano two. Super is the fallback. */
   reader: list(process.env.NEBIUS_READER_MODELS, ["nvidia/Nemotron-3-Ultra-550b-a55b", "nvidia/nemotron-3-super-120b-a12b"]),
+  /** Reads what people typed into items. Its own chain so it can be routed separately; by default it follows the reader. */
+  intake: list(process.env.NEBIUS_INTAKE_MODELS ?? process.env.NEBIUS_READER_MODELS, ["nvidia/Nemotron-3-Ultra-550b-a55b", "nvidia/nemotron-3-super-120b-a12b"]),
+  /** The notice reader for the lite tier (after the day's Ultra budget): the fixed search plan with Nano reading
+   *  the notices measured 98 of 105 right, no recalled unit cleared, at about 0.3 cents an item. */
+  lite: list(process.env.NEBIUS_LITE_READER_MODELS, ["nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", "nvidia/nemotron-3-super-120b-a12b"]),
   /** Reads label photos. There is no NVIDIA vision model on Token Factory today, so this is the one non-Nemotron role. */
   vision: list(process.env.NEBIUS_VISION_MODELS, ["Qwen/Qwen3.8-27B", "google/gemma-3-27b-it"]),
 };
