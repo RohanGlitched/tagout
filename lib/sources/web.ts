@@ -1,6 +1,7 @@
 import "server-only";
 import type { Notice } from "../types";
 import { clean } from "./http";
+import { isListing } from "./listing";
 
 /**
  * Tavily: the web half of the search. The agency APIs trail their own newsrooms by one to six weeks, and some
@@ -54,7 +55,7 @@ export async function webSearch(q: WebQuery): Promise<{ notices: Notice[]; answe
   if (!r.ok) throw new Error(`Tavily search failed (HTTP ${r.status}).`);
   const j = (await r.json()) as { results: SearchResult[] };
   const notices = (j.results ?? [])
-    .filter((x) => /recall|alert|warning|safety/i.test(`${x.url} ${x.title}`))
+    .filter((x) => /recall|alert|warning|safety/i.test(`${x.url} ${x.title}`) && !isListing(x.url))
     .map((x): Notice => {
       const host = new URL(x.url).hostname.replace(/^www\./, "");
       return {
