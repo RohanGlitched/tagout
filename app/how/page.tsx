@@ -36,7 +36,7 @@ export default function How() {
             <li>
               <h3>Your list becomes items</h3>
               <p>
-                {modelLabel(MODELS.reader[0])} reads each line into a kind of product, a brand, and the codes a recall turns on: model, lot, VIN, UPC, NDC. Every code it returns is
+                {modelLabel(MODELS.intake[0])} reads each line into a kind of product, a brand, and the codes a recall turns on: model, lot, VIN, UPC, NDC. Every code it returns is
                 checked against the words you typed, and dropped if it isn&apos;t there, so the reader can&apos;t invent the number a match depends on. A VIN is decoded by NHTSA&apos;s
                 own decoder. A label photo is read by {modelLabel(MODELS.vision[0])}, the one model here that isn&apos;t Nemotron: Token Factory has no NVIDIA vision model today.
               </p>
