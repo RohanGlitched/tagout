@@ -9,7 +9,10 @@ import { loadWatch } from "@/lib/watches";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Watched things", robots: { index: false } };
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const w = await loadWatch((await params).id);
+  return { title: w ? "Watched things" : "Watch not found", robots: { index: false } };
+}
 
 export default async function WatchPage({ params }: { params: Promise<{ id: string }> }) {
   const w = await loadWatch((await params).id);
