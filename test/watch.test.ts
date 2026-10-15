@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { diffChecks, due, RECHECK_AFTER_MS, type WatchRecord } from "../lib/watch.ts";
 import type { Item, Notice, Verdict } from "../lib/types.ts";
 
-const notice = (id: string): Notice => ({ source: "cpsc", id, title: `Recall ${id}`, date: "2026-10-01", url: `https://www.cpsc.gov/Recalls/${id}`, models: [], lots: [], upcs: [] });
+const notice = (id: string, date = "2026-10-20"): Notice => ({ source: "cpsc", id, title: `Recall ${id}`, date, url: `https://www.cpsc.gov/Recalls/${id}`, models: [], lots: [], upcs: [] });
 const item = (id: string, said: string, brand: string): Item => ({ id, kind: "product", said, brand });
 const verdict = (itemId: string, level: Verdict["level"], n?: Notice, related: Notice[] = []): Verdict => ({ itemId, level, headline: "", notice: n, related, proof: [], steps: [], checkedAt: "2026-10-15", searched: ["cpsc"] });
 
@@ -27,8 +27,8 @@ test("an unchanged household has no changes", () => {
 });
 
 test("a new recall for the same orange tag is reported, a green one is not", () => {
-  const prev = { items: [heater, fan], verdicts: [verdict("i1", "warning", notice("26-1")), verdict("i2", "inspected", undefined, [notice("25-9")])] };
-  const next = { items: [heater, fan], verdicts: [verdict("i1", "warning", notice("26-1"), [notice("27-3")]), verdict("i2", "inspected", undefined, [notice("25-9"), notice("27-4")])] };
+  const prev = { createdAt: "2026-10-15T10:00:00Z", items: [heater, fan], verdicts: [verdict("i1", "warning", notice("26-1")), verdict("i2", "inspected", undefined, [notice("25-9")])] };
+  const next = { items: [heater, fan], verdicts: [verdict("i1", "warning", notice("26-1"), [notice("27-3"), notice("03-5", "2003-05-01")]), verdict("i2", "inspected", undefined, [notice("25-9"), notice("27-4")])] };
   const d = diffChecks(prev, next);
   assert.equal(d.length, 1);
   assert.equal(d[0].kind, "new-recall");

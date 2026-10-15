@@ -40,10 +40,13 @@ function partner(item: Item, prev: Item[]): Item | undefined {
 }
 
 /**
- * What changed from one check of a household to the next: a tag that got worse or better, a recall listed for
- * a thing that wasn't listed last time, or a thing that wasn't checked before. Unchanged things are left out.
+ * What changed from one check of a household to the next: a tag that got worse or better, a recall published
+ * since the earlier check, or a thing that wasn't checked before. Unchanged things are left out.
  */
-export function diffChecks(prev: Pick<CheckRecord, "items" | "verdicts">, next: Pick<CheckRecord, "items" | "verdicts">): Change[] {
+export function diffChecks(prev: Pick<CheckRecord, "items" | "verdicts"> & { createdAt?: string; finishedAt?: string }, next: Pick<CheckRecord, "items" | "verdicts">): Change[] {
+  // A recall counts as new only if it was published after the earlier check; an old recall the search happened to
+  // surface this time isn't news.
+  const since = (prev.finishedAt ?? prev.createdAt ?? "").slice(0, 10);
   const out: Change[] = [];
   const pv = new Map((prev.verdicts ?? []).map((v) => [v.itemId, v]));
   for (const v of next.verdicts ?? []) {
@@ -61,7 +64,7 @@ export function diffChecks(prev: Pick<CheckRecord, "items" | "verdicts">, next: 
       continue;
     }
     const old = new Set(noticesOf(was).map(ref));
-    const added = noticesOf(v).filter((n) => !old.has(ref(n)));
+    const added = noticesOf(v).filter((n) => !old.has(ref(n)) && Boolean(n.date) && n.date >= since);
     if (added.length && v.level !== "inspected") out.push({ said: item.said, kind: "new-recall", from: was.level, to: v.level, notices: added.map(link) });
   }
   // Worst news first.
