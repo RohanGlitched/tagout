@@ -151,7 +151,9 @@ function compact(n: Notice, ref: string, item: Item) {
   };
 }
 
-async function runTool(tool: string, a: Record<string, unknown>, item: Item, pool: Pool): Promise<{ notices: Notice[]; raw?: number; note?: string }> {
+type ToolOut = { notices: Notice[]; raw?: number; note?: string; /** search_web: each result's own page, to drop recalls already found */ webUrls?: string[] };
+
+async function runTool(tool: string, a: Record<string, unknown>, item: Item, pool: Pool): Promise<ToolOut> {
   switch (tool) {
     case "search_vehicle_recalls":
       return { notices: await vehicleRecalls(String(a.make), String(a.model), Number(a.year)) };
@@ -188,10 +190,9 @@ async function runTool(tool: string, a: Record<string, unknown>, item: Item, poo
     case "search_web": {
       const extra = typeof a.extra_domain === "string" && /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(a.extra_domain) ? [a.extra_domain] : [];
       const { notices } = await webSearch({ query: String(a.query), domains: [...OFFICIAL_DOMAINS, ...extra], days: typeof a.recent_days === "number" ? a.recent_days : undefined });
-      // Results already found through an agency API are the same recall; keep the API's copy.
-      const known = new Set([...pool.values()].map((n) => n.url.toLowerCase()));
-      const unseen = await officialCopies(notices.filter((n) => !known.has(n.url.toLowerCase())));
-      return { notices: unseen, raw: notices.length, ...(notices.length > unseen.length ? { note: `${notices.length - unseen.length} of the ${notices.length} pages are recalls already in the results above.` } : {}) };
+      // Pages already found through an agency API are dropped when the results are committed (in call order,
+      // so parallel calls give the same answer however fast each one comes back).
+      return { notices: await officialCopies(notices), raw: notices.length, webUrls: notices.map((n) => n.url.toLowerCase()) };
     }
     case "read_page": {
       const n = findRef(pool, a.ref);
@@ -260,41 +261,64 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
   const searched = new Set<Source>();
   let refN = 0;
 
-  const exec = async (tool: string, args: Record<string, unknown>) => {
+  type Ran = { tool: string; args: Record<string, unknown>; text: string; source: Source; ms: number; r?: ToolOut; error?: string };
+
+  /** Runs a tool against the network. Parallel calls run here at once; nothing is added to the pool yet. */
+  const start = async (tool: string, args: Record<string, unknown>): Promise<Ran> => {
     const t = Date.now();
     const page = tool === "read_page" ? findRef(pool, args.ref) : undefined;
     const { text, source } = label(tool, page ? { ...args, title: page.title.length > 70 ? `${page.title.slice(0, 68).trimEnd()}…` : page.title } : args);
     try {
-      const r = await runTool(tool, args, item, pool);
-      const refs: ReturnType<typeof compact>[] = [];
-      // New to this item: not already in the pool (the agency's own copy of a web page counts as the same recall).
-      const keyOf = (n: Notice) => `${n.source}|${n.id}|${n.url}`;
-      const before = new Set([...pool.values()].map(keyOf));
-      const fresh = new Set(r.notices.map(keyOf).filter((k) => !before.has(k))).size;
-      for (const n of r.notices.slice(0, 10)) {
-        const dup = [...pool.entries()].find(([, p]) => p.source === n.source && p.id === n.id && p.url === n.url);
-        const ref = dup?.[0] ?? `R${++refN}`;
-        if (!dup) pool.set(ref, n);
-        refs.push(compact(dup?.[1] ?? n, ref, item));
-      }
-      if (tool !== "read_page") searched.add(source);
-      const step: Step = { itemId: item.id, tool, label: text, found: r.raw ?? r.notices.length, fresh, ms: Date.now() - t, source };
-      steps.push(step);
-      onStep(step);
-      return JSON.stringify(r.note && !refs.length ? { note: r.note } : { found: r.notices.length, results: refs, ...(r.note ? { note: r.note } : {}) });
+      return { tool, args, text, source, r: await runTool(tool, args, item, pool), ms: Date.now() - t };
     } catch (e) {
-      const step: Step = { itemId: item.id, tool, label: text, found: 0, ms: Date.now() - t, source, error: (e as Error).message };
-      steps.push(step);
-      onStep(step);
-      return JSON.stringify({ error: (e as Error).message });
+      return { tool, args, text, source, error: (e as Error).message, ms: Date.now() - t };
     }
   };
+
+  /**
+   * Adds a tool's results to the pool and names them R1, R2… Called in the order the model made the calls, so
+   * the refs (and what the model reads next) don't depend on which API answered first.
+   */
+  const commit = (x: Ran): string => {
+    const { tool, text, source } = x;
+    if (!x.r) {
+      const step: Step = { itemId: item.id, tool, label: text, found: 0, ms: x.ms, source, error: x.error };
+      steps.push(step);
+      onStep(step);
+      return JSON.stringify({ error: x.error });
+    }
+    let { notices, note } = x.r;
+    if (x.r.webUrls) {
+      // A web page about a recall an agency API already returned is the same recall; keep the API's copy.
+      const known = new Set([...pool.values()].map((n) => n.url.toLowerCase()));
+      notices = notices.filter((_, i) => !known.has(x.r!.webUrls![i]));
+      if (notices.length < x.r.webUrls.length) note = `${x.r.webUrls.length - notices.length} of the ${x.r.webUrls.length} pages are recalls already in the results above.`;
+    }
+    const refs: ReturnType<typeof compact>[] = [];
+    // New to this item: not already in the pool (the agency's own copy of a web page counts as the same recall).
+    const keyOf = (n: Notice) => `${n.source}|${n.id}|${n.url}`;
+    const before = new Set([...pool.values()].map(keyOf));
+    const fresh = new Set(notices.map(keyOf).filter((k) => !before.has(k))).size;
+    for (const n of notices.slice(0, 10)) {
+      const dup = [...pool.entries()].find(([, p]) => p.source === n.source && p.id === n.id && p.url === n.url);
+      const ref = dup?.[0] ?? `R${++refN}`;
+      if (!dup) pool.set(ref, n);
+      refs.push(compact(dup?.[1] ?? n, ref, item));
+    }
+    if (tool !== "read_page") searched.add(source);
+    const step: Step = { itemId: item.id, tool, label: text, found: x.r.raw ?? notices.length, fresh, ms: x.ms, source };
+    steps.push(step);
+    onStep(step);
+    return JSON.stringify(note && !refs.length ? { note } : { found: notices.length, results: refs, ...(note ? { note } : {}) });
+  };
+
+  const exec = async (tool: string, args: Record<string, unknown>) => commit(await start(tool, args));
 
   if (useModel) {
     try {
       const messages: Msg[] = [
         { role: "system", content: SYSTEM },
-        { role: "user", content: `Today is ${new Date().toISOString().slice(0, 10)}. Item:\n${JSON.stringify(item)}` },
+        { role: "user", content: `Today is ${today()}. Item:\n${JSON.stringify(item)}` },
       ];
       let model: string | undefined;
       for (let round = 0; round < 6; round++) {
@@ -319,7 +343,8 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
           const notices = newestFirst([...new Set([...chosen, ...mustKeep(item, pool)])]).slice(0, 8);
           return { notices, searched: [...searched], steps, model, planned: "model" };
         }
-        const outs = await Promise.all(calls.map((c) => exec(c.function.name, safeArgs(c.function.arguments))));
+        const ran = await Promise.all(calls.map((c) => start(c.function.name, safeArgs(c.function.arguments))));
+        const outs = ran.map(commit);
         calls.forEach((c, i) => messages.push({ role: "tool", tool_call_id: c.id, content: outs[i] }));
       }
     } catch (e) {
@@ -333,6 +358,9 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
   const notices = newestFirst([...new Set([...mustKeep(item, pool), ...byBrand])]).slice(0, 8);
   return { notices, searched: [...searched], steps, planned: "fixed" };
 }
+
+/** The date the agent is told. TAGOUT_TODAY pins it, so an eval replayed on a later day asks the same question. */
+const today = () => process.env.TAGOUT_TODAY || new Date().toISOString().slice(0, 10);
 
 const newestFirst = (ns: Notice[]) => [...ns].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 

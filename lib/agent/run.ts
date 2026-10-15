@@ -51,13 +51,16 @@ function channel<T>() {
   };
 }
 
+/** `agent: false` keeps the model readers but searches by the fixed plan: the eval's "no agent" arm. */
+export type RunOptions = { agent?: boolean };
+
 /** One check, with every Token Factory call inside it counted onto the engine. */
-export async function* runCheck(input: { text: string; photos: string[] }, useModel: boolean): AsyncGenerator<Event> {
+export async function* runCheck(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions = {}): AsyncGenerator<Event> {
   const usage: Usage = { calls: 0, prompt: 0, completion: 0 };
   const ch = channel<Event>();
   usageScope.run(usage, () =>
     (async () => {
-      for await (const e of run(input, useModel)) ch.push(e);
+      for await (const e of run(input, useModel, opts)) ch.push(e);
     })()
       .catch((e) => ch.push({ t: "error", message: (e as Error).message }))
       .finally(() => ch.close()),
@@ -65,7 +68,7 @@ export async function* runCheck(input: { text: string; photos: string[] }, useMo
   yield* ch.drain();
 }
 
-async function* run(input: { text: string; photos: string[] }, useModel: boolean): AsyncGenerator<Event> {
+async function* run(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions): AsyncGenerator<Event> {
   const engine: Engine = { planned: useModel ? "model" : "fixed" };
   const intake = await readItems(input.text, input.photos, useModel);
   if (intake.model) engine.reader = modelLabel(intake.model);
@@ -81,7 +84,7 @@ async function* run(input: { text: string; photos: string[] }, useModel: boolean
 
   const one = async (item: Item) => {
     try {
-      const inv = await investigate(item, useModel, (step) => ch.push({ t: "step", step }));
+      const inv = await investigate(item, useModel && opts.agent !== false, (step) => ch.push({ t: "step", step }));
       if (inv.model) engine.agent = modelLabel(inv.model);
       if (inv.planned === "fixed") engine.planned = "fixed";
       const reads = await Promise.all(inv.notices.map((n) => readNotice(n, useModel)));
