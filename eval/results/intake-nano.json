@@ -1,0 +1,2370 @@
+{
+ "arm": "intake-nano",
+ "label": "Nano reading the list",
+ "config": {
+  "kind": "intake",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "label": "Nano reading the list"
+ },
+ "at": "2026-10-15T08:44:28.953Z",
+ "cases": [
+  {
+   "id": "p01",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Dollar Tree",
+    "product": "electric balloon pump",
+    "model": "406198"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 698
+   },
+   "usd": 0.00019,
+   "ms": 4525,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p02",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Gobi Heat",
+    "product": "rechargeable hand warmer",
+    "model": "UT3053"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 1177
+   },
+   "usd": 0.0003,
+   "ms": 7003,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p03",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "HotHands",
+    "product": "rechargeable hand warmer",
+    "model": "H163650"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 756
+   },
+   "usd": 0.0002,
+   "ms": 4764,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Snow Peak",
+    "product": "propane fireplace insert",
+    "model": "ST-332-US",
+    "codes": [
+     "ST-332-US"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 903
+   },
+   "usd": 0.00024,
+   "ms": 5203,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p05",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "ONTHEWEI",
+    "product": "baby bath seat",
+    "model": "MY002"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 308,
+    "completion": 887
+   },
+   "usd": 0.00023,
+   "ms": 4954,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p06",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Love To Dream",
+    "product": "portable sleep machine",
+    "model": "LTD-SM23",
+    "codes": [
+     "7W15TN"
+    ],
+    "made": "7W15TN"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 318,
+    "completion": 1242
+   },
+   "usd": 0.00032,
+   "ms": 7136,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p07",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "NEWDERY",
+    "product": "power bank",
+    "model": "ZHX-PB22"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 654
+   },
+   "usd": 0.00018,
+   "ms": 3985,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p08",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Hayward",
+    "product": "Universal pool heater",
+    "model": "HDFS400"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 307,
+    "completion": 544
+   },
+   "usd": 0.00015,
+   "ms": 3366,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p09",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "LANCHEZ",
+    "product": "pressure washer",
+    "model": "KLC-BULL135C"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 760
+   },
+   "usd": 0.0002,
+   "ms": 5386,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p10",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Skip Hop",
+    "product": "Sesame Street Elmo silicone teether",
+    "model": "9R263210"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 317,
+    "completion": 818
+   },
+   "usd": 0.00022,
+   "ms": 5751,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p11",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Cuisinart",
+    "product": "grill brush",
+    "model": "CCB-5014"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 755
+   },
+   "usd": 0.0002,
+   "ms": 5323,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p12",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Merax",
+    "product": "Murphy bed",
+    "model": "GX000392AAK",
+    "codes": [
+     "GX000392AAK"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 663
+   },
+   "usd": 0.00018,
+   "ms": 5329,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p13",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Hampton Bay",
+    "product": "Halwin 52-inch ceiling fan",
+    "model": "AK396H-MBK"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 314,
+    "completion": 756
+   },
+   "usd": 0.0002,
+   "ms": 6039,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p14",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Brookstone",
+    "product": "tabletop fire pit",
+    "model": "BSFIREPIT02"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 495
+   },
+   "usd": 0.00014,
+   "ms": 4283,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p15",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Fitueyes",
+    "product": "Laziza dresser",
+    "model": "WE11E5080Wx3-W",
+    "lot": "SME2025112805"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 330,
+    "completion": 1184
+   },
+   "usd": 0.0003,
+   "ms": 7245,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p16",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Galanz",
+    "product": "retro refrigerator",
+    "model": "GLR76TRDER"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 307,
+    "completion": 606
+   },
+   "usd": 0.00016,
+   "ms": 4013,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p17",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "item": {
+    "kind": "product",
+    "brand": "BenQ",
+    "product": "portable projector",
+    "model": "GV31"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 304,
+    "completion": 2500
+   },
+   "usd": 0.00062,
+   "ms": 13213,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p18",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Vornado",
+    "product": "space heater",
+    "codes": [
+     "SRTH"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 307,
+    "completion": 471
+   },
+   "usd": 0.00013,
+   "ms": 2788,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p19",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Panasonic",
+    "product": "toaster oven",
+    "model": "NB-G200"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 308,
+    "completion": 619
+   },
+   "usd": 0.00017,
+   "ms": 3465,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p20",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Insignia",
+    "product": "gas range",
+    "model": "NS-RGFGSS1"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 308,
+    "completion": 846
+   },
+   "usd": 0.00022,
+   "ms": 4546,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p21",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Cuisinart",
+    "product": "Propel+ gas grill",
+    "model": "CGG-6331",
+    "codes": [
+     "CGG-6331"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 312,
+    "completion": 561
+   },
+   "usd": 0.00015,
+   "ms": 3045,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p22",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Rowenta",
+    "product": "cordless vacuum",
+    "model": "RH99A2U1"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 570
+   },
+   "usd": 0.00016,
+   "ms": 3119,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p23",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Wyze",
+    "product": "Solar Cam Pan",
+    "model": "WYZESCPWH"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 459
+   },
+   "usd": 0.00013,
+   "ms": 2642,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p24",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Thermos",
+    "product": "Stainless King food jar",
+    "model": "SK3000",
+    "made": "2022-05"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 320,
+    "completion": 840
+   },
+   "usd": 0.00022,
+   "ms": 4548,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p25",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Build-A-Bear",
+    "product": "Heartwarming Hugs bear",
+    "model": "034464"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 314,
+    "completion": 713
+   },
+   "usd": 0.00019,
+   "ms": 3854,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p26",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Merkury",
+    "product": "Hot + Cool heating and cooling fan",
+    "model": "MI-DHC02"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 441
+   },
+   "usd": 0.00012,
+   "ms": 2439,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "p27",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "ZWILLING",
+    "product": "electric water kettle",
+    "model": "53101-200"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 315,
+    "completion": 822
+   },
+   "usd": 0.00022,
+   "ms": 4356,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d01",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Tylenol",
+    "product": "Extra Strength caplets",
+    "lot": "EJA022",
+    "codes": [
+     "EJA022"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 657
+   },
+   "usd": 0.00018,
+   "ms": 3529,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d02",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Tums",
+    "product": "Assorted Fruit antacid tablets",
+    "lot": "1096076",
+    "codes": [
+     "1096076"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 314,
+    "completion": 681
+   },
+   "usd": 0.00018,
+   "ms": 3662,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d03",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Gas-X",
+    "product": "Extra Strength softgels",
+    "lot": "YH9X"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 307,
+    "completion": 1141
+   },
+   "usd": 0.00029,
+   "ms": 5474,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Clear Eyes",
+    "product": "Redness Relief eye drops",
+    "lot": "RL25G04"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 836
+   },
+   "usd": 0.00022,
+   "ms": 4096,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d05",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Rohto",
+    "product": "Cooling Eye Drops Max Strength",
+    "lot": "3J3V"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 710
+   },
+   "usd": 0.00019,
+   "ms": 3419,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d06",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "GenTeal",
+    "product": "Tears lubricant eye gel",
+    "lot": "4V15"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 771
+   },
+   "usd": 0.0002,
+   "ms": 3513,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d07",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "iVIZIA",
+    "product": "lubricant eye drops",
+    "lot": "5S30B",
+    "codes": [
+     "5S30B"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 562
+   },
+   "usd": 0.00015,
+   "ms": 2638,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d08",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Beekeeper's Naturals",
+    "product": "saline nasal spray",
+    "lot": "5950"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 617
+   },
+   "usd": 0.00017,
+   "ms": 2770,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d09",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Children's",
+    "product": "ibuprofen oral suspension 100 mg per 5 mL",
+    "lot": "7261973A"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 324,
+    "completion": 913
+   },
+   "usd": 0.00024,
+   "ms": 4149,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d10",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Hy-Vee",
+    "product": "Ultra Strength antacid chewable tablets",
+    "lot": "1716089"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 317,
+    "completion": 943
+   },
+   "usd": 0.00025,
+   "ms": 4197,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "d11",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "FreshKote",
+    "product": "lubricant eye drops",
+    "lot": "1X68"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 564
+   },
+   "usd": 0.00015,
+   "ms": 2566,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f01",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Lundberg",
+    "product": "jasmine white rice",
+    "lot": "260201MA",
+    "codes": [
+     "260201MA"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 316,
+    "completion": 604
+   },
+   "usd": 0.00016,
+   "ms": 3006,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f02",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Outshine",
+    "product": "grape fruit bars",
+    "lot": "LLA616803"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 755
+   },
+   "usd": 0.0002,
+   "ms": 3615,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f03",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Spring & Mulberry",
+    "product": "Mango Chili chocolate bar",
+    "lot": "025245",
+    "codes": [
+     "025245"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 313,
+    "completion": 718
+   },
+   "usd": 0.00019,
+   "ms": 3375,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Prolon",
+    "product": "Everyday almond and cocoa spread",
+    "lot": "L2755",
+    "codes": [
+     "L2755"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 312,
+    "completion": 742
+   },
+   "usd": 0.0002,
+   "ms": 3531,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f05",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "My Mochi",
+    "product": "strawberry frozen dessert",
+    "lot": "041-26"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 312,
+    "completion": 628
+   },
+   "usd": 0.00017,
+   "ms": 3193,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f06",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Todd's Seeds",
+    "product": "salad sprouting mix",
+    "lot": "TS-633-2"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 312,
+    "completion": 655
+   },
+   "usd": 0.00018,
+   "ms": 3527,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f07",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Blackstone",
+    "product": "Parmesan Ranch seasoning",
+    "lot": "2025-43282"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 316,
+    "completion": 586
+   },
+   "usd": 0.00016,
+   "ms": 3445,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "f08",
+   "group": "positive",
+   "expect": "danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Wawa",
+    "product": "Diet Iced Tea Lemon pint",
+    "upc": "726191018548"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 319,
+    "completion": 908
+   },
+   "usd": 0.00024,
+   "ms": 5170,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n01",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Dollar Tree",
+    "product": "electric balloon pump",
+    "model": "406199"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 414
+   },
+   "usd": 0.00012,
+   "ms": 2520,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n02",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Gobi Heat",
+    "product": "rechargeable hand warmer",
+    "model": "UT3054",
+    "codes": [
+     "UT3054"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 668
+   },
+   "usd": 0.00018,
+   "ms": 4013,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n03",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "HotHands",
+    "product": "rechargeable hand warmer",
+    "model": "H163651"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 609
+   },
+   "usd": 0.00016,
+   "ms": 3663,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n04",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Love To Dream",
+    "product": "portable sleep machine",
+    "model": "LTD-SM23",
+    "made": "7W16TN"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 318,
+    "completion": 998
+   },
+   "usd": 0.00026,
+   "ms": 5961,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n05",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Cuisinart",
+    "product": "grill brush",
+    "model": "CCB-5015",
+    "codes": [
+     "CCB-5015"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 330
+   },
+   "usd": 0.0001,
+   "ms": 2074,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n06",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Galanz",
+    "product": "retro refrigerator",
+    "model": "GLR12TRDEFR",
+    "codes": [
+     "GLR12TRDEFR"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 308,
+    "completion": 333
+   },
+   "usd": 0.0001,
+   "ms": 2090,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n07",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Hampton Bay",
+    "product": "Halwin 52-inch ceiling fan",
+    "model": "AK396H-WH",
+    "codes": [
+     "52-inch"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 314,
+    "completion": 783
+   },
+   "usd": 0.00021,
+   "ms": 4404,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n08",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Brookstone",
+    "product": "tabletop fire pit",
+    "model": "BSFIREPIT04"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 311,
+    "completion": 605
+   },
+   "usd": 0.00016,
+   "ms": 3474,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n09",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Fitueyes",
+    "product": "Laziza dresser",
+    "model": "WE11E5080Wx3-W",
+    "lot": "SME2025112806",
+    "codes": [
+     "batch SME2025112806"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 330,
+    "completion": 1021
+   },
+   "usd": 0.00026,
+   "ms": 5287,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n10",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Panasonic",
+    "product": "FlashXpress toaster oven",
+    "model": "NB-G110P"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 312,
+    "completion": 1028
+   },
+   "usd": 0.00027,
+   "ms": 5248,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n11",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "item": {
+    "kind": "product",
+    "brand": "Wyze Cam",
+    "product": "v3 security camera",
+    "model": "WYZEC3"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 2500
+   },
+   "usd": 0.00062,
+   "ms": 11486,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n12",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Thermos",
+    "product": "Stainless King food jar",
+    "model": "SK3000",
+    "made": "2024-02"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 320,
+    "completion": 1269
+   },
+   "usd": 0.00032,
+   "ms": 5732,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n13",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Vornado",
+    "product": "whole room heater",
+    "model": "VH200"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 307,
+    "completion": 852
+   },
+   "usd": 0.00022,
+   "ms": 3817,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n14",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Lasko",
+    "product": "ceramic tower heater",
+    "model": "CT22425"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 484
+   },
+   "usd": 0.00013,
+   "ms": 2328,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n15",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Insignia",
+    "product": "gas range",
+    "model": "NS-RGFGSS3"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 308,
+    "completion": 808
+   },
+   "usd": 0.00021,
+   "ms": 4146,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n16",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Rowenta",
+    "product": "cordless vacuum",
+    "model": "RH99A3U1"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 309,
+    "completion": 442
+   },
+   "usd": 0.00012,
+   "ms": 2470,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n17",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "ZWILLING",
+    "product": "electric water kettle",
+    "model": "53101-209"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 315,
+    "completion": 826
+   },
+   "usd": 0.00022,
+   "ms": 4321,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n18",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Merkury",
+    "product": "heating and cooling fan",
+    "model": "MI-DHC03"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 308,
+    "completion": 1351
+   },
+   "usd": 0.00034,
+   "ms": 7408,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n19",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Tylenol",
+    "product": "Extra Strength caplets",
+    "lot": "EJA023"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 566
+   },
+   "usd": 0.00015,
+   "ms": 3066,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n20",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Tums",
+    "product": "Assorted Fruit antacid tablets",
+    "lot": "1096079"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 314,
+    "completion": 516
+   },
+   "usd": 0.00014,
+   "ms": 3167,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n21",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Gas-X",
+    "product": "Extra Strength softgels",
+    "lot": "YH9Z"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 307,
+    "completion": 753
+   },
+   "usd": 0.0002,
+   "ms": 4624,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n22",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Clear Eyes",
+    "product": "Redness Relief eye drops",
+    "lot": "RL25G05"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 600
+   },
+   "usd": 0.00016,
+   "ms": 3595,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n23",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Beekeeper's Naturals",
+    "product": "saline nasal spray",
+    "lot": "5951"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 535
+   },
+   "usd": 0.00015,
+   "ms": 3181,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n24",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Lundberg",
+    "product": "jasmine white rice",
+    "lot": "260203MA",
+    "codes": [
+     "2 lb bag"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 316,
+    "completion": 999
+   },
+   "usd": 0.00026,
+   "ms": 5775,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n25",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Outshine",
+    "product": "grape fruit bars",
+    "lot": "LLA616804"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 676
+   },
+   "usd": 0.00018,
+   "ms": 4026,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "n26",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Spring & Mulberry",
+    "product": "Mango Chili chocolate bar",
+    "lot": "025246"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 313,
+    "completion": 746
+   },
+   "usd": 0.0002,
+   "ms": 4377,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c01",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Gobi Heat",
+    "product": "rechargeable hand warmer"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 302,
+    "completion": 900
+   },
+   "usd": 0.00023,
+   "ms": 4861,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c02",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Cuisinart",
+    "product": "grill brush"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 300,
+    "completion": 288
+   },
+   "usd": 0.00009,
+   "ms": 1767,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c03",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Galanz",
+    "product": "retro refrigerator"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 299,
+    "completion": 382
+   },
+   "usd": 0.00011,
+   "ms": 2259,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c04",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Skip Hop",
+    "product": "Elmo silicone teether"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 302,
+    "completion": 659
+   },
+   "usd": 0.00018,
+   "ms": 3515,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c05",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "car-seat",
+    "brand": "Evenflo",
+    "product": "car seat"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 300,
+    "completion": 1006
+   },
+   "usd": 0.00026,
+   "ms": 5214,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c06",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Tylenol",
+    "product": "Extra Strength caplets"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 303,
+    "completion": 262
+   },
+   "usd": 0.00008,
+   "ms": 1557,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c07",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Gas-X",
+    "product": "Extra Strength softgels"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 301,
+    "completion": 688
+   },
+   "usd": 0.00018,
+   "ms": 3714,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c08",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Clear Eyes",
+    "product": "Redness Relief eye drops"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 302,
+    "completion": 399
+   },
+   "usd": 0.00011,
+   "ms": 2193,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c09",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "food",
+    "brand": "Lundberg",
+    "product": "Jasmine White Rice"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 301,
+    "completion": 339
+   },
+   "usd": 0.0001,
+   "ms": 2026,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c10",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Thermos",
+    "product": "Stainless King food jar"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 303,
+    "completion": 615
+   },
+   "usd": 0.00017,
+   "ms": 3307,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c11",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Panasonic",
+    "product": "toaster oven"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 301,
+    "completion": 264
+   },
+   "usd": 0.00008,
+   "ms": 1654,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "c12",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Hampton Bay",
+    "product": "Halwin ceiling fan"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 301,
+    "completion": 610
+   },
+   "usd": 0.00016,
+   "ms": 3014,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v01",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Honda",
+    "product": "CR-V",
+    "year": 2019
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 303,
+    "completion": 715
+   },
+   "usd": 0.00019,
+   "ms": 3436,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v02",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Ford",
+    "product": "Explorer",
+    "year": 2020
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 302,
+    "completion": 490
+   },
+   "usd": 0.00014,
+   "ms": 2352,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v03",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Tesla",
+    "product": "Model 3",
+    "model": "Model 3",
+    "year": 2021
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 304,
+    "completion": 622
+   },
+   "usd": 0.00017,
+   "ms": 2869,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v04",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Toyota",
+    "product": "Camry",
+    "year": 2018
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 303,
+    "completion": 879
+   },
+   "usd": 0.00023,
+   "ms": 4000,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v05",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Kia",
+    "product": "Telluride"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 305,
+    "completion": 481
+   },
+   "usd": 0.00013,
+   "ms": 2404,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v06",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Chevrolet",
+    "product": "Bolt EV",
+    "year": 2017
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 303,
+    "completion": 458
+   },
+   "usd": 0.00013,
+   "ms": 2156,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v07",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Hyundai",
+    "product": "Ioniq 5",
+    "year": 2023
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 306,
+    "completion": 457
+   },
+   "usd": 0.00013,
+   "ms": 2223,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v08",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Mazda",
+    "product": "MX-5 Miata",
+    "year": 2021
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 306,
+    "completion": 593
+   },
+   "usd": 0.00016,
+   "ms": 2663,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v09",
+   "group": "car",
+   "expect": "warning",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Lexus",
+    "product": "GX",
+    "year": 2015
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 304,
+    "completion": 689
+   },
+   "usd": 0.00018,
+   "ms": 3138,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v10",
+   "group": "car",
+   "expect": "inspected",
+   "level": "n/a",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Kia",
+    "product": "Soul",
+    "year": 2024
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 303,
+    "completion": 2500
+   },
+   "usd": 0.00062,
+   "ms": 10312,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v11",
+   "group": "car",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Subaru",
+    "product": "BRZ",
+    "model": "BRZ",
+    "year": 2023
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 304,
+    "completion": 576
+   },
+   "usd": 0.00016,
+   "ms": 2588,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "v12",
+   "group": "car",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "vehicle",
+    "brand": "Honda",
+    "product": "Fit",
+    "year": 2014
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 302,
+    "completion": 858
+   },
+   "usd": 0.00022,
+   "ms": 3673,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k01",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Honeywell",
+    "product": "ceramic tower heater",
+    "model": "HCE200W"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 308,
+    "completion": 474
+   },
+   "usd": 0.00013,
+   "ms": 2139,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k02",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "KitchenAid",
+    "product": "Artisan stand mixer",
+    "model": "KSM150PS"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 501
+   },
+   "usd": 0.00014,
+   "ms": 2404,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k03",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Ninja",
+    "product": "air fryer",
+    "model": "AF101"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 305,
+    "completion": 283
+   },
+   "usd": 0.00009,
+   "ms": 1478,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k04",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Shark",
+    "product": "Navigator upright vacuum",
+    "model": "NV352"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 306,
+    "completion": 555
+   },
+   "usd": 0.00015,
+   "ms": 2511,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k05",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Lodge",
+    "product": "cast iron skillet",
+    "model": "L8SK3"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 306,
+    "completion": 674
+   },
+   "usd": 0.00018,
+   "ms": 3200,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k06",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Hamilton Beach",
+    "product": "FlexBrew coffee maker",
+    "model": "49976",
+    "codes": [
+     "49976"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 310,
+    "completion": 694
+   },
+   "usd": 0.00019,
+   "ms": 3299,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k07",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "drug",
+    "brand": "Claritin",
+    "product": "24 hour allergy tablets",
+    "lot": "4BJ0421"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 312,
+    "completion": 581
+   },
+   "usd": 0.00016,
+   "ms": 2749,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k08",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Cuisinart",
+    "product": "4-burner gas grill",
+    "model": "CGG-7400",
+    "codes": [
+     "CGG-7400"
+    ]
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 314,
+    "completion": 680
+   },
+   "usd": 0.00018,
+   "ms": 2766,
+   "msFresh": true,
+   "tavily": 0
+  },
+  {
+   "id": "k09",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "n/a",
+   "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+   "item": {
+    "kind": "product",
+    "brand": "Dyson",
+    "product": "V8 cordless vacuum",
+    "model": "SV25"
+   },
+   "calls": 1,
+   "tokens": {
+    "prompt": 307,
+    "completion": 574
+   },
+   "usd": 0.00016,
+   "ms": 2314,
+   "msFresh": true,
+   "tavily": 0
+  }
+ ]
+}

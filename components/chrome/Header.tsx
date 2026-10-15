@@ -13,6 +13,7 @@ export default function Header() {
         <nav className={s.nav} aria-label="Main">
           <Link href="/recalls">Recalls today</Link>
           <Link href="/how">How it works</Link>
+          <Link href="/proof">Proof</Link>
           <Link href="/#check" className={s.cta}>
             Check my things
           </Link>

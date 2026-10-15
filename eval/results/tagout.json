@@ -1,0 +1,5650 @@
+{
+ "arm": "tagout",
+ "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "useAgent": true,
+  "useModel": true,
+  "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide"
+ },
+ "at": "2026-10-15T08:55:44.128Z",
+ "cases": [
+  {
+   "id": "p01",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-012",
+   "headline": "Model 406198 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5988,
+     "completion": 1390
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dollar Tree”, product “electric balloon pump”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “406198”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dollar Tree electric balloon pump recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 5988,
+    "completion": 1390
+   },
+   "usd": 0.01016,
+   "ms": 87,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p02",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-009",
+   "headline": "UT3053 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 6627,
+     "completion": 1875
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”, product “hand warmer”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “UT3053”",
+     "found": 2,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gobi Heat hand warmer recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 6627,
+    "completion": 1875
+   },
+   "usd": 0.01225,
+   "ms": 82,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p03",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-011",
+   "headline": "H163650 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 10064,
+     "completion": 2653
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “HotHands”, product “hand warmer”, text “H163650”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “HotHands rechargeable hand warmer recall H163650”",
+     "found": 2,
+     "fresh": 1
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 10064,
+    "completion": 2653
+   },
+   "usd": 0.01802,
+   "ms": 102,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-021",
+   "headline": "ST-332-US is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 14216,
+     "completion": 2721
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Snow Peak”, product “propane fireplace insert”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Snow Peak”, text “ST-332-US”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Snow Peak propane fireplace insert recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Snow Peak Recalls Propane Fireplace Inserts and Lava Rocks Due to Ri…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 14216,
+    "completion": 2721
+   },
+   "usd": 0.02238,
+   "ms": 4298,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "p05",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-018",
+   "headline": "MY002 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5981,
+     "completion": 1608
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “ONTHEWEI”, product “baby bath seat”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “ONTHEWEI baby bath seat recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 5981,
+    "completion": 1608
+   },
+   "usd": 0.01081,
+   "ms": 41,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p06",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-798",
+   "headline": "LTD-SM23 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 8175,
+     "completion": 2600
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Love To Dream”, product “portable sleep machine”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Love To Dream”, text “LTD-SM23”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, maker “Love To Dream”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Love To Dream portable sleep machine recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 8175,
+    "completion": 2600
+   },
+   "usd": 0.01597,
+   "ms": 41,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p07",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-792",
+   "headline": "ZHX-PB22 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 8015,
+     "completion": 2130
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “NEWDERY”, product “power bank”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “ZHX-PB22”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “NEWDERY power bank recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 8015,
+    "completion": 2130
+   },
+   "usd": 0.01441,
+   "ms": 32,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p08",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-777",
+   "headline": "HDFS400 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 10239,
+     "completion": 2430
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hayward”, product “pool heater”, text “HDFS400”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hayward Universal pool heater recall HDFS400”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 10239,
+    "completion": 2430
+   },
+   "usd": 0.01753,
+   "ms": 34,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "p09",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-779",
+   "headline": "KLC-BULL135C is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 12587,
+     "completion": 2266
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “LANCHEZ”, product “pressure washer”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “LANCHEZ pressure washer recall”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “LANCHEZ Pressure Washers Recalled Due to Serious Risk of Injury or D…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “CPSC Warns Consumers to Stop Using FOTING Pressure Washers Immediate…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 12587,
+    "completion": 2266
+   },
+   "usd": 0.01938,
+   "ms": 4312,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "p10",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-739",
+   "headline": "Model 9R263210 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 10023,
+     "completion": 1676
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Skip Hop”, product “teether”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Skip Hop Baby Sesame Street Elmo silicone teether recall”",
+     "found": 6,
+     "fresh": 4
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 10023,
+    "completion": 1676
+   },
+   "usd": 0.01505,
+   "ms": 35,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p11",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-717",
+   "headline": "CCB-5014 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7389,
+     "completion": 3942
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Cuisinart”, product “grill brush”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Cuisinart grill brush recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7389,
+    "completion": 3942
+   },
+   "usd": 0.01921,
+   "ms": 19,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p12",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-694",
+   "headline": "GX000392AAK is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 14875,
+     "completion": 2412
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Merax”, product “bed”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Merax Murphy bed recall”",
+     "found": 3,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “GigaCloud Technology USA Recalls Merax Murphy Beds Due to Risk of Se…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 14875,
+    "completion": 2412
+   },
+   "usd": 0.02211,
+   "ms": 3887,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "p13",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-702",
+   "headline": "AK396H-MBK is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7672,
+     "completion": 1872
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hampton Bay”, product “ceiling fan”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “AK396H-MBK”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hampton Bay Halwin ceiling fan recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7672,
+    "completion": 1872
+   },
+   "usd": 0.01329,
+   "ms": 20,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p14",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-687",
+   "headline": "BSFIREPIT02 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5680,
+     "completion": 1244
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Brookstone”, product “fire pit”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Brookstone”, text “BSFIREPIT02”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Brookstone tabletop fire pit recall”",
+     "found": 3,
+     "fresh": 2
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 5680,
+    "completion": 1244
+   },
+   "usd": 0.00941,
+   "ms": 6,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p15",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-676",
+   "headline": "Lot SME2025112805 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7691,
+     "completion": 1739
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Fitueyes”, product “dresser”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Fitueyes Laziza dresser recall”",
+     "found": 3,
+     "fresh": 2
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7691,
+    "completion": 1739
+   },
+   "usd": 0.01291,
+   "ms": 7,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p16",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-649",
+   "headline": "GLR76TRDER is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 6279,
+     "completion": 1814
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Galanz”, product “refrigerator”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Galanz”, text “GLR76TRDER”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Galanz retro refrigerator recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 6279,
+    "completion": 1814
+   },
+   "usd": 0.01172,
+   "ms": 10,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p17",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-647",
+   "headline": "GV31 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 8492,
+     "completion": 2366
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “BenQ”, product “portable projector”, text “GV31”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “BenQ”, product “projector”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “BenQ GV31 projector recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 8492,
+    "completion": 2366
+   },
+   "usd": 0.01559,
+   "ms": 14,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "p18",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "WEB CPSC newsroom",
+   "headline": "SRTH is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 8987,
+     "completion": 2116
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Vornado”, product “space heater”, text “SRTH”",
+     "found": 19,
+     "fresh": 19
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Vornado space heater SRTH recall”",
+     "found": 5,
+     "fresh": 5
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 8987,
+    "completion": 2116
+   },
+   "usd": 0.01534,
+   "ms": 10,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p19",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-618",
+   "headline": "NB-G200 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5901,
+     "completion": 1439
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Panasonic”, product “toaster oven”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “NB-G200”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Panasonic toaster oven recall NB-G200”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 5901,
+    "completion": 1439
+   },
+   "usd": 0.01022,
+   "ms": 9,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p20",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-606",
+   "headline": "NS-RGFGSS1 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7959,
+     "completion": 1250
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Insignia”, product “gas range”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Insignia gas range recall NS-RGFGSS1”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7959,
+    "completion": 1250
+   },
+   "usd": 0.01171,
+   "ms": 10,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p21",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-605",
+   "headline": "CGG-6331 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7563,
+     "completion": 1684
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Cuisinart”, product “gas grill”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Cuisinart”, text “CGG-6331”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Cuisinart Propel+ gas grill recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7563,
+    "completion": 1684
+   },
+   "usd": 0.01262,
+   "ms": 10,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p22",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-595",
+   "headline": "RH99A2U1 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7007,
+     "completion": 3921
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Rowenta”, product “cordless vacuum”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Rowenta”, text “RH99A2U1”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Rowenta cordless vacuum recall RH99A2U1”",
+     "found": 2,
+     "fresh": 1
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7007,
+    "completion": 3921
+   },
+   "usd": 0.01877,
+   "ms": 9,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "p23",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-524",
+   "headline": "WYZESCPWH is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5538,
+     "completion": 1260
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”, product “security camera”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”, text “WYZESCPWH”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Wyze Solar Cam Pan recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 5538,
+    "completion": 1260
+   },
+   "usd": 0.00932,
+   "ms": 4,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p24",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-444",
+   "headline": "SK3000 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 10,
+     "prompt": 31378,
+     "completion": 4507
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food jar”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “stainless steel”",
+     "found": 24,
+     "fresh": 23
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “SK3000”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Thermos Stainless King food jar recall”",
+     "found": 6,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Thermos Stainless King food jars bottles recall 2024 2025 CPSC”",
+     "found": 2,
+     "fresh": 0
+    }
+   ],
+   "calls": 10,
+   "tokens": {
+    "prompt": 31378,
+    "completion": 4507
+   },
+   "usd": 0.0449,
+   "ms": 19,
+   "msFresh": false,
+   "tavily": 4
+  },
+  {
+   "id": "p25",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-457",
+   "headline": "Model 034464 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 28576,
+     "completion": 2926
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Build-A-Bear”, product “plush”",
+     "found": 20,
+     "fresh": 20
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Build-A-Bear”, product “bear”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Build-A-Bear”, text “034464”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Build-A-Bear Heartwarming Hugs bear recall”",
+     "found": 2,
+     "fresh": 1
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 28576,
+    "completion": 2926
+   },
+   "usd": 0.03735,
+   "ms": 14,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p26",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-539",
+   "headline": "MI-DHC02 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 12291,
+     "completion": 1495
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Merkury”, product “heating and cooling fan”, text “MI-DHC02”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Merkury Hot + Cool heating cooling fan recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Merkury”, product “fan heater”",
+     "found": 7,
+     "fresh": 6
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 12291,
+    "completion": 1495
+   },
+   "usd": 0.01678,
+   "ms": 21,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "p27",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-489",
+   "headline": "Model 53101-200 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 15584,
+     "completion": 3168
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “ZWILLING”, product “electric water kettle”, text “53101-200”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “ZWILLING J. A. Henckels Aktiengesellschaft Recalls Electric Water Ke…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “ZWILLING electric water kettle recall”",
+     "found": 6,
+     "fresh": 2
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 15584,
+    "completion": 3168
+   },
+   "usd": 0.02509,
+   "ms": 6988,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "d01",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0121-2026",
+   "headline": "Lot EJA022 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 9509,
+     "completion": 1499
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot EJA022, brand “Tylenol”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Tylenol Extra Strength caplets recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 9509,
+    "completion": 1499
+   },
+   "usd": 0.01401,
+   "ms": 18,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "d02",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0558-2026",
+   "headline": "Lot 1096076 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 11703,
+     "completion": 1535
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 1096076, brand “Tums”, “Assorted Fruit antacid tablets”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Tums Assorted Fruit antacid tablets lot 1096076 recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 11703,
+    "completion": 1535
+   },
+   "usd": 0.01631,
+   "ms": 17,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "d03",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0595-2026",
+   "headline": "Lot YH9X is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 9872,
+     "completion": 6077
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot YH9X, brand “Gas-X”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gas-X Extra Strength softgels recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 9872,
+    "completion": 6077
+   },
+   "usd": 0.0281,
+   "ms": 24,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "d04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0871-2026",
+   "headline": "Lot RL25G04 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 12703,
+     "completion": 4371
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot RL25G04, brand “Clear Eyes”, “Redness Relief eye drops”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Clear Eyes Redness Relief eye drops recall RL25G04”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 12703,
+    "completion": 4371
+   },
+   "usd": 0.02582,
+   "ms": 18,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "d05",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0716-2026",
+   "headline": "Lot 3J3V is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 10,
+     "prompt": 39720,
+     "completion": 4763
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 3J3V, brand “Rohto”, “Cooling Eye Drops Max Strength”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Rohto Cooling Eye Drops Max Strength recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Rohto\" eye drops recall FDA”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Rohto\" eye drops recall 2023 2024”",
+     "found": 6,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Rohto Cooling Eye Drops\" recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 10,
+   "tokens": {
+    "prompt": 39720,
+    "completion": 4763
+   },
+   "usd": 0.05401,
+   "ms": 31,
+   "msFresh": false,
+   "tavily": 6
+  },
+  {
+   "id": "d06",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0492-2026",
+   "headline": "Lot 4V15 is printed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 9503,
+     "completion": 2863
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 4V15, brand “GenTeal”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “GenTeal Tears lubricant eye gel recall”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “GenTeal”",
+     "found": 2,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 9503,
+    "completion": 2863
+   },
+   "usd": 0.01809,
+   "ms": 16,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "d07",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0501-2026",
+   "headline": "Lot 5S30B is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 10,
+     "prompt": 36733,
+     "completion": 3893
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 5S30B, brand “iVIZIA”, “lubricant eye drops”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “iVIZIA lubricant eye drops recall lot 5S30B”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “FDA iVIZIA eye drops recall 2024 2025”",
+     "found": 4,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"iVIZIA\" eye drops recall FDA”",
+     "found": 6,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"iVIZIA\" OR \"IVIZIA\" eye drops recall FDA 2024 2025”",
+     "found": 4,
+     "fresh": 0
+    }
+   ],
+   "calls": 10,
+   "tokens": {
+    "prompt": 36733,
+    "completion": 3893
+   },
+   "usd": 0.04841,
+   "ms": 29,
+   "msFresh": false,
+   "tavily": 6
+  },
+  {
+   "id": "d08",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0620-2026",
+   "headline": "Lot 5950 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 12038,
+     "completion": 2282
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 5950, brand “Beekeeper's Naturals”, “saline nasal spray”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Beekeeper's Naturals saline nasal spray recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 12038,
+    "completion": 2282
+   },
+   "usd": 0.01888,
+   "ms": 17,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "d09",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0390-2026",
+   "headline": "Lot 7261973A is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 6977,
+     "completion": 2673
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 7261973A",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, “children's ibuprofen oral suspension”",
+     "found": 5,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “ibuprofen oral suspension 100 mg per 5 mL lot 7261973A recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 6977,
+    "completion": 2673
+   },
+   "usd": 0.015,
+   "ms": 11,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "d10",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0572-2026",
+   "headline": "Lot 1716089 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 12,
+     "prompt": 13664,
+     "completion": 6396
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 1716089, brand “Hy-Vee”, “antacid chewable tablets”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hy-Vee Ultra Strength antacid recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 12,
+   "tokens": {
+    "prompt": 13664,
+    "completion": 6396
+   },
+   "usd": 0.03285,
+   "ms": 28,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "d11",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0489-2026",
+   "headline": "Lot 1X68 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 7901,
+     "completion": 2939
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 1X68, brand “FreshKote”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “FreshKote lubricant eye drops recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 7901,
+    "completion": 2939
+   },
+   "usd": 0.01672,
+   "ms": 15,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "f01",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0767-2026",
+   "headline": "Lot 260201MA is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 13550,
+     "completion": 2395
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 260201MA, brand “Lundberg”, “jasmine white rice”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lundberg jasmine white rice recall lot 260201MA”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “LUNDBERG FAMILY FAMRS WHITE RICE JASMINE NET WT 32 OZ (2 lb) 907 g…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 13550,
+    "completion": 2395
+   },
+   "usd": 0.02073,
+   "ms": 6025,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "f02",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-1266-2026",
+   "headline": "Lot LLA616803 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 17527,
+     "completion": 2818
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot LLA616803, brand “Outshine”, “grape fruit bars”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Outshine grape fruit bars recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 17527,
+    "completion": 2818
+   },
+   "usd": 0.02598,
+   "ms": 13,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "f03",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-1100-2026",
+   "headline": "Lot 025245 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 13,
+     "prompt": 36910,
+     "completion": 6701
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 025245, brand “Spring & Mulberry”, “Mango Chili chocolate bar”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Spring & Mulberry Mango Chili chocolate recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “FDA Spring Mulberry Mango Chili recall 025245 lot code”",
+     "found": 6,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"025245\" \"Mango Chili\" Spring Mulberry recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Spring Mulberry Mango Chili 025245 lot code recall details FDA”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 13,
+   "tokens": {
+    "prompt": 36910,
+    "completion": 6701
+   },
+   "usd": 0.05701,
+   "ms": 29,
+   "msFresh": false,
+   "tavily": 6
+  },
+  {
+   "id": "f04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-1335-2026",
+   "headline": "Lot L2755 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 10739,
+     "completion": 2279
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot L2755, brand “Prolon”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Prolon Everyday almond cocoa spread recall”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “L-Nutra Issues Allergy Alert on Undeclared Tree Nuts in ...”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 10739,
+    "completion": 2279
+   },
+   "usd": 0.01758,
+   "ms": 20,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "f05",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0684-2026",
+   "headline": "Lot 041-26 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7971,
+     "completion": 2020
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 041-26, brand “My Mochi”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “My Mochi strawberry frozen dessert recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7971,
+    "completion": 2020
+   },
+   "usd": 0.01403,
+   "ms": 14,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "f06",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-1407-2026",
+   "headline": "Lot TS-633-2 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 8696,
+     "completion": 1936
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot TS-633-2, brand “Todd's Seeds”, “salad sprouting mix”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Todd's Seeds salad sprouting mix recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 8696,
+    "completion": 1936
+   },
+   "usd": 0.0145,
+   "ms": 10,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "f07",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0817-2026",
+   "headline": "Lot 2025-43282 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 11798,
+     "completion": 2993
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 2025-43282, brand “Blackstone”, “Parmesan Ranch seasoning”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Blackstone Parmesan Ranch seasoning recall”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Blackstone Products Recalls Parmesan Ranch Seasoning Because of Poss…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 11798,
+    "completion": 2993
+   },
+   "usd": 0.02078,
+   "ms": 18,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "f08",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0856-2026",
+   "headline": "UPC 726191018548 is listed in this recall.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 10,
+     "prompt": 28037,
+     "completion": 3639
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 726191018548, brand “Wawa”, “Diet Iced Tea Lemon”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Wawa Diet Iced Tea Lemon recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Wawa Diet Iced Tea Lemon Pint (16oz), Plastic bottle”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Wawa Issues Product Recall on 16-oz. Wawa Brand Iced Tea Lemon, Iced…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Wawa Strawberry Milk, Lowfat Milk, 16 oz (Pint), Plastic bottle, Sto…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search",
+     "label": "search",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 10,
+   "tokens": {
+    "prompt": 28037,
+    "completion": 3639
+   },
+   "usd": 0.03895,
+   "ms": 3457,
+   "msFresh": false,
+   "tavily": 4
+  },
+  {
+   "id": "n01",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 14194,
+     "completion": 2340
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dollar Tree”, product “electric balloon pump”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “406199”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dollar Tree electric balloon pump recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Dollar Tree Stores Recalls Electric Balloon Pumps Due to Burn Hazard”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"406199\" Dollar Tree balloon pump”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 14194,
+    "completion": 2340
+   },
+   "usd": 0.02121,
+   "ms": 3065,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "n02",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 14648,
+     "completion": 1367
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”, product “hand warmer”, text “UT3054”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Gobi Heat Recalls Rechargeable Hand Warmers Due to Risk of Serious I…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gobi Heat rechargeable hand warmer recall UT3054”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 14648,
+    "completion": 1367
+   },
+   "usd": 0.01875,
+   "ms": 3600,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "n03",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "Similar products are recalled, but none of those recalls lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 9,
+     "prompt": 27252,
+     "completion": 2760
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “HotHands”, product “hand warmer”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “HotHands hand warmer recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Kobayashi Recalls Rechargeable Hand Warmers Due to Risk of Serious I…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Comfort and Relaxation”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “H163651”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “HotHands”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 9,
+   "tokens": {
+    "prompt": 27252,
+    "completion": 2760
+   },
+   "usd": 0.03553,
+   "ms": 4142,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "n04",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 26-798",
+   "headline": "LTD-SM23 is listed, but this recall names particular lot or date codes and 7W16TN isn't one the notice prints. Compare the code on yours with the notice.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 13177,
+     "completion": 3332
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Love To Dream”, product “portable sleep machine”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “LTD-SM23”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Love To Dream”, product “sound machine”",
+     "found": 4,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Love To Dream”, product “white noise machine”",
+     "found": 2,
+     "fresh": 1
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Love To Dream Recalls Portable Sleep Machines Due to Risk of Injury…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Love To Dream portable sleep machine recall LTD-SM23”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 13177,
+    "completion": 3332
+   },
+   "usd": 0.02317,
+   "ms": 7833,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "n05",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "Recalls exist for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 16524,
+     "completion": 4516
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Cuisinart”, product “grill brush”, text “CCB-5015”",
+     "found": 8,
+     "fresh": 8
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Conair Expands Recall of Cuisinart Grill Brushes Due to Ingestion Ha…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Conair Recalls Over One Million Cuisinart Grill Brushes Due to Inges…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Cuisinart grill brush CCB-5015 recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 16524,
+    "completion": 4516
+   },
+   "usd": 0.03007,
+   "ms": 7664,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "n06",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 12755,
+     "completion": 2300
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Galanz”, product “refrigerator”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Galanz”, text “GLR12TRDEFR”",
+     "found": 2,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Galanz retro refrigerator recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Galanz Americas Recalls Retro Refrigerators Due to Risk of Serious I…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 12755,
+    "completion": 2300
+   },
+   "usd": 0.01965,
+   "ms": 4838,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "n07",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 28024,
+     "completion": 2372
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hampton Bay”, product “ceiling fan”, text “AK396H-WH”",
+     "found": 14,
+     "fresh": 14
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Hampton Bay Halwin 52-Inch Ceiling Fans Recalled Due to Impact and I…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hampton Bay Halwin ceiling fan recall AK396H-WH”",
+     "found": 6,
+     "fresh": 4
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hampton Bay”, product “ceiling fan”",
+     "found": 2,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, with no search terms",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 28024,
+    "completion": 2372
+   },
+   "usd": 0.03514,
+   "ms": 9054,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "n08",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 15124,
+     "completion": 2432
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Brookstone”, product “tabletop fire pit”, text “BSFIREPIT04”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Brookstone tabletop fire pit recall BSFIREPIT04”",
+     "found": 6,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Southern Telecom Recalls Brookstone-Branded Tabletop Fire Pits Due t…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 15124,
+    "completion": 2432
+   },
+   "usd": 0.02242,
+   "ms": 3210,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "n09",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 7712,
+     "completion": 2044
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Fitueyes”, product “dresser”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “dresser”, maker “Fitueyes”",
+     "found": 12,
+     "fresh": 11
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “WE11E5080Wx3-W”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Fitueyes Laziza dresser recall”",
+     "found": 3,
+     "fresh": 2
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 7712,
+    "completion": 2044
+   },
+   "usd": 0.01384,
+   "ms": 18,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "n10",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 18317,
+     "completion": 3039
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Panasonic”, product “toaster oven”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “NB-G110P”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Panasonic FlashXpress toaster oven recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Panasonic Recalls Electric Toaster Ovens Due to Shock and Fire Hazards”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Panasonic”, text “FlashXpress”",
+     "found": 7,
+     "fresh": 6
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “toaster oven”, maker “Panasonic”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Panasonic NB-G110P recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Panasonic toaster oven recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 18317,
+    "completion": 3039
+   },
+   "usd": 0.02743,
+   "ms": 20507,
+   "msFresh": true,
+   "tavily": 4
+  },
+  {
+   "id": "n11",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "No recall found for Wyze model WYZEC3.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 12543,
+     "completion": 1543
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”, product “security camera”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Wyze Cam v3 recall”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”, text “WYZEC3”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”, product “camera”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Wyze Cam v3 WYZEC3 recall”",
+     "found": 6,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 12543,
+    "completion": 1543
+   },
+   "usd": 0.01717,
+   "ms": 16723,
+   "msFresh": true,
+   "tavily": 2
+  },
+  {
+   "id": "n12",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 7944,
+     "completion": 2459
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food jar”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “stainless steel”",
+     "found": 24,
+     "fresh": 23
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “SK3000”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Thermos Stainless King food jar recall”",
+     "found": 6,
+     "fresh": 4
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 7944,
+    "completion": 2459
+   },
+   "usd": 0.01532,
+   "ms": 10,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "n13",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 26-532",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 15,
+     "prompt": 32831,
+     "completion": 10330
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Vornado”, product “heater”, text “VH200”",
+     "found": 21,
+     "fresh": 21
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Vornado”, product “whole room heater”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Vornado VH200 heater recall”",
+     "found": 2,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “VH200”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Vornado VH200 whole room heater recall”",
+     "found": 6,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “Vornado VH200”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"VH200\" Vornado heater”",
+     "found": 2,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Vornado”",
+     "found": 11,
+     "fresh": 6
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “VH200”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Vornado whole room heater recall”",
+     "found": 6,
+     "fresh": 3
+    }
+   ],
+   "calls": 15,
+   "tokens": {
+    "prompt": 32831,
+    "completion": 10330
+   },
+   "usd": 0.06382,
+   "ms": 42,
+   "msFresh": false,
+   "tavily": 4
+  },
+  {
+   "id": "n14",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 35019,
+     "completion": 2780
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lasko”, product “ceramic tower heater”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “CT22425”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lasko ceramic tower heater recall”",
+     "found": 6,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Ceramic Heaters Recalled By Lasko; Heaters Could Pose A Fire Hazard”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “CPSC, Lasko Products Inc. Announce Recall of Space Heaters”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Lasko Recalls Portable Electric Heaters Due To Fire Hazard”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lasko”, product “heater”",
+     "found": 3,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lasko CT22425 heater recall”",
+     "found": 2,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lasko Model 5540”, product “heater”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lasko 5540”, product “heater”",
+     "found": 12,
+     "fresh": 2
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 35019,
+    "completion": 2780
+   },
+   "usd": 0.04336,
+   "ms": 32329,
+   "msFresh": true,
+   "tavily": 5
+  },
+  {
+   "id": "n15",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 15744,
+     "completion": 2332
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Insignia”, product “gas range”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Insignia gas range recall NS-RGFGSS3”",
+     "found": 6,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Best Buy Recalls Insignia® Gas Ranges Due to Risk of Serious Injury…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “NS-RGFGSS3”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Insignia NS-RGFGSS3 gas range recall”",
+     "found": 6,
+     "fresh": 1
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 15744,
+    "completion": 2332
+   },
+   "usd": 0.02274,
+   "ms": 24641,
+   "msFresh": true,
+   "tavily": 3
+  },
+  {
+   "id": "n16",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 26-595",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 20650,
+     "completion": 3260
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Rowenta”, product “cordless vacuum”, text “RH99A3U1”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Rowenta Recalls Cordless Vacuum Cleaners Due to Risk of Serious Inju…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Rowenta RH99A3U1 recall”",
+     "found": 6,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Vacuum Cleaners”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Rowenta”, product “vacuum”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 20650,
+    "completion": 3260
+   },
+   "usd": 0.03043,
+   "ms": 24977,
+   "msFresh": true,
+   "tavily": 3
+  },
+  {
+   "id": "n17",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 17066,
+     "completion": 2624
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “ZWILLING”, product “electric kettle”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “ZWILLING”, product “water kettle”",
+     "found": 3,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “53101-209”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “ZWILLING electric kettle recall”",
+     "found": 5,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “ZWILLING J. A. Henckels Aktiengesellschaft Recalls Electric Water Ke…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “ZWILLING 53101-209 recall”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “ZWILLING”, product “kettle”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 17066,
+    "completion": 2624
+   },
+   "usd": 0.02494,
+   "ms": 3109,
+   "msFresh": false,
+   "tavily": 3
+  },
+  {
+   "id": "n18",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 15380,
+     "completion": 2583
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Merkury”, product “heating and cooling fan”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Merkury”, text “MI-DHC03”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Merkury heating cooling fan recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Merkury Innovations Recalls Hot + Cool Heating and Cooling Fans Due…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Merkury MI-DHC03 recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 6,
+   "tokens": {
+    "prompt": 15380,
+    "completion": 2583
+   },
+   "usd": 0.02313,
+   "ms": 23186,
+   "msFresh": true,
+   "tavily": 3
+  },
+  {
+   "id": "n19",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "FDA D-0277-2026",
+   "headline": "This product line is recalled. Check the lot number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 24459,
+     "completion": 2837
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot EJA023, brand “Tylenol”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Tylenol Extra Strength caplets lot EJA023 recall”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “TYLENOL, Acetaminophen, Extra Strength, 24 Caplets, 500mg each”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot EJA023",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Tylenol”, “Extra Strength caplets”",
+     "found": 4,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “TYLENOL a) 500 MG., 2'S DISPLAY, 50CT; b) COLD & FLU, 25CT/2S; c) CO…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Ready in case ACETAMINOPHEN PM CAPLETS 24 CT SKU 900559;  TYLENOL CH…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “EJA023 Tylenol recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 24459,
+    "completion": 2837
+   },
+   "usd": 0.03297,
+   "ms": 32825,
+   "msFresh": true,
+   "tavily": 5
+  },
+  {
+   "id": "n20",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 11418,
+     "completion": 1899
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 1096079, brand “Tums”, “Assorted Fruit antacid tablets”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Tums Assorted Fruit antacid recall lot 1096079”",
+     "found": 5,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 11418,
+    "completion": 1899
+   },
+   "usd": 0.01712,
+   "ms": 46855,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "n21",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 14661,
+     "completion": 3807
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot YH9Z, brand “Gas-X”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gas-X Extra Strength softgels recall”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Haleon Issues Voluntary Nationwide Recall of Gas-X Extra Strength So…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Gas-X”, “Extra Strength softgels”",
+     "found": 2,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 14661,
+    "completion": 3807
+   },
+   "usd": 0.02608,
+   "ms": 20,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "n22",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "Similar products are recalled, but none of those recalls lists your lot number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 12,
+     "prompt": 40385,
+     "completion": 5662
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot RL25G05, brand “Clear Eyes”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Clear Eyes Redness Relief eye drops recall RL25G05”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Clear Eyes\" \"Redness Relief\" recall lot RL25G05”",
+     "found": 5,
+     "fresh": 3
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Clear Eyes\" \"Redness Relief\" recall 2025”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Clear Eyes\" \"Redness Relief\" \"RL25G05\" recall”",
+     "found": 6,
+     "fresh": 2
+    }
+   ],
+   "calls": 12,
+   "tokens": {
+    "prompt": 40385,
+    "completion": 5662
+   },
+   "usd": 0.05737,
+   "ms": 25667,
+   "msFresh": true,
+   "tavily": 8
+  },
+  {
+   "id": "n23",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "No recall found for lot 5951.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 15,
+     "prompt": 45783,
+     "completion": 10094
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 5951, brand “Beekeeper's Naturals”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, lot 5951, brand “Beekeeper's Naturals”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 5951, brand “Beekeeper's Naturals”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “BEEKEEPER'S NATURALS Saline Nasal Spray, Sinus Congestion Rinse”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Beekeeper's Naturals saline nasal spray recall lot 5950 5951”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “FDA recall Beekeeper's Naturals Saline Nasal Spray lot 5950 02/2028”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Beekeeper's Naturals”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 15,
+   "tokens": {
+    "prompt": 45783,
+    "completion": 10094
+   },
+   "usd": 0.07607,
+   "ms": 41956,
+   "msFresh": true,
+   "tavily": 4
+  },
+  {
+   "id": "n24",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 15876,
+     "completion": 2728
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 260203MA, brand “Lundberg”, “jasmine white rice”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lundberg jasmine white rice recall”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “LUNDBERG FAMILY FAMRS WHITE RICE JASMINE NET WT 32 OZ (2 lb) 907 g…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 260203MA, brand “Lundberg”",
+     "found": 4,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 15876,
+    "completion": 2728
+   },
+   "usd": 0.02406,
+   "ms": 2491,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "n25",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 31360,
+     "completion": 2645
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot LLA616804, brand “Outshine”, “grape fruit bars”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Outshine grape fruit bars recall LLA616804”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"LLA616804\" Outshine fruit bars recall”",
+     "found": 6,
+     "fresh": 3
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Outshine\" fruit bars recall LLA616804 FDA”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Outshine\" fruit bars recall \"LLA616804\" OR \"LLA616804\" FDA recall”",
+     "found": 6,
+     "fresh": 1
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 31360,
+    "completion": 2645
+   },
+   "usd": 0.03929,
+   "ms": 43515,
+   "msFresh": true,
+   "tavily": 4
+  },
+  {
+   "id": "n26",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 27272,
+     "completion": 2016
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 025246, brand “Spring & Mulberry”, “Mango Chili chocolate bar”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Spring & Mulberry Mango Chili Date-Sweetened Chocolate, Net Wt. 2.1…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search",
+     "label": "search",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search",
+     "label": "search",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Spring & Mulberry Mango Chili Date-Sweetened Chocolate, Net Wt. 2.1…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 27272,
+    "completion": 2016
+   },
+   "usd": 0.03332,
+   "ms": 32006,
+   "msFresh": true,
+   "tavily": 2
+  },
+  {
+   "id": "c01",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 27-009",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 11243,
+     "completion": 1379
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”, product “hand warmer”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gobi Heat hand warmer recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Gobi Heat Recalls Rechargeable Hand Warmers Due to Risk of Serious I…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 11243,
+    "completion": 1379
+   },
+   "usd": 0.01538,
+   "ms": 15,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "c02",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 26-717",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7310,
+     "completion": 3750
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Cuisinart”, product “grill brush”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Cuisinart grill brush recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7310,
+    "completion": 3750
+   },
+   "usd": 0.01856,
+   "ms": 11,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "c03",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 26-649",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 11837,
+     "completion": 2047
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Galanz”, product “refrigerator”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Galanz retro refrigerator recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Galanz Americas Recalls Retro Refrigerators Due to Risk of Serious I…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 11837,
+    "completion": 2047
+   },
+   "usd": 0.01798,
+   "ms": 11,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "c04",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 26-739",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7980,
+     "completion": 1555
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Skip Hop”, product “teether”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Skip Hop Elmo silicone teether recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 7980,
+    "completion": 1555
+   },
+   "usd": 0.01264,
+   "ms": 9,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "c05",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 25C003000",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 15,
+     "prompt": 37760,
+     "completion": 7977
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_car_seat_recalls",
+     "label": "NHTSA car seat recalls for “Evenflo”",
+     "found": 14,
+     "fresh": 14
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Evenflo car seat recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 26C005”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 25C008”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 25C010”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 26C005”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Evenflo Revolve180 Litemax NXT recall 2025”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 25C008”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 15,
+   "tokens": {
+    "prompt": 37760,
+    "completion": 7977
+   },
+   "usd": 0.06169,
+   "ms": 23,
+   "msFresh": false,
+   "tavily": 7
+  },
+  {
+   "id": "c06",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "FDA D-0277-2026",
+   "headline": "This product line is recalled. Check the lot number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 11,
+     "prompt": 42568,
+     "completion": 5155
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Tylenol”, “Extra Strength caplets”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Tylenol Extra Strength caplets recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “TYLENOL, Acetaminophen, Extra Strength, 24 Caplets, 500mg each”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Ready in case ACETAMINOPHEN PM CAPLETS 24 CT SKU 900559;  TYLENOL CH…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “TYLENOL a) 500 MG., 2'S DISPLAY, 50CT; b) COLD & FLU, 25CT/2S; c) CO…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Tylenol”, “caplets”",
+     "found": 10,
+     "fresh": 8
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Tylenol”, “Extra Strength”",
+     "found": 10,
+     "fresh": 9
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Tylenol”, “Extra Strength 500mg caplets”",
+     "found": 5,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Tylenol”, “recall”",
+     "found": 9,
+     "fresh": 5
+    }
+   ],
+   "calls": 11,
+   "tokens": {
+    "prompt": 42568,
+    "completion": 5155
+   },
+   "usd": 0.05803,
+   "ms": 14714,
+   "msFresh": false,
+   "tavily": 4
+  },
+  {
+   "id": "c07",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "FDA D-0595-2026",
+   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 11266,
+     "completion": 3937
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Gas-X”, “Extra Strength softgels”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gas-X Extra Strength softgels recall”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Haleon Issues Voluntary Nationwide Recall of Gas-X Extra Strength So…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 11266,
+    "completion": 3937
+   },
+   "usd": 0.02308,
+   "ms": 11,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "c08",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "FDA D-0871-2026",
+   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 11,
+     "prompt": 14294,
+     "completion": 9647
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Clear Eyes”, “Redness Relief eye drops”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Clear Eyes Redness Relief eye drops recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 11,
+   "tokens": {
+    "prompt": 14294,
+    "completion": 9647
+   },
+   "usd": 0.04323,
+   "ms": 27458,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "c09",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "FDA H-0767-2026",
+   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 10,
+     "prompt": 31118,
+     "completion": 7173
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Lundberg”, “jasmine white rice”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lundberg jasmine white rice recall”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “LUNDBERG FAMILY FAMRS WHITE RICE JASMINE NET WT 32 OZ (2 lb) 907 g…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Lundberg”, “rice”",
+     "found": 10,
+     "fresh": 9
+    }
+   ],
+   "calls": 10,
+   "tokens": {
+    "prompt": 31118,
+    "completion": 7173
+   },
+   "usd": 0.05264,
+   "ms": 16152,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "c10",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 26-444",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 33791,
+     "completion": 1523
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food jar”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food container”",
+     "found": 12,
+     "fresh": 11
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “stainless”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Thermos Stainless King food jar recall”",
+     "found": 6,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Thermos Recalls 8.2 Million Stainless King Food Jars and Bottles Due…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Thermos Recall Alert: Check Your Bottle Now”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Thermos Recall Alert: Check Your Bottle Now”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Thermos Recalls 8.2 Million Stainless King Food Jars and Bottles Due…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 33791,
+    "completion": 1523
+   },
+   "usd": 0.03836,
+   "ms": 24901,
+   "msFresh": true,
+   "tavily": 5
+  },
+  {
+   "id": "c11",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 26-618",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 10509,
+     "completion": 1114
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Panasonic”, product “toaster oven”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Panasonic toaster oven recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Panasonic Recalls Electric Toaster Ovens Due to Shock and Fire Hazards”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 10509,
+    "completion": 1114
+   },
+   "usd": 0.01385,
+   "ms": 13,
+   "msFresh": false,
+   "tavily": 2
+  },
+  {
+   "id": "c12",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 26-702",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5958,
+     "completion": 1625
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hampton Bay”, product “ceiling fan”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hampton Bay Halwin ceiling fan recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 5958,
+    "completion": 1625
+   },
+   "usd": 0.01083,
+   "ms": 9,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "v01",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V332000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 3,
+     "prompt": 6253,
+     "completion": 1200
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2019 Honda CR-V",
+     "found": 8,
+     "fresh": 8
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2019 Honda CR-V recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 3,
+   "tokens": {
+    "prompt": 6253,
+    "completion": 1200
+   },
+   "usd": 0.00985,
+   "ms": 12746,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "v02",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V451000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 10391,
+     "completion": 1489
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2020 Ford Explorer",
+     "found": 33,
+     "fresh": 33
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Ford Explorer 2020 recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 10391,
+    "completion": 1489
+   },
+   "usd": 0.01486,
+   "ms": 9367,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "v03",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V507000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 3,
+     "prompt": 7159,
+     "completion": 1672
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2021 Tesla Model 3",
+     "found": 22,
+     "fresh": 22
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2021 Tesla Model 3 recall”",
+     "found": 5,
+     "fresh": 5
+    }
+   ],
+   "calls": 3,
+   "tokens": {
+    "prompt": 7159,
+    "completion": 1672
+   },
+   "usd": 0.01218,
+   "ms": 11309,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "v04",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 25V028000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 10042,
+     "completion": 1242
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2018 Toyota Camry",
+     "found": 8,
+     "fresh": 8
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2018 Toyota Camry recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 10042,
+    "completion": 1242
+   },
+   "usd": 0.01377,
+   "ms": 10738,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "v05",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V430000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 9510,
+     "completion": 1506
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2022 Kia Telluride",
+     "found": 7,
+     "fresh": 7
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2022 Kia Telluride recall”",
+     "found": 5,
+     "fresh": 5
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 9510,
+    "completion": 1506
+   },
+   "usd": 0.01403,
+   "ms": 9609,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "v06",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 23V845000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 13388,
+     "completion": 3565
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2017 Chevrolet Bolt EV",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2017 Chevrolet Bolt EV recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 13388,
+    "completion": 3565
+   },
+   "usd": 0.02408,
+   "ms": 17072,
+   "msFresh": true,
+   "tavily": 4
+  },
+  {
+   "id": "v07",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V432000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 8542,
+     "completion": 1037
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2023 Hyundai Ioniq 5",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2023 Hyundai Ioniq 5 recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 8542,
+    "completion": 1037
+   },
+   "usd": 0.01165,
+   "ms": 9099,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "v08",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 24V695000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 7880,
+     "completion": 793
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2021 Mazda MX-5 Miata",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Mazda MX-5 Miata recall 2024 2025 2026”",
+     "found": 5,
+     "fresh": 5
+    }
+   ],
+   "calls": 4,
+   "tokens": {
+    "prompt": 7880,
+    "completion": 793
+   },
+   "usd": 0.01026,
+   "ms": 4,
+   "msFresh": false,
+   "tavily": 1
+  },
+  {
+   "id": "v09",
+   "group": "car",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 20V012000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 12562,
+     "completion": 1742
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2015 Lexus GX",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lexus GX recall 2015”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Lexus GX\" recall 2015”",
+     "found": 3,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 12562,
+    "completion": 1742
+   },
+   "usd": 0.01779,
+   "ms": 16184,
+   "msFresh": true,
+   "tavily": 2
+  },
+  {
+   "id": "v10",
+   "group": "car",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for the 2024 Kia Soul.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 9,
+     "prompt": 21277,
+     "completion": 2632
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2024 Kia Soul",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2024 Kia Soul recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 23V-531”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"2024\" \"Kia Soul\" recall”",
+     "found": 6,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kia Soul recall 2024 model year”",
+     "found": 5,
+     "fresh": 1
+    }
+   ],
+   "calls": 9,
+   "tokens": {
+    "prompt": 21277,
+    "completion": 2632
+   },
+   "usd": 0.02917,
+   "ms": 22450,
+   "msFresh": true,
+   "tavily": 5
+  },
+  {
+   "id": "v11",
+   "group": "car",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for the 2023 Subaru BRZ.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 10,
+     "prompt": 20570,
+     "completion": 4374
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2023 Subaru BRZ",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2023 Subaru BRZ recall”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Subaru BRZ recall”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 21V-587”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “URGENT IMPORTANT SAFETY RECALL”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Subaru BRZ 2023 recall site:nhtsa.gov”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 10,
+   "tokens": {
+    "prompt": 20570,
+    "completion": 4374
+   },
+   "usd": 0.03369,
+   "ms": 28352,
+   "msFresh": true,
+   "tavily": 6
+  },
+  {
+   "id": "v12",
+   "group": "car",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for the 2014 Honda Fit.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 19898,
+     "completion": 1598
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2014 Honda Fit",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Honda Fit recall”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 23V-858”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “[PDF] Part 573 Safety Recall Report 23V-046”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 20V-770”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “2014 Honda Fit recall”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Takata Recall Spotlight”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 20V-770”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Part 573 Safety Recall Report 19V-378”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 19898,
+    "completion": 1598
+   },
+   "usd": 0.02469,
+   "ms": 20203,
+   "msFresh": true,
+   "tavily": 8
+  },
+  {
+   "id": "k01",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 42414,
+     "completion": 2075
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Honeywell”, product “ceramic tower heater”",
+     "found": 13,
+     "fresh": 13
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Honeywell”, text “HCE200W”",
+     "found": 12,
+     "fresh": 3
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Honeywell ceramic tower heater recall HCE200W”",
+     "found": 5,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Honeywell”, product “heater”",
+     "found": 6,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Honeywell HCE200W ceramic heater recall”",
+     "found": 5,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Honeywell HCE200W ceramic space heater recall CPSC”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"HCE200W\" Honeywell ceramic heater recall”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Honeywell ceramic space heater recall ceramic heater”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 42414,
+    "completion": 2075
+   },
+   "usd": 0.04864,
+   "ms": 21,
+   "msFresh": false,
+   "tavily": 6
+  },
+  {
+   "id": "k02",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for KitchenAid model KSM150PS.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 32383,
+     "completion": 1713
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “KitchenAid”, product “stand mixer”, text “KSM150PS”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “KitchenAid”, product “stand mixer”",
+     "found": 5,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “KitchenAid Artisan stand mixer recall KSM150PS”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “KitchenAid”, product “mixer”",
+     "found": 8,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “KitchenAid”, text “Artisan”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “KitchenAid”, text “stand mixer Artisan”",
+     "found": 4,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “KitchenAid Artisan”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 32383,
+    "completion": 1713
+   },
+   "usd": 0.03752,
+   "ms": 21246,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "k03",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "Similar products are recalled, but none of those recalls lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 38975,
+     "completion": 2367
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Ninja”, product “air fryer”",
+     "found": 9,
+     "fresh": 9
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Ninja air fryer recall AF101”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Ninja”, product “air fryer”",
+     "found": 9,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Ninja”, text “AF101”",
+     "found": 3,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Ninja Foodi air fryer recall”",
+     "found": 2,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"AF101\" Ninja air fryer recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “air fryer”, maker “SharkNinja”",
+     "found": 6,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “AF101”, maker “Ninja”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Ninja AF101 air fryer recall”",
+     "found": 6,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"AF101\" air fryer recall Ninja”",
+     "found": 6,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 38975,
+    "completion": 2367
+   },
+   "usd": 0.04608,
+   "ms": 36189,
+   "msFresh": true,
+   "tavily": 5
+  },
+  {
+   "id": "k04",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "warning",
+   "notice": "CPSC 15-120",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 48761,
+     "completion": 3619
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, product “upright vacuum”",
+     "found": 9,
+     "fresh": 9
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, product “Navigator”",
+     "found": 5,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, text “NV352”",
+     "found": 5,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark Navigator upright vacuum recall”",
+     "found": 6,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Shark Vacuum Cleaners Recalled by Euro-Pro Due to Shock Hazard”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, product “vacuum”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark Navigator NV352 recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark Navigator”, product “vacuum”",
+     "found": 12,
+     "fresh": 11
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark Navigator NV352 recall CPSC”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Shark Navigator\" NV352 recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark NV352 recall CPSC”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, product “vacuum”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “vacuum”, maker “Shark”",
+     "found": 13,
+     "fresh": 3
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 48761,
+    "completion": 3619
+   },
+   "usd": 0.05962,
+   "ms": 31546,
+   "msFresh": true,
+   "tavily": 6
+  },
+  {
+   "id": "k05",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for Lodge model L8SK3.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 10206,
+     "completion": 1672
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lodge”, product “cast iron skillet”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “L8SK3”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lodge cast iron skillet recall”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “skillet”, maker “Lodge”",
+     "found": 2,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lodge Manufacturing cast iron skillet recall”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lodge”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Lodge\" cast iron recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "tokens": {
+    "prompt": 10206,
+    "completion": 1672
+   },
+   "usd": 0.01522,
+   "ms": 19439,
+   "msFresh": true,
+   "tavily": 3
+  },
+  {
+   "id": "k06",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "Similar products are recalled, but none of those recalls lists your model number.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 44393,
+     "completion": 5315
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hamilton Beach”, product “coffee maker”",
+     "found": 16,
+     "fresh": 16
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hamilton Beach”, text “49976”",
+     "found": 10,
+     "fresh": 7
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hamilton Beach FlexBrew coffee maker recall”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hamilton Beach”, product “FlexBrew”",
+     "found": 9,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Proctor Silex”, product “coffee maker”",
+     "found": 8,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “FlexBrew”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “FlexBrew”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "tokens": {
+    "prompt": 44393,
+    "completion": 5315
+   },
+   "usd": 0.06034,
+   "ms": 36230,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "k07",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "FDA D-0266-2026",
+   "headline": "This product line is recalled. Check the lot number on yours.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 17286,
+     "completion": 2376
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot 4BJ0421, brand “Claritin”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Claritin”, “24 hour allergy tablets”",
+     "found": 2,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Claritin 24 hour allergy tablets recall lot 4BJ0421”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Claritin, 20 Count”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Claritin”, “loratadine 24 hour”",
+     "found": 2,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 17286,
+    "completion": 2376
+   },
+   "usd": 0.02441,
+   "ms": 22239,
+   "msFresh": true,
+   "tavily": 2
+  },
+  {
+   "id": "k08",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for Cuisinart model CGG-7400.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 30523,
+     "completion": 3229
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Cuisinart”, product “gas grill”, text “CGG-7400”",
+     "found": 17,
+     "fresh": 17
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Cuisinart CGG-7400 gas grill recall”",
+     "found": 6,
+     "fresh": 4
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “CGG-7400”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Cuisinart”, product “grill”",
+     "found": 3,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “Cuisinart Propel+ Four Burner 3-in-1 Gas Grill CGG-6331”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “Cuisinart CGG-7400”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “Cuisinart CGG-7400”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “Cuisinart grill”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 30523,
+    "completion": 3229
+   },
+   "usd": 0.04021,
+   "ms": 22118,
+   "msFresh": true,
+   "tavily": 1
+  },
+  {
+   "id": "k09",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for Dyson model SV25.",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 36923,
+     "completion": 1213
+    }
+   },
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “vacuum”, text “SV25”",
+     "found": 13,
+     "fresh": 13
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “vacuum”",
+     "found": 13,
+     "fresh": 3
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson V8 cordless vacuum recall SV25”",
+     "found": 5,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson cordless vacuum recall”",
+     "found": 5,
+     "fresh": 4
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, text “SV25”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson SV25 cordless vacuum recall CPSC”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson cordless vacuum recall battery fire hazard 2024 2025”",
+     "found": 2,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"SV25\" Dyson vacuum recall fire hazard”",
+     "found": 5,
+     "fresh": 2
+    }
+   ],
+   "calls": 7,
+   "tokens": {
+    "prompt": 36923,
+    "completion": 1213
+   },
+   "usd": 0.04056,
+   "ms": 23861,
+   "msFresh": true,
+   "tavily": 5
+  }
+ ]
+}

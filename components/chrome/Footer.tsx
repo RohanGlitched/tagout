@@ -18,6 +18,7 @@ export default function Footer() {
         <nav className={s.footNav} aria-label="Footer">
           <Link href="/recalls">Recalls today</Link>
           <Link href="/how">How it works</Link>
+          <Link href="/proof">Proof: the eval</Link>
           <a href={REPO_URL}>Source code</a>
         </nav>
       </div>
