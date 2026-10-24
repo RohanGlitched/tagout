@@ -104,6 +104,11 @@
 .nums dd[data-warn] {
   color: var(--warning-ink);
 }
+.now {
+  margin-top: 14px;
+  font-size: 14.5px;
+  color: #2f363d;
+}
 .key {
   margin-top: 14px;
   display: flex;

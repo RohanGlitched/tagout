@@ -134,3 +134,11 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.law {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border-left: 4px solid var(--danger);
+  background: var(--stock);
+  font-size: 16px !important;
+}

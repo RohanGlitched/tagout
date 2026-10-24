@@ -39,16 +39,24 @@ export default function Business() {
                 They keep each unit&apos;s appliances (brand, model, serial) for service calls and inspections. Tagout watches that list, and a recall that names one of those
                 models shows up as an alert on that unit&apos;s watch and feed, with the agency&apos;s own sentence attached as proof, ready to become a work order.
               </p>
+              <p className={s.law}>
+                <b>Why now, in California:</b> since AB 628, a landlord has 30 days from notice of a recall to repair or replace a recalled stove or refrigerator (Civil Code
+                1941.1(c)(1), for leases signed, renewed or amended from 1 Jan 2026). Tagout&apos;s alert is that notice, dated, with the recall&apos;s own sentence. The recall&apos;s remedy
+                is the maker&apos;s cost, not the landlord&apos;s.
+              </p>
               <ul className={s.points}>
                 <li>
                   <b>Price:</b> $1 per unit per month. A 200-unit building pays $200 a month.
                 </li>
                 <li>
-                  <b>Our cost:</b> about {money(8 * full)} once to check a unit&apos;s eight appliances, then a share of one daily sweep that reads each new recall once: at most
-                  about 3¢ a day across every watched list, so well under a cent per unit per month.
+                  <b>Our cost:</b> about {money(8 * full)} once to check a unit&apos;s eight appliances, then a share of one daily sweep that reads each new recall once (capped
+                  at 40 readings a day, under 10¢ for every watched list together). That is a gross margin above 95% from the first year; hosting is the main fixed cost.
                 </li>
                 <li>
                   <b>Channel:</b> property-management software marketplaces, then warranty claims systems.
+                </li>
+                <li>
+                  <b>Where we are:</b> a working product and a public error rate; no paying customer yet.
                 </li>
               </ul>
             </div>
@@ -68,7 +76,44 @@ export default function Business() {
           <p className={s.body}>
             Selling a recalled consumer product is unlawful in the U.S. (15 U.S.C. 2068). A seller photographs the label; Tagout tags the listing red only when the item&apos;s own
             code is printed in a recall. On {summary.cases} test cases it wrongly tagged nothing as do-not-use, so honest sellers aren&apos;t blocked. Buyers: resale marketplaces, kids&apos;
-            resale and thrift chains, pawn shops. Priced per listing checked.
+            resale and thrift chains, pawn shops. Priced per listing checked (10–25¢), against about 1.4¢ of cost on the lite tier, with the full agent only to confirm a red.
+          </p>
+        </section>
+
+        <section className={s.section} aria-labelledby="alt-h">
+          <h2 id="alt-h" className={s.h2}>
+            Already out there, and what Tagout adds
+          </h2>
+          <div className={s.tableWrap}>
+            <table className={s.table}>
+              <thead>
+                <tr>
+                  <th scope="col">Option</th>
+                  <th scope="col">What it does well</th>
+                  <th scope="col">What Tagout adds</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Recall-alert apps (e.g. RecallSentry)</th>
+                  <td>Free alerts from FDA, CPSC, NHTSA and USDA, matched on UPC, model, lot or VIN you enter</td>
+                  <td>A published error rate on 144 cases, 39 of them held out; the agency&apos;s own sentence beside every red tag</td>
+                </tr>
+                <tr>
+                  <th scope="row">Agency sites and email lists (recalls.gov, CPSC, SaferCar)</th>
+                  <td>The source of truth; per-VIN lookup for cars</td>
+                  <td>Reads the notice prose for codes (CPSC&apos;s model field is always empty) and finds recalls on the web before the databases list them</td>
+                </tr>
+                <tr>
+                  <th scope="row">Retailer and maker notices</th>
+                  <td>Reach buyers they know about</td>
+                  <td>Covers what a building owns, whoever sold it, with an open API and a feed per list</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className={s.note}>
+            The part that is hard to copy is the verified index of affected codes the sweep builds as it reads each recall, together with a public, held-out error rate.
           </p>
         </section>
 

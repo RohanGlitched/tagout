@@ -1,4 +1,5 @@
 import summary from "@/eval/summary.json";
+import current from "@/eval/summary-current.json";
 import s from "./ladder.module.css";
 
 /** From the weakest setup to Tagout, each answering the same cases. */
@@ -9,6 +10,12 @@ const RUNGS: { arm: string; name: string; note: string }[] = [
   { arm: "fixed-plan-nano", name: "Lite tier", note: "Fixed plan, Nemotron Nano reads the notices, rules decide." },
   { arm: "tagout", name: "Tagout", note: "Nemotron Ultra agent and readers, rules decide." },
 ];
+
+/** The same case at today's code, from eval/summary-current.json. */
+const now = (id: string) => {
+  const a = current.arms.find((x) => x.arm === id);
+  return a ? `${a.right}/${a.n}` : "";
+};
 
 /**
  * The eval as a ladder: one tick per case. Dark ticks are right; red ticks are recalled units the setup cleared,
@@ -62,6 +69,10 @@ export default function Ladder() {
           );
         })}
       </ol>
+      <p className={s.now}>
+        The Oct 15 run. At today&apos;s code the same cases give Tagout {now("tagout")}, the lite tier {now("fixed-plan-nano")} and rules alone {now("rules")}, and none of the
+        three clears a recalled unit.
+      </p>
       <p className={s.key}>
         <span>
           <i data-k="r" /> right
