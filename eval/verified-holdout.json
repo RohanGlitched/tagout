@@ -1,0 +1,475 @@
+{
+ "at": "2026-10-24T19:06:33.522Z",
+ "results": [
+  {
+   "id": "h01",
+   "set": "database",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "TL1302Z"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h02",
+   "set": "database",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "TL1302Z"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h03",
+   "set": "database",
+   "group": "near-miss",
+   "form": "clean",
+   "codes": [
+    "TL1306"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h04",
+   "set": "database",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "PAPA03001AI"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h05",
+   "set": "database",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "PAPA03001AI"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h06",
+   "set": "database",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "2595301"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h07",
+   "set": "database",
+   "group": "positive",
+   "form": "photo",
+   "codes": [
+    "2595301"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h08",
+   "set": "database",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-15"
+  },
+  {
+   "id": "h10",
+   "set": "database",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "LT25B01"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h11",
+   "set": "database",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "LT25B01"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h12",
+   "set": "database",
+   "group": "near-miss",
+   "form": "clean",
+   "codes": [
+    "LT25B03"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h15",
+   "set": "database",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "091026 DL"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h16",
+   "set": "database",
+   "group": "near-miss",
+   "form": "clean",
+   "codes": [
+    "091226 DL"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h18",
+   "set": "database",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "720106"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h19",
+   "set": "database",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "L6081A"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h20",
+   "set": "database",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [
+    "666186277621"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "h21",
+   "set": "database",
+   "group": "car",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [],
+   "recalls": 1,
+   "campaigns": [
+    "26V685000 19/10/2026"
+   ]
+  },
+  {
+   "id": "h22",
+   "set": "database",
+   "group": "car",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [],
+   "recalls": 1,
+   "campaigns": [
+    "26V693000 21/10/2026"
+   ]
+  },
+  {
+   "id": "h23",
+   "set": "database",
+   "group": "car",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [],
+   "recalls": 0,
+   "campaigns": []
+  },
+  {
+   "id": "h24",
+   "set": "database",
+   "group": "clean",
+   "form": "clean",
+   "codes": [
+    "HYF290B"
+   ],
+   "ok": true,
+   "notes": []
+  },
+  {
+   "id": "h25",
+   "set": "database",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "VQQQ-A1"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-22"
+  },
+  {
+   "id": "h26",
+   "set": "database",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "VQQQ001"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-22"
+  },
+  {
+   "id": "h27",
+   "set": "database",
+   "group": "near-miss",
+   "form": "clean",
+   "codes": [
+    "VQQQ-A2"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-22"
+  },
+  {
+   "id": "h28",
+   "set": "database",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-22"
+  },
+  {
+   "id": "h29",
+   "set": "database",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-22"
+  },
+  {
+   "id": "h30",
+   "set": "database",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-22"
+  },
+  {
+   "id": "h31",
+   "set": "database",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [
+    "AASP"
+   ],
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-22"
+  },
+  {
+   "id": "h32",
+   "set": "lag",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "000080112600",
+    "26-196"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Vitamin Cottage Natural Food Markets about mung since Oct 1"
+   ]
+  },
+  {
+   "id": "h33",
+   "set": "lag",
+   "group": "near-miss",
+   "form": "clean",
+   "codes": [
+    "000080112600",
+    "26-161"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Vitamin Cottage Natural Food Markets about mung since Oct 1"
+   ]
+  },
+  {
+   "id": "h34",
+   "set": "lag",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [
+    "2-70552-00649-2"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from WinCo Foods about hoagie since Oct 1"
+   ]
+  },
+  {
+   "id": "h35",
+   "set": "lag",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "085261"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Lidl about gelato since Oct 1"
+   ]
+  },
+  {
+   "id": "h36",
+   "set": "lag",
+   "group": "near-miss",
+   "form": "clean",
+   "codes": [
+    "085216"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Lidl about gelato since Oct 1"
+   ]
+  },
+  {
+   "id": "h37",
+   "set": "lag",
+   "group": "positive",
+   "form": "clean",
+   "codes": [
+    "D080-148"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Krasnyi Oktyabr about salmon since Oct 1"
+   ]
+  },
+  {
+   "id": "h38",
+   "set": "lag",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [
+    "7839"
+   ],
+   "ok": true,
+   "notes": [
+    "FSIS: Tagout has no FSIS database tool; web only"
+   ]
+  },
+  {
+   "id": "h39",
+   "set": "lag",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [
+    "FSIS: Tagout has no FSIS database tool; web only"
+   ]
+  },
+  {
+   "id": "h40",
+   "set": "lag",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "26-196"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Vitamin Cottage Natural Food Markets about mung since Oct 1"
+   ]
+  },
+  {
+   "id": "h41",
+   "set": "lag",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "085261"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Lidl about gelato since Oct 1"
+   ]
+  },
+  {
+   "id": "h42",
+   "set": "lag",
+   "group": "positive",
+   "form": "messy",
+   "codes": [
+    "D080148"
+   ],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Krasnyi Oktyabr about salmon since Oct 1"
+   ]
+  },
+  {
+   "id": "h43",
+   "set": "lag",
+   "group": "no-code",
+   "form": "clean",
+   "codes": [],
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Wedgewood since Oct 1"
+   ]
+  }
+ ]
+}
