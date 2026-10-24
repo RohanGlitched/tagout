@@ -22,7 +22,7 @@
 
 **On 105 real recall cases, Tagout tagged all 46 recalled units Do not use and wrongly told nobody to stop using something. NVIDIA Nemotron 3 Ultra on its own caught 5 of the 46, cleared 36, and told five people to stop using things no recall lists.**
 
-Tagout checks what a household owns against live U.S. recalls. List what you own, or photograph the label. An agent on **NVIDIA Nemotron** (served by **Nebius Token Factory**) searches NHTSA, CPSC and the FDA with tools, and **Tavily** searches the agencies' newsrooms and USDA for anything the databases don't have yet. Nemotron reads each notice's list of affected models and lots, every code is checked against the notice's own text, and plain rules hang the tag. Save the list as a watch and Tagout checks it again each time you open the link, with what's new.
+Tagout checks what a household owns against live U.S. recalls. List what you own, or photograph the label. An agent on **NVIDIA Nemotron** (served by **Nebius Token Factory**) searches NHTSA, CPSC and the FDA with tools, and **Tavily** searches the agencies' newsrooms and USDA for anything the databases don't have yet. Nemotron reads each notice's list of affected models and lots, every code is checked against the notice's own text, and plain rules hang the tag. Save the list as a watch and a daily sweep reads every new recall once and matches it against the list; the watch's Atom feed tells you when one covers something you own.
 
 ## Try it in one minute
 
@@ -30,7 +30,7 @@ Tagout checks what a household owns against live U.S. recalls. List what you own
 2. Tap **A space heater** and **A medicine**, then **Check my things**.
 3. Watch the agent search CPSC, the FDA and the web (about 25 seconds an item). Then the tags are hung: the Vornado heater (`TYPE SRTH`) and Tylenol lot `EJA022` are both **Do not use**, each with the recall's own line next to yours.
 4. Try a car (`2019 Honda CR-V`) or a car seat with no model number (`Evenflo car seat`): both are **Check the label**, and the tag says exactly what to look up.
-5. At the bottom of a finished check, **Watch these things** saves the list. [This watch](https://tagout-recalls.vercel.app/watch/5ehharz7sr) started from the Oct 8 showcase and was checked again on Oct 15.
+5. At the bottom of a finished check, **Watch these things** saves the list. [This watch](https://tagout-recalls.vercel.app/watch/5ehharz7sr) started from the Oct 8 showcase; the daily sweep checks it against every new recall, and [its feed](https://tagout-recalls.vercel.app/watch/5ehharz7sr/feed.xml) works in any feed reader.
 6. The [eval](https://tagout-recalls.vercel.app/proof) shows every case and every answer, including the ones that were wrong.
 7. [This check](https://tagout-recalls.vercel.app/check/vk9vuyk3zi) shows two recalls only the web search could find, each marked on its tag.
 
@@ -129,7 +129,31 @@ A full check costs about **2.6¢ an item**; the five-item showcase took 37 Token
 
 ## Watch mode
 
-**Watch these things**, under any finished check, saves the typed list (photos aren't kept) and gives it a link. Opening that link checks the list again if the newest check is more than a day old, then shows **what changed since the last check**: a tag that got worse or better, a recall published since then, a thing checked for the first time. Nothing runs in the background and nothing is emailed yet; there is no scheduler, so a watch moves only when someone opens it, at most once a day, under the same budget as any check. The browser remembers your watches on the home page.
+**Watch these things**, under any finished check, saves the typed list (photos aren't kept) and gives it a link. From then on Tagout does the looking:
+
+- **A daily sweep reads each new recall once** ([`lib/sweep/run.ts`](lib/sweep/run.ts)). It pulls the last 30 days of CPSC recalls (by recall date, plus records CPSC re-published since the last run), the CPSC newsroom feed (a week ahead of the database), openFDA's drug, food and device enforcement reports, NHTSA's recalls for each distinct watched vehicle and car-seat brand (NHTSA has no "published since" query), and USDA FSIS through one Tavily search.
+- **An inverted index matches them against every watch** ([`lib/sweep/index.ts`](lib/sweep/index.ts)): the brands and printed codes of every watched thing, from each watch's newest check. A recall goes on only if it names a watched brand for the same kind of product (a Vornado steamer recall doesn't touch a Vornado heater) or prints a watched code. The rest cost nothing.
+- **Nemotron reads each of those once.** Readings are cached in storage by source, recall number, a hash of the exact text read and the model, so the same wording is never read twice, by the sweep or by a check (a check reports the readings it reused). The deterministic matcher then hangs the tag, exactly as in a check.
+- **The recalls a watch already cites are compared with the agency's current record.** A changed record is re-read and re-matched; one missing from its agency on two sweeps running is reported as no longer listed.
+- **Each watch gets an event log and an Atom feed**: `/watch/<id>/feed.xml` (stable entry ids, each linking to the watch page) and `/api/watches/<id>/events` (JSON). Events: **new recall** (red or orange), **recall changed**, **recall no longer listed**, and **tag changed** after a "check again now".
+- **Opening a watch runs nothing.** "Check again now" queues a full check of the list at most once an hour (every six hours, on the lite tier, for the showcase watch), under the same budget as any check; what it changed goes into the same log.
+
+Cost grows with recalls, not households. Measured on Oct 25 against the production watches: 409 recalls in the 30-day window, 13 agency calls, 1 Tavily credit, 0 Token Factory calls (no new recall touched a watched brand), about 10 seconds. A recall that does touch a watch costs one Nemotron 3 Ultra reading, once (measured: 329 + 663 tokens, 0.23¢, for CPSC 27-040). Even if every one of the roughly 14 new recalls a day touched someone's list, that is about 3¢ a day for all households together; a watch itself adds two small storage reads a day. Every run writes its report, with its calls, tokens, cents and Tavily credits, to `sweep/runs/` in storage.
+
+**Scheduling.** [`vercel.json`](vercel.json) runs `GET /api/cron/sweep` once a day at 06:00 UTC (Vercel Hobby runs daily crons somewhere within that hour). Vercel sends `Authorization: Bearer $CRON_SECRET`; without `CRON_SECRET` set, the route refuses to run.
+
+The same sweep runs as a standalone job ([`scripts/sweep.mts`](scripts/sweep.mts), [`Dockerfile`](Dockerfile)), for example as a **Nebius AI Cloud Serverless Job**:
+
+```bash
+npx tsx --conditions=react-server scripts/sweep.mts --dry --no-model     # measure what would be read: no writes, no model
+npx tsx --conditions=react-server scripts/sweep.mts --prefix=sweep-test/ --gcloud --max-reads=1   # trial run in the real bucket, under sweep-test/
+docker build -t tagout-sweep .
+docker run --rm -e NEBIUS_API_KEY -e TAVILY_API_KEY -e GCS_BUCKET -e GCS_SA_KEY tagout-sweep
+```
+
+On Nebius: push the image to Nebius Container Registry (`docker tag tagout-sweep cr.<region>.nebius.cloud/<registry-id>/tagout-sweep:1`, then `docker push` it), create a Serverless Job from it on a CPU preset with the env vars above (the job needs a way into the bucket: `GCS_SA_KEY`, a service-account key, or `GCS_ACCESS_TOKEN`), and run it daily (`nebius ai job create --help` lists the flags for your CLI version). Or let the job only trigger the deployed route: `scripts/sweep.mts --remote` with `CRON_SECRET` needs no storage credentials. Run one scheduler, not both; a second run that starts while one is in progress stops at once.
+
+**When the model isn't there.** A tag is never green when no model answered for the thing (the rules tier, an empty balance, every call timing out): it is held at orange with "Model unavailable: not cleared". Model calls are retried only on 429, 5xx and timeouts (honouring Retry-After); 401, 402 and 403 end the chain at once. Each check has a 200-second deadline: after 150 s the remaining things run on the lite tier, and after 200 s no model call starts. A daily GitHub Actions canary ([`.github/workflows/token-canary.yml`](.github/workflows/token-canary.yml)) makes one 1-token Nemotron Nano call and fails on a 401, 402 or 403, so GitHub emails the owner.
 
 ## Who pays
 
@@ -137,7 +161,7 @@ Households use it free. The people who lose money when a recall doesn't reach an
 - **Home, renters and auto insurers, and home-warranty firms**: a recalled heater or dryer is a claim waiting to happen. They already hold the list of insured items.
 - **Property managers**: appliances in every unit, one watch per building.
 - **Baby-registry retailers and pediatric practices**: car seats, bassinets and formula are where recalls hit hardest, and they know what was bought.
-- **The recalling firms**: CPSC's own numbers say direct contact moves consumer response from 6% to 50%, and a watch is direct contact the owner set up.
+- **The recalling firms**: CPSC's own numbers say direct notice moves consumer response from 6% to 50%. A watch's feed is a direct channel the owner set up: a new recall that lists their code reaches them without their having to look.
 
 At 2.6¢ an item for a full check (0.29¢ on the lite tier), checking a 20-item household every month costs about $6 a year on the full tier, or 70¢ on the lite tier.
 
@@ -190,7 +214,7 @@ npm run dev                  # http://localhost:3000
 Checks and watches are stored as JSON under `.data/` locally. In production they live in a private Google Cloud Storage bucket, reached keylessly: the function's Vercel OIDC token is exchanged for a Google access token through a workload identity pool (`GCS_BUCKET`, `GCS_WIF_AUDIENCE`), so no key exists anywhere. A Vercel Blob store (`BLOB_READ_WRITE_TOKEN`) also works; it was the first store, until the Hobby account's shared monthly Blob allowance ran out on Oct 8. See [`lib/storage.ts`](lib/storage.ts).
 
 ```bash
-npm test           # matcher, watch and web-filter unit tests (25)
+npm test           # matcher, watch, sweep index and events, feed, never-green, redirect and web-filter unit tests
 npm run typecheck
 npx tsx --conditions=react-server scripts/try-check.ts "Vornado heater TYPE SRTH\n2019 Honda CR-V"   # one check in the terminal
 ```
@@ -207,6 +231,8 @@ npx tsx --conditions=react-server scripts/try-check.ts "Vornado heater TYPE SRTH
 | `lib/agent/run.ts` | One check as an event stream (NDJSON to the page); full or lite tier |
 | `lib/budget.ts` | Per-visitor and daily allowances for the full and lite tiers |
 | `lib/watch.ts`, `lib/watches.ts` | Watches and what changed between two checks (tested in `test/watch.test.ts`) |
+| `lib/sweep/` | The daily sweep: inverted index, events, run, store (tested in `test/sweep.test.ts`) |
+| `lib/feed.ts` | A watch's Atom feed |
 | `lib/sources/*` | NHTSA, CPSC, openFDA and Tavily clients, with the quirks measured on day one |
 | `eval/` | Cases, ground-truth check, cached harness, scorer, results ([/proof](https://tagout-recalls.vercel.app/proof)) |
 | `components/label`, `components/tag` | Product labels (rating plate, door-jamb sticker, car seat label, carton) and the lockout tags |
