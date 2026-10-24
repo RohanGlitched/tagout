@@ -1,0 +1,793 @@
+{
+ "arm": "tagout",
+ "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "useAgent": true,
+  "useModel": true,
+  "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+  "cases": "cases.json",
+  "today": "2026-10-15",
+  "noWeb": false,
+  "offline": false,
+  "keyless": true,
+  "code": {
+   "commit": "a1d8b21",
+   "libChanged": false
+  }
+ },
+ "at": "2026-10-24T19:29:25.666Z",
+ "cases": [
+  {
+   "id": "p02",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-009",
+   "headline": "UT3053 is listed in this recall.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 6502,
+     "completion": 1862
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Gobi Heat",
+     "product": "rechargeable hand warmer",
+     "model": "UT3053",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”, product “hand warmer”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “UT3053”",
+     "found": 2,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gobi Heat hand warmer recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 6502,
+    "completion": 1862
+   },
+   "usd": 0.01209,
+   "ms": 1941,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0
+  },
+  {
+   "id": "p04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-021",
+   "headline": "ST-332-US is listed in this recall.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 8341,
+     "completion": 2830
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Snow Peak",
+     "product": "propane fireplace insert",
+     "model": "ST-332-US",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Snow Peak”, product “propane fireplace insert”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Snow Peak”, text “ST-332-US”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Snow Peak propane fireplace insert recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 8341,
+    "completion": 2830
+   },
+   "usd": 0.01683,
+   "ms": 2431,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1
+  },
+  {
+   "id": "p05",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-018",
+   "headline": "MY002 is listed in this recall.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5851,
+     "completion": 1536
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "ONTHEWEI",
+     "product": "baby bath seat",
+     "model": "MY002",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “ONTHEWEI”, product “baby bath seat”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “ONTHEWEI baby bath seat recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 5851,
+    "completion": 1536
+   },
+   "usd": 0.01046,
+   "ms": 1850,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0
+  },
+  {
+   "id": "p23",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-524",
+   "headline": "WYZESCPWH is listed in this recall.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5240,
+     "completion": 1248
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Wyze",
+     "product": "Solar Cam Pan security camera",
+     "model": "WYZESCPWH",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”, product “security camera”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wyze”, text “WYZESCPWH”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Wyze Solar Cam Pan recall”",
+     "found": 1,
+     "fresh": 1
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 5240,
+    "completion": 1248
+   },
+   "usd": 0.00898,
+   "ms": 949,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0
+  },
+  {
+   "id": "p24",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-444",
+   "headline": "SK3000 is listed in this recall.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 12200,
+     "completion": 2265
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Thermos",
+     "product": "Stainless King food jar",
+     "model": "SK3000",
+     "made": "2022-05",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food jar”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “stainless steel”",
+     "found": 24,
+     "fresh": 23
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “SK3000”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Thermos Stainless King food jar recall”",
+     "found": 5,
+     "fresh": 3
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 12200,
+    "completion": 2265
+   },
+   "usd": 0.01899,
+   "ms": 3834,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0
+  },
+  {
+   "id": "n02",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 8,
+     "prompt": 22223,
+     "completion": 1651
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Gobi Heat",
+     "product": "rechargeable hand warmer",
+     "model": "UT3054",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”, product “hand warmer”, text “UT3054”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Gobi Heat Recalls Rechargeable Hand Warmers Due to Risk of Serious I…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gobi Heat rechargeable hand warmer recall UT3054”",
+     "found": 4,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”, product “hand warmer”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 8,
+   "liveCalls": 3,
+   "tokens": {
+    "prompt": 22223,
+    "completion": 1651
+   },
+   "usd": 0.02718,
+   "ms": 4967,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1
+  },
+  {
+   "id": "n12",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB CPSC newsroom",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 8381,
+     "completion": 2748
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Thermos",
+     "product": "Stainless King food jar",
+     "model": "SK3000",
+     "made": "2024-02",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food jar”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “stainless steel”",
+     "found": 24,
+     "fresh": 23
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “SK3000”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Thermos Stainless King food jar recall”",
+     "found": 5,
+     "fresh": 3
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 8381,
+    "completion": 2748
+   },
+   "usd": 0.01662,
+   "ms": 5019,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1
+  },
+  {
+   "id": "c01",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 27-009",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 10993,
+     "completion": 1390
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Gobi Heat",
+     "product": "rechargeable hand warmer",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gobi Heat”, product “hand warmer”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gobi Heat hand warmer recall”",
+     "found": 5,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Gobi Heat Recalls Rechargeable Hand Warmers Due to Risk of Serious I…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 2,
+   "tokens": {
+    "prompt": 10993,
+    "completion": 1390
+   },
+   "usd": 0.01516,
+   "ms": 3851,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1
+  },
+  {
+   "id": "c10",
+   "group": "no-code",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "CPSC 26-444",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 7670,
+     "completion": 1666
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Thermos",
+     "product": "Stainless King food jar",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food jar”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “food container”",
+     "found": 12,
+     "fresh": 11
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Thermos”, product “stainless”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Thermos Stainless King food jar recall”",
+     "found": 5,
+     "fresh": 3
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 7670,
+    "completion": 1666
+   },
+   "usd": 0.01267,
+   "ms": 2122,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0
+  },
+  {
+   "id": "k04",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for Shark model NV352.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 34211,
+     "completion": 2290
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Shark",
+     "product": "Navigator upright vacuum",
+     "model": "NV352",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, product “upright vacuum”",
+     "found": 9,
+     "fresh": 9
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, product “Navigator”",
+     "found": 5,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, text “NV352”",
+     "found": 5,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark Navigator upright vacuum recall”",
+     "found": 6,
+     "fresh": 3
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Shark Vacuum Cleaners Recalled by Euro-Pro Due to Shock Hazard”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark”, product “vacuum”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark Navigator NV352 recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Shark Navigator”, product “vacuum”",
+     "found": 12,
+     "fresh": 11
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark Navigator NV352 recall CPSC”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Shark Navigator\" NV352 recall”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Shark NV352 recall CPSC”",
+     "found": 5,
+     "fresh": 5
+    }
+   ],
+   "calls": 6,
+   "liveCalls": 1,
+   "tokens": {
+    "prompt": 34211,
+    "completion": 2290
+   },
+   "usd": 0.04108,
+   "ms": 3823,
+   "msFresh": false,
+   "tavily": 6,
+   "tavilySearch": 5,
+   "tavilyExtract": 1
+  },
+  {
+   "id": "k09",
+   "group": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for Dyson model SV25.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 36485,
+     "completion": 1045
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Dyson",
+     "product": "V8 cordless vacuum",
+     "model": "SV25",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “vacuum”, text “SV25”",
+     "found": 13,
+     "fresh": 13
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “vacuum”",
+     "found": 13,
+     "fresh": 3
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson V8 cordless vacuum recall SV25”",
+     "found": 5,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson cordless vacuum recall”",
+     "found": 4,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, text “SV25”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson V8 SV25 recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “\"Dyson V8\" cordless vacuum”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "liveCalls": 3,
+   "tokens": {
+    "prompt": 36485,
+    "completion": 1045
+   },
+   "usd": 0.03962,
+   "ms": 8319,
+   "msFresh": false,
+   "tavily": 4,
+   "tavilySearch": 4,
+   "tavilyExtract": 0
+  }
+ ]
+}
