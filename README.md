@@ -71,7 +71,7 @@ The 105 cases shaped the fixes above, so on Oct 25 we wrote 39 new cases from re
 - **Tavily, measured.** With Tavily off, Tagout cleared all 10 recalled units that no database listed yet; with it, it flagged 8. On the 27 database cases Tavily changed nothing.
 - **The misses.** Four recalled units were cleared: a two-part lot code (`091026 DL`), a whole-line air-rifle recall dropped before the tag, and two USDA FSIS lines. Each was traced and fixed afterwards (commits `9677671`..`a9a0f8f`, tests in `test/holdout-fixes.test.ts`). Re-run after the fixes, Tagout gets **37/39 with none cleared and none wrongly red**, and 105/105 on the tuned set; that re-run is no longer held out, so the table above stays the headline (`eval/holdout-after-fixes.json`).
 
-Reproduce it (every HTTP response is cached, so a re-run reads the same data and costs nothing):
+Reproduce it. Every HTTP response is cached: unpack `eval-cache.tgz` (scrubbed, 5.2 MB, unpacks as `eval/.cache/` in the repo root), and `npm run eval:replay` reads the same data and costs nothing. Without the archive:
 
 ```bash
 node eval/verify.mjs                                          # ground truth against the agencies
@@ -125,7 +125,7 @@ All model calls go to **Nebius Token Factory**'s OpenAI-compatible API (`https:/
 | Read the household's list | `nvidia/Nemotron-3-Ultra-550b-a55b` | Strict `json_schema`; every code verified against the input | Super filed 11 of 105 eye drops and foods as products (the wrong database); Nano dropped a car's year |
 | Search agent | `nvidia/Nemotron-3-Ultra-550b-a55b` | OpenAI-style `tools`, parallel tool calls, up to 6 rounds, forced `finish` on the last | On 18 cases, Super was right on 17 at half the cost and Nano on 15: too few to move the agent |
 | Read each recall notice | `nvidia/Nemotron-3-Ultra-550b-a55b` | Strict `json_schema`; codes verified against the notice text | Super: 1 unit wrongly red; Nano: 2 |
-| Lite tier notice reader | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | With the fixed search plan, once the day's Ultra budget is spent | 98 of 105 right, none cleared, 0.29¢ an item |
+| Lite tier notice reader | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`, reasoning off (`enable_thinking: false`), retried with reasoning on if a reply is cut off | With the fixed search plan, once the day's Ultra budget is spent | 101 of 105 at current code (98 on Oct 15) right, none cleared, 0.29¢ an item |
 | Fallback for every role | `nvidia/nemotron-3-super-120b-a12b` | Same calls; used when the first model errors or times out | |
 | Read label photos | `nvidia/Nemotron-3.5-Super-VL`, then `Qwen/Qwen3.8-27B`, then `google/gemma-3-27b-it` | Vision chat with `json_schema` | All three read 7 of 7 codes on the sample labels |
 
@@ -178,7 +178,7 @@ Households use it free.
 - **Second: resale.** Selling a recalled consumer product is unlawful in the U.S. (15 U.S.C. 2068). A seller photographs the label; Tagout red-tags a listing only when the item's own code is in a recall, so honest sellers aren't blocked.
 - **Later:** baby registries, insurers' loss-prevention programs, recalling firms (CPSC's own numbers: direct notice moves consumer response from 6% to 50%).
 
-All-in costs (Nemotron plus Tavily): about 4.8¢ an item for a full check, 1.7¢ on the lite tier. Details and the API: [/business](https://tagout-recalls.vercel.app/business).
+All-in costs (Nemotron plus Tavily): about 4.6¢ an item for a full check and 1.4¢ on the lite tier on the 105 cases; 4.9¢ and 1.7¢ on the held-out set. Details and the API: [/business](https://tagout-recalls.vercel.app/business).
 
 ## Data sources
 

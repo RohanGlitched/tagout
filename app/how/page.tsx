@@ -135,7 +135,7 @@ export default function How() {
             <li>Tagout covers U.S. recalls. A product sold only elsewhere may be recalled there without a U.S. notice.</li>
             <li>Green means nothing was found on that day, not that a product is safe. Register products with their makers so they can reach you.</li>
             <li>
-              When the demo&apos;s daily Nemotron 3 Ultra budget is spent, checks run a fixed search plan with Nemotron 3 Nano reading the notices (98 of 105 right in the eval, against
+              When the demo&apos;s daily Nemotron 3 Ultra budget is spent, checks run a fixed search plan with Nemotron 3 Nano reading the notices (101 of 105 right in the eval at current code, 98 on Oct 15, and 35 of 39 on the held-out cases after the fixes, against
               104 for the full agent). Past that budget too, or if Token Factory is down, the fixed plan runs with no model. Each check says which way it ran.
             </li>
             <li>A watched list is compared with every new recall once a day, by a sweep that reads each recall once and matches it by rules. Alerts go to the watch page and its feed; there is no email or phone notification yet.</li>

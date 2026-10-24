@@ -469,7 +469,7 @@ export default function Proof() {
               We chose the cases. Recalled units come from recent notices that print a code, which is the case Tagout is built for; a product whose notice prints no code can only ever
               be orange.
             </li>
-            <li>Cost is tokens times Token Factory&apos;s list prices ($1/$3 per million for Ultra, $0.30/$0.90 for Super, $0.06/$0.24 for Nano). Tavily credits are counted separately ($0.008 each at pay-as-you-go rates; see the business page for the all-in cost). Agency APIs are free.</li>
+            <li>Cost is tokens times Token Factory&apos;s list prices ($1/$3 per million for Ultra, $0.30/$0.90 for Super and for Super VL, $0.45/$3 for Qwen3.8 27B, $0.10/$0.30 for Gemma 3 27B, $0.06/$0.24 for Nano). Tavily credits are counted separately ($0.008 each at pay-as-you-go rates; see the business page for the all-in cost). Agency APIs are free.</li>
           </ul>
           <p className={s.more}>
             Reproduce it: <span className="code">node eval/verify.mjs</span>, then <span className="code">npx tsx --conditions=react-server eval/run.ts tagout</span> for each arm, then{" "}

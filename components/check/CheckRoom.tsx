@@ -267,8 +267,8 @@ function Engine({ rec }: { rec: Pub }) {
   const e = rec.engine;
   if (!e) return null;
   const tk = e.tokens;
-  // Tavily credits: one per search, one per page extracted (as Tavily bills them).
-  const web = (rec.log ?? []).filter((x) => x.t === "step" && (x.step.tool === "search_web" || x.step.tool === "read_page")).length;
+  // Tavily credits as billed (an extract is 1 per 5 URLs read); older checks count one per search or page read.
+  const web = e.tavily?.credits ?? (rec.log ?? []).filter((x) => x.t === "step" && (x.step.tool === "search_web" || x.step.tool === "read_page")).length;
   // Tokens priced like Ultra when an older check carries no cost of its own.
   const usd = tk ? (tk.usd ?? (tk.prompt * 1 + tk.completion * 3) / 1e6) : 0;
   const roles: [string, string | undefined][] =
@@ -320,7 +320,7 @@ function Engine({ rec }: { rec: Pub }) {
             ; <b>{plural(web, "Tavily credit")}</b> (about {(web * 0.8).toFixed(0)}¢)
           </>
         ) : null}
-        .{e.mode === "lite" ? " Today's full-agent budget was spent, so this ran on the lite tier: 98 of 105 right in the eval, none cleared." : ""}
+        .{e.mode === "lite" ? " Today's full-agent budget was spent, so this ran on the lite tier: 101 of 105 right in the eval, none cleared." : ""}
       </p>
       {extras.length ? <p className={s.cost}>{extras.join("; ")}.</p> : null}
     </section>
