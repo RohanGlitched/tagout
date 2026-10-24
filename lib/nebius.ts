@@ -20,7 +20,8 @@ export const MODELS = {
   /** Reads what people typed into items. Its own chain so it can be routed separately; by default it follows the reader. */
   intake: list(process.env.NEBIUS_INTAKE_MODELS ?? process.env.NEBIUS_READER_MODELS, ["nvidia/Nemotron-3-Ultra-550b-a55b", "nvidia/nemotron-3-super-120b-a12b"]),
   /** The notice reader for the lite tier (after the day's Ultra budget): the fixed search plan with Nano reading
-   *  the notices measured 98 of 105 right, no recalled unit cleared, at about 0.3 cents an item. */
+   *  the notices measured 101 of 105 right at ed2dc77 (98 on Oct 15), no recalled unit cleared, at about 0.2 cents an
+   *  item; 30 of 39 on the held-out set as run once. Nano reads with reasoning off (NO_THINKING). */
   lite: list(process.env.NEBIUS_LITE_READER_MODELS, ["nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", "nvidia/nemotron-3-super-120b-a12b"]),
   /** Reads label photos. Nemotron 3.5 Super VL joined Token Factory on Oct 12 2026, after the photo step was built
    *  on Qwen; on Oct 25 it read every code on the sample labels exactly (scripts/vision-eval.ts, eval/HOLDOUT.md),

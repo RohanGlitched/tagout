@@ -8,7 +8,8 @@ import { storage } from "./storage";
  *   (104 of 105 cases right). Per visitor: 12 checks per 10 minutes and IP_DAILY_MODEL_CAP a day (default 40;
  *   production sets 15). In all: DAILY_MODEL_CAP checks a day (default 400; production sets 60).
  * - lite: once either full cap is spent, the fixed search plan runs with Nemotron 3 Nano reading the notices
- *   (Ultra still reads the list). About 0.3 cents an item, 98 of 105 right and no recalled unit cleared.
+ *   (Ultra still reads the list). About 0.2 cents an item, 101 of 105 right at ed2dc77 (98 on Oct 15) and no
+ *   recalled unit cleared.
  *   IP_DAILY_LITE_CAP (default 30) per visitor and DAILY_LITE_CAP (default 120) in all.
  * - rules: past both, the fixed plan and the matcher run with no model at all, and the page says so.
  * Daily counts live in memory and are flushed to storage every 10 checks (every check once 80% is spent), so the
