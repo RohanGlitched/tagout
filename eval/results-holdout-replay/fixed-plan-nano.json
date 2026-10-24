@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a1d8b21",
+   "commit": "ed2dc77",
    "libChanged": false
   }
  },
- "at": "2026-10-24T19:32:11.119Z",
+ "at": "2026-10-24T21:14:19.332Z",
  "cases": [
   {
    "id": "h01",
@@ -44,7 +44,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 1573,
-     "completion": 4951
+     "completion": 1005,
+     "usd": 0.0024191000000000004
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -80,14 +87,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1573,
-    "completion": 4951
+    "completion": 1005
    },
-   "usd": 0.00337,
-   "ms": 80,
+   "usd": 0.00242,
+   "ms": 70,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -108,7 +117,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 1571,
-     "completion": 4868
+     "completion": 922,
+     "usd": 0.0021681000000000005
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -144,14 +160,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1571,
-    "completion": 4868
+    "completion": 922
    },
-   "usd": 0.00312,
-   "ms": 77,
+   "usd": 0.00217,
+   "ms": 66,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -161,9 +179,8 @@
    "set": "database",
    "form": "clean",
    "expect": "not-danger",
-   "level": "warning",
-   "notice": "CPSC 23-064",
-   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "level": "inspected",
+   "headline": "Recalls exist for this brand, but none lists your model number.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -172,7 +189,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 1572,
-     "completion": 4838
+     "completion": 892,
+     "usd": 0.0020791000000000004
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -208,14 +232,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1572,
-    "completion": 4838
+    "completion": 892
    },
-   "usd": 0.00303,
-   "ms": 77,
+   "usd": 0.00208,
+   "ms": 65,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -236,7 +262,14 @@
     "tokens": {
      "calls": 4,
      "prompt": 2308,
-     "completion": 3343
+     "completion": 1076,
+     "usd": 0.0028916000000000002
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -272,14 +305,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 2308,
-    "completion": 3343
+    "completion": 1076
    },
-   "usd": 0.00344,
-   "ms": 78,
+   "usd": 0.00289,
+   "ms": 66,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -300,7 +335,14 @@
     "tokens": {
      "calls": 3,
      "prompt": 1931,
-     "completion": 1928
+     "completion": 673,
+     "usd": 0.00191472
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -336,14 +378,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1931,
-    "completion": 1928
+    "completion": 673
    },
-   "usd": 0.00222,
-   "ms": 56,
+   "usd": 0.00191,
+   "ms": 51,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -362,9 +406,16 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3011,
-     "completion": 8587
+     "calls": 11,
+     "prompt": 5539,
+     "completion": 1622,
+     "usd": 0.0029046800000000006
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -396,18 +447,20 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 11,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3011,
-    "completion": 8587
+    "prompt": 5539,
+    "completion": 1622
    },
-   "usd": 0.00442,
-   "ms": 56,
+   "usd": 0.0029,
+   "ms": 61,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -417,16 +470,24 @@
    "set": "database",
    "form": "photo",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Retail price tag for black one-size garment (from a photo).",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "vision": "Qwen3.8 27B",
+    "vision": "Nemotron 3.5 Super VL",
+    "modelUnavailable": 1,
     "tokens": {
-     "calls": 2,
-     "prompt": 738,
-     "completion": 3796
+     "calls": 1,
+     "prompt": 453,
+     "completion": 164,
+     "usd": 0.0002835
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -434,42 +495,46 @@
      "kind": "product",
      "upc": "5397356164483",
      "codes": [
+      "01-04-04",
       "212046247",
       "991174725",
+      "BLACK",
+      "ONE SIZE",
       "83710",
       "2595301",
       "3210"
      ],
-     "made": "01-04-04",
      "readFrom": "photo"
     }
    ],
    "steps": [
     {
      "tool": "search_cpsc",
-     "label": "CPSC recalls, product “Retail price tag for black one-size garment (from a photo)”",
+     "label": "CPSC recalls, product “product price tag (from a photo)”",
      "found": 0,
      "fresh": 0
     },
     {
      "tool": "search_web",
-     "label": "Tavily web search “Retail price tag for black one-size garment (from a photo) recall”",
-     "found": 4,
-     "fresh": 4
+     "label": "Tavily web search “product price tag (from a photo) recall”",
+     "found": 5,
+     "fresh": 5
     }
    ],
-   "calls": 2,
+   "calls": 1,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 738,
-    "completion": 3796
+    "prompt": 453,
+    "completion": 164
    },
-   "usd": 0.00656,
-   "ms": 41,
+   "usd": 0.00028,
+   "ms": 28,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -479,16 +544,25 @@
    "set": "database",
    "form": "clean",
    "expect": "flag",
-   "level": "inspected",
-   "headline": "No recall found for Hatsan Blitz air rifle.",
+   "level": "warning",
+   "notice": "CPSC 27-025",
+   "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 1,
-     "prompt": 301,
-     "completion": 366
+     "calls": 3,
+     "prompt": 1205,
+     "completion": 597,
+     "usd": 0.00150868
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -513,18 +587,20 @@
      "fresh": 5
     }
    ],
-   "calls": 1,
+   "calls": 3,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 301,
-    "completion": 366
+    "prompt": 1205,
+    "completion": 597
    },
-   "usd": 0.0014,
-   "ms": 36,
+   "usd": 0.00151,
+   "ms": 46,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -545,7 +621,14 @@
     "tokens": {
      "calls": 4,
      "prompt": 3559,
-     "completion": 4671
+     "completion": 876,
+     "usd": 0.0017097199999999999
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -575,14 +658,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 3559,
-    "completion": 4671
+    "completion": 876
    },
-   "usd": 0.00262,
-   "ms": 58,
+   "usd": 0.00171,
+   "ms": 49,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -603,7 +688,14 @@
     "tokens": {
      "calls": 4,
      "prompt": 3563,
-     "completion": 4887
+     "completion": 1092,
+     "usd": 0.0023617200000000003
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -634,14 +726,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 3563,
-    "completion": 4887
+    "completion": 1092
    },
-   "usd": 0.00327,
-   "ms": 57,
+   "usd": 0.00236,
+   "ms": 47,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -662,7 +756,14 @@
     "tokens": {
      "calls": 4,
      "prompt": 3559,
-     "completion": 4797
+     "completion": 1002,
+     "usd": 0.00208772
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -692,14 +793,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 3559,
-    "completion": 4797
+    "completion": 1002
    },
-   "usd": 0.003,
-   "ms": 51,
+   "usd": 0.00209,
+   "ms": 46,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -709,17 +812,27 @@
    "set": "database",
    "form": "clean",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "level": "danger",
+   "notice": "FDA H-0009-2027",
+   "headline": "Lot 091026 DL is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 2567,
-     "completion": 8606
+     "calls": 12,
+     "prompt": 3351,
+     "completion": 8017,
+     "usd": 0.0033568799999999996,
+     "truncated": 3,
+     "retried": 3
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -745,18 +858,20 @@
      "fresh": 0
     }
    ],
-   "calls": 9,
+   "calls": 12,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2567,
-    "completion": 8606
+    "prompt": 3351,
+    "completion": 8017
    },
-   "usd": 0.00345,
+   "usd": 0.00336,
    "ms": 50,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 3,
    "cacheMisses": 0,
    "missed": []
   },
@@ -774,9 +889,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 2567,
-     "completion": 8600
+     "calls": 12,
+     "prompt": 3351,
+     "completion": 8011,
+     "usd": 0.00333888,
+     "truncated": 3,
+     "retried": 3
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -802,18 +926,20 @@
      "fresh": 0
     }
    ],
-   "calls": 9,
+   "calls": 12,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2567,
-    "completion": 8600
+    "prompt": 3351,
+    "completion": 8011
    },
-   "usd": 0.00343,
-   "ms": 50,
+   "usd": 0.00334,
+   "ms": 41,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 3,
    "cacheMisses": 0,
    "missed": []
   },
@@ -834,7 +960,14 @@
     "tokens": {
      "calls": 4,
      "prompt": 2238,
-     "completion": 3250
+     "completion": 790,
+     "usd": 0.0017516399999999998
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -864,14 +997,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 2238,
-    "completion": 3250
+    "completion": 790
    },
-   "usd": 0.00234,
-   "ms": 53,
+   "usd": 0.00175,
+   "ms": 37,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -883,16 +1018,25 @@
    "expect": "danger",
    "level": "danger",
    "notice": "FDA H-0014-2027",
-   "headline": "Lot L6081A is printed in this recall.",
+   "headline": "Lot L6081A is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 6,
-     "prompt": 2328,
-     "completion": 6682
+     "calls": 7,
+     "prompt": 2564,
+     "completion": 3317,
+     "usd": 0.0024566600000000003,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -918,18 +1062,20 @@
      "fresh": 3
     }
    ],
-   "calls": 6,
+   "calls": 7,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2328,
-    "completion": 6682
+    "prompt": 2564,
+    "completion": 3317
    },
-   "usd": 0.00325,
-   "ms": 52,
+   "usd": 0.00246,
+   "ms": 43,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -950,7 +1096,14 @@
     "tokens": {
      "calls": 8,
      "prompt": 3333,
-     "completion": 9962
+     "completion": 973,
+     "usd": 0.0017324799999999998
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 3,
+     "credits": 2
     }
    },
    "items": [
@@ -980,14 +1133,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 3333,
-    "completion": 9962
+    "completion": 973
    },
-   "usd": 0.00389,
-   "ms": 63,
+   "usd": 0.00173,
+   "ms": 38,
    "msFresh": false,
-   "tavily": 4,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 3,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1008,7 +1163,14 @@
     "tokens": {
      "calls": 7,
      "prompt": 4243,
-     "completion": 7038
+     "completion": 822,
+     "usd": 0.0014865199999999999
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1037,14 +1199,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 4243,
-    "completion": 7038
+    "completion": 822
    },
-   "usd": 0.00298,
-   "ms": 37,
+   "usd": 0.00149,
+   "ms": 40,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1063,9 +1227,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 7,
-     "prompt": 4681,
-     "completion": 4218
+     "calls": 8,
+     "prompt": 5313,
+     "completion": 2966,
+     "usd": 0.0021673400000000002,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 5,
+     "credits": 2
     }
    },
    "items": [
@@ -1090,18 +1263,20 @@
      "fresh": 6
     }
    ],
-   "calls": 7,
+   "calls": 8,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 4681,
-    "completion": 4218
+    "prompt": 5313,
+    "completion": 2966
    },
-   "usd": 0.00243,
-   "ms": 35,
+   "usd": 0.00217,
+   "ms": 38,
    "msFresh": false,
-   "tavily": 6,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 5,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1119,9 +1294,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 5,
-     "prompt": 6429,
-     "completion": 4592
+     "calls": 6,
+     "prompt": 9220,
+     "completion": 2405,
+     "usd": 0.0023141000000000004,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 2,
+     "credits": 2
     }
    },
    "items": [
@@ -1146,18 +1330,20 @@
      "fresh": 4
     }
    ],
-   "calls": 5,
+   "calls": 6,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 6429,
-    "completion": 4592
+    "prompt": 9220,
+    "completion": 2405
    },
-   "usd": 0.00267,
-   "ms": 42,
+   "usd": 0.00231,
+   "ms": 43,
    "msFresh": false,
-   "tavily": 3,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 2,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1167,9 +1353,8 @@
    "set": "database",
    "form": "clean",
    "expect": "inspected",
-   "level": "warning",
-   "notice": "CPSC 18-146",
-   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "level": "inspected",
+   "headline": "Recalls exist for this brand, but none lists your model number.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1178,7 +1363,14 @@
     "tokens": {
      "calls": 9,
      "prompt": 3883,
-     "completion": 10643
+     "completion": 1615,
+     "usd": 0.00204446
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1214,14 +1406,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 3883,
-    "completion": 10643
+    "completion": 1615
    },
-   "usd": 0.00421,
-   "ms": 39,
+   "usd": 0.00204,
+   "ms": 38,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1242,7 +1436,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 622,
-     "completion": 1538
+     "completion": 580,
+     "usd": 0.00180558
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1278,14 +1479,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 622,
-    "completion": 1538
+    "completion": 580
    },
-   "usd": 0.00204,
-   "ms": 34,
+   "usd": 0.00181,
+   "ms": 30,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1306,7 +1509,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 619,
-     "completion": 1456
+     "completion": 498,
+     "usd": 0.0015565800000000001
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1342,14 +1552,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 619,
-    "completion": 1456
+    "completion": 498
    },
-   "usd": 0.00179,
-   "ms": 38,
+   "usd": 0.00156,
+   "ms": 32,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1369,7 +1581,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 622,
-     "completion": 1474
+     "completion": 516,
+     "usd": 0.00161358
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1405,14 +1624,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 622,
-    "completion": 1474
+    "completion": 516
    },
-   "usd": 0.00184,
-   "ms": 39,
+   "usd": 0.00161,
+   "ms": 27,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1433,7 +1654,14 @@
     "tokens": {
      "calls": 6,
      "prompt": 2555,
-     "completion": 4873
+     "completion": 1087,
+     "usd": 0.0021461200000000005
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1462,14 +1690,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 2555,
-    "completion": 4873
+    "completion": 1087
    },
-   "usd": 0.00305,
-   "ms": 37,
+   "usd": 0.00215,
+   "ms": 26,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1490,7 +1720,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 648,
-     "completion": 726
+     "completion": 334,
+     "usd": 0.00109292
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1519,14 +1756,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 648,
-    "completion": 726
+    "completion": 334
    },
-   "usd": 0.00119,
-   "ms": 35,
+   "usd": 0.00109,
+   "ms": 25,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1547,7 +1786,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 641,
-     "completion": 1098
+     "completion": 334,
+     "usd": 0.00110166
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1576,14 +1822,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 641,
-    "completion": 1098
+    "completion": 334
    },
-   "usd": 0.00129,
-   "ms": 31,
+   "usd": 0.0011,
+   "ms": 26,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1604,7 +1852,14 @@
     "tokens": {
      "calls": 9,
      "prompt": 3114,
-     "completion": 7479
+     "completion": 1233,
+     "usd": 0.0017741599999999999
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1633,14 +1888,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 3114,
-    "completion": 7479
+    "completion": 1233
    },
-   "usd": 0.00327,
-   "ms": 59,
+   "usd": 0.00177,
+   "ms": 40,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1650,17 +1907,25 @@
    "set": "lag",
    "form": "clean",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Lot 26-196 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 2772,
-     "completion": 10947
+     "calls": 10,
+     "prompt": 3590,
+     "completion": 2243,
+     "usd": 0.0036178599999999997
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1687,18 +1952,20 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2772,
-    "completion": 10947
+    "prompt": 3590,
+    "completion": 2243
    },
-   "usd": 0.00566,
-   "ms": 57,
+   "usd": 0.00362,
+   "ms": 42,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1708,17 +1975,25 @@
    "set": "lag",
    "form": "clean",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 2772,
-     "completion": 11043
+     "calls": 10,
+     "prompt": 3590,
+     "completion": 2339,
+     "usd": 0.0039058599999999997
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1745,18 +2020,20 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2772,
-    "completion": 11043
+    "prompt": 3590,
+    "completion": 2339
    },
-   "usd": 0.00595,
-   "ms": 58,
+   "usd": 0.00391,
+   "ms": 44,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1766,9 +2043,9 @@
    "set": "lag",
    "form": "clean",
    "expect": "flag",
-   "level": "warning",
-   "notice": "FDA H-0008-2027",
-   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "UPC 2-70552-00649-2 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1777,7 +2054,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 2206,
-     "completion": 6145
+     "completion": 1165,
+     "usd": 0.00190332
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1807,14 +2091,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 2206,
-    "completion": 6145
+    "completion": 1165
    },
-   "usd": 0.0031,
-   "ms": 63,
+   "usd": 0.0019,
+   "ms": 36,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1826,7 +2112,7 @@
    "expect": "danger",
    "level": "danger",
    "notice": "WEB FDA website",
-   "headline": "Lot 085261 is printed in this recall.",
+   "headline": "Lot 085261 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1835,7 +2121,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1282,
-     "completion": 1767
+     "completion": 448,
+     "usd": 0.0013830000000000001
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1865,14 +2158,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1282,
-    "completion": 1767
+    "completion": 448
    },
-   "usd": 0.0017,
-   "ms": 34,
+   "usd": 0.00138,
+   "ms": 18,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1882,9 +2177,8 @@
    "set": "lag",
    "form": "clean",
    "expect": "not-danger",
-   "level": "warning",
-   "notice": "WEB FDA website",
-   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1893,7 +2187,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1282,
-     "completion": 1770
+     "completion": 451,
+     "usd": 0.001392
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1923,14 +2224,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1282,
-    "completion": 1770
+    "completion": 451
    },
-   "usd": 0.00171,
-   "ms": 34,
+   "usd": 0.00139,
+   "ms": 20,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1947,10 +2250,18 @@
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
      "calls": 2,
      "prompt": 1280,
-     "completion": 1915
+     "completion": 500,
+     "usd": 0.0016382999999999999
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1980,14 +2291,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1280,
-    "completion": 1915
+    "completion": 500
    },
-   "usd": 0.00198,
-   "ms": 28,
+   "usd": 0.00164,
+   "ms": 17,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2004,10 +2317,18 @@
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
      "calls": 2,
      "prompt": 1486,
-     "completion": 1927
+     "completion": 1022,
+     "usd": 0.00180342
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -2039,14 +2360,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1486,
-    "completion": 1927
+    "completion": 1022
    },
-   "usd": 0.00202,
-   "ms": 22,
+   "usd": 0.0018,
+   "ms": 14,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2066,8 +2389,15 @@
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
      "calls": 5,
-     "prompt": 6884,
-     "completion": 4897
+     "prompt": 5018,
+     "completion": 667,
+     "usd": 0.00143774
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 4,
+     "credits": 2
     }
    },
    "items": [
@@ -2095,15 +2425,17 @@
    "calls": 5,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 6884,
-    "completion": 4897
+    "prompt": 5018,
+    "completion": 667
    },
-   "usd": 0.00256,
-   "ms": 43,
+   "usd": 0.00144,
+   "ms": 30,
    "msFresh": false,
-   "tavily": 5,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 4,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2113,17 +2445,25 @@
    "set": "lag",
    "form": "messy",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Lot 26-196 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 2761,
-     "completion": 10370
+     "calls": 10,
+     "prompt": 3579,
+     "completion": 1666,
+     "usd": 0.0018758600000000002
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2151,18 +2491,20 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2761,
-    "completion": 10370
+    "prompt": 3579,
+    "completion": 1666
    },
-   "usd": 0.00392,
-   "ms": 44,
+   "usd": 0.00188,
+   "ms": 29,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2174,7 +2516,7 @@
    "expect": "danger",
    "level": "danger",
    "notice": "WEB FDA website",
-   "headline": "Lot 085261 is printed in this recall.",
+   "headline": "Lot 085261 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -2183,7 +2525,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1279,
-     "completion": 1767
+     "completion": 448,
+     "usd": 0.0013800000000000002
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2213,14 +2562,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1279,
-    "completion": 1767
+    "completion": 448
    },
-   "usd": 0.0017,
-   "ms": 41,
+   "usd": 0.00138,
+   "ms": 28,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2237,10 +2588,18 @@
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
      "calls": 2,
      "prompt": 1271,
-     "completion": 1805
+     "completion": 390,
+     "usd": 0.0012993
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2270,14 +2629,16 @@
    "liveCalls": 0,
    "tokens": {
     "prompt": 1271,
-    "completion": 1805
+    "completion": 390
    },
-   "usd": 0.00164,
-   "ms": 40,
+   "usd": 0.0013,
+   "ms": 26,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2296,7 +2657,14 @@
     "tokens": {
      "calls": 1,
      "prompt": 308,
-     "completion": 319
+     "completion": 319,
+     "usd": 0.001265
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -2328,11 +2696,13 @@
     "completion": 319
    },
    "usd": 0.00127,
-   "ms": 8,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   }

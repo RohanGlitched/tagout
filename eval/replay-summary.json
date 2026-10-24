@@ -1,5 +1,5 @@
 {
- "at": "2026-10-24T20:14:20.536Z",
+ "at": "2026-10-24T21:17:14.356Z",
  "firstRun": null,
  "cases": 105,
  "groups": {
@@ -63,11 +63,11 @@
      "right": 8
     }
    },
-   "usdPerItem": 0.025771142857142864,
-   "usdTotal": 2.7059700000000007,
+   "usdPerItem": 0.02645190476190477,
+   "usdTotal": 2.777450000000001,
    "tavilyPerItem": 2.1619047619047618,
    "tavilyUsdPerItem": 0.017295238095238096,
-   "usdPerItemWithTavily": 0.04306638095238096,
+   "usdPerItemWithTavily": 0.043747142857142866,
    "medianMs": null,
    "webOnlyReds": [
     "p18"
@@ -94,7 +94,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -160,12 +160,12 @@
     "n13": "warning",
     "n14": "inspected",
     "n15": "inspected",
-    "n16": "warning",
+    "n16": "inspected",
     "n17": "inspected",
     "n18": "inspected",
     "n19": "warning",
     "n20": "inspected",
-    "n21": "warning",
+    "n21": "inspected",
     "n22": "inspected",
     "n23": "warning",
     "n24": "inspected",
@@ -210,19 +210,19 @@
    "arm": "fixed-plan-nano",
    "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
    "n": 105,
-   "right": 95,
+   "right": 101,
    "rightInterval": [
-    0.832,
-    0.953
+    0.905,
+    0.99
    ],
-   "redPrecision": 0.9782608695652174,
-   "redRecall": 0.9782608695652174,
+   "redPrecision": 0.9787234042553191,
+   "redRecall": 1,
    "redRecallInterval": [
-    0.885,
-    0.999
+    0.923,
+    1
    ],
-   "reds": 46,
-   "truePositives": 45,
+   "reds": 47,
+   "truePositives": 46,
    "positives": 46,
    "falseRed": [
     "n12"
@@ -242,7 +242,7 @@
    "byGroup": {
     "positive": {
      "n": 46,
-     "right": 45
+     "right": 46
     },
     "near-miss": {
      "n": 27,
@@ -254,34 +254,38 @@
     },
     "car": {
      "n": 12,
-     "right": 9
+     "right": 12
     },
     "clean": {
      "n": 8,
-     "right": 3
+     "right": 5
     }
    },
-   "usdPerItem": 0.003029333333333335,
-   "usdTotal": 0.31808000000000014,
+   "usdPerItem": 0.002282761904761904,
+   "usdTotal": 0.23968999999999996,
    "tavilyPerItem": 1.438095238095238,
    "tavilyUsdPerItem": 0.011504761904761905,
-   "usdPerItemWithTavily": 0.01453409523809524,
+   "usdPerItemWithTavily": 0.013787523809523809,
    "medianMs": null,
-   "webOnlyReds": [],
+   "webOnlyReds": [
+    "p22"
+   ],
    "webCited": [
-    "n26",
+    "p22",
     "k09"
    ],
    "fellBack": [],
    "cacheMisses": [
     "d08",
+    "d10",
     "f01",
     "f02",
     "f04",
     "n23",
     "n24",
     "n25",
-    "c09"
+    "c09",
+    "v09"
    ],
    "config": {
     "today": "2026-10-15",
@@ -289,7 +293,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -316,7 +320,7 @@
     "p20": "danger",
     "p21": "danger",
     "p22": "danger",
-    "p23": "warning",
+    "p23": "danger",
     "p24": "danger",
     "p25": "danger",
     "p26": "danger",
@@ -341,31 +345,31 @@
     "f07": "danger",
     "f08": "danger",
     "n01": "warning",
-    "n02": "warning",
+    "n02": "inspected",
     "n03": "inspected",
     "n04": "warning",
     "n05": "inspected",
-    "n06": "warning",
+    "n06": "inspected",
     "n07": "warning",
     "n08": "warning",
     "n09": "inspected",
     "n10": "warning",
-    "n11": "warning",
+    "n11": "inspected",
     "n12": "danger",
     "n13": "warning",
-    "n14": "warning",
-    "n15": "warning",
+    "n14": "inspected",
+    "n15": "inspected",
     "n16": "warning",
-    "n17": "warning",
+    "n17": "inspected",
     "n18": "inspected",
     "n19": "warning",
-    "n20": "warning",
-    "n21": "warning",
-    "n22": "warning",
+    "n20": "inspected",
+    "n21": "inspected",
+    "n22": "inspected",
     "n23": "inspected",
     "n24": "inspected",
-    "n25": "warning",
-    "n26": "warning",
+    "n25": "inspected",
+    "n26": "inspected",
     "c01": "warning",
     "c02": "warning",
     "c03": "warning",
@@ -387,11 +391,11 @@
     "v07": "warning",
     "v08": "warning",
     "v09": "warning",
-    "v10": "warning",
-    "v11": "warning",
-    "v12": "warning",
-    "k01": "warning",
-    "k02": "warning",
+    "v10": "inspected",
+    "v11": "inspected",
+    "v12": "inspected",
+    "k01": "inspected",
+    "k02": "inspected",
     "k03": "inspected",
     "k04": "warning",
     "k05": "inspected",
@@ -499,7 +503,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -682,7 +686,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -877,14 +881,16 @@
    "webOnlyReds": [],
    "webCited": [],
    "fellBack": [],
-   "cacheMisses": [],
+   "cacheMisses": [
+    "p02"
+   ],
    "config": {
     "today": "2026-10-15",
     "noWeb": false,
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -1104,14 +1110,17 @@
    "webOnlyReds": [],
    "webCited": [],
    "fellBack": [],
-   "cacheMisses": [],
+   "cacheMisses": [
+    "n16",
+    "v02"
+   ],
    "config": {
     "today": "2026-10-15",
     "noWeb": false,
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -1298,9 +1307,12 @@
    "cacheMisses": [
     "d08",
     "f02",
+    "f03",
+    "n05",
     "n23",
     "n24",
     "n25",
+    "c05",
     "c09"
    ],
    "config": {
@@ -1309,7 +1321,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -1425,28 +1437,27 @@
    "arm": "nano-readers",
    "label": "Ultra list reader and agent, Nano notice reader",
    "n": 105,
-   "right": 98,
+   "right": 100,
    "rightInterval": [
-    0.867,
-    0.973
+    0.892,
+    0.984
    ],
-   "redPrecision": 0.9574468085106383,
-   "redRecall": 0.9782608695652174,
+   "redPrecision": 0.9787234042553191,
+   "redRecall": 1,
    "redRecallInterval": [
-    0.885,
-    0.999
+    0.923,
+    1
    ],
    "reds": 47,
-   "truePositives": 45,
+   "truePositives": 46,
    "positives": 46,
    "falseRed": [
-    "n12",
-    "n23"
+    "n12"
    ],
    "falseRedOf": 59,
    "falseRedInterval": [
-    0.004,
-    0.117
+    0,
+    0.091
    ],
    "falseClear": [],
    "falseClearOf": 67,
@@ -1458,11 +1469,11 @@
    "byGroup": {
     "positive": {
      "n": 46,
-     "right": 45
+     "right": 46
     },
     "near-miss": {
      "n": 27,
-     "right": 25
+     "right": 26
     },
     "no-code": {
      "n": 12,
@@ -1477,24 +1488,73 @@
      "right": 6
     }
    },
-   "usdPerItem": 0.01998838095238095,
-   "usdTotal": 2.0987799999999996,
+   "usdPerItem": 0.01948828571428572,
+   "usdTotal": 2.0462700000000003,
    "tavilyPerItem": 2.1619047619047618,
    "tavilyUsdPerItem": 0.017295238095238096,
-   "usdPerItemWithTavily": 0.037283619047619045,
+   "usdPerItemWithTavily": 0.036783523809523815,
    "medianMs": null,
-   "webOnlyReds": [],
-   "webCited": [],
+   "webOnlyReds": [
+    "p22"
+   ],
+   "webCited": [
+    "p22",
+    "k01"
+   ],
    "fellBack": [
     "n13"
    ],
    "cacheMisses": [
+    "p08",
+    "p09",
+    "p12",
+    "p13",
+    "p17",
+    "p18",
+    "p27",
+    "d05",
+    "d07",
     "d08",
+    "d10",
+    "f01",
     "f02",
+    "f03",
+    "f04",
+    "f07",
+    "f08",
+    "n01",
+    "n02",
+    "n03",
+    "n04",
+    "n05",
+    "n06",
+    "n07",
+    "n08",
+    "n10",
+    "n14",
+    "n15",
+    "n16",
+    "n17",
+    "n18",
+    "n19",
+    "n22",
     "n23",
     "n24",
     "n25",
-    "c09"
+    "n26",
+    "c01",
+    "c03",
+    "c05",
+    "c06",
+    "c09",
+    "c11",
+    "v02",
+    "v06",
+    "v10",
+    "v11",
+    "k01",
+    "k03",
+    "k07"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1502,7 +1562,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -1529,7 +1589,7 @@
     "p20": "danger",
     "p21": "danger",
     "p22": "danger",
-    "p23": "warning",
+    "p23": "danger",
     "p24": "danger",
     "p25": "danger",
     "p26": "danger",
@@ -1553,31 +1613,31 @@
     "f06": "danger",
     "f07": "danger",
     "f08": "danger",
-    "n01": "inspected",
+    "n01": "warning",
     "n02": "warning",
-    "n03": "inspected",
+    "n03": "warning",
     "n04": "warning",
     "n05": "warning",
-    "n06": "inspected",
+    "n06": "warning",
     "n07": "warning",
-    "n08": "inspected",
+    "n08": "warning",
     "n09": "inspected",
     "n10": "warning",
     "n11": "inspected",
     "n12": "danger",
     "n13": "warning",
-    "n14": "inspected",
+    "n14": "warning",
     "n15": "warning",
     "n16": "warning",
-    "n17": "inspected",
+    "n17": "warning",
     "n18": "warning",
     "n19": "warning",
-    "n20": "warning",
-    "n21": "warning",
+    "n20": "inspected",
+    "n21": "inspected",
     "n22": "warning",
-    "n23": "danger",
+    "n23": "warning",
     "n24": "warning",
-    "n25": "warning",
+    "n25": "inspected",
     "n26": "warning",
     "c01": "warning",
     "c02": "warning",
@@ -1603,12 +1663,12 @@
     "v10": "warning",
     "v11": "warning",
     "v12": "inspected",
-    "k01": "inspected",
+    "k01": "warning",
     "k02": "inspected",
     "k03": "warning",
     "k04": "inspected",
     "k05": "inspected",
-    "k06": "warning",
+    "k06": "inspected",
     "k07": "warning",
     "k08": "inspected",
     "k09": "inspected"
@@ -1667,11 +1727,11 @@
      "right": 1
     }
    },
-   "usdPerItem": 0.012452777777777778,
-   "usdTotal": 0.22415000000000002,
+   "usdPerItem": 0.014163333333333333,
+   "usdTotal": 0.25494,
    "tavilyPerItem": 1.6666666666666667,
    "tavilyUsdPerItem": 0.013333333333333334,
-   "usdPerItemWithTavily": 0.025786111111111114,
+   "usdPerItemWithTavily": 0.02749666666666667,
    "medianMs": null,
    "webOnlyReds": [
     "p18"
@@ -1681,7 +1741,8 @@
    ],
    "fellBack": [],
    "cacheMisses": [
-    "f08"
+    "f08",
+    "k04"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1689,7 +1750,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -1767,11 +1828,11 @@
      "right": 0
     }
    },
-   "usdPerItem": 0.013850555555555557,
-   "usdTotal": 0.24931000000000003,
+   "usdPerItem": 0.014905000000000002,
+   "usdTotal": 0.26829000000000003,
    "tavilyPerItem": 1.2777777777777777,
    "tavilyUsdPerItem": 0.010222222222222221,
-   "usdPerItemWithTavily": 0.024072777777777776,
+   "usdPerItemWithTavily": 0.025127222222222224,
    "medianMs": null,
    "webOnlyReds": [],
    "webCited": [
@@ -1784,7 +1845,19 @@
     "k01"
    ],
    "cacheMisses": [
-    "f01"
+    "p06",
+    "p18",
+    "d01",
+    "f01",
+    "f08",
+    "n12",
+    "n19",
+    "n21",
+    "c05",
+    "c08",
+    "v12",
+    "k01",
+    "k04"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1792,7 +1865,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },

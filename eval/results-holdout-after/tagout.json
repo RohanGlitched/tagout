@@ -21,11 +21,11 @@
   "offline": false,
   "keyless": false,
   "code": {
-   "commit": "a9a0f8f",
+   "commit": "ed2dc77",
    "libChanged": false
   }
  },
- "at": "2026-10-24T20:06:33.969Z",
+ "at": "2026-10-24T21:09:24.721Z",
  "cases": [
   {
    "id": "h01",
@@ -47,6 +47,12 @@
      "prompt": 6144,
      "completion": 2511,
      "usd": 0.013677
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -85,11 +91,13 @@
     "completion": 2511
    },
    "usd": 0.01368,
-   "ms": 65,
+   "ms": 69,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h02",
@@ -111,6 +119,12 @@
      "prompt": 6675,
      "completion": 2419,
      "usd": 0.013932
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -149,11 +163,13 @@
     "completion": 2419
    },
    "usd": 0.01393,
-   "ms": 62,
+   "ms": 65,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h03",
@@ -174,6 +190,12 @@
      "prompt": 18957,
      "completion": 3937,
      "usd": 0.030768000000000004
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 1,
+     "extractUrls": 2,
+     "credits": 3
     }
    },
    "items": [
@@ -230,11 +252,13 @@
     "completion": 3937
    },
    "usd": 0.03077,
-   "ms": 100,
+   "ms": 99,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 3,
+   "truncated": 0
   },
   {
    "id": "h04",
@@ -256,6 +280,12 @@
      "prompt": 7763,
      "completion": 2041,
      "usd": 0.013885999999999999
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -300,11 +330,13 @@
     "completion": 2041
    },
    "usd": 0.01389,
-   "ms": 48,
+   "ms": 66,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h05",
@@ -326,6 +358,12 @@
      "prompt": 14917,
      "completion": 2168,
      "usd": 0.021421
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 2,
+     "extractUrls": 2,
+     "credits": 3
     }
    },
    "items": [
@@ -364,11 +402,13 @@
     "completion": 2168
    },
    "usd": 0.02142,
-   "ms": 54,
+   "ms": 49,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
-   "tavilyExtract": 2
+   "tavilyExtract": 2,
+   "tavilyCredits": 3,
+   "truncated": 0
   },
   {
    "id": "h06",
@@ -390,6 +430,12 @@
      "prompt": 11374,
      "completion": 1840,
      "usd": 0.016894
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -426,7 +472,9 @@
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h07",
@@ -444,10 +492,16 @@
     "agent": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 14,
-     "prompt": 27268,
-     "completion": 12451,
-     "usd": 0.064621
+     "calls": 5,
+     "prompt": 7833,
+     "completion": 1858,
+     "usd": 0.0127455
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -455,13 +509,15 @@
      "kind": "product",
      "upc": "5397356164483",
      "codes": [
-      "2595301",
-      "83710",
-      "3210",
+      "01-04-04",
       "212046247",
-      "991174725"
+      "991174725",
+      "BLACK",
+      "ONE SIZE",
+      "83710",
+      "2595301",
+      "3210"
      ],
-     "made": "01-04-04",
      "readFrom": "photo"
     }
    ],
@@ -480,71 +536,25 @@
     },
     {
      "tool": "search_cpsc",
-     "label": "CPSC recalls, text “83710”",
-     "found": 0,
-     "fresh": 0
-    },
-    {
-     "tool": "search_cpsc",
-     "label": "CPSC recalls, text “3210”",
-     "found": 12,
-     "fresh": 12
-    },
-    {
-     "tool": "search_cpsc",
-     "label": "CPSC recalls, text “212046247”",
-     "found": 0,
-     "fresh": 0
-    },
-    {
-     "tool": "search_cpsc",
-     "label": "CPSC recalls, text “991174725”",
-     "found": 0,
-     "fresh": 0
-    },
-    {
-     "tool": "search_cpsc",
-     "label": "CPSC recalls, product “clothing tag”",
-     "found": 0,
-     "fresh": 0
-    },
-    {
-     "tool": "search_cpsc",
-     "label": "CPSC recalls, product “price tag”",
-     "found": 0,
-     "fresh": 0
-    },
-    {
-     "tool": "search_cpsc",
-     "label": "CPSC recalls, product “garment tag”",
-     "found": 0,
-     "fresh": 0
-    },
-    {
-     "tool": "search_web",
-     "label": "Tavily web search “clothing price tag recall”",
-     "found": 4,
-     "fresh": 4
-    },
-    {
-     "tool": "read_page",
-     "label": "Tavily read the page “Primark Recalls 101 Dalmatians Faux Leather Children’s Coin Purses D…”",
-     "found": 0,
+     "label": "CPSC recalls, title “Primark”, product “purse”",
+     "found": 1,
      "fresh": 0
     }
    ],
-   "calls": 14,
+   "calls": 5,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 27268,
-    "completion": 12451
+    "prompt": 7833,
+    "completion": 1858
    },
-   "usd": 0.05617,
-   "ms": 97,
+   "usd": 0.01275,
+   "ms": 47,
    "msFresh": false,
-   "tavily": 3,
-   "tavilySearch": 2,
-   "tavilyExtract": 1
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h08",
@@ -566,6 +576,12 @@
      "prompt": 6598,
      "completion": 3114,
      "usd": 0.015940000000000003
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -597,11 +613,13 @@
     "completion": 3114
    },
    "usd": 0.01594,
-   "ms": 38,
+   "ms": 33,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h10",
@@ -620,10 +638,18 @@
     "agent": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 9,
-     "prompt": 36012,
-     "completion": 3849,
-     "usd": 0.047559000000000004
+     "calls": 10,
+     "prompt": 37161,
+     "completion": 6189,
+     "usd": 0.055728,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 3,
+     "credits": 2
     }
    },
    "items": [
@@ -667,18 +693,20 @@
      "fresh": 0
     }
    ],
-   "calls": 9,
-   "liveCalls": 0,
+   "calls": 10,
+   "liveCalls": 1,
    "tokens": {
-    "prompt": 36012,
-    "completion": 3849
+    "prompt": 37161,
+    "completion": 6189
    },
-   "usd": 0.04756,
-   "ms": 102,
+   "usd": 0.05573,
+   "ms": 9165,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1
   },
   {
    "id": "h11",
@@ -696,10 +724,18 @@
     "agent": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 10,
-     "prompt": 36443,
-     "completion": 5958,
-     "usd": 0.05431700000000001
+     "calls": 11,
+     "prompt": 37905,
+     "completion": 9708,
+     "usd": 0.067029,
+     "truncated": 2,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 2,
+     "extractUrls": 3,
+     "credits": 4
     }
    },
    "items": [
@@ -750,18 +786,20 @@
      "fresh": 1
     }
    ],
-   "calls": 10,
-   "liveCalls": 0,
+   "calls": 11,
+   "liveCalls": 1,
    "tokens": {
-    "prompt": 36443,
-    "completion": 5958
+    "prompt": 37905,
+    "completion": 9708
    },
-   "usd": 0.05432,
-   "ms": 122,
+   "usd": 0.06703,
+   "ms": 13516,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
-   "tavilyExtract": 2
+   "tavilyExtract": 2,
+   "tavilyCredits": 4,
+   "truncated": 2
   },
   {
    "id": "h12",
@@ -779,10 +817,18 @@
     "agent": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 14,
-     "prompt": 37046,
-     "completion": 13428,
-     "usd": 0.07733
+     "calls": 19,
+     "prompt": 43416,
+     "completion": 27516,
+     "usd": 0.125964,
+     "truncated": 6,
+     "retried": 5
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 4,
+     "credits": 2
     }
    },
    "items": [
@@ -844,18 +890,20 @@
      "fresh": 0
     }
    ],
-   "calls": 14,
-   "liveCalls": 0,
+   "calls": 19,
+   "liveCalls": 5,
    "tokens": {
-    "prompt": 37046,
-    "completion": 13428
+    "prompt": 43416,
+    "completion": 27516
    },
-   "usd": 0.07733,
-   "ms": 85,
+   "usd": 0.12596,
+   "ms": 13367,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 6
   },
   {
    "id": "h15",
@@ -871,11 +919,20 @@
     "planned": "model",
     "reader": "Nemotron 3 Ultra",
     "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 5,
-     "prompt": 11521,
-     "completion": 2290,
-     "usd": 0.018391
+     "calls": 6,
+     "prompt": 12014,
+     "completion": 4640,
+     "usd": 0.025934000000000002,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -901,18 +958,20 @@
      "fresh": 6
     }
    ],
-   "calls": 5,
-   "liveCalls": 0,
+   "calls": 6,
+   "liveCalls": 1,
    "tokens": {
-    "prompt": 11521,
-    "completion": 2290
+    "prompt": 12014,
+    "completion": 4640
    },
-   "usd": 0.01839,
-   "ms": 43,
+   "usd": 0.02593,
+   "ms": 9985,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 1
   },
   {
    "id": "h16",
@@ -920,19 +979,27 @@
    "set": "database",
    "form": "clean",
    "expect": "not-danger",
-   "level": "warning",
-   "headline": "Model unavailable: not cleared.",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
    "planned": "model",
    "engine": {
     "planned": "model",
     "reader": "Nemotron 3 Ultra",
     "agent": "Nemotron 3 Ultra",
-    "modelUnavailable": 1,
+    "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 8,
-     "prompt": 28039,
-     "completion": 3103,
-     "usd": 0.037348
+     "calls": 9,
+     "prompt": 28845,
+     "completion": 4039,
+     "usd": 0.040962,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 3,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 4
     }
    },
    "items": [
@@ -976,18 +1043,20 @@
      "fresh": 0
     }
    ],
-   "calls": 8,
-   "liveCalls": 0,
+   "calls": 9,
+   "liveCalls": 1,
    "tokens": {
-    "prompt": 28039,
-    "completion": 3103
+    "prompt": 28845,
+    "completion": 4039
    },
-   "usd": 0.03735,
-   "ms": 63,
+   "usd": 0.04096,
+   "ms": 3014,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 3,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 4,
+   "truncated": 1
   },
   {
    "id": "h18",
@@ -1035,11 +1104,13 @@
     "completion": 1278
    },
    "usd": 0.00874,
-   "ms": 33,
+   "ms": 4,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0
   },
   {
    "id": "h19",
@@ -1061,6 +1132,12 @@
      "prompt": 14996,
      "completion": 2881,
      "usd": 0.023639
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1099,11 +1176,13 @@
     "completion": 2881
    },
    "usd": 0.02364,
-   "ms": 47,
+   "ms": 7,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h20",
@@ -1125,6 +1204,12 @@
      "prompt": 15903,
      "completion": 2554,
      "usd": 0.023565
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1169,11 +1254,13 @@
     "completion": 2554
    },
    "usd": 0.02356,
-   "ms": 44,
+   "ms": 10,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h21",
@@ -1195,6 +1282,12 @@
      "prompt": 17098,
      "completion": 3828,
      "usd": 0.028582000000000003
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 4,
+     "credits": 2
     }
    },
    "items": [
@@ -1250,11 +1343,13 @@
     "completion": 3828
    },
    "usd": 0.02858,
-   "ms": 41,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h22",
@@ -1275,6 +1370,12 @@
      "prompt": 5224,
      "completion": 771,
      "usd": 0.007537
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1306,11 +1407,13 @@
     "completion": 771
    },
    "usd": 0.00754,
-   "ms": 23,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h23",
@@ -1331,6 +1434,12 @@
      "prompt": 18201,
      "completion": 3180,
      "usd": 0.027741000000000002
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 1,
+     "extractUrls": 2,
+     "credits": 3
     }
    },
    "items": [
@@ -1380,11 +1489,13 @@
     "completion": 3180
    },
    "usd": 0.02774,
-   "ms": 47,
+   "ms": 8,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 3,
+   "truncated": 0
   },
   {
    "id": "h24",
@@ -1404,6 +1515,12 @@
      "prompt": 30549,
      "completion": 1441,
      "usd": 0.034872
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 2
     }
    },
    "items": [
@@ -1466,11 +1583,13 @@
     "completion": 1441
    },
    "usd": 0.03487,
-   "ms": 57,
+   "ms": 14,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 2,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h25",
@@ -1492,6 +1611,12 @@
      "prompt": 8002,
      "completion": 1219,
      "usd": 0.011659
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1524,11 +1649,13 @@
     "completion": 1219
    },
    "usd": 0.01166,
-   "ms": 32,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h26",
@@ -1550,6 +1677,12 @@
      "prompt": 4922,
      "completion": 1126,
      "usd": 0.0083
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1588,11 +1721,13 @@
     "completion": 1126
    },
    "usd": 0.0083,
-   "ms": 25,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
-   "tavilyExtract": 0
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
   },
   {
    "id": "h27",
@@ -1613,6 +1748,12 @@
      "prompt": 15005,
      "completion": 2639,
      "usd": 0.022921999999999998
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 3
     }
    },
    "items": [
@@ -1669,11 +1810,13 @@
     "completion": 2639
    },
    "usd": 0.02292,
-   "ms": 50,
+   "ms": 12,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 3,
+   "truncated": 0
   },
   {
    "id": "h28",
@@ -1695,6 +1838,12 @@
      "prompt": 11642,
      "completion": 3416,
      "usd": 0.021890000000000003
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1732,11 +1881,13 @@
     "completion": 3416
    },
    "usd": 0.02189,
-   "ms": 40,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h29",
@@ -1758,6 +1909,12 @@
      "prompt": 11179,
      "completion": 1367,
      "usd": 0.015280000000000002
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1807,11 +1964,13 @@
     "completion": 1367
    },
    "usd": 0.01528,
-   "ms": 36,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h30",
@@ -1833,6 +1992,12 @@
      "prompt": 14155,
      "completion": 1592,
      "usd": 0.018931
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1870,11 +2035,13 @@
     "completion": 1592
    },
    "usd": 0.01893,
-   "ms": 50,
+   "ms": 7,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h31",
@@ -1896,6 +2063,12 @@
      "prompt": 18836,
      "completion": 4769,
      "usd": 0.033143000000000006
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1939,11 +2112,13 @@
     "completion": 4769
    },
    "usd": 0.03314,
-   "ms": 46,
+   "ms": 13,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h32",
@@ -1965,6 +2140,12 @@
      "prompt": 17634,
      "completion": 2349,
      "usd": 0.024680999999999998
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2010,11 +2191,13 @@
     "completion": 2349
    },
    "usd": 0.02468,
-   "ms": 46,
+   "ms": 7,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h33",
@@ -2036,6 +2219,12 @@
      "prompt": 23475,
      "completion": 2570,
      "usd": 0.031185
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2081,11 +2270,13 @@
     "completion": 2570
    },
    "usd": 0.03119,
-   "ms": 47,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h34",
@@ -2107,6 +2298,12 @@
      "prompt": 14501,
      "completion": 1622,
      "usd": 0.019367
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2145,11 +2342,13 @@
     "completion": 1622
    },
    "usd": 0.01937,
-   "ms": 38,
+   "ms": 7,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h35",
@@ -2171,6 +2370,12 @@
      "prompt": 22317,
      "completion": 1583,
      "usd": 0.027066
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2221,11 +2426,13 @@
     "completion": 1583
    },
    "usd": 0.02707,
-   "ms": 50,
+   "ms": 9,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h36",
@@ -2246,6 +2453,12 @@
      "prompt": 22349,
      "completion": 1463,
      "usd": 0.026737999999999998
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2296,11 +2509,13 @@
     "completion": 1463
    },
    "usd": 0.02674,
-   "ms": 47,
+   "ms": 9,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h37",
@@ -2323,6 +2538,12 @@
      "prompt": 25397,
      "completion": 1828,
      "usd": 0.030881
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 3
     }
    },
    "items": [
@@ -2373,11 +2594,13 @@
     "completion": 1828
    },
    "usd": 0.03088,
-   "ms": 47,
+   "ms": 11,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 3,
+   "truncated": 0
   },
   {
    "id": "h38",
@@ -2399,6 +2622,12 @@
      "prompt": 27890,
      "completion": 3859,
      "usd": 0.039467
+    },
+    "tavily": {
+     "searches": 3,
+     "extracts": 3,
+     "extractUrls": 5,
+     "credits": 6
     }
    },
    "items": [
@@ -2475,11 +2704,13 @@
     "completion": 3859
    },
    "usd": 0.03947,
-   "ms": 56,
+   "ms": 13,
    "msFresh": false,
    "tavily": 6,
    "tavilySearch": 3,
-   "tavilyExtract": 3
+   "tavilyExtract": 3,
+   "tavilyCredits": 6,
+   "truncated": 0
   },
   {
    "id": "h39",
@@ -2501,6 +2732,12 @@
      "prompt": 23930,
      "completion": 5001,
      "usd": 0.038933
+    },
+    "tavily": {
+     "searches": 3,
+     "extracts": 1,
+     "extractUrls": 4,
+     "credits": 4
     }
    },
    "items": [
@@ -2568,11 +2805,13 @@
     "completion": 5001
    },
    "usd": 0.03893,
-   "ms": 52,
+   "ms": 10,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 3,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 4,
+   "truncated": 0
   },
   {
    "id": "h40",
@@ -2594,6 +2833,12 @@
      "prompt": 21311,
      "completion": 7196,
      "usd": 0.04289900000000001
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2640,11 +2885,13 @@
     "completion": 7196
    },
    "usd": 0.0429,
-   "ms": 49,
+   "ms": 10,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h41",
@@ -2666,6 +2913,12 @@
      "prompt": 13296,
      "completion": 1494,
      "usd": 0.017778000000000002
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2710,11 +2963,13 @@
     "completion": 1494
    },
    "usd": 0.01778,
-   "ms": 46,
+   "ms": 7,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
   },
   {
    "id": "h42",
@@ -2736,6 +2991,12 @@
      "prompt": 23355,
      "completion": 1481,
      "usd": 0.027798000000000003
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 3
     }
    },
    "items": [
@@ -2786,11 +3047,13 @@
     "completion": 1481
    },
    "usd": 0.0278,
-   "ms": 42,
+   "ms": 9,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
-   "tavilyExtract": 1
+   "tavilyExtract": 1,
+   "tavilyCredits": 3,
+   "truncated": 0
   },
   {
    "id": "h43",
@@ -2812,6 +3075,12 @@
      "prompt": 22061,
      "completion": 1991,
      "usd": 0.028034
+    },
+    "tavily": {
+     "searches": 3,
+     "extracts": 2,
+     "extractUrls": 2,
+     "credits": 5
     }
    },
    "items": [
@@ -2879,11 +3148,13 @@
     "completion": 1991
    },
    "usd": 0.02803,
-   "ms": 38,
+   "ms": 10,
    "msFresh": false,
    "tavily": 5,
    "tavilySearch": 3,
-   "tavilyExtract": 2
+   "tavilyExtract": 2,
+   "tavilyCredits": 5,
+   "truncated": 0
   }
  ]
 }

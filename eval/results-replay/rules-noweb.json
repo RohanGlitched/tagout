@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a9a0f8f",
+   "commit": "ed2dc77",
    "libChanged": false
   }
  },
- "at": "2026-10-24T20:14:20.393Z",
+ "at": "2026-10-24T21:17:14.232Z",
  "cases": [
   {
    "id": "p01",
@@ -36,7 +36,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -73,6 +79,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -86,7 +94,13 @@
    "headline": "UT3053 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -124,11 +138,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 34,
+   "ms": 35,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -142,7 +158,13 @@
    "headline": "H163650 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -180,11 +202,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 33,
+   "ms": 34,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -198,7 +222,13 @@
    "headline": "ST-332-US is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -241,6 +271,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -254,7 +286,13 @@
    "headline": "MY002 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -292,11 +330,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 14,
+   "ms": 13,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -310,7 +350,13 @@
    "headline": "LTD-SM23 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -348,11 +394,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -366,7 +414,13 @@
    "headline": "ZHX-PB22 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -404,11 +458,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -422,7 +478,13 @@
    "headline": "HDFS400 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -465,6 +527,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -478,7 +542,13 @@
    "headline": "KLC-BULL135C is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -516,11 +586,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 11,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -534,7 +606,13 @@
    "headline": "Model 9R263210 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -572,11 +650,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 14,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -590,7 +670,13 @@
    "headline": "CCB-5014 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -628,11 +714,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 16,
+   "ms": 13,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -646,7 +734,13 @@
    "headline": "GX000392AAK is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -684,11 +778,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 13,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -702,7 +798,13 @@
    "headline": "AK396H-MBK is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -740,11 +842,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 12,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -758,7 +862,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -795,6 +905,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -808,7 +920,13 @@
    "headline": "WE11E5080Wx3-W is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -852,6 +970,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -865,7 +985,13 @@
    "headline": "GLR76TRDER is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -903,11 +1029,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -921,7 +1049,13 @@
    "headline": "GV31 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -959,11 +1093,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 11,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -977,7 +1113,13 @@
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1008,11 +1150,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 12,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1026,7 +1170,13 @@
    "headline": "NB-G200 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1064,11 +1214,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 14,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1082,7 +1234,13 @@
    "headline": "NS-RGFGSS1 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1120,11 +1278,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 13,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1138,7 +1298,13 @@
    "headline": "CGG-6331 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1181,6 +1347,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1194,7 +1362,13 @@
    "headline": "RH99A2U1 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1237,6 +1411,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1250,7 +1426,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1293,6 +1475,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1306,7 +1490,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1343,6 +1533,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1356,7 +1548,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1394,11 +1592,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 11,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1412,7 +1612,13 @@
    "headline": "MI-DHC02 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1450,11 +1656,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 11,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1468,7 +1676,13 @@
    "headline": "Model 53101-200 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1506,11 +1720,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1524,7 +1740,13 @@
    "headline": "Lot EJA022 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1556,11 +1778,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1574,7 +1798,13 @@
    "headline": "Lot 1096076 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1606,11 +1836,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1624,7 +1856,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1656,11 +1894,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1674,7 +1914,13 @@
    "headline": "Lot RL25G04 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1706,11 +1952,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1724,7 +1972,13 @@
    "headline": "Lot 3J3V is printed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1755,11 +2009,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1773,7 +2029,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1805,11 +2067,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1823,7 +2087,13 @@
    "headline": "Lot 5S30B is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1854,11 +2124,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1872,7 +2144,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1904,11 +2182,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1922,7 +2202,13 @@
    "headline": "Lot 7261973A is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -1954,11 +2240,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -1972,7 +2260,13 @@
    "headline": "Lot 1716089 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2004,11 +2298,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2022,7 +2318,13 @@
    "headline": "Lot 1X68 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2054,11 +2356,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2072,7 +2376,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2109,6 +2419,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2122,7 +2434,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2159,6 +2477,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2172,7 +2492,13 @@
    "headline": "Lot 025245 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2209,6 +2535,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2222,7 +2550,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2259,6 +2593,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2272,7 +2608,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2304,11 +2646,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2322,7 +2666,13 @@
    "headline": "Lot TS-633-2 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2354,11 +2704,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2372,7 +2724,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2409,6 +2767,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2422,7 +2782,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2459,6 +2825,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2472,7 +2840,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2504,11 +2878,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 2,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2522,7 +2898,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2565,6 +2947,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2578,7 +2962,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2616,11 +3006,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2634,7 +3026,13 @@
    "headline": "LTD-SM23 is listed in this recall.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2677,6 +3075,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2690,7 +3090,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2733,6 +3139,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2746,7 +3154,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2784,11 +3198,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2802,7 +3218,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2840,11 +3262,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2858,7 +3282,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2890,11 +3320,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2908,7 +3340,13 @@
    "headline": "WE11E5080Wx3-W is listed, but this recall names particular lot or date codes and SME2025112806 isn't one the notice prints. Compare the code on yours with the notice.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -2947,11 +3385,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -2965,7 +3405,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3003,11 +3449,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3021,7 +3469,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3059,11 +3513,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3077,7 +3533,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3109,11 +3571,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3127,7 +3591,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3165,11 +3635,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 15,
+   "ms": 12,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3183,7 +3655,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3221,11 +3699,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 13,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3239,7 +3719,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3277,11 +3763,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 13,
+   "ms": 12,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3295,7 +3783,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3333,11 +3827,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 11,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3351,7 +3847,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3394,6 +3896,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3407,7 +3911,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3450,6 +3960,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3463,7 +3975,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3500,6 +4018,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3513,7 +4033,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3550,6 +4076,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3563,7 +4091,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3600,6 +4134,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3613,7 +4149,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3645,11 +4187,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3663,7 +4207,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3700,6 +4250,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3713,7 +4265,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3745,11 +4303,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 2,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3763,7 +4323,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3795,11 +4361,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3813,7 +4381,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3850,6 +4424,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3863,7 +4439,13 @@
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3899,6 +4481,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3912,7 +4496,13 @@
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3948,6 +4538,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -3961,7 +4553,13 @@
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -3992,11 +4590,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4010,7 +4610,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4046,6 +4652,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4059,7 +4667,13 @@
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4090,11 +4704,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 12,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4108,7 +4724,13 @@
    "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4139,11 +4761,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4157,7 +4781,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4188,11 +4818,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4206,7 +4838,13 @@
    "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4237,11 +4875,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4255,7 +4895,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4291,6 +4937,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4304,7 +4952,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4340,6 +4994,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4353,7 +5009,13 @@
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4384,11 +5046,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4402,7 +5066,13 @@
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4438,6 +5108,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4451,7 +5123,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4482,11 +5160,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4500,7 +5180,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4536,6 +5222,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4549,7 +5237,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4578,6 +5272,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4591,7 +5287,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4622,11 +5324,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4640,7 +5344,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4676,6 +5386,8 @@
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4689,7 +5401,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4720,11 +5438,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4738,7 +5458,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4769,11 +5495,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4787,7 +5515,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4818,11 +5552,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4836,7 +5572,13 @@
    "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4867,11 +5609,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4885,7 +5629,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4916,11 +5666,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4934,7 +5686,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -4965,11 +5723,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -4983,7 +5743,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5014,11 +5780,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5032,7 +5800,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5070,11 +5844,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 13,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5088,7 +5864,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5126,11 +5908,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5144,7 +5928,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5182,11 +5972,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5200,7 +5992,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5238,11 +6036,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5256,7 +6056,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5294,11 +6100,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5312,7 +6120,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5350,11 +6164,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5368,7 +6184,13 @@
    "headline": "This product line is recalled. Check the lot number on yours.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5400,11 +6222,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5418,7 +6242,13 @@
    "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5456,11 +6286,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []
@@ -5474,7 +6306,13 @@
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "modelUnavailable": 1
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
    },
    "items": [
     {
@@ -5512,11 +6350,13 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
    "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
    "webBlocked": 1,
    "cacheMisses": 0,
    "missed": []

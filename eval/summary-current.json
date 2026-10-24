@@ -1,5 +1,5 @@
 {
- "at": "2026-10-24T20:13:27.286Z",
+ "at": "2026-10-24T21:09:57.998Z",
  "firstRun": {
   "at": "2026-10-15T08:44:43.371Z",
   "right": 98,
@@ -105,11 +105,11 @@
      "right": 8
     }
    },
-   "usdPerItem": 0.025766952380952383,
-   "usdTotal": 2.7055300000000004,
+   "usdPerItem": 0.026450476190476194,
+   "usdTotal": 2.7773000000000003,
    "tavilyPerItem": 2.1619047619047618,
    "tavilyUsdPerItem": 0.017295238095238096,
-   "usdPerItemWithTavily": 0.043062190476190476,
+   "usdPerItemWithTavily": 0.04374571428571429,
    "medianMs": null,
    "webOnlyReds": [
     "p18"
@@ -128,7 +128,7 @@
     "offline": false,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -194,12 +194,12 @@
     "n13": "warning",
     "n14": "inspected",
     "n15": "inspected",
-    "n16": "warning",
+    "n16": "inspected",
     "n17": "inspected",
     "n18": "inspected",
     "n19": "warning",
     "n20": "inspected",
-    "n21": "warning",
+    "n21": "inspected",
     "n22": "inspected",
     "n23": "warning",
     "n24": "inspected",
@@ -244,19 +244,19 @@
    "arm": "fixed-plan-nano",
    "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
    "n": 105,
-   "right": 95,
+   "right": 101,
    "rightInterval": [
-    0.832,
-    0.953
+    0.905,
+    0.99
    ],
-   "redPrecision": 0.9782608695652174,
-   "redRecall": 0.9782608695652174,
+   "redPrecision": 0.9787234042553191,
+   "redRecall": 1,
    "redRecallInterval": [
-    0.885,
-    0.999
+    0.923,
+    1
    ],
-   "reds": 46,
-   "truePositives": 45,
+   "reds": 47,
+   "truePositives": 46,
    "positives": 46,
    "falseRed": [
     "n12"
@@ -276,7 +276,7 @@
    "byGroup": {
     "positive": {
      "n": 46,
-     "right": 45
+     "right": 46
     },
     "near-miss": {
      "n": 27,
@@ -288,22 +288,24 @@
     },
     "car": {
      "n": 12,
-     "right": 9
+     "right": 12
     },
     "clean": {
      "n": 8,
-     "right": 3
+     "right": 5
     }
    },
-   "usdPerItem": 0.003029333333333335,
-   "usdTotal": 0.31808000000000014,
+   "usdPerItem": 0.002282761904761904,
+   "usdTotal": 0.23968999999999996,
    "tavilyPerItem": 1.438095238095238,
    "tavilyUsdPerItem": 0.011504761904761905,
-   "usdPerItemWithTavily": 0.01453409523809524,
+   "usdPerItemWithTavily": 0.013787523809523809,
    "medianMs": null,
-   "webOnlyReds": [],
+   "webOnlyReds": [
+    "p22"
+   ],
    "webCited": [
-    "n26",
+    "p22",
     "k09"
    ],
    "fellBack": [],
@@ -313,7 +315,7 @@
     "offline": false,
     "keyless": false,
     "code": {
-     "commit": "a9a0f8f",
+     "commit": "ed2dc77",
      "libChanged": false
     }
    },
@@ -340,7 +342,7 @@
     "p20": "danger",
     "p21": "danger",
     "p22": "danger",
-    "p23": "warning",
+    "p23": "danger",
     "p24": "danger",
     "p25": "danger",
     "p26": "danger",
@@ -365,31 +367,31 @@
     "f07": "danger",
     "f08": "danger",
     "n01": "warning",
-    "n02": "warning",
+    "n02": "inspected",
     "n03": "inspected",
     "n04": "warning",
     "n05": "inspected",
-    "n06": "warning",
+    "n06": "inspected",
     "n07": "warning",
     "n08": "warning",
     "n09": "inspected",
     "n10": "warning",
-    "n11": "warning",
+    "n11": "inspected",
     "n12": "danger",
     "n13": "warning",
-    "n14": "warning",
-    "n15": "warning",
+    "n14": "inspected",
+    "n15": "inspected",
     "n16": "warning",
-    "n17": "warning",
+    "n17": "inspected",
     "n18": "inspected",
     "n19": "warning",
-    "n20": "warning",
-    "n21": "warning",
-    "n22": "warning",
+    "n20": "inspected",
+    "n21": "inspected",
+    "n22": "inspected",
     "n23": "inspected",
     "n24": "inspected",
-    "n25": "warning",
-    "n26": "warning",
+    "n25": "inspected",
+    "n26": "inspected",
     "c01": "warning",
     "c02": "warning",
     "c03": "warning",
@@ -411,11 +413,11 @@
     "v07": "warning",
     "v08": "warning",
     "v09": "warning",
-    "v10": "warning",
-    "v11": "warning",
-    "v12": "warning",
-    "k01": "warning",
-    "k02": "warning",
+    "v10": "inspected",
+    "v11": "inspected",
+    "v12": "inspected",
+    "k01": "inspected",
+    "k02": "inspected",
     "k03": "inspected",
     "k04": "warning",
     "k05": "inspected",

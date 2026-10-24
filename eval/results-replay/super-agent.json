@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a9a0f8f",
+   "commit": "ed2dc77",
    "libChanged": false
   }
  },
- "at": "2026-10-24T20:14:08.579Z",
+ "at": "2026-10-24T21:17:02.802Z",
  "cases": [
   {
    "id": "p01",
@@ -45,6 +45,12 @@
      "prompt": 7966,
      "completion": 1247,
      "usd": 0.0060615
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -77,11 +83,13 @@
     "completion": 1247
    },
    "usd": 0.00606,
-   "ms": 66,
+   "ms": 69,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -103,6 +111,12 @@
      "prompt": 10332,
      "completion": 2337,
      "usd": 0.0113475
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -136,11 +150,13 @@
     "completion": 2337
    },
    "usd": 0.01135,
-   "ms": 63,
+   "ms": 67,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -156,11 +172,20 @@
     "planned": "model",
     "reader": "Nemotron 3 Ultra",
     "agent": "Nemotron 3 Super",
+    "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 6,
-     "prompt": 10001,
-     "completion": 3819,
-     "usd": 0.014981600000000001
+     "calls": 8,
+     "prompt": 11593,
+     "completion": 8282,
+     "usd": 0.0299626,
+     "truncated": 2,
+     "retried": 2
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -186,18 +211,20 @@
      "fresh": 5
     }
    ],
-   "calls": 6,
+   "calls": 8,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 10001,
-    "completion": 3819
+    "prompt": 11593,
+    "completion": 8282
    },
-   "usd": 0.01498,
-   "ms": 61,
+   "usd": 0.02996,
+   "ms": 66,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 2,
    "cacheMisses": 0,
    "missed": []
   },
@@ -219,6 +246,12 @@
      "prompt": 10663,
      "completion": 5751,
      "usd": 0.0219093
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -253,11 +286,13 @@
     "completion": 5751
    },
    "usd": 0.02191,
-   "ms": 61,
+   "ms": 64,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -279,6 +314,12 @@
      "prompt": 8880,
      "completion": 1409,
      "usd": 0.0061706999999999994
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -311,11 +352,13 @@
     "completion": 1409
    },
    "usd": 0.00617,
-   "ms": 43,
+   "ms": 33,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -325,17 +368,26 @@
    "expect": "danger",
    "level": "danger",
    "notice": "FDA D-0492-2026",
-   "headline": "Lot 4V15 is printed in this recall.",
+   "headline": "Lot 4V15 is listed in this recall.",
    "planned": "model",
    "engine": {
     "planned": "model",
     "reader": "Nemotron 3 Ultra",
     "agent": "Nemotron 3 Super",
+    "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 5,
-     "prompt": 8499,
-     "completion": 2607,
-     "usd": 0.0097596
+     "calls": 6,
+     "prompt": 8864,
+     "completion": 3095,
+     "usd": 0.011588600000000001,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -361,18 +413,20 @@
      "fresh": 5
     }
    ],
-   "calls": 5,
+   "calls": 6,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 8499,
-    "completion": 2607
+    "prompt": 8864,
+    "completion": 3095
    },
-   "usd": 0.00976,
-   "ms": 41,
+   "usd": 0.01159,
+   "ms": 33,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -394,6 +448,12 @@
      "prompt": 9388,
      "completion": 1261,
      "usd": 0.0062816
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -426,11 +486,13 @@
     "completion": 1261
    },
    "usd": 0.00628,
-   "ms": 41,
+   "ms": 32,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -452,6 +514,12 @@
      "prompt": 10169,
      "completion": 1015,
      "usd": 0.0056413999999999995
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -484,11 +552,13 @@
     "completion": 1015
    },
    "usd": 0.00564,
-   "ms": 456,
+   "ms": 442,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 16,
    "missed": [
     "api.fda.gov /food/enforcement.json",
@@ -514,6 +584,12 @@
      "prompt": 9147,
      "completion": 1937,
      "usd": 0.0089282
+    },
+    "tavily": {
+     "searches": 0,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 1
     }
    },
    "items": [
@@ -547,11 +623,13 @@
     "completion": 1937
    },
    "usd": 0.00893,
-   "ms": 22,
+   "ms": 19,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 0,
    "tavilyExtract": 1,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -572,6 +650,12 @@
      "prompt": 7605,
      "completion": 1893,
      "usd": 0.0079059
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -605,11 +689,13 @@
     "completion": 1893
    },
    "usd": 0.00791,
-   "ms": 23,
+   "ms": 21,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -629,6 +715,12 @@
      "prompt": 22387,
      "completion": 1252,
      "usd": 0.0088915
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 2,
+     "extractUrls": 2,
+     "credits": 3
     }
    },
    "items": [
@@ -679,11 +771,13 @@
     "completion": 1252
    },
    "usd": 0.00889,
-   "ms": 47,
+   "ms": 37,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
    "tavilyExtract": 2,
+   "tavilyCredits": 3,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -703,6 +797,12 @@
      "prompt": 20339,
      "completion": 1767,
      "usd": 0.0094462
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 2,
+     "extractUrls": 2,
+     "credits": 4
     }
    },
    "items": [
@@ -753,11 +853,13 @@
     "completion": 1767
    },
    "usd": 0.00945,
-   "ms": 60,
+   "ms": 49,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
    "tavilyExtract": 2,
+   "tavilyCredits": 4,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -775,10 +877,18 @@
     "agent": "Nemotron 3 Super",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 15,
-     "prompt": 23570,
-     "completion": 9982,
-     "usd": 0.043741199999999994
+     "calls": 17,
+     "prompt": 30528,
+     "completion": 12323,
+     "usd": 0.057722199999999994,
+     "truncated": 2,
+     "retried": 2
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 3,
+     "credits": 2
     }
    },
    "items": [
@@ -803,18 +913,20 @@
      "fresh": 6
     }
    ],
-   "calls": 15,
+   "calls": 17,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 23570,
-    "completion": 9982
+    "prompt": 30528,
+    "completion": 12323
    },
-   "usd": 0.04374,
-   "ms": 57,
+   "usd": 0.05772,
+   "ms": 46,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 2,
    "cacheMisses": 0,
    "missed": []
   },
@@ -835,7 +947,14 @@
      "calls": 11,
      "prompt": 14107,
      "completion": 8348,
-     "usd": 0.029644300000000002
+     "usd": 0.029644300000000002,
+     "truncated": 2
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -867,11 +986,13 @@
     "completion": 8348
    },
    "usd": 0.02964,
-   "ms": 38,
+   "ms": 32,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 2,
    "cacheMisses": 0,
    "missed": []
   },
@@ -892,6 +1013,12 @@
      "prompt": 6969,
      "completion": 603,
      "usd": 0.0035069999999999997
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -923,11 +1050,13 @@
     "completion": 603
    },
    "usd": 0.00351,
-   "ms": 17,
+   "ms": 18,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -948,6 +1077,12 @@
      "prompt": 18761,
      "completion": 1227,
      "usd": 0.010277399999999999
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 3,
+     "extractUrls": 3,
+     "credits": 4
     }
    },
    "items": [
@@ -1002,6 +1137,8 @@
    "tavily": 4,
    "tavilySearch": 1,
    "tavilyExtract": 3,
+   "tavilyCredits": 4,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1021,6 +1158,12 @@
      "prompt": 20257,
      "completion": 875,
      "usd": 0.0078656
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1065,11 +1208,13 @@
     "completion": 875
    },
    "usd": 0.00787,
-   "ms": 24,
+   "ms": 26,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1089,7 +1234,15 @@
      "calls": 5,
      "prompt": 10979,
      "completion": 2437,
-     "usd": 0.0117758
+     "usd": 0.0117758,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1128,13 +1281,17 @@
     "completion": 2437
    },
    "usd": 0.01178,
-   "ms": 16,
+   "ms": 15,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyCredits": 2,
+   "truncated": 1,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   }
  ]
 }

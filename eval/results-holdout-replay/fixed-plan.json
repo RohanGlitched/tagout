@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a1d8b21",
+   "commit": "ed2dc77",
    "libChanged": false
   }
  },
- "at": "2026-10-24T19:32:13.654Z",
+ "at": "2026-10-24T21:14:23.287Z",
  "cases": [
   {
    "id": "h01",
@@ -44,7 +44,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 1573,
-     "completion": 2315
+     "completion": 2315,
+     "usd": 0.008518
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -83,11 +90,13 @@
     "completion": 2315
    },
    "usd": 0.00852,
-   "ms": 79,
+   "ms": 62,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -108,7 +117,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 1571,
-     "completion": 2232
+     "completion": 2232,
+     "usd": 0.008267
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -147,11 +163,13 @@
     "completion": 2232
    },
    "usd": 0.00827,
-   "ms": 76,
+   "ms": 58,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -171,7 +189,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 1572,
-     "completion": 2202
+     "completion": 2202,
+     "usd": 0.008178
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -210,11 +235,13 @@
     "completion": 2202
    },
    "usd": 0.00818,
-   "ms": 76,
+   "ms": 57,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -235,7 +262,14 @@
     "tokens": {
      "calls": 4,
      "prompt": 2308,
-     "completion": 1758
+     "completion": 1758,
+     "usd": 0.007581999999999999
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -274,11 +308,13 @@
     "completion": 1758
    },
    "usd": 0.00758,
-   "ms": 79,
+   "ms": 59,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -299,7 +335,14 @@
     "tokens": {
      "calls": 3,
      "prompt": 1931,
-     "completion": 1158
+     "completion": 1158,
+     "usd": 0.005405
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -338,11 +381,13 @@
     "completion": 1158
    },
    "usd": 0.00541,
-   "ms": 59,
+   "ms": 44,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -363,7 +408,14 @@
     "tokens": {
      "calls": 9,
      "prompt": 3011,
-     "completion": 3520
+     "completion": 3520,
+     "usd": 0.013571000000000001
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -402,13 +454,17 @@
     "completion": 3520
    },
    "usd": 0.01357,
-   "ms": 60,
+   "ms": 1942,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 4,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   },
   {
    "id": "h07",
@@ -416,16 +472,24 @@
    "set": "database",
    "form": "photo",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Retail price tag for black one-size garment (from a photo).",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
-    "vision": "Qwen3.8 27B",
+    "vision": "Nemotron 3.5 Super VL",
+    "modelUnavailable": 1,
     "tokens": {
-     "calls": 2,
-     "prompt": 738,
-     "completion": 3796
+     "calls": 1,
+     "prompt": 453,
+     "completion": 164,
+     "usd": 0.0002835
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -433,42 +497,46 @@
      "kind": "product",
      "upc": "5397356164483",
      "codes": [
+      "01-04-04",
       "212046247",
       "991174725",
+      "BLACK",
+      "ONE SIZE",
       "83710",
       "2595301",
       "3210"
      ],
-     "made": "01-04-04",
      "readFrom": "photo"
     }
    ],
    "steps": [
     {
      "tool": "search_cpsc",
-     "label": "CPSC recalls, product “Retail price tag for black one-size garment (from a photo)”",
+     "label": "CPSC recalls, product “product price tag (from a photo)”",
      "found": 0,
      "fresh": 0
     },
     {
      "tool": "search_web",
-     "label": "Tavily web search “Retail price tag for black one-size garment (from a photo) recall”",
-     "found": 4,
-     "fresh": 4
+     "label": "Tavily web search “product price tag (from a photo) recall”",
+     "found": 5,
+     "fresh": 5
     }
    ],
-   "calls": 2,
+   "calls": 1,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 738,
-    "completion": 3796
+    "prompt": 453,
+    "completion": 164
    },
-   "usd": 0.00656,
-   "ms": 45,
+   "usd": 0.00028,
+   "ms": 27,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -478,16 +546,25 @@
    "set": "database",
    "form": "clean",
    "expect": "flag",
-   "level": "inspected",
-   "headline": "No recall found for Hatsan Blitz air rifle.",
+   "level": "warning",
+   "notice": "CPSC 27-025",
+   "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 1,
-     "prompt": 301,
-     "completion": 366
+     "calls": 3,
+     "prompt": 1205,
+     "completion": 2555,
+     "usd": 0.00887
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -512,18 +589,20 @@
      "fresh": 5
     }
    ],
-   "calls": 1,
+   "calls": 3,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 301,
-    "completion": 366
+    "prompt": 1205,
+    "completion": 2555
    },
-   "usd": 0.0014,
-   "ms": 39,
+   "usd": 0.00887,
+   "ms": 38,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -542,9 +621,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 4,
-     "prompt": 3559,
-     "completion": 3493
+     "calls": 5,
+     "prompt": 4708,
+     "completion": 5756,
+     "usd": 0.021976000000000002,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -570,18 +658,20 @@
      "fresh": 3
     }
    ],
-   "calls": 4,
+   "calls": 5,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3559,
-    "completion": 3493
+    "prompt": 4708,
+    "completion": 5756
    },
-   "usd": 0.01404,
-   "ms": 58,
+   "usd": 0.02198,
+   "ms": 39,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -600,9 +690,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 4,
-     "prompt": 3563,
-     "completion": 3709
+     "calls": 5,
+     "prompt": 4712,
+     "completion": 5972,
+     "usd": 0.022628000000000002,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -629,18 +728,20 @@
      "fresh": 3
     }
    ],
-   "calls": 4,
+   "calls": 5,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3563,
-    "completion": 3709
+    "prompt": 4712,
+    "completion": 5972
    },
-   "usd": 0.01469,
-   "ms": 59,
+   "usd": 0.02263,
+   "ms": 34,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -659,9 +760,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 4,
-     "prompt": 3559,
-     "completion": 3619
+     "calls": 5,
+     "prompt": 4708,
+     "completion": 5882,
+     "usd": 0.022354000000000002,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -687,18 +797,20 @@
      "fresh": 3
     }
    ],
-   "calls": 4,
+   "calls": 5,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3559,
-    "completion": 3619
+    "prompt": 4708,
+    "completion": 5882
    },
-   "usd": 0.01442,
-   "ms": 53,
+   "usd": 0.02235,
+   "ms": 32,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -708,17 +820,27 @@
    "set": "database",
    "form": "clean",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "level": "danger",
+   "notice": "FDA H-0009-2027",
+   "headline": "Lot 091026 DL is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 9,
-     "prompt": 2567,
-     "completion": 8021
+     "calls": 10,
+     "prompt": 3060,
+     "completion": 10371,
+     "usd": 0.034172999999999995,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -744,18 +866,20 @@
      "fresh": 0
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2567,
-    "completion": 8021
+    "prompt": 3060,
+    "completion": 10371
    },
-   "usd": 0.02663,
-   "ms": 53,
+   "usd": 0.03417,
+   "ms": 24,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -773,9 +897,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 9,
-     "prompt": 2567,
-     "completion": 8015
+     "calls": 10,
+     "prompt": 3060,
+     "completion": 10365,
+     "usd": 0.034155,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -801,18 +934,20 @@
      "fresh": 0
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2567,
-    "completion": 8015
+    "prompt": 3060,
+    "completion": 10365
    },
-   "usd": 0.02661,
-   "ms": 57,
+   "usd": 0.03415,
+   "ms": 20,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -833,7 +968,14 @@
     "tokens": {
      "calls": 4,
      "prompt": 2238,
-     "completion": 1981
+     "completion": 1981,
+     "usd": 0.008181
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -866,11 +1008,13 @@
     "completion": 1981
    },
    "usd": 0.00818,
-   "ms": 58,
+   "ms": 21,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -891,7 +1035,16 @@
     "tokens": {
      "calls": 6,
      "prompt": 2328,
-     "completion": 4664
+     "completion": 4664,
+     "usd": 0.01632,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -924,13 +1077,17 @@
     "completion": 4664
    },
    "usd": 0.01632,
-   "ms": 57,
+   "ms": 22,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyCredits": 2,
+   "truncated": 1,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   },
   {
    "id": "h20",
@@ -949,7 +1106,14 @@
     "tokens": {
      "calls": 8,
      "prompt": 3333,
-     "completion": 3748
+     "completion": 3748,
+     "usd": 0.014577
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 3,
+     "credits": 2
     }
    },
    "items": [
@@ -982,11 +1146,13 @@
     "completion": 3748
    },
    "usd": 0.01458,
-   "ms": 72,
+   "ms": 23,
    "msFresh": false,
-   "tavily": 4,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 3,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1007,7 +1173,16 @@
     "tokens": {
      "calls": 7,
      "prompt": 4243,
-     "completion": 5662
+     "completion": 5662,
+     "usd": 0.021229,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1039,13 +1214,17 @@
     "completion": 5662
    },
    "usd": 0.02123,
-   "ms": 44,
+   "ms": 21,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyCredits": 2,
+   "truncated": 1,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   },
   {
    "id": "h22",
@@ -1064,7 +1243,14 @@
     "tokens": {
      "calls": 7,
      "prompt": 4681,
-     "completion": 3610
+     "completion": 3610,
+     "usd": 0.015511
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 5,
+     "credits": 2
     }
    },
    "items": [
@@ -1096,11 +1282,13 @@
     "completion": 3610
    },
    "usd": 0.01551,
-   "ms": 45,
+   "ms": 17,
    "msFresh": false,
-   "tavily": 6,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 5,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1120,7 +1308,14 @@
     "tokens": {
      "calls": 5,
      "prompt": 6429,
-     "completion": 2537
+     "completion": 2537,
+     "usd": 0.01404
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 2,
+     "credits": 2
     }
    },
    "items": [
@@ -1152,11 +1347,13 @@
     "completion": 2537
    },
    "usd": 0.01404,
-   "ms": 50,
+   "ms": 23,
    "msFresh": false,
-   "tavily": 3,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 2,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1167,8 +1364,8 @@
    "form": "clean",
    "expect": "inspected",
    "level": "warning",
-   "notice": "CPSC 24-158",
-   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
+   "notice": "CPSC 18-146",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1177,7 +1374,16 @@
     "tokens": {
      "calls": 9,
      "prompt": 3883,
-     "completion": 8013
+     "completion": 8013,
+     "usd": 0.027922000000000002,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1216,13 +1422,17 @@
     "completion": 8013
    },
    "usd": 0.02792,
-   "ms": 44,
+   "ms": 24,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyCredits": 1,
+   "truncated": 1,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   },
   {
    "id": "h25",
@@ -1241,7 +1451,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 622,
-     "completion": 818
+     "completion": 818,
+     "usd": 0.0030759999999999997
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1280,11 +1497,13 @@
     "completion": 818
    },
    "usd": 0.00308,
-   "ms": 37,
+   "ms": 20,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1305,7 +1524,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 619,
-     "completion": 736
+     "completion": 736,
+     "usd": 0.002827
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1344,11 +1570,13 @@
     "completion": 736
    },
    "usd": 0.00283,
-   "ms": 38,
+   "ms": 17,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1368,7 +1596,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 622,
-     "completion": 754
+     "completion": 754,
+     "usd": 0.0028840000000000003
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1407,11 +1642,13 @@
     "completion": 754
    },
    "usd": 0.00288,
-   "ms": 44,
+   "ms": 16,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1432,7 +1669,16 @@
     "tokens": {
      "calls": 6,
      "prompt": 2555,
-     "completion": 4031
+     "completion": 4031,
+     "usd": 0.014648,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1464,13 +1710,17 @@
     "completion": 4031
    },
    "usd": 0.01465,
-   "ms": 40,
+   "ms": 18,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyCredits": 1,
+   "truncated": 1,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   },
   {
    "id": "h29",
@@ -1489,7 +1739,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 648,
-     "completion": 1450
+     "completion": 1450,
+     "usd": 0.004998
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1521,11 +1778,13 @@
     "completion": 1450
    },
    "usd": 0.005,
-   "ms": 37,
+   "ms": 15,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1546,7 +1805,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 641,
-     "completion": 581
+     "completion": 581,
+     "usd": 0.002384
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1578,11 +1844,13 @@
     "completion": 581
    },
    "usd": 0.00238,
-   "ms": 33,
+   "ms": 15,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1603,7 +1871,14 @@
     "tokens": {
      "calls": 9,
      "prompt": 3114,
-     "completion": 4569
+     "completion": 4569,
+     "usd": 0.016821
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -1635,11 +1910,13 @@
     "completion": 4569
    },
    "usd": 0.01682,
-   "ms": 55,
+   "ms": 25,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1649,17 +1926,25 @@
    "set": "lag",
    "form": "clean",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Lot 26-196 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 9,
-     "prompt": 2772,
-     "completion": 7435
+     "calls": 10,
+     "prompt": 3590,
+     "completion": 8005,
+     "usd": 0.027605
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1686,18 +1971,20 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2772,
-    "completion": 7435
+    "prompt": 3590,
+    "completion": 8005
    },
-   "usd": 0.02508,
-   "ms": 55,
+   "usd": 0.02761,
+   "ms": 24,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1707,17 +1994,25 @@
    "set": "lag",
    "form": "clean",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 9,
-     "prompt": 2772,
-     "completion": 7531
+     "calls": 10,
+     "prompt": 3590,
+     "completion": 8101,
+     "usd": 0.027893000000000005
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1744,18 +2039,20 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2772,
-    "completion": 7531
+    "prompt": 3590,
+    "completion": 8101
    },
-   "usd": 0.02537,
-   "ms": 53,
+   "usd": 0.02789,
+   "ms": 24,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1776,7 +2073,16 @@
     "tokens": {
      "calls": 5,
      "prompt": 2206,
-     "completion": 4619
+     "completion": 4619,
+     "usd": 0.016063,
+     "truncated": 2,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1809,13 +2115,17 @@
     "completion": 4619
    },
    "usd": 0.01606,
-   "ms": 64,
+   "ms": 16,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyCredits": 2,
+   "truncated": 2,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   },
   {
    "id": "h35",
@@ -1834,7 +2144,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1282,
-     "completion": 816
+     "completion": 816,
+     "usd": 0.00373
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1867,11 +2184,13 @@
     "completion": 816
    },
    "usd": 0.00373,
-   "ms": 36,
+   "ms": 15,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1891,7 +2210,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1282,
-     "completion": 819
+     "completion": 819,
+     "usd": 0.003739
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1924,11 +2250,13 @@
     "completion": 819
    },
    "usd": 0.00374,
-   "ms": 34,
+   "ms": 14,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1949,7 +2277,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1280,
-     "completion": 765
+     "completion": 765,
+     "usd": 0.003575
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -1982,11 +2317,13 @@
     "completion": 765
    },
    "usd": 0.00358,
-   "ms": 29,
+   "ms": 19,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2006,7 +2343,16 @@
     "tokens": {
      "calls": 2,
      "prompt": 1486,
-     "completion": 1927
+     "completion": 1927,
+     "usd": 0.007267,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -2041,13 +2387,17 @@
     "completion": 1927
    },
    "usd": 0.00727,
-   "ms": 18,
+   "ms": 17,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "tavilyCredits": 1,
+   "truncated": 1,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
   },
   {
    "id": "h39",
@@ -2055,8 +2405,9 @@
    "set": "lag",
    "form": "clean",
    "expect": "flag",
-   "level": "inspected",
-   "headline": "Only older recalls found (latest 2025), too old to cover what you have now.",
+   "level": "warning",
+   "notice": "WEB USDA FSIS",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -2064,8 +2415,15 @@
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
      "calls": 5,
-     "prompt": 6884,
-     "completion": 2448
+     "prompt": 5018,
+     "completion": 2929,
+     "usd": 0.013805
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 4,
+     "credits": 2
     }
    },
    "items": [
@@ -2093,15 +2451,17 @@
    "calls": 5,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 6884,
-    "completion": 2448
+    "prompt": 5018,
+    "completion": 2929
    },
-   "usd": 0.01423,
-   "ms": 36,
+   "usd": 0.0138,
+   "ms": 19,
    "msFresh": false,
-   "tavily": 5,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 4,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2111,17 +2471,25 @@
    "set": "lag",
    "form": "messy",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Lot 26-196 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 9,
-     "prompt": 2761,
-     "completion": 6858
+     "calls": 10,
+     "prompt": 3579,
+     "completion": 7428,
+     "usd": 0.025863
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2149,18 +2517,20 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2761,
-    "completion": 6858
+    "prompt": 3579,
+    "completion": 7428
    },
-   "usd": 0.02334,
-   "ms": 37,
+   "usd": 0.02586,
+   "ms": 16,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2181,7 +2551,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1279,
-     "completion": 816
+     "completion": 816,
+     "usd": 0.0037270000000000003
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2214,11 +2591,13 @@
     "completion": 816
    },
    "usd": 0.00373,
-   "ms": 34,
+   "ms": 14,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2239,7 +2618,14 @@
     "tokens": {
      "calls": 2,
      "prompt": 1271,
-     "completion": 655
+     "completion": 655,
+     "usd": 0.003236
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
     }
    },
    "items": [
@@ -2272,11 +2658,13 @@
     "completion": 655
    },
    "usd": 0.00324,
-   "ms": 34,
+   "ms": 14,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2295,7 +2683,14 @@
     "tokens": {
      "calls": 1,
      "prompt": 308,
-     "completion": 319
+     "completion": 319,
+     "usd": 0.001265
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
     }
    },
    "items": [
@@ -2327,11 +2722,13 @@
     "completion": 319
    },
    "usd": 0.00127,
-   "ms": 6,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
    "cacheMisses": 0,
    "missed": []
   }
