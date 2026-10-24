@@ -18,7 +18,10 @@ import { webExtract, webSearch, OFFICIAL_DOMAINS } from "../sources/web";
  *  (a Tavily page about a recall CPSC's database also returned is the same recall, so it isn't new). */
 export type Step = { itemId: string; tool: string; label: string; found: number; fresh?: number; ms: number; source: Source; error?: string };
 
-export type Investigation = { notices: Notice[]; searched: Source[]; steps: Step[]; model?: string; planned: "model" | "fixed" };
+/** `fallback` says why a model-planned search ended on the fixed plan: the model failed, or the check's soft
+ *  deadline came first. `skipped` counts read_page calls answered without Tavily: pages already read for this
+ *  item, and pages about another brand and product. */
+export type Investigation = { notices: Notice[]; searched: Source[]; steps: Step[]; model?: string; planned: "model" | "fixed"; fallback?: "error" | "deadline"; skipped?: { repeat: number; offItem: number } };
 
 const S = (props: Record<string, unknown>, required: string[] = []) => ({ type: "object", additionalProperties: false, properties: props, required });
 const str = (description: string) => ({ type: "string", description });
@@ -151,9 +154,29 @@ function compact(n: Notice, ref: string, item: Item) {
   };
 }
 
-type ToolOut = { notices: Notice[]; raw?: number; note?: string; /** search_web: each result's own page, to drop recalls already found */ webUrls?: string[] };
+type ToolOut = { notices: Notice[]; raw?: number; note?: string; /** search_web: each result's own page, to drop recalls already found */ webUrls?: string[]; /** answered without a tool call: no step is logged */ skip?: boolean };
 
-async function runTool(tool: string, a: Record<string, unknown>, item: Item, pool: Pool): Promise<ToolOut> {
+/** Per item: pages being or already read (one Tavily call per URL, or one batched call per round), the URLs the
+ *  agent has asked for, and the read_page calls answered without Tavily. */
+type Ctx = { pages: Map<string, Promise<string | undefined>>; asked: Set<string>; skipped: { repeat: number; offItem: number } };
+
+/**
+ * A web result about another brand and another product, with none of the item's codes: the agent is told to stay
+ * on the item, and reading it costs a Tavily credit for nothing (the web-catch showcase once read a bread recall
+ * twice for a packet of broccoli seeds). Agency records came from a search on the item itself and always pass.
+ */
+export function offItem(item: Item, n: Notice): boolean {
+  if (!item.brand || n.source !== "web") return false;
+  const hay = normBrand(`${n.title} ${n.text ?? ""}`);
+  const brand = normBrand(item.brand);
+  if (brand && (` ${hay} `.includes(` ${brand} `) || hay.replace(/ /g, "").includes(brand.replace(/ /g, "")))) return false;
+  const words = normBrand(item.product ?? "").split(" ").filter((w) => w.length > 3);
+  if (words.some((w) => hay.includes(w.replace(/e?s$/, "")))) return false;
+  const text = norm(n.text ?? "");
+  return !itemCodes(item).some((c) => text.includes(norm(c)));
+}
+
+async function runTool(tool: string, a: Record<string, unknown>, item: Item, pool: Pool, ctx: Ctx): Promise<ToolOut> {
   switch (tool) {
     case "search_vehicle_recalls":
       return { notices: await vehicleRecalls(String(a.make), String(a.model), Number(a.year)) };
@@ -197,8 +220,17 @@ async function runTool(tool: string, a: Record<string, unknown>, item: Item, poo
     case "read_page": {
       const n = findRef(pool, a.ref);
       if (!n) return { notices: [], note: "No result has that ref." };
-      const pages = await webExtract([n.url]);
-      const text = pages.get(n.url);
+      // Checked before anything is awaited, so two calls for one page in the same round count as a repeat too.
+      if (ctx.asked.has(n.url)) {
+        ctx.skipped.repeat++;
+        return { notices: [], note: "That page was already read above; use what it said.", skip: true };
+      }
+      if (offItem(item, n)) {
+        ctx.skipped.offItem++;
+        return { notices: [], note: `That page (“${n.title.slice(0, 80)}”) is about another brand and product. Stay on this item's own brand and product.`, skip: true };
+      }
+      ctx.asked.add(n.url);
+      const text = await (ctx.pages.get(n.url) ?? webExtract([n.url]).then((p) => p.get(n.url)));
       if (!text) return { notices: [], note: "The page couldn't be read." };
       // A web result's snippet is replaced by the full page. An agency record keeps its own text (its code list)
       // and gains the page: FDA's enforcement page is mostly navigation and once replaced a record's lot list.
@@ -268,10 +300,14 @@ function mustKeep(item: Item, pool: Pool): Notice[] {
   });
 }
 
-export async function investigate(item: Item, useModel: boolean, onStep: (s: Step) => void): Promise<Investigation> {
+/** `until`: past this time the agent stops planning and the fixed plan finishes the search (the check's soft
+ *  deadline, so a slow Token Factory can't run a check past the function's time limit). */
+export async function investigate(item: Item, useModel: boolean, onStep: (s: Step) => void, opts: { until?: number } = {}): Promise<Investigation> {
   const pool: Pool = new Map();
   const steps: Step[] = [];
   const searched = new Set<Source>();
+  const ctx: Ctx = { pages: new Map(), asked: new Set(), skipped: { repeat: 0, offItem: 0 } };
+  let fallback: Investigation["fallback"];
   let refN = 0;
 
   type Ran = { tool: string; args: Record<string, unknown>; text: string; source: Source; ms: number; r?: ToolOut; error?: string };
@@ -282,7 +318,7 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
     const page = tool === "read_page" ? findRef(pool, args.ref) : undefined;
     const { text, source } = label(tool, page ? { ...args, title: page.title.length > 70 ? `${page.title.slice(0, 68).trimEnd()}…` : page.title } : args);
     try {
-      return { tool, args, text, source, r: await runTool(tool, args, item, pool), ms: Date.now() - t };
+      return { tool, args, text, source, r: await runTool(tool, args, item, pool, ctx), ms: Date.now() - t };
     } catch (e) {
       return { tool, args, text, source, error: (e as Error).message, ms: Date.now() - t };
     }
@@ -300,6 +336,7 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
       onStep(step);
       return JSON.stringify({ error: x.error });
     }
+    if (x.r.skip) return JSON.stringify({ note: x.r.note });
     let { notices, note } = x.r;
     if (x.r.webUrls) {
       // A web page about a recall an agency API already returned is the same recall; keep the API's copy.
@@ -335,6 +372,10 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
       ];
       let model: string | undefined;
       for (let round = 0; round < 6; round++) {
+        if (opts.until && Date.now() > opts.until) {
+          fallback = "deadline";
+          throw new Error("the check's soft deadline passed");
+        }
         const last = round === 5;
         const r = await chat(MODELS.agent, { messages, tools: TOOLS, tool_choice: last ? { type: "function", function: { name: "finish" } } : "auto", max_tokens: 1800 }, 45_000);
         model = r.model;
@@ -354,13 +395,24 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
             if (tool !== "search_web" && !steps.some((s) => s.tool === tool && !s.error)) await exec(tool, args);
           }
           const notices = newestFirst([...new Set([...chosen, ...mustKeep(item, pool)])]).slice(0, 8);
-          return { notices, searched: [...searched], steps, model, planned: "model" };
+          return { notices, searched: [...searched], steps, model, planned: "model", skipped: ctx.skipped };
+        }
+        // Pages asked for in the same round are read in one Tavily Extract call (up to five URLs).
+        const wanted = calls
+          .filter((c) => c.function.name === "read_page")
+          .map((c) => findRef(pool, safeArgs(c.function.arguments).ref))
+          .filter((n): n is Notice => Boolean(n && !ctx.asked.has(n.url) && !ctx.pages.has(n.url) && !offItem(item, n)));
+        const urls = [...new Set(wanted.map((n) => n.url))].slice(0, 5);
+        if (urls.length >= 2) {
+          const batch = webExtract(urls).catch(() => new Map<string, string>());
+          for (const u of urls) ctx.pages.set(u, batch.then((m) => m.get(u)));
         }
         const ran = await Promise.all(calls.map((c) => start(c.function.name, safeArgs(c.function.arguments))));
         const outs = ran.map(commit);
         calls.forEach((c, i) => messages.push({ role: "tool", tool_call_id: c.id, content: outs[i] }));
       }
     } catch (e) {
+      fallback ??= "error";
       console.error("[agent] falling back to the fixed plan:", (e as Error).message);
     }
   }
@@ -369,7 +421,7 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
   for (const [tool, args] of fixedPlan(item)) await exec(tool, args);
   const byBrand = [...pool.values()].filter((n) => (item.kind === "vehicle" ? true : brandIn(item.brand, n) || productWords(item, n)));
   const notices = newestFirst([...new Set([...mustKeep(item, pool), ...byBrand])]).slice(0, 8);
-  return { notices, searched: [...searched], steps, planned: "fixed" };
+  return { notices, searched: [...searched], steps, planned: "fixed", fallback, skipped: ctx.skipped };
 }
 
 /** The date the agent is told. TAGOUT_TODAY pins it, so an eval replayed on a later day asks the same question. */

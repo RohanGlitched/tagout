@@ -73,6 +73,9 @@ async function federatedToken(audience: string): Promise<{ value: string; exp: n
  *  (RS256); cached until a few minutes before it expires. */
 async function accessToken(): Promise<string> {
   if (token && token.exp - 300 > Date.now() / 1000) return token.value;
+  // A short-lived token handed in from outside (`gcloud auth print-access-token`), for a trial run from a laptop
+  // or a job that gets its token from its own platform; used only when neither keyless nor key auth is set.
+  if (!process.env.GCS_WIF_AUDIENCE && !process.env.GCS_SA_KEY && process.env.GCS_ACCESS_TOKEN) return process.env.GCS_ACCESS_TOKEN;
   if (process.env.GCS_WIF_AUDIENCE) {
     token = await federatedToken(process.env.GCS_WIF_AUDIENCE);
     return token.value;
@@ -154,14 +157,25 @@ function blob(): Storage {
 }
 
 let chosen: Storage | null | undefined;
+let kind: "gcs" | "blob" | null = null;
 
 /** The configured backend, or null when checks live in files and counters in memory. */
 export function storage(): Storage | null {
   if (chosen !== undefined) return chosen;
-  if (process.env.GCS_BUCKET && (process.env.GCS_WIF_AUDIENCE || process.env.GCS_SA_KEY)) chosen = gcs(process.env.GCS_BUCKET);
-  else if (process.env.BLOB_READ_WRITE_TOKEN) chosen = blob();
-  else chosen = null;
+  if (process.env.GCS_BUCKET && (process.env.GCS_WIF_AUDIENCE || process.env.GCS_SA_KEY || process.env.GCS_ACCESS_TOKEN)) {
+    chosen = gcs(process.env.GCS_BUCKET);
+    kind = "gcs";
+  } else if (process.env.BLOB_READ_WRITE_TOKEN) {
+    chosen = blob();
+    kind = "blob";
+  } else chosen = null;
   return chosen;
+}
+
+/** Which backend storage() chose ("gcs" supports create-only writes with ifMatch "0"). */
+export function storageKind(): "gcs" | "blob" | null {
+  storage();
+  return kind;
 }
 
 export const hasStorage = () => storage() !== null;

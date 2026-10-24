@@ -60,6 +60,8 @@ export type Notice = {
   /** FDA: "Drugs", "Food" or "Devices"; FDA severity class ("Class I" is the most serious). */
   category?: string;
   severity?: string;
+  /** FDA: the recall's status as openFDA reports it ("Ongoing", "Completed", "Terminated"). */
+  status?: string;
   /** Web results only: the agency database Tavily's page was looked up in and didn't come back from, on the
    *  day of the check (a recall the newsroom has published but the database hasn't ingested yet). */
   notInDb?: "cpsc" | "fda";
@@ -92,4 +94,7 @@ export type Verdict = {
   whereToLook?: string;
   checkedAt: string;
   searched: Source[];
+  /** Set when the tag was held back from green because no model answered for this item (see guardGreen in
+   *  lib/agent/verdict.ts): the page should say "Model unavailable: not cleared". */
+  degraded?: "model-unavailable";
 };

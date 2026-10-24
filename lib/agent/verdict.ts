@@ -104,3 +104,48 @@ export function buildVerdict(item: Item, notices: Notice[], searched: Source[], 
   }
   return { ...base, level: "warning", headline: top.match.why, notice: n, proof: top.match.proof, steps, whereToLook: n.whereToLook ?? WHERE[item.kind] };
 }
+
+/** What answered for one item: the tier the check ran on, and which model steps actually returned. */
+export type ModelTrace = {
+  mode?: "full" | "lite" | "rules";
+  /** False when the check ran with no model at all. */
+  useModel: boolean;
+  intake: boolean;
+  agent: boolean;
+  /** The search agent was asked and failed (an error, not the lite tier's planned fixed search). */
+  agentFailed?: boolean;
+  /** Notice reads that returned, and reads that were attempted and failed. */
+  reads: number;
+  readsFailed: number;
+};
+
+/** True when no model took part in this item's tag: the rules tier, or every model step failed or was skipped. */
+export function noModelAnswered(t: ModelTrace): boolean {
+  if (!t.useModel || t.mode === "rules") return true;
+  // A notice whose codes couldn't be read could still list this item: the matcher can't clear against it.
+  if (t.readsFailed > 0) return true;
+  if (t.agent || t.reads > 0) return false;
+  // Only the list reader answered: fine on the lite tier, whose fixed search plan is measured (eval, /proof), but
+  // not when the agent was meant to search and failed (an empty balance fails every call after the first).
+  return !t.intake || Boolean(t.agentFailed);
+}
+
+/**
+ * Green is never shown when no model answered: the eval's no-model arm cleared 10 of 46 recalled units. Such a
+ * tag is held at orange with "Model unavailable: not cleared"; red and orange tags stand, since their notice
+ * already names the product.
+ */
+export function guardGreen(v: Verdict, t: ModelTrace): Verdict {
+  if (v.level !== "inspected" || !noModelAnswered(t)) return v;
+  return {
+    ...v,
+    level: "warning",
+    headline: "Model unavailable: not cleared.",
+    degraded: "model-unavailable",
+    steps: [
+      "Tagout's model didn't answer for this item, so it hasn't been cleared. Run the check again in a little while.",
+      ...v.steps.filter((s) => /^Searched /.test(s)),
+      "Meanwhile you can search it yourself at recalls.gov.",
+    ],
+  };
+}

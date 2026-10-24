@@ -1,10 +1,10 @@
 import "server-only";
 import type { Item, Verdict } from "../types";
-import { modelLabel, usageScope, type Usage } from "../nebius";
+import { deadlineScope, modelLabel, MODELS, usageScope, type Usage } from "../nebius";
 import { readItems } from "./intake";
 import { investigate, type Step } from "./investigate";
-import { readNotice } from "./read-notice";
-import { buildVerdict } from "./verdict";
+import { fillWebText, readNotice } from "./read-notice";
+import { buildVerdict, guardGreen } from "./verdict";
 
 /**
  * One check, start to finish, as a stream of events the page renders as they happen:
@@ -13,7 +13,30 @@ import { buildVerdict } from "./verdict";
  * notice text → the deterministic matcher hangs the tag.
  */
 
-export type Engine = { reader?: string; agent?: string; vision?: string; noticeReader?: string; planned: "model" | "fixed"; mode?: "full" | "lite" | "rules"; tokens?: Usage };
+/**
+ * How a check ran. `readsReused`: notice readings taken from the read cache instead of a model call.
+ * `modelUnavailable`: items held back from green because no model answered for them. `lateLite`: items that ran
+ * on the lite tier because the check passed its soft deadline. `pagesSkipped`: read_page calls answered without
+ * Tavily (a page already read, or one about another brand).
+ */
+export type Engine = {
+  reader?: string;
+  agent?: string;
+  vision?: string;
+  noticeReader?: string;
+  planned: "model" | "fixed";
+  mode?: "full" | "lite" | "rules";
+  tokens?: Usage;
+  readsReused?: number;
+  modelUnavailable?: number;
+  lateLite?: number;
+  pagesSkipped?: number;
+};
+
+/** After SOFT_MS the remaining items run on the lite tier; after DEADLINE_MS no model call is started. Both sit
+ *  well inside the run route's 300 s limit. */
+const SOFT_MS = Number(process.env.CHECK_SOFT_DEADLINE_MS || 150_000);
+const DEADLINE_MS = Number(process.env.CHECK_DEADLINE_MS || 200_000);
 
 export type Event =
   | { t: "items"; items: Item[]; dropped: number; engine: Engine }
@@ -55,21 +78,24 @@ function channel<T>() {
  *  tier); `reader` names the notice reader's model chain for this check. */
 export type RunOptions = { agent?: boolean; reader?: string[]; mode?: Engine["mode"] };
 
-/** One check, with every Token Factory call inside it counted onto the engine. */
+/** One check, with every Token Factory call inside it counted onto the engine, under a 200 s overall deadline. */
 export async function* runCheck(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions = {}): AsyncGenerator<Event> {
   const usage: Usage = { calls: 0, prompt: 0, completion: 0 };
+  const t0 = Date.now();
   const ch = channel<Event>();
   usageScope.run(usage, () =>
-    (async () => {
-      for await (const e of run(input, useModel, opts)) ch.push(e);
-    })()
-      .catch((e) => ch.push({ t: "error", message: (e as Error).message }))
-      .finally(() => ch.close()),
+    deadlineScope.run({ at: t0 + DEADLINE_MS }, () =>
+      (async () => {
+        for await (const e of run(input, useModel, opts, t0 + SOFT_MS)) ch.push(e);
+      })()
+        .catch((e) => ch.push({ t: "error", message: (e as Error).message }))
+        .finally(() => ch.close()),
+    ),
   );
   yield* ch.drain();
 }
 
-async function* run(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions): AsyncGenerator<Event> {
+async function* run(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions, softAt: number): AsyncGenerator<Event> {
   const engine: Engine = { planned: useModel && opts.agent !== false ? "model" : "fixed", mode: opts.mode };
   const intake = await readItems(input.text, input.photos, useModel);
   if (intake.model) engine.reader = modelLabel(intake.model);
@@ -83,24 +109,41 @@ async function* run(input: { text: string; photos: string[] }, useModel: boolean
   const ch = channel<Event>();
   const checkedAt = new Date().toISOString();
 
+  const add = (k: "readsReused" | "modelUnavailable" | "lateLite" | "pagesSkipped", n = 1) => {
+    if (n) engine[k] = (engine[k] ?? 0) + n;
+  };
+
   const one = async (item: Item) => {
     try {
-      const inv = await investigate(item, useModel && opts.agent !== false, (step) => ch.push({ t: "step", step }));
+      // Past the soft deadline an item that hasn't started runs on the lite tier: the fixed plan, Nano reading.
+      const late = Date.now() > softAt;
+      if (late && useModel && opts.agent !== false) add("lateLite");
+      const agentOn = useModel && opts.agent !== false && !late;
+      const chain = late && useModel ? MODELS.lite : opts.reader;
+      const inv = await investigate(item, agentOn, (step) => ch.push({ t: "step", step }), { until: softAt });
+      if (inv.fallback === "deadline") add("lateLite");
+      add("pagesSkipped", (inv.skipped?.repeat ?? 0) + (inv.skipped?.offItem ?? 0));
       if (inv.model) engine.agent = modelLabel(inv.model);
       if (inv.planned === "fixed") engine.planned = "fixed";
-      const reads = await Promise.all(inv.notices.map((n) => readNotice(n, useModel, opts.reader)));
+      await fillWebText(inv.notices);
+      const reads = await Promise.all(inv.notices.map((n) => readNotice(n, useModel, chain)));
+      add("readsReused", reads.filter((r) => r.cached).length);
       const reader = reads.find((r) => r.model)?.model;
       if (reader) engine.noticeReader = modelLabel(reader);
       for (const r of reads) {
         if (r.notice.vehicleModel) continue;
         ch.push({ t: "read", itemId: item.id, noticeId: r.notice.id, source: r.notice.source, codes: r.notice.models.length + r.notice.lots.length + r.notice.upcs.length, struck: r.struck });
       }
-      const verdict = buildVerdict(
-        item,
-        reads.map((r) => r.notice),
-        inv.searched,
-        checkedAt,
-      );
+      const verdict = guardGreen(buildVerdict(item, reads.map((r) => r.notice), inv.searched, checkedAt), {
+        mode: opts.mode,
+        useModel,
+        intake: Boolean(intake.model),
+        agent: inv.planned === "model",
+        agentFailed: inv.fallback === "error",
+        reads: reads.filter((r) => r.model).length,
+        readsFailed: reads.filter((r) => r.failed).length,
+      });
+      if (verdict.degraded) add("modelUnavailable");
       ch.push({ t: "verdict", verdict, planned: inv.planned, model: inv.model ? modelLabel(inv.model) : undefined });
     } catch (e) {
       console.error("[check] item failed", item.id, e);

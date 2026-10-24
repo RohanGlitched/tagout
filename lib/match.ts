@@ -264,7 +264,7 @@ export function matchItem(item: Item, notice: Notice): Match {
 }
 
 /** Long enough and mixed enough (letters and digits, 6+ characters) that finding it in another brand's notice isn't chance. */
-const distinctive = (c: string) => {
+export const distinctive = (c: string) => {
   const n = norm(c);
   return n.length >= 6 && /[A-Z]/.test(n) && /\d/.test(n);
 };
@@ -350,8 +350,7 @@ export function yearsText(years: number[]): string {
 export function decide(results: { notice: Notice; match: Match }[]): { level: TagLevel; top?: { notice: Notice; match: Match }; related: Notice[] } {
   const reds = results.filter((r) => r.match.level === "danger");
   const oranges = results.filter((r) => r.match.level === "warning");
-  // The agency's own record beats a web copy of it; then the newest.
-  const pick = (rs: typeof results) => [...rs].sort((a, b) => Number(a.notice.source === "web") - Number(b.notice.source === "web") || (b.notice.date || "").localeCompare(a.notice.date || ""))[0];
+  const pick = (rs: typeof results) => [...rs].sort(leadOrder)[0];
   if (reds.length) {
     const top = pick(reds);
     return { level: "danger", top, related: [...reds, ...oranges].map((r) => r.notice).filter((n) => n !== top.notice) };
@@ -361,4 +360,32 @@ export function decide(results: { notice: Notice; match: Match }[]): { level: Ta
     return { level: "warning", top, related: oranges.map((r) => r.notice).filter((n) => n !== top.notice) };
   }
   return { level: "inspected", related: [] };
+}
+
+/**
+ * How closely a notice pins down this item: each of the item's own codes it lists counts most, then any other
+ * matched field, then whether the notice prints a code list at all (a recall that names its models can be
+ * compared on the label; one that doesn't, can't).
+ */
+export function specificity(r: { notice: Notice; match: Match }): number {
+  const matched = r.match.proof.filter((p) => p.matched);
+  const codes = matched.filter((p) => p.field === "model" || p.field === "lot" || p.field === "upc" || p.field === "vin").length;
+  const lists = r.notice.models.length + r.notice.lots.length + r.notice.upcs.length > 0 ? 1 : 0;
+  return codes * 10 + matched.length * 2 + lists;
+}
+
+/**
+ * The order the lead notice is picked in, so the same recall leads every run whatever order the search returned
+ * them in: the notice that pins the item down most closely, then the agency's own record before a web copy, then
+ * the newest, then the recall number.
+ */
+export function leadOrder(a: { notice: Notice; match: Match }, b: { notice: Notice; match: Match }): number {
+  const strength = (r: { notice: Notice; match: Match }) => Math.floor(specificity(r) / 2);
+  return (
+    strength(b) - strength(a) ||
+    Number(a.notice.source === "web") - Number(b.notice.source === "web") ||
+    (b.notice.date || "").localeCompare(a.notice.date || "") ||
+    specificity(b) - specificity(a) ||
+    `${a.notice.source}:${a.notice.id}:${a.notice.url}`.localeCompare(`${b.notice.source}:${b.notice.id}:${b.notice.url}`)
+  );
 }
