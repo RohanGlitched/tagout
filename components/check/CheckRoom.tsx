@@ -117,6 +117,8 @@ export default function CheckRoom({ initial, onDone, embedded = false }: { initi
   const verdicts = useMemo(() => new Map((rec.verdicts ?? []).map((v) => [v.itemId, v])), [rec.verdicts]);
   const counts = { danger: 0, warning: 0, inspected: 0 };
   for (const v of verdicts.values()) counts[v.level]++;
+  // Red allergy alerts are counted apart: they are a danger only to someone allergic.
+  const allergyAlerts = [...verdicts.values()].filter((v) => v.level === "danger" && v.allergen).length;
   const pending = items.length - verdicts.size;
   const order = { danger: 0, warning: 1, inspected: 2 } as const;
   // Once everything is decided, red first; while running, keep the order the person typed.
@@ -126,7 +128,7 @@ export default function CheckRoom({ initial, onDone, embedded = false }: { initi
     <Shell embedded={embedded} status={rec.status}>
       <section className={s.top} aria-live="polite">
         <div className={s.titleCol}>
-          <h1 className={s.h1}>{headline(rec.status, items.length, counts, pending)}</h1>
+          <h1 className={s.h1}>{headline(rec.status, items.length, counts, pending, allergyAlerts)}</h1>
           <p className={s.meta}>
             {items.length ? `${plural(items.length, "thing")} checked against NHTSA, CPSC, FDA and the web` : "Reading your list"}
             {when ? `, ${when}` : ""}.
@@ -240,10 +242,14 @@ function WatchOffer({ checkId, photos }: { checkId: string; photos: number }) {
   );
 }
 
-function headline(status: Pub["status"], n: number, c: Record<Verdict["level"], number>, pending: number): string {
+function headline(status: Pub["status"], n: number, c: Record<Verdict["level"], number>, pending: number, allergy = 0): string {
   if (status === "failed" && !n) return "This check didn't run.";
   if (!n) return "Reading your list…";
   if (pending > 0) return `Checking ${plural(n, "thing")}…`;
+  const stop = c.danger - allergy;
+  const alerts = allergy ? `${allergy === 1 ? "one allergy alert" : `${allergy} allergy alerts`}` : "";
+  if (stop && allergy) return `${stop === 1 ? "One thing" : `${stop} things`} to stop using, and ${alerts}.`;
+  if (allergy) return `${alerts.charAt(0).toUpperCase()}${alerts.slice(1)}: not to be eaten by anyone allergic.`;
   if (c.danger) return `${c.danger === 1 ? "One thing" : `${c.danger} things`} to stop using.`;
   if (c.warning) return `${c.warning === 1 ? "One thing" : `${c.warning} things`} to check on the label.`;
   return `Nothing you listed is recalled.`;

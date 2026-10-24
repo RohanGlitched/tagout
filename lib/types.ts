@@ -65,6 +65,14 @@ export type Notice = {
   /** Web results only: the agency database Tavily's page was looked up in and didn't come back from, on the
    *  day of the check (a recall the newsroom has published but the database hasn't ingested yet). */
   notInDb?: "cpsc" | "fda";
+  /** With notInDb "fda": the per-recall openFDA lookups behind it, in words, and the day they ran. */
+  dbCheck?: { on: string; searched: string[] };
+  /** The allergen of an undeclared-allergen recall ("sesame", "milk and soy"), read from the notice's own words
+   *  (lib/notice-facts.ts), when an undeclared allergen is the only hazard it names. */
+  allergen?: string;
+  /** Codes in models/lots/upcs that only the notice reader (Nemotron) listed: the agency record's own fields and
+   *  the deterministic parse didn't have them. */
+  readCodes?: string[];
   /** The agency's own wording the identifiers were read from; every extracted code must appear in it. */
   text?: string;
 };
@@ -77,7 +85,14 @@ export type Proof = {
   yours: string;
   theirs: string;
   matched: boolean;
+  /** A label for the field when "Model or code" would mislead: "USDA establishment" for EST. numbers. */
+  label?: string;
 };
+
+/** How a red tag's deciding code was found in the notice: in a list the reader (Nemotron) read, in the agency
+ *  record's own list, or only in the notice's text (the matcher's fallback); exactly, in a printed range or a
+ *  family code; `window` when a manufacture-date window was checked too. */
+export type Basis = { by: "reader-list" | "record-list" | "text"; how: "exact" | "range" | "family"; window?: boolean };
 
 export type Verdict = {
   itemId: string;
@@ -97,4 +112,8 @@ export type Verdict = {
   /** Set when the tag was held back from green because no model answered for this item (see guardGreen in
    *  lib/agent/verdict.ts): the page should say "Model unavailable: not cleared". */
   degraded?: "model-unavailable";
+  /** An undeclared-allergen recall: the tag tells the household to avoid it only if someone is allergic. */
+  allergen?: string;
+  /** Red tags: how the deciding code matched (for the eval's per-red split). */
+  basis?: Basis;
 };

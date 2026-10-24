@@ -2,6 +2,7 @@ import "server-only";
 import type { Notice } from "../types";
 import { clean, getJson } from "./http";
 import { joinCodeParts } from "../match";
+import { allergenOnly } from "../notice-facts";
 
 /**
  * FDA enforcement reports (drugs, food, medical devices) through openFDA. No key: 240 requests a minute and
@@ -85,6 +86,8 @@ function toNotice(r: Rec): Notice {
     lots: lotsIn(`${r.code_info}\n${r.more_code_info ?? ""}`),
     upcs: codes.upcs,
     category: r.product_type,
+    // An undeclared-allergen food recall ("Product contains undeclared milk"), when that is the only hazard named.
+    ...(r.product_type === "Food" && allergenOnly(r.reason_for_recall ?? "") ? { allergen: allergenOnly(r.reason_for_recall ?? "") } : {}),
     severity: r.classification,
     status: r.status,
     text: `${desc}\n${clean(r.code_info)}\n${clean(r.more_code_info)}`,
@@ -159,21 +162,90 @@ export async function latestFda(kind: FdaKind, limit = 20): Promise<Notice[]> {
   return (j?.results ?? []).map(toNotice);
 }
 
+/** What a per-recall openFDA lookup found: `has` is null when openFDA didn't answer (which says nothing either
+ *  way); `searched` are the lookups in words for the tag ("lot 085261: 0 results"). */
+export type DbCheck = { has: boolean | null; on: string; searched: string[] };
+
+export type RecallQuery = {
+  firm?: string;
+  /** The announcement's own date (YYYY-MM-DD), when known. */
+  noticeDate?: string;
+  lots: string[];
+  upcs: string[];
+  /** Product words from the announcement's title ("gelato", "hoagie"). */
+  nouns: string[];
+  kinds?: FdaKind[];
+  /** The day of the check (YYYY-MM-DD). */
+  today: string;
+};
+
+const digits = (s: string) => s.replace(/\D/g, "");
+const squash = (s: string) => s.toUpperCase().replace(/[^A-Z0-9]/g, "");
+const back = (iso: string, days: number) => new Date(Date.parse(iso) - days * 86_400_000).toISOString().slice(0, 10);
+
 /**
- * Does openFDA have any enforcement report from this firm since a date? Company announcements on fda.gov come
- * weeks before the enforcement report, so a recall page with no report behind it is one only the web search found.
- * Returns null when openFDA didn't answer (which says nothing either way).
+ * Is a firm's enforcement report this recall? It is when it prints one of the announcement's lots or UPCs, or
+ * names one of its product words, or was reported (or started) no earlier than a week before the announcement:
+ * an older report about other products is another recall (the Lidl cookies of September aren't the gelato of
+ * October). Without the announcement's date, any report from the last 30 days counts.
  */
-export async function firmReported(firm: string, since: string): Promise<boolean | null> {
-  const q = `recalling_firm:${quote(firm)}+AND+report_date:[${since.replace(/-/g, "")}+TO+20991231]`;
-  try {
-    const all = await Promise.all(
-      (["food", "drug", "device"] as FdaKind[]).map((k) =>
-        getJson<{ results: Rec[] }>(`https://api.fda.gov/${k}/enforcement.json?search=${encodeURIComponent(q).replace(/%20/g, "+").replace(/%2B/g, "+")}&limit=1${apiKey()}`, { timeoutMs: 12_000 }).then((j) => (j?.results ?? []).length > 0),
+export function sameRecall(r: Pick<Rec, "product_description" | "code_info" | "report_date" | "recall_initiation_date">, q: RecallQuery): boolean {
+  const text = `${r.product_description} ${r.code_info}`;
+  const hay = squash(text);
+  if (q.lots.some((l) => squash(l).length >= 4 && hay.includes(squash(l)))) return true;
+  if (q.upcs.some((u) => digits(u).length >= 8 && digits(text).includes(digits(u).replace(/^0+/, "")))) return true;
+  const words = ` ${text.toLowerCase().replace(/[^a-z]+/g, " ")} `;
+  if (q.nouns.some((w) => w.length >= 4 && new RegExp(` ${w}(e?s)? `).test(words))) return true;
+  const from = (q.noticeDate ? back(q.noticeDate, 7) : back(q.today, 30)).replace(/-/g, "");
+  return (r.report_date ?? "") >= from || (r.recall_initiation_date ?? "") >= from;
+}
+
+/**
+ * Does openFDA have an enforcement report for THIS recall yet (not just any report from the firm)? Searches each
+ * lot and UPC the announcement prints, then the firm's reports of the last 90 days, each judged by sameRecall.
+ * A company announcement with no such report is one only the web search found ("Ahead of the database").
+ */
+export async function fdaHasRecall(q: RecallQuery): Promise<DbCheck> {
+  const kinds = q.kinds?.length ? q.kinds : (["food", "drug", "device"] as FdaKind[]);
+  const searched: string[] = [];
+  let answered = 0;
+  let has = false;
+  const ask = async (search: string) => {
+    const per = await Promise.all(
+      kinds.map((k) =>
+        getJson<{ results: Rec[] }>(`https://api.fda.gov/${k}/enforcement.json?search=${encodeURIComponent(search).replace(/%20/g, "+").replace(/%2B/g, "+")}&limit=100${apiKey()}`, { timeoutMs: 12_000 })
+          .then((j) => {
+            answered++;
+            return j?.results ?? [];
+          })
+          .catch(() => null),
       ),
     );
-    return all.some(Boolean);
-  } catch {
-    return null;
+    return per.some((x) => x !== null) ? per.flatMap((x) => x ?? []) : null;
+  };
+  const codes = [...q.lots.slice(0, 2).map((c) => ({ what: "lot", c })), ...q.upcs.slice(0, 2).map((c) => ({ what: "UPC", c }))];
+  for (const { what, c } of codes) {
+    const fields = what === "UPC" ? [`code_info:${quote(c)}`, `product_description:${quote(c)}`] : [`code_info:${quote(c)}`];
+    const hits = await Promise.all(fields.map(ask));
+    if (hits.every((h) => h === null)) continue;
+    const n = new Set(hits.flatMap((h) => h ?? []).map((r) => r.recall_number)).size;
+    if (n) has = true;
+    searched.push(`${what} ${c}: ${n ? `${n} ${n === 1 ? "report" : "reports"}` : "0 results"}`);
   }
+  if (q.firm) {
+    const since = back(q.noticeDate ?? q.today, 90).replace(/-/g, "");
+    const recs = await ask(`recalling_firm:${quote(q.firm)}+AND+report_date:[${since}+TO+20991231]`);
+    if (recs) {
+      const same = recs.filter((r) => sameRecall(r, q));
+      if (same.length) has = true;
+      searched.push(
+        recs.length
+          ? same.length
+            ? `${q.firm}: ${same.length} matching ${same.length === 1 ? "report" : "reports"}`
+            : `${q.firm}: ${recs.length} other ${recs.length === 1 ? "report" : "reports"}, none for this product`
+          : `${q.firm}: no reports in 90 days`,
+      );
+    }
+  }
+  return { has: answered ? has : null, on: q.today, searched };
 }

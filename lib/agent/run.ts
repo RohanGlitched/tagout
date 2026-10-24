@@ -2,6 +2,7 @@ import "server-only";
 import type { Item, Verdict } from "../types";
 import { deadlineScope, modelLabel, MODELS, usageScope, type Usage } from "../nebius";
 import { tavilyScope, type TavilyTally } from "../sources/web";
+import { markAhead } from "./ahead";
 import { readItems } from "./intake";
 import { investigate, type Step } from "./investigate";
 import { fillWebText, readNotice } from "./read-notice";
@@ -146,7 +147,9 @@ async function* run(input: { text: string; photos: string[] }, useModel: boolean
         if (r.notice.vehicleModel) continue;
         ch.push({ t: "read", itemId: item.id, noticeId: r.notice.id, source: r.notice.source, codes: r.notice.models.length + r.notice.lots.length + r.notice.upcs.length, struck: r.struck });
       }
-      const verdict = guardGreen(buildVerdict(item, reads.map((r) => r.notice), inv.searched, checkedAt), {
+      // An FDA company announcement openFDA has no report of, for this recall, is marked ahead of the database.
+      const notices = await markAhead(reads.map((r) => r.notice), item, checkedAt);
+      const verdict = guardGreen(buildVerdict(item, notices, inv.searched, checkedAt), {
         mode: opts.mode,
         useModel,
         intake: Boolean(intake.model),

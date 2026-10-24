@@ -127,7 +127,7 @@ test("a one-sided date window reads as before or after", () => {
   const item: Item = { id: "t", kind: "product", said: "jar", brand: "Thermos", model: "SK3000" };
   assert.equal(matchItem({ ...item, made: "2022-05" }, jar).level, "danger");
   assert.equal(matchItem({ ...item, made: "2024-02" }, jar).level, null);
-  assert.match(matchItem(item, jar).why, /before 2023-07-31/);
+  assert.match(matchItem(item, jar).why, /before 31 Jul 2023/);
 });
 
 test("a trailing X in a lot is a letter, not a family code", () => {

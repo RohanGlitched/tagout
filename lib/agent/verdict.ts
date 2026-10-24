@@ -1,5 +1,7 @@
 import type { Item, Notice, Source, Verdict } from "../types";
-import { brandIn, decide, matchItem } from "../match";
+import { brandIn, decide, matchItem, windowText } from "../match";
+import { fmtDate } from "../format";
+import { remedyAction } from "../notice-facts";
 import { isListing } from "../sources/listing";
 
 export const SOURCE_NAME: Record<Source, string> = {
@@ -86,7 +88,10 @@ export function buildVerdict(item: Item, notices: Notice[], searched: Source[], 
   const d = decide(results);
   const top = d.top;
   const cleared = results.filter((r) => r.match.level === null).map((r) => r.notice);
-  const related = relatedForBrand(item, [...d.related, ...cleared, ...old].filter((n, i, a) => a.indexOf(n) === i), d.related).slice(0, 4);
+  // Newest first, undated last.
+  const related = relatedForBrand(item, [...d.related, ...cleared, ...old].filter((n, i, a) => a.indexOf(n) === i), d.related)
+    .sort((a, b) => (b.date || "0").localeCompare(a.date || "0"))
+    .slice(0, 4);
   const base = { itemId: item.id, checkedAt, searched, related };
 
   if (d.level === "inspected" || !top) {
@@ -113,24 +118,45 @@ export function buildVerdict(item: Item, notices: Notice[], searched: Source[], 
   const n = top.notice;
   const steps: string[] = [];
   if (n.urgent) steps.push(n.urgent);
+  // An undeclared-allergen food recall: a danger only to someone allergic, and the tag says so.
+  const allergen = item.kind === "food" || /^food/i.test(n.category ?? "") ? n.allergen : undefined;
+  const allergy = allergen ? { allergen } : {};
 
   if (d.level === "danger") {
-    if (!/stop using|do not use|don.t use|immediately/i.test(n.remedy ?? "")) steps.push("Stop using it until you've followed the recall's remedy.");
+    const basis = top.match.basis ? { basis: top.match.basis } : {};
+    if (allergen) {
+      const action = remedyAction(n.remedy);
+      steps.push(`${top.match.why} It is an allergy alert: the product contains ${allergen} that its label doesn't declare.`);
+      if (n.remedy) steps.push(n.remedy);
+      if (n.contact) steps.push(n.contact);
+      const headline = `Do not eat if anyone in your home is allergic to ${allergen}; ${action ?? "follow the recall's remedy below"}.`;
+      return { ...base, level: "danger", headline, notice: n, proof: top.match.proof, steps, ...allergy, ...basis };
+    }
+    if (!/stop using|do not use|don.t use|immediately|not (?:to )?(?:eat|consume)|discard|thrown? away/i.test(n.remedy ?? "")) steps.push(item.kind === "food" ? "Don't eat it, and keep it apart until you've followed the recall's remedy." : "Stop using it until you've followed the recall's remedy.");
     if (n.remedy) steps.push(n.remedy);
     if (n.contact) steps.push(n.contact);
-    return { ...base, level: "danger", headline: top.match.why, notice: n, proof: top.match.proof, steps };
+    return { ...base, level: "danger", headline: top.match.why, notice: n, proof: top.match.proof, steps, ...basis };
   }
 
   // Orange: the product line is recalled; the deciding code isn't confirmed.
   if (item.kind === "vehicle" || n.vehicleModel) {
     steps.push(`Enter your VIN at nhtsa.gov/recalls to see whether your car is included and whether it's already been repaired.`);
     if (n.remedy) steps.push(`If it's included: ${n.remedy}`);
+  } else if (top.match.window) {
+    // Your code is listed and only the made-date window is open: ask for the date, not for a code.
+    const w = top.match.window;
+    const span = w.from <= "1901" ? `made ${windowText(w)}` : w.to >= "2998" ? `made ${windowText(w)}` : `${fmtDate(w.from)} – ${fmtDate(w.to)}`;
+    if (allergen) steps.push(`This is an allergy alert for undeclared ${allergen}: it matters if anyone in your home is allergic to ${allergen}.`);
+    steps.push(item.kind === "food" ? `Check the packed-on or use-by date (${span}).` : `Check the date of manufacture on the label (${span}).`);
+    steps.push(`Add the date to this check and run it again; Tagout will compare it with the recall's window.`);
+    if (n.remedy) steps.push(`If yours is covered: ${n.remedy}`);
   } else {
+    if (allergen) steps.push(`This is an allergy alert for undeclared ${allergen}: it matters if anyone in your home is allergic to ${allergen}.`);
     steps.push(n.whereToLook ? `Find the ${FIELD_NAME[item.kind]}: ${n.whereToLook.replace(/\.$/, "")}.` : WHERE[item.kind]);
     steps.push(`Add it to this check and run it again; Tagout will compare it with the recall's list.`);
     if (n.remedy) steps.push(`If yours is covered: ${n.remedy}`);
   }
-  return { ...base, level: "warning", headline: top.match.why, notice: n, proof: top.match.proof, steps, whereToLook: n.whereToLook ?? WHERE[item.kind] };
+  return { ...base, level: "warning", headline: top.match.why, notice: n, proof: top.match.proof, steps, whereToLook: n.whereToLook ?? WHERE[item.kind], ...allergy };
 }
 
 /** What answered for one item: the tier the check ran on, and which model steps actually returned. */

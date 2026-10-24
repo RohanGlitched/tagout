@@ -1,4 +1,5 @@
-import type { Item, Notice, Proof, TagLevel } from "./types";
+import type { Basis, Item, Notice, Proof, TagLevel } from "./types";
+import { fmtDate } from "./format";
 
 /**
  * The deterministic half of a verdict. The model decides which notices are about the same kind of product; this
@@ -169,22 +170,44 @@ export type Match = {
   proof: Proof[];
   /** One plain sentence explaining the outcome, for the tag. */
   why: string;
+  /** Orange because the code matches but the recall is limited to a made-date window yours doesn't show: the
+   *  steps ask for the date, not for a code. */
+  window?: { from: string; to: string };
+  /** Red: how the deciding code matched (reader's list, the record's own list or the text; exact, range, family). */
+  basis?: Basis;
 };
+
+/** A USDA establishment number as typed ("EST. 7839", "EST. M/P 7839", "P-20935A"): printed inside the USDA mark
+ *  of inspection, it names the plant, not a model. */
+export const EST_CODE = /^\s*(?:EST\.?|EST(?:ABLISHMENT)?\s*(?:NO\.?|#)?)\s*(?:[MPV]\s*\/?\s*[MPV]?\s*-?\s*)?\d{2,6}[A-Z]?\s*$|^\s*[MPV]-\d{2,6}[A-Z]?\s*$/i;
+
+/** The item's establishment number that `code` came from, as typed, if it is one. */
+function establishmentOf(item: Item, code: string): string | undefined {
+  const c = norm(code);
+  return [item.model, ...(item.codes ?? [])].find((x): x is string => Boolean(x && EST_CODE.test(x) && (norm(x) === c || splitIds(x, false).includes(c))));
+}
+
+/** "between 31 Mar 2026 and 7 Oct 2026", "before 7 Oct 2026", "after 31 Mar 2026". */
+export function windowText(w: { from: string; to: string }): string {
+  return w.from <= "1901" ? `before ${fmtDate(w.to)}` : w.to >= "2998" ? `after ${fmtDate(w.from)}` : `between ${fmtDate(w.from)} and ${fmtDate(w.to)}`;
+}
 
 const listedIds = (list: string[], dashRanges: boolean) => [...new Set(list.flatMap((t) => splitIds(t, dashRanges)))];
 
 const RANK = { exact: 4, range: 3, wildcard: 2, variant: 1 } as const;
 
-/** Find the best match of `yours` among the notice's listed ids. */
-function best(yours: string | undefined, listed: string[], family = true): { how: IdMatch; theirs: string } | null {
+/** Find the best match of `yours` among the notice's listed ids (`tok` is the listed id as split). */
+function best(yours: string | undefined, listed: string[], family = true): { how: IdMatch; theirs: string; tok: string } | null {
   if (!yours) return null;
-  let found: { how: IdMatch; theirs: string } | null = null;
+  let found: { how: IdMatch; theirs: string; tok: string } | null = null;
   for (const l of listed) {
     const how = compareId(yours, l, family);
-    if (how && (!found || RANK[how] > RANK[found.how!])) found = { how, theirs: l.replace("..", " through ") };
+    if (how && (!found || RANK[how] > RANK[found.how!])) found = { how, theirs: l.replace("..", " through "), tok: l };
   }
   return found;
 }
+
+const HOW: Record<"exact" | "range" | "wildcard", Basis["how"]> = { exact: "exact", range: "range", wildcard: "family" };
 
 /**
  * Match one item against one notice the model judged relevant.
@@ -200,9 +223,19 @@ export function matchItem(item: Item, notice: Notice): Match {
   const models = listedIds(notice.models, false);
   const lots = listedIds(notice.lots, true);
   const upcs = notice.upcs.map(norm).filter((u) => u.length >= 8);
+  // The ids the agency record itself listed (its own fields, or the deterministic parse of them), as against
+  // those only the notice reader listed: for the eval's split of what decided each red tag.
+  const byReader = new Set((notice.readCodes ?? []).map(norm));
+  const recordIds = new Set([
+    ...listedIds(notice.models.filter((x) => !byReader.has(norm(x))), false),
+    ...listedIds(notice.lots.filter((x) => !byReader.has(norm(x))), true),
+    ...notice.upcs.filter((x) => !byReader.has(norm(x))).map(norm),
+  ]);
+  const listBasis = (b: { how: IdMatch; tok: string }, window?: boolean): Basis => ({ by: recordIds.has(b.tok) ? "record-list" : "reader-list", how: HOW[b.how as keyof typeof HOW] ?? "exact", ...(window ? { window } : {}) });
+  const textBasis = (window?: boolean): Basis => ({ by: "text", how: "exact", ...(window ? { window } : {}) });
 
   // The model number and any other printed code (a TYPE, style or item number) are all tried.
-  let m: { how: IdMatch; theirs: string } | null = null;
+  let m: { how: IdMatch; theirs: string; tok: string } | null = null;
   let mYours = item.model;
   // Codes as typed may carry their label ("TYPE SRTH"); try the bare code too.
   const mine = [item.model, ...(item.codes ?? [])].filter((c): c is string => Boolean(c));
@@ -232,10 +265,10 @@ export function matchItem(item: Item, notice: Notice): Match {
 
   // When a notice lists lots, the lot decides. A model match alone isn't enough for a lot-limited recall.
   if (lots.length && item.lot) {
-    if (strongLot) return { level: "danger", proof, why: `Lot ${item.lot} is listed in this recall.` };
+    if (strongLot) return { level: "danger", proof, why: `Lot ${item.lot} is listed in this recall.`, basis: listBasis(l!) };
     if (lotInText) {
       proof.push({ field: "lot", yours: item.lot, theirs: `${item.lot} (in the notice's text)`, matched: true });
-      return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.` };
+      return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.`, basis: textBasis() };
     }
     // Yours is a listed lot without its last letters ("091026" against "091026 DL"), or with letters it doesn't
     // print: the line or plant code decides, and only the label shows it.
@@ -255,19 +288,22 @@ export function matchItem(item: Item, notice: Notice): Match {
     const tied = strongModel || u || brandIn(item.brand, notice);
     if (listed && tied) {
       proof.push({ field: "lot", yours: listed.c, theirs: listed.b!.theirs, matched: true });
-      return { level: "danger", proof, why: `Lot ${listed.c} is listed in this recall.` };
+      return { level: "danger", proof, why: `Lot ${listed.c} is listed in this recall.`, basis: listBasis(listed.b!) };
     }
     if (tied) {
       return { level: "warning", proof, why: "This recall is limited to certain lots. Check the lot number printed on yours." };
     }
   }
 
+  let byText = false;
   if (!strongModel && !u && m?.how !== "variant") {
     const printed = [...mine, ...mine.flatMap((c) => splitIds(c, false))].find(inText);
     if (printed) {
       strongModel = true;
+      byText = true;
       mYours = printed;
-      proof.push({ field: "model", yours: printed, theirs: `${printed} (in the notice's text)`, matched: true });
+      const est = establishmentOf(item, printed);
+      proof.push({ field: "model", yours: est ?? printed, theirs: `${printed} (in the notice's text)`, matched: true, ...(est ? { label: "USDA establishment" } : {}) });
     }
   }
   // No lot list was read (a company announcement whose reader failed): the item's UPC and its pack or date code
@@ -277,24 +313,34 @@ export function matchItem(item: Item, notice: Notice): Match {
     if (code) {
       proof.push({ field: "upc", yours: item.upc, theirs: `${item.upc} (in the notice's text)`, matched: true });
       proof.push({ field: "lot", yours: code, theirs: `${code} (in the notice's text)`, matched: true });
-      return { level: "danger", proof, why: `UPC ${item.upc} and code ${code} are printed in this recall.` };
+      return { level: "danger", proof, why: `UPC ${item.upc} and code ${code} are printed in this recall.`, basis: textBasis() };
     }
   }
   if (!lots.length && lotInText && !strongModel && !u) {
     proof.push({ field: "lot", yours: item.lot!, theirs: `${item.lot} (in the notice's text)`, matched: true });
-    return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.` };
+    return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.`, basis: textBasis() };
   }
 
   if (strongModel || u) {
-    const what = strongModel ? `${/^\d/.test(mYours!) ? "Model " : ""}${mYours}` : `UPC ${item.upc}`;
+    // A USDA establishment number names the plant ("USDA establishment EST. 7839"), not a model.
+    const est = strongModel ? establishmentOf(item, mYours!) : undefined;
+    if (est && !byText) for (const p of proof) if (p.field === "model" && p.yours === mYours) Object.assign(p, { yours: est, label: "USDA establishment" });
+    const what = est ? `USDA establishment ${est.trim()}` : strongModel ? `${/^\d/.test(mYours!) ? "Model " : ""}${mYours}` : `UPC ${item.upc}`;
     const window = notice.madeRanges?.[0];
+    const food = item.kind === "food";
     if (window) {
       const made = parseMade(item.made);
-      const span = window.from <= "1901" ? `before ${window.to}` : window.to >= "2998" ? `after ${window.from}` : `between ${window.from} and ${window.to}`;
-      if (!made) return { level: "warning", proof, why: `${what} is listed, but only units made ${span}. Check the date of manufacture on the label.` };
+      const span = windowText(window);
+      if (!made)
+        return {
+          level: "warning",
+          proof,
+          why: food ? `${what} is listed, but only products made ${span}. Check the packed-on or use-by date on the package.` : `${what} is listed, but only units made ${span}. Check the date of manufacture on the label.`,
+          window,
+        };
       const inside = made.end >= window.from && made.start <= window.to;
       proof.push({ field: "made", yours: item.made!, theirs: `made ${span}`, matched: inside });
-      if (!inside) return { level: null, proof, why: `${what} is listed, but only units made ${span} are recalled, and yours was made ${item.made}.` };
+      if (!inside) return { level: null, proof, why: `${what} is listed, but only ${food ? "products" : "units"} made ${span} are recalled, and yours was made ${item.made}.` };
     }
     // The notice limits the recall to certain lots or date codes, but the list it was read into has none: the
     // notice's own text decides. A lot or date code on the label that the notice doesn't print can't be red.
@@ -305,7 +351,9 @@ export function matchItem(item: Item, notice: Notice): Match {
       proof.push({ field: "lot", yours: unlisted, theirs: "not printed in the notice", matched: false });
       return { level: "warning", proof, why: `${what} is listed, but this recall names particular lot or date codes and ${unlisted} isn't one the notice prints. Compare the code on yours with the notice.` };
     }
-    return { level: "danger", proof, why: `${what} is listed in this recall${m?.how === "range" ? " range" : ""}.` };
+    const w = Boolean(window);
+    const basis: Basis = strongModel ? (byText || !m ? textBasis(w) : listBasis(m, w)) : { by: byReader.has(u!) ? "reader-list" : "record-list", how: "exact", ...(w ? { window: w } : {}) };
+    return { level: "danger", proof, why: `${what} is listed in this recall${m?.how === "range" ? " range" : ""}.`, basis };
   }
   if (m?.how === "variant") {
     return { level: "warning", proof, why: `The recall lists ${m.theirs}, which is close to your ${item.model}. Compare the full model number on the label.` };
@@ -335,7 +383,7 @@ export const distinctive = (c: string) => {
   return n.length >= 6 && /[A-Z]/.test(n) && /\d/.test(n);
 };
 
-const EXCLUDED = /\bnot\b[^.]{0,40}\b(included|affected|part of|subject|recalled|covered)\b|\bexclud(ed|es|ing)\b/i;
+export const EXCLUDED = /\bnot\b[^.]{0,40}\b(included|affected|part of|subject|recalled|covered)\b|\bexclud(ed|es|ing)\b/i;
 
 /**
  * Is this code printed in the text as a whole word (ignoring case, dashes and dots), outside any sentence that

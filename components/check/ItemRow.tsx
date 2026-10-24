@@ -118,7 +118,7 @@ function Detail({ verdict, struck }: { verdict: Verdict; struck: string[] }) {
           <tbody>
             {verdict.proof.map((p, i) => (
               <tr key={i} data-matched={p.matched}>
-                <th scope="row">{FIELD[p.field]}</th>
+                <th scope="row">{p.label ?? FIELD[p.field]}</th>
                 <td className="code">{p.yours}</td>
                 <td>
                   <span className={s.mark} aria-label={p.matched ? "matches" : "doesn't match"}>
@@ -147,6 +147,12 @@ function Detail({ verdict, struck }: { verdict: Verdict; struck: string[] }) {
               {n.date ? `, ${fmtDate(n.date)}` : ""}
               {n.units ? `. ${fmtUnits(n.units)}` : ""}
             </p>
+            {verdict.allergen ? (
+              <p className={s.allergenLine}>
+                <span className={s.allergenChip}>Allergen: {verdict.allergen}</span>
+                Only a danger to someone allergic to {verdict.allergen}.
+              </p>
+            ) : null}
             {n.hazard ? <p className={s.hazard}>{n.hazard}</p> : null}
             {n.source === "web" ? <WebNote n={n} checkedAt={verdict.checkedAt} /> : null}
           </div>
@@ -200,7 +206,9 @@ function WebNote({ n, checkedAt }: { n: NonNullable<Verdict["notice"]>; checkedA
       {n.notInDb === "cpsc"
         ? `Tavily found this notice on ${host}. CPSC's recall database didn't return it on ${fmtDate(checkedAt)}, so only the web search could catch it.`
         : n.notInDb === "fda"
-          ? `Tavily found this company announcement on ${host}. FDA's enforcement reports (openFDA) had nothing from this firm in the 90 days before ${fmtDate(checkedAt)}, so only the web search could catch it.`
+          ? n.dbCheck
+            ? `openFDA had no report of this recall on ${fmtDate(n.dbCheck.on)}${n.dbCheck.searched.length ? ` (${n.dbCheck.searched.join("; ")})` : ""}. Tavily found the company's announcement on ${host}, so only the web search could catch it.`
+            : `Tavily found this company announcement on ${host}. FDA's enforcement reports (openFDA) had nothing from this firm in the 90 days before ${fmtDate(checkedAt)}, so only the web search could catch it.`
           : /fsis\.usda\.gov$/.test(host)
           ? `Tavily found this notice on ${host}. USDA's recall API turns away automated clients, so the web search is the only way to reach meat and poultry recalls.`
           : `Tavily found this notice on ${host}.`}

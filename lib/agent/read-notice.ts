@@ -1,7 +1,9 @@
 import "server-only";
 import type { Notice } from "../types";
 import { docKey, readDoc, sha256, writeDoc } from "../docs";
-import { looksLikeCode, norm } from "../match";
+import { norm } from "../match";
+import { noticeFacts } from "../notice-facts";
+import { verifyCodes } from "./verify-codes";
 import { MODELS, NO_THINKING, structured } from "../nebius";
 import { storage } from "../storage";
 import { webExtract } from "../sources/web";
@@ -9,8 +11,8 @@ import { webExtract } from "../sources/web";
 /**
  * Reads the affected model numbers, lots, UPCs and manufacture-date windows out of a notice's own wording.
  * CPSC prints model numbers only in prose, NHTSA in its summaries, so a model reads them. Then every code the
- * model returns is checked against the notice text, character for character after normalisation; a code that
- * isn't there is struck and never reaches the matcher.
+ * model returns is checked against the notice text as whole words, outside any "not included" sentence
+ * (lib/agent/verify-codes.ts); a code that isn't printed there is struck and never reaches the matcher.
  */
 
 const SCHEMA = {
@@ -107,6 +109,12 @@ export async function readNotice(n: Notice, useModel: boolean, chain: string[] =
     const d = datelineDate(text);
     if (d) n = { ...n, date: d };
   }
+  // A web notice's hazard, remedy, consumer contact and allergen, from its own sentences (lib/notice-facts.ts):
+  // agency records carry these as fields, a web page doesn't. No model; each is checked against the text.
+  if (n.source === "web" && text) {
+    const f = noticeFacts(text, n.title);
+    n = { ...n, hazard: n.hazard ?? f.hazard, remedy: n.remedy ?? f.remedy, contact: n.contact ?? f.contact, allergen: n.allergen ?? f.allergen };
+  }
   if (!useModel || !text || n.vehicleModel) return { notice: n, struck: [] };
 
   const hash = textHash(n, text);
@@ -137,19 +145,12 @@ export async function readNotice(n: Notice, useModel: boolean, chain: string[] =
     await saveRead(n, hash, r.model, r.data);
   }
   try {
-    const hay = norm(text);
-    const struck: string[] = [];
-    const keep = (codes: string[]) =>
-      codes.filter((c) => {
-        // "A through B": both ends must be printed.
-        const ends = c.split(/\s+(?:through|thru|to)\s+|\s*[–—]\s*/i);
-        const ok = ends.every((e) => norm(e).length >= 2 && hay.includes(norm(e)));
-        if (!ok && looksLikeCode(c)) struck.push(c); // junk (paths, prose) is dropped without a mention
-        return ok;
-      });
-    const models = keep(r.data.models);
-    const lots = keep(r.data.lots);
-    const upcs = keep(r.data.upcs);
+    // Every code must be printed in the notice as whole words, outside any "not included" sentence
+    // (lib/agent/verify-codes.ts); the rest are struck.
+    const { models, lots, upcs, struck } = verifyCodes(r.data, text);
+    // Codes only the reader listed (the record's own fields and parse didn't have them).
+    const own = new Set([...n.models, ...n.lots, ...n.upcs].map(norm));
+    const readCodes = [...new Set([...models, ...lots, ...upcs])].filter((c) => !own.has(norm(c)));
     const inText = (d: string | null) => Boolean(d && /^\d{4}-\d{2}-\d{2}$/.test(d) && text.includes(d.slice(0, 4)));
     // A window can be open at one end ("made before July 2023"); readers also answer "July 2023" for a date.
     const from = isoDay(r.data.made_from, "start"), to = isoDay(r.data.made_to, "end");
@@ -160,6 +161,7 @@ export async function readNotice(n: Notice, useModel: boolean, chain: string[] =
         models: [...new Set([...n.models, ...models])],
         lots: [...new Set([...n.lots, ...lots])],
         upcs: [...new Set([...n.upcs, ...upcs])],
+        ...(readCodes.length ? { readCodes } : {}),
         madeRanges: range ?? n.madeRanges,
         whereToLook: r.data.where_to_look || n.whereToLook,
         // A web page often has no date in its metadata; take the announcement date when its year is in the text.
