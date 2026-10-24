@@ -105,7 +105,7 @@ flowchart LR
 
 1. **Read.** Nemotron turns each line into a kind of product, a brand and the codes a recall turns on (model, lot, VIN, UPC, NDC). Each code it returns must appear in what the person typed or it is dropped. VINs are decoded with NHTSA's vPIC. Label photos are read by NVIDIA Nemotron 3.5 Super VL on Token Factory (7 of 7 codes on the sample labels), with Qwen3.8 27B and Gemma 3 27B as fallbacks.
 2. **Search.** Nemotron 3 Ultra runs an agent loop with six tools: NHTSA vehicle recalls, NHTSA child-seat recalls, CPSC (SaferProducts.gov), openFDA enforcement reports, Tavily search and Tavily extract. It reads results and searches again with better words (CPSC files a space heater under "tower heaters"). It always runs a Tavily search too, because the databases trail the agencies' newsrooms by one to six weeks, and USDA FSIS is only reachable through the web. A few rules keep recalls the model may not drop: any notice containing the item's own code, a brand's car-seat campaigns, and a brand's FDA recalls of the product when no lot was given.
-3. **Read the notices.** CPSC prints model numbers only in prose ("The model 'TYPE SRTH' is printed on the silver rating label"). Nemotron reads the affected models, lots, UPCs and date windows from each notice. Every code is then looked up in the notice's text, character for character; anything not printed there is struck, and the check says so.
+3. **Read the notices.** CPSC prints model numbers only in prose ("The model 'TYPE SRTH' is printed on the silver rating label"). Nemotron reads the affected models, lots, UPCs and date windows from each notice. Every code is then looked up in the notice's text, as whole words and outside any "not included" sentence (8 fixture tests in `test/verify-codes.test.ts`); anything not printed there is struck, and the check says so.
 4. **Match.** [`lib/match.ts`](lib/match.ts) compares the household's codes with each list, without a model: exact codes, printed ranges (`2LC1234 through 2LC1240`), family codes (`5160X`, in model lists only), TYPE codes and manufacture-date windows, open at one end or both. When the reader's list missed a code that the notice's own text prints, the text wins. A near miss (`CT22425` vs `CT22425B`), or a model match when the recall is limited to date codes that yours isn't, is orange, never red. Cars are orange at most: NHTSA has no public per-VIN API, so the tag links to its VIN lookup.
 
 The tags follow industrial lockout/tagout colours:
@@ -139,7 +139,8 @@ Across the 105-case eval a full check averaged **2.6¢ of Nemotron an item** (pl
 - **Search**, limited to `cpsc.gov`, `nhtsa.gov`, `fda.gov`, `fsis.usda.gov`, `recalls.gov` and `foodsafety.gov`, plus a maker's domain when the agent asks for one. It catches recalls newer than the databases (CPSC's newsroom runs about a week ahead of its API) and USDA FSIS meat and poultry recalls, whose API turns away automated clients.
 - **Extract**, to read a recall page in full when the snippet doesn't show which models or lots are affected.
 - A `cpsc.gov` page that CPSC's database also has is swapped for the database record, so tags cite recall numbers. The log says so: "Tavily web search … 6 found, 2 new" means four pages confirmed recalls already found and two added new ones.
-- A recall that only Tavily found carries a badge on the tag: **Ahead of the database** when CPSC's database didn't have it on the day of the check, **Found by Tavily** otherwise (with the USDA note for FSIS recalls).
+- A recall that only Tavily found carries a badge on the tag: **Ahead of the database** when the agency database had no record of that recall on the day of the check (decided per recall: for openFDA, no report matching the lot, UPC or product, e.g. "openFDA had no report of this recall on 25 Oct (lot 085261: 0 results)"), **Found by Tavily** otherwise (with the USDA note for FSIS recalls). Web notices get the hazard, remedy and contact from their own sentences, and undeclared-allergen recalls read as allergy alerts.
+- **Measured:** with Tavily off, Tagout cleared all 10 held-out recalled units that no database listed yet; with it on, it flagged 8 (see [Held out](#held-out-39-new-cases-run-once)).
 - [This check](https://tagout-recalls.vercel.app/check/u6jkua8xia) (Oct 25) has three recalls only Tavily could find: a Lidl Gelatelli gelato lot and a WinCo hoagie-roll UPC from FDA company announcements that openFDA had no report for (both **Do not use**), and a USDA FSIS Kayem hot-dog recall limited to production dates (**Check the label**). [An earlier one](https://tagout-recalls.vercel.app/check/vk9vuyk3zi) (Oct 15) caught Gardeners Basics sprouting seeds and a Ukrop's FSIS recall.
 - In the eval, the Vornado heater's red tag came from the CPSC newsroom page Tavily found, after the database record's own text failed to give up the code.
 
@@ -187,11 +188,19 @@ The live demo runs on one Token Factory balance and one Tavily plan, and it has 
 ## Who pays
 
 Households use it free.
-- **First customer: property managers and home-warranty firms.** They already keep each unit's appliance list (brand, model, serial). Tagout watches it, and a recall that names one of those models becomes a work order with the agency's own sentence as proof. $1 per unit per month; our cost is a few cents once per unit, then a share of a daily sweep that costs a few cents a day for everyone.
+- **First customer: property managers and home-warranty firms.** They already keep each unit's appliance list (brand, model, serial). Tagout watches it, and a recall that names one of those models shows up as an alert on that unit's watch and feed (or a webhook into their own system), with the agency's own sentence as proof. $1 per unit per month; our cost is about 37¢ once per unit (eight appliances), then a share of a daily sweep capped under 10¢ a day for everyone. **Why now:** since California's AB 628, a landlord has 30 days from notice to repair or replace a recalled stove or refrigerator (Civil Code 1941.1(c)(1), leases from Jan 1 2026). No paying customer yet.
 - **Second: resale.** Selling a recalled consumer product is unlawful in the U.S. (15 U.S.C. 2068). A seller photographs the label; Tagout red-tags a listing only when the item's own code is in a recall, so honest sellers aren't blocked.
 - **Later:** baby registries, insurers' loss-prevention programs, recalling firms (CPSC's own numbers: direct notice moves consumer response from 6% to 50%).
 
 All-in costs (Nemotron plus Tavily): about 4.6¢ an item for a full check and 1.4¢ on the lite tier on the 105 cases; 4.9¢ and 1.7¢ on the held-out set. Details and the API: [/business](https://tagout-recalls.vercel.app/business).
+
+## Already out there, and what Tagout adds
+
+| Option | What it does well | What Tagout adds |
+|---|---|---|
+| Recall-alert apps (e.g. RecallSentry) | Free alerts from FDA, CPSC, NHTSA and USDA, matched on the UPC, model, lot or VIN you enter | A published, held-out error rate; the agency's own sentence beside every red tag |
+| Agency sites and email lists (recalls.gov, CPSC, SaferCar) | The source of truth; per-VIN lookup for cars | Reads the notice prose for codes (CPSC's model field is always empty) and finds recalls on the web before the databases list them |
+| Retailer and maker notices | Reach buyers they know about | Covers what a building owns, whoever sold it, with an open API, a feed and a webhook per list |
 
 ## Data sources
 
@@ -270,7 +279,7 @@ npx tsx --conditions=react-server scripts/try-check.ts "Vornado heater TYPE SRTH
 - U.S. recalls only. A product sold only elsewhere may be recalled there without a U.S. notice.
 - Green means nothing was found that day, not that a product is safe.
 - CPSC's API returns a fake error record and caches it per URL, so every call carries a cache-buster and retries. Its `Model` field is always empty, which is why model numbers are read from the prose.
-- The demo has per-visitor and daily limits on model calls: 12 checks per 10 minutes and 15 a day per address on the full tier, 60 a day in all (`IP_DAILY_MODEL_CAP`, `DAILY_MODEL_CAP`); then 30 and 120 on the lite tier (`IP_DAILY_LITE_CAP`, `DAILY_LITE_CAP`); past both, the rules-only plan.
+- The demo's spending is capped in dollars (see Spend guards) as well as in calls: 12 checks per 10 minutes and 15 a day per address on the full tier, 60 a day in all (`IP_DAILY_MODEL_CAP`, `DAILY_MODEL_CAP`); then 30 and 120 on the lite tier (`IP_DAILY_LITE_CAP`, `DAILY_LITE_CAP`); past both, the rules-only plan.
 - Photos: Nemotron 3.5 Super VL leads since Oct 25. It can spend its whole output budget reasoning on a hard photo, so the call has a generous token budget and Qwen3.8 27B and Gemma 3 27B stand behind it.
 - Tagout isn't affiliated with NHTSA, CPSC, FDA or USDA. Always confirm with the recall notice; every tag links to it.
 

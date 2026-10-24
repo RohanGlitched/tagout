@@ -54,7 +54,7 @@ export default function How() {
               <h3>Each notice&apos;s list is read and checked</h3>
               <p>
                 CPSC prints model numbers only in prose (&ldquo;The model &lsquo;TYPE SRTH&rsquo; is printed on the silver rating label&rdquo;). Nemotron reads the affected models,
-                lots, UPCs and date windows out of each notice. Then each one is looked up in the notice&apos;s own text, character for character. A code the notice doesn&apos;t print
+                lots, UPCs and date windows out of each notice. Then each one is looked up in the notice&apos;s own text, as whole words and outside any “not included” sentence. A code the notice doesn&apos;t print
                 is struck, and the check says so.
               </p>
             </li>

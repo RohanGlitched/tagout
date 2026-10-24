@@ -7,6 +7,7 @@ import type { TagLevel } from "@/lib/types";
 import summary from "@/eval/summary.json";
 import holdout from "@/eval/holdout-summary.json";
 import heldAfter from "@/eval/holdout-after-fixes.json";
+import heldExtra from "@/eval/holdout-arms-extra.json";
 import caseFile from "@/eval/cases.json";
 import notes from "@/eval/notes.json";
 import s from "./proof.module.css";
@@ -254,6 +255,20 @@ export default function Proof() {
                     <td>{cents(a.usdPerItemWithTavily)}</td>
                   </tr>
                 ))}
+                <tr>
+                  <th scope="row">No model at all (rules only; measured at today&apos;s code)</th>
+                  <td>
+                    <b>{heldExtra.rules.right}</b>/{heldExtra.rules.n}
+                  </td>
+                  <td>
+                    {heldExtra.rules.falseRed.length}/{heldExtra.rules.falseRedOf}
+                  </td>
+                  <td>
+                    {heldExtra.rules.falseClear.length}/{heldExtra.rules.falseClearOf}
+                  </td>
+                  <td>{heldExtra.rules.lag}</td>
+                  <td>{cents(heldExtra.rules.usdPerItemWithTavily)}</td>
+                </tr>
               </tbody>
             </table>
           </div>
