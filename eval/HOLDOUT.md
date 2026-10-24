@@ -81,10 +81,10 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 
 ## Replaying (`npm run eval:replay`)
 
-- **What it does.** It re-runs every recorded arm offline from `eval/.cache` against the current code: no network, no keys, no spend. Then it re-scores into `replay-summary.json` and compares with the recorded tags and with the committed replay. It exits 1 if any tag moved since the committed replay.
+- **What it does.** It re-runs every recorded arm offline from `eval/.cache` against the checked-out code: no network, no keys, no spend. Then it re-scores into `replay-summary.json` and compares with the recorded tags and with the committed replay. It exits 1 if any tag moved since the committed replay.
 - **Held-out set.** `npm run eval:replay -- --holdout` does the same for this set. All 5 arms replay with no cache misses.
 - **Determinism.** Two offline replays in a row gave identical tags.
-- **Tagout on the 105, current code: 105/105, every call from the cache.**
+- **Tagout on the 105 at `a1d8b21`: 105/105, every call from the cache.**
   - Against the code that shipped after Oct 15, 11 tuned cases made model calls the cache didn't have. The code changed under them: listing pages filtered out of web results, and the struck-code cleanup.
   - Those 11 were filled with one live run, $0.09 of Token Factory and keyless Tavily, into `results-current/`.
   - Two cases changed tag against the recorded run, both for the better and both still right or now right: n12 green→orange, k04 orange→green.
@@ -105,7 +105,11 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 - **Tavily mode differed by arm.** It was keyed for most Tagout and lite calls (84 credits) and keyless for 36 calls. Keyless and keyed search the same index, as far as we know.
 - **h03 differs between the run and the replay in the lite arm.** It was green when run and orange on replay; both are right. A response that failed during the run was probably cached later by another arm.
 - **Ground truth for the lag window rests on saved excerpts** of the FDA and FSIS pages (`notices-holdout/`). The Kayem cases are scored orange-or-red because the product list is a PDF we did not parse.
-- **The code measured is commit `a1d8b21`.** Changes made to `lib/` after it are not in these numbers. On Oct 25 another engineer had uncommitted work in `lib/agent`, `lib/match.ts` and `lib/sources`.
+- **The code measured is commit `a1d8b21`, not the newest code.** `lib/` changed after it, in commits `3adbbab` through `2965b11` on Oct 25: never green without a model, retries only where they help, cached notice reads, and the daily sweep. An offline replay at `2965b11` ran into cache misses:
+  - held-out Tagout arm: 30 of 39 cases replay exactly and 9 need live calls (h03 h10 h11 h12 h21 h23 h37 h38 h39). Among the exact ones, h15 and h16 moved from green to orange;
+  - tuned Tagout arm: 88 of 105 replay exactly, and 17 need live calls.
+
+  To quote these as current-code numbers, re-run the held-out arms at the final commit. That is about $0.3 of Token Factory, since most calls are cached. Then run `npm run eval:replay` and commit the new replay summaries. Anyone who reads these results before changing `lib/` makes the set less held-out; say so if it happens.
 
 ## Spend for this pass
 
