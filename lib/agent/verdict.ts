@@ -1,5 +1,6 @@
 import type { Item, Notice, Source, Verdict } from "../types";
 import { brandIn, decide, matchItem } from "../match";
+import { isListing } from "../sources/listing";
 
 export const SOURCE_NAME: Record<Source, string> = {
   nhtsa: "NHTSA",
@@ -47,6 +48,33 @@ function greenHeadline(item: Item, cleared: Notice[], what: string, old: Notice[
   return `No recall found for ${what}.`;
 }
 
+/** A translated copy of an agency page ("cpsc.gov/zh-CN/Recalls/...", "/es/..."): the English page is the record. */
+const TRANSLATED = /^\/[a-z]{2,3}(?:-[a-z]{2,4})?\/(?:recalls|newsroom|safety|news)\b/i;
+
+/**
+ * "Other recalls for this brand", as shown under a tag: only notices whose firm, title, make or model list names
+ * the item's brand (a Vornado heater never lists a Trane recall), with no listing or category pages, no translated
+ * copies of a page, and each recall once. `matched` notices (the matcher's other red or orange hits) are kept for
+ * an item with no brand, since they matched on a code; everything else needs the brand.
+ */
+export function relatedForBrand(item: Pick<Item, "brand">, notices: Notice[], matched: Notice[] = []): Notice[] {
+  const seen = new Set<string>();
+  return notices.filter((n) => {
+    if (!(brandIn(item.brand, n) || (!item.brand && matched.includes(n)))) return false;
+    let path = "";
+    try {
+      path = new URL(n.url).pathname;
+    } catch {}
+    if (n.url && (isListing(n.url) || TRANSLATED.test(path))) return false;
+    const keys = [`${n.source} ${n.id}`, n.title.toLowerCase().replace(/\W+/g, " ").trim(), n.url.toLowerCase().replace(/^https?:\/\/(www\.)?/, "").replace(/\/+$/, "")];
+    // A web notice's id names the site ("CPSC newsroom"), not the recall, so it doesn't identify one.
+    const own = n.source === "web" ? keys.slice(1) : keys;
+    if (own.some((k) => k && seen.has(k))) return false;
+    for (const k of own) if (k) seen.add(k);
+    return true;
+  });
+}
+
 /** Turns the matcher's result into the tag: a headline, the proof, and what to do, in order. */
 export function buildVerdict(item: Item, notices: Notice[], searched: Source[], checkedAt: string): Verdict {
   // Food is eaten within months and medicine expires within about three years, so older recalls of those
@@ -58,7 +86,7 @@ export function buildVerdict(item: Item, notices: Notice[], searched: Source[], 
   const d = decide(results);
   const top = d.top;
   const cleared = results.filter((r) => r.match.level === null).map((r) => r.notice);
-  const related = [...d.related, ...cleared, ...old].filter((n, i, a) => a.indexOf(n) === i).slice(0, 4);
+  const related = relatedForBrand(item, [...d.related, ...cleared, ...old].filter((n, i, a) => a.indexOf(n) === i), d.related).slice(0, 4);
   const base = { itemId: item.id, checkedAt, searched, related };
 
   if (d.level === "inspected" || !top) {
