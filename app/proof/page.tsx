@@ -5,6 +5,7 @@ import { TAG_WORDS } from "@/components/tag/Tag";
 import { REPO_URL } from "@/lib/site";
 import type { TagLevel } from "@/lib/types";
 import summary from "@/eval/summary.json";
+import holdout from "@/eval/holdout-summary.json";
 import caseFile from "@/eval/cases.json";
 import notes from "@/eval/notes.json";
 import s from "./proof.module.css";
@@ -36,6 +37,17 @@ const GROUP_RIGHT: Record<string, string> = {
 
 const right = (c: Case, level: string) => (c.expect === "not-danger" ? level === "warning" || level === "inspected" : level === c.expect);
 const pct = (x: number | null) => (x == null ? "–" : `${Math.round(x * 100)}%`);
+const HELD_NAME: Record<string, string> = {
+  tagout: "Tagout: Nemotron 3 Ultra agent and readers",
+  "tagout-noweb": "Tagout with Tavily off",
+  "fixed-plan": "Fixed plan, Ultra readers",
+  "fixed-plan-nano": "Lite tier: fixed plan, Nano reader",
+  "fixed-plan-nano-noweb": "Lite tier with Tavily off",
+};
+const held = holdout.arms.find((a) => a.arm === "tagout");
+const heldLag = held?.bySet.lag;
+const lagAbl = holdout.tavilyAblation?.tagout?.lag;
+const heldTav = lagAbl ? { lagRecalled: lagAbl.shouldFlag, lagFlagged: lagAbl.withTavily.flagged, lagRed: lagAbl.withTavily.red } : null;
 const cents = (x: number) => (x < 0.0005 ? "0¢" : `${(x * 100).toFixed(x < 0.01 ? 2 : 1)}¢`);
 const secs = (ms: number | null) => (ms == null ? "–" : `${(ms / 1000).toFixed(0)} s`);
 
@@ -129,6 +141,7 @@ export default function Proof() {
         <nav className={s.index} aria-label="On this page">
           {[
             ["head-h", "Short answer"],
+            ["held-h", "Held out"],
             ["arms-h", "Each setup"],
             ["cases-h", "Every case"],
             ["wrong-h", "What went wrong"],
@@ -198,6 +211,62 @@ export default function Proof() {
             </ul>
           </section>
         ) : null}
+
+        {/* The held-out set: written after the fixes, committed before any run, run once (eval/HOLDOUT.md). */}
+        <section className={s.section} aria-labelledby="held-h">
+          <h2 id="held-h" className={s.h2}>
+            Held out: {holdout.cases} new cases, run once
+          </h2>
+          <p className={s.sub}>
+            The {summary.cases} cases above shaped Tagout&apos;s fixes, so they flatter it. These {holdout.cases} were written on Oct 25 from recalls published Oct 14–22, committed before
+            anything ran, and run once on the code as it stood. {heldLag?.n ?? 12} of them are recalls the agency databases didn&apos;t list yet: FDA company announcements and a USDA meat
+            recall that only a web search can find.
+          </p>
+          <div className={s.tableWrap}>
+            <table className={s.table}>
+              <thead>
+                <tr>
+                  <th scope="col">Setup</th>
+                  <th scope="col">Right</th>
+                  <th scope="col">Wrongly red</th>
+                  <th scope="col">Recalled, cleared</th>
+                  <th scope="col">Not in a database yet</th>
+                  <th scope="col">Cost per item, Tavily included</th>
+                </tr>
+              </thead>
+              <tbody>
+                {holdout.arms.map((a) => (
+                  <tr key={a.arm}>
+                    <th scope="row">{HELD_NAME[a.arm] ?? a.label}</th>
+                    <td>
+                      <b>{a.right}</b>/{a.n}
+                    </td>
+                    <td>
+                      {a.falseRed.length}/{a.falseRedOf}
+                    </td>
+                    <td>
+                      {a.falseClear.length}/{a.falseClearOf}
+                    </td>
+                    <td>
+                      {a.bySet.lag.right}/{a.bySet.lag.n}
+                    </td>
+                    <td>{cents(a.usdPerItemWithTavily)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <ul className={s.claims}>
+            <li>
+              <b>Tavily earns its place.</b> Of the {heldTav?.lagRecalled ?? 10} recalls no database listed yet, Tagout without the web search cleared every one green; with it, Tagout flagged{" "}
+              {heldTav?.lagFlagged ?? 8} ({heldTav?.lagRed ?? 3} red, the rest orange with the FDA notice).
+            </li>
+            <li>
+              <b>No wrong red tag</b> on new cases either: 0 of {held?.falseRedOf}. Four recalled units were cleared, which is the error that matters most; each cause is in the eval notes and is
+              being fixed, and those fixes are measured separately so these numbers stay held out.
+            </li>
+          </ul>
+        </section>
 
         <section className={s.section} aria-labelledby="arms-h">
           <h2 id="arms-h" className={s.h2}>

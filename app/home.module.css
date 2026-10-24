@@ -187,6 +187,21 @@
   text-underline-offset: 3px;
 }
 
+.held {
+  margin-top: 22px;
+  max-width: 52em;
+  padding: 14px 18px;
+  border-left: 4px solid var(--ink);
+  background: var(--stock);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #2f363d;
+}
+.held a {
+  color: var(--focus);
+  font-weight: 650;
+}
+
 /* Recalled lately */
 .week {
   max-width: var(--max);

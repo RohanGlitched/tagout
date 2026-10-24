@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Label from "@/components/label/Label";
 import Tag from "@/components/tag/Tag";
@@ -17,27 +17,41 @@ const LENGTH = 4200;
  * real time; the replay itself is compressed to a few seconds and plays once, or again on request.
  */
 export default function HeroReplay({ replay }: { replay: Replay }) {
+  // React re-renders only when the replay crosses one of its events; the clock and the progress bar are written
+  // straight to the DOM each frame, so a phone isn't re-rendering three labels sixty times a second.
+  const marks = useMemo(() => [...new Set(replay.rows.flatMap((r) => [r.tagAt, ...r.lines.map((l) => l.at)]).concat(1))].sort((a, b) => a - b), [replay]);
   const [t, setT] = useState(0);
   const [run, setRun] = useState(0);
   const raf = useRef(0);
+  const clock = useRef<HTMLSpanElement>(null);
+  const bar = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const paint = (p: number) => {
+      if (clock.current) clock.current.textContent = `0:${String(Math.round(p * replay.seconds)).padStart(2, "0")}`;
+      if (bar.current) bar.current.style.transform = `scaleX(${p})`;
+    };
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      paint(1);
       setT(1);
       return;
     }
     const start = performance.now();
+    let next = 0;
+    setT(0);
     const tick = (now: number) => {
       const p = Math.min(1, (now - start) / LENGTH);
-      setT(p);
+      paint(p);
+      if (p >= marks[next]) {
+        while (next < marks.length && p >= marks[next]) next++;
+        setT(p);
+      }
       if (p < 1) raf.current = requestAnimationFrame(tick);
     };
-    setT(0);
     raf.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf.current);
-  }, [run]);
+  }, [run, marks, replay.seconds]);
 
-  const secs = Math.round(t * replay.seconds);
   const done = t >= 1;
 
   return (
@@ -50,8 +64,8 @@ export default function HeroReplay({ replay }: { replay: Replay }) {
           </span>
         </div>
         <div className={s.clock} aria-hidden="true">
-          <span className={s.time}>
-            0:{String(secs).padStart(2, "0")}
+          <span className={s.time} ref={clock}>
+            0:00
           </span>
           <span className={s.of}>of {replay.seconds} s</span>
         </div>
@@ -62,7 +76,7 @@ export default function HeroReplay({ replay }: { replay: Replay }) {
           Replay
         </button>
         <div className={s.progress} aria-hidden="true">
-          <i style={{ transform: `scaleX(${t})` }} />
+          <i ref={bar} style={{ transform: "scaleX(0)" }} />
         </div>
       </div>
 

@@ -18,6 +18,7 @@ import { yearWall } from "@/lib/wall";
 import { AGENCY, fmtDate, noticeRef, plural } from "@/lib/format";
 import type { Proof } from "@/lib/types";
 import summary from "@/eval/summary.json";
+import holdout from "@/eval/holdout-summary.json";
 import s from "./home.module.css";
 
 export const revalidate = 600;
@@ -65,6 +66,7 @@ export default async function Home() {
   const weekAgo = newest ? new Date(Date.parse(newest.date.slice(0, 10)) - 7 * 86400000).toISOString().slice(0, 10) : "";
   const lastWeek = newest ? distinct.filter((n) => (n.date ?? "") > weekAgo).length : 0;
 
+  const held = holdout.arms.find((a) => a.arm === "tagout");
   const months = wall ? wall.months.length : 0;
   const red = demo?.items?.find((i) => demo.verdicts?.find((v) => v.itemId === i.id)?.level === "danger");
   const monthWords = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
@@ -156,6 +158,12 @@ export default async function Home() {
             </p>
           </div>
           <Ladder />
+          {held ? (
+            <p className={s.held}>
+              <b>On {holdout.cases} new cases it had never seen</b>, committed before a single run: {held.right} of {held.n} right, none wrongly tagged do not use, and{" "}
+              {held.falseClear.length} recalled units cleared, each traced to a cause. <Link href="/proof#held-h">The held-out results</Link>
+            </p>
+          ) : null}
         </section>
 
         {wall ? (
