@@ -199,6 +199,26 @@ An undeclared-allergen recall is a danger only to someone allergic, so its red t
 - **Four new cases**, none in the other sets: three recalled lots (Donutful donuts, undeclared milk, H-0011-2027; Cloud Cafe collagen milk, fish, H-1400-2026; Organiccs collagen capsules, shellfish, H-1401-2026) and one neighbouring lot (Donutful `26079`). `node eval/verify-allergen.mjs` checks them against openFDA with no Tagout code: 4/4.
 - **Tagout, run once (`results-allergen/`, `allergen-summary.json`): 4/4**, three red allergy alerts naming milk, fish and shellfish, and the near miss orange. $0.076 of Token Factory; Tavily in keyless mode, no credits.
 
+## Held out #2: pre-registered in public (prepared Oct 25, not yet run)
+
+Nineteen new cases (`cases-holdout2.json`, commit `45dc3a1`, sha256 `34907813bf703a3dafc877c60cfdf0a7f775a9e57a8cab9ac23432fcc2014cbd`), built for what the first sets never tested on a recalled unit:
+
+- **2 inside a printed serial range** and its edge (Giant SureLock serial `00010 2450` inside `00010 2303`-`00010 2607`; `00010 2650` outside), **2 on a prefix family** (Lestoil `PR01` followed by a number between 25091 and 26168), **4 on a best-by or use-by window** (two pizza best-by dates either side of "all dates through 3/30/2027", a bean dip inside "August 14th to September 25th, 2026", a salad with no code inside its use-by window), and **4 gaps in an enumerated list**, which a range reading would wrongly call recalled (a rollator lot, a tirzepatide lot, the next product ID after a list, a bread lot between two listed ones).
+- **2 lag-window recalls** no database has: FDA's Oct 23 advisory on Haifa cold smoked sprats (every lot), and Pan Pepin's allergy alert (a listed lot and a gap).
+- **Plus** 3 listed codes (one with its dash dropped, one model with a sale window), a car and a clean item.
+- **Dates.** On Oct 25 no database had a record dated Oct 23 or later (CPSC's newest batch is Oct 22, openFDA's newest report Oct 14), so the database cases are the freshest records in no other case file (CPSC Sep 3 - Oct 8, openFDA Oct 14). Nothing in `lib/` was changed with these cases in view.
+- **Ground truth** (`verify-holdout2.mjs`, `verified-holdout2.json`, commit `9ecb544`): 19/19, checked with no Tagout code. For a range, family or window it parses the printed bounds and compares; a gap's neighbours must be printed and the value printed in no CPSC or FDA record of the brand. Re-run it right before the run: NHTSA can add a campaign.
+- **To run once, after pushing the cases with the tag `prereg-2026-10-27` and checking the tag shows on GitHub:**
+
+  ```bash
+  node eval/verify-holdout2.mjs
+  npx tsx --conditions=react-server eval/run.ts tagout --cases cases-holdout2.json --results results-holdout2 --today 2026-10-29 --cap 0.7
+  npx tsx --conditions=react-server eval/run.ts fixed-plan-nano --cases cases-holdout2.json --results results-holdout2 --today 2026-10-29 --cap 0.1
+  node eval/score.mjs --cases cases-holdout2.json --verified verified-holdout2.json --results results-holdout2 --out holdout2-summary.json --first none
+  ```
+
+  Expected spend: about $0.55 of Token Factory for Tagout and $0.05 for the lite tier (19 cases at the measured 2.8¢ and 0.2¢), and about 40 + 30 Tavily credits keyed (add `--keyless` to spend none).
+
 ## Replaying (`npm run eval:replay`)
 
 - **What it does.** It re-runs every recorded arm offline from `eval/.cache` against the checked-out code: no network, no keys, no spend. Then it re-scores into `replay-summary.json` and compares with the recorded tags and with the committed replay. It exits 1 if any tag moved since the committed replay.
@@ -265,7 +285,10 @@ An undeclared-allergen recall is a danger only to someone allergic, so its red t
 | `results-current/` | The 11 refilled tuned cases |
 | `results-holdout-after/`, `holdout-after-fixes.json` | This set after the fixes (no longer held out) |
 | `results-after/`, `summary-current.json` | Every arm of the 105 at `a9a0f8f`; Tagout and the lite tier again at `ed2dc77` |
-| `results-holdout-extra/`, `holdout-arms-extra.mjs`, `holdout-arms-extra.json` | Rules-only replay and the cascade on this set (and the cascade on the 105) |
+| `results-holdout-extra/`, `holdout-arms-extra.mjs`, `holdout-arms-extra.json` | Rules-only arm on all 39 and the cascade on this set (and the cascade on the 105) |
+| `basis-split.mjs` | What decided each red tag, copied from the replays into `summary-current.json` and `holdout-after-fixes.json` |
+| `cases-allergen.json`, `verify-allergen.mjs`, `verified-allergen.json`, `results-allergen/`, `allergen-summary.json` | The allergy-alert cases and their one run |
+| `cases-holdout2.json`, `verify-holdout2.mjs`, `verified-holdout2.json`, `notices-holdout2/` | Held out #2, pre-registered, not yet run |
 
 Commands:
 
