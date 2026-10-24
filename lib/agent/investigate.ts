@@ -6,6 +6,7 @@ import { searchCpsc } from "../sources/cpsc";
 import { childSeatRecalls, vehicleRecalls } from "../sources/nhtsa";
 import { firmReported, searchFda, type FdaKind } from "../sources/fda";
 import { webExtract, webSearch, OFFICIAL_DOMAINS } from "../sources/web";
+import { isOfficial } from "./read-notice";
 
 /**
  * The search half of a check, for one item. Nemotron plans it: it chooses which agency databases to query and
@@ -294,6 +295,13 @@ function mustKeep(item: Item, pool: Pool): Notice[] {
     // Medicine, food or a device with no lot given: the brand's own FDA recalls of that product stay, so the tag
     // can say "check the lot" instead of clearing it (the eval caught Clear Eyes drops cleared this way).
     if ((item.kind === "drug" || item.kind === "food" || item.kind === "device") && !item.lot && !item.upc && !item.ndc && n.source === "fda" && productWords(item, n)) return true;
+    // The same on the official recall sites the web search covers (FSIS has no database Tagout can query), where
+    // a recall often names a whole range ("Recalls Meat and Poultry Products") rather than the item's own words:
+    // the eval caught an FSIS hot-dog recall the agent read and left out, cleared green.
+    if ((item.kind === "drug" || item.kind === "food" || item.kind === "device") && !item.lot && !item.upc && !item.ndc && n.source === "web" && isOfficial(n.url) && (productWords(item, n) || wholeRange(item, n))) return true;
+    // A consumer product with no model number given: the brand's recalls of that kind of product stay too (a
+    // recall of every unit prints no code to compare, so only the tag can say "check yours").
+    if (item.kind === "product" && !item.model && !item.codes?.length && (n.source === "cpsc" || (n.source === "web" && isOfficial(n.url))) && productWords(item, n)) return true;
     if (!codes.length) return false;
     const hay = norm(n.text ?? "");
     return codes.some((c) => hay.includes(c));
@@ -394,7 +402,7 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
           for (const [tool, args] of fixedPlan(item)) {
             if (tool !== "search_web" && !steps.some((s) => s.tool === tool && !s.error)) await exec(tool, args);
           }
-          const notices = newestFirst([...new Set([...chosen, ...mustKeep(item, pool)])]).slice(0, 8);
+          const notices = keepNewest([...new Set([...chosen, ...mustKeep(item, pool)])]);
           return { notices, searched: [...searched], steps, model, planned: "model", skipped: ctx.skipped };
         }
         // Pages asked for in the same round are read in one Tavily Extract call (up to five URLs).
@@ -420,7 +428,7 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
   // The fixed plan: the same tools in a set order, with brand and code matching for relevance.
   for (const [tool, args] of fixedPlan(item)) await exec(tool, args);
   const byBrand = [...pool.values()].filter((n) => (item.kind === "vehicle" ? true : brandIn(item.brand, n) || productWords(item, n)));
-  const notices = newestFirst([...new Set([...mustKeep(item, pool), ...byBrand])]).slice(0, 8);
+  const notices = keepNewest([...new Set([...mustKeep(item, pool), ...byBrand])]);
   return { notices, searched: [...searched], steps, planned: "fixed", fallback, skipped: ctx.skipped };
 }
 
@@ -428,6 +436,16 @@ export async function investigate(item: Item, useModel: boolean, onStep: (s: Ste
 const today = () => process.env.TAGOUT_TODAY || new Date().toISOString().slice(0, 10);
 
 const newestFirst = (ns: Notice[]) => [...ns].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+/**
+ * The eight newest dated notices, plus up to three undated ones. A web page often has no date until it is read,
+ * and sorting it as the oldest let a brand's eight old FDA records push out the company announcement of the week
+ * (the eval's lag-window mung-bean recall, cleared green by the fixed plan).
+ */
+export function keepNewest(ns: Notice[]): Notice[] {
+  const sorted = newestFirst(ns);
+  return [...sorted.filter((n) => n.date).slice(0, 8), ...sorted.filter((n) => !n.date).slice(0, 3)];
+}
 
 function safeArgs(s: string): Record<string, unknown> {
   try {
@@ -442,6 +460,17 @@ function productWords(item: Item, n: Notice): boolean {
   const words = normBrand(item.product).split(" ").filter((w) => w.length > 3);
   const hay = normBrand(n.title);
   return brandIn(item.brand, n) && words.some((w) => hay.includes(w));
+}
+
+/**
+ * A recall from the item's brand whose title names a range rather than a product: "Kayem Foods Inc. Recalls Meat
+ * and Poultry Products Due to …", "… Recalls Various Products". Only the words after the recall verb count, so a
+ * firm called "… Products, Inc." doesn't make every one of its recalls a range.
+ */
+export function wholeRange(item: Item, n: Notice): boolean {
+  if (!brandIn(item.brand, n)) return false;
+  const what = n.title.split(/\b(?:recalls?|recalling|issues|announces|expands|withdraws)\b/i).slice(1).join(" ").split(/\b(?:due to|because|after|for possible|over)\b/i)[0];
+  return /\b(products|items|various|multiple|several)\b/i.test(what ?? "");
 }
 
 export function fixedPlan(item: Item): [string, Record<string, unknown>][] {

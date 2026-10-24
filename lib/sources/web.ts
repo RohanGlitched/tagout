@@ -99,6 +99,23 @@ export async function webExtract(urls: string[]): Promise<Map<string, string>> {
   const r = await tavily("/extract", { urls: urls.slice(0, 5), extract_depth: "basic", format: "text" }, 20_000);
   if (!r.ok) return out;
   const j = (await r.json()) as { results: { url: string; raw_content: string }[] };
-  for (const x of j.results ?? []) out.set(x.url, clean(x.raw_content).slice(0, 16_000));
+  for (const x of j.results ?? []) out.set(x.url, mainText(clean(x.raw_content)));
   return out;
+}
+
+/** Where a press release's own text starts: its dateline ("WASHINGTON, Oct. 17, 2026 –") or announcement header. */
+const BODY_START = /\b(?:FSIS Announcement|Company Announcement Date|FOR IMMEDIATE RELEASE|[A-Z]{4,}(?:,\s[A-Z][A-Za-z.]+)?,\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s\d{1,2},\s\d{4})/;
+
+/**
+ * Up to 16,000 characters of a page, from where its recall text starts. Most recall pages fit whole; some (FSIS
+ * pages) print 28,000 characters of menus before the announcement, which a plain cut lost entirely, so a reader saw
+ * only navigation. A long page whose dateline sits past the middle of the window is read from a little before the
+ * dateline (the recall number, class and title sit just above it).
+ */
+export function mainText(page: string, max = 16_000): string {
+  if (page.length <= max) return page;
+  const m = BODY_START.exec(page);
+  if (!m || m.index < max / 2) return page.slice(0, max);
+  const start = page.lastIndexOf("\n", m.index - 600) + 1;
+  return page.slice(start, start + max);
 }

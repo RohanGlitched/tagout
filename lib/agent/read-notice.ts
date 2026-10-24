@@ -101,6 +101,12 @@ export async function readNotice(n: Notice, useModel: boolean, chain: string[] =
     prefetched.add(n);
   }
   const text = (n.text ?? "").slice(0, 12_000);
+  // A web page with no date in its metadata is dated by its own dateline, without a model: an undated 2015 recall
+  // page would otherwise count as current (food recalls older than about a year can't cover what's in the cupboard).
+  if (n.source === "web" && !n.date) {
+    const d = datelineDate(text);
+    if (d) n = { ...n, date: d };
+  }
   if (!useModel || !text || n.vehicleModel) return { notice: n, struck: [] };
 
   const hash = textHash(n, text);
@@ -168,6 +174,20 @@ export async function readNotice(n: Notice, useModel: boolean, chain: string[] =
 }
 
 const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+/**
+ * The date a press release states for itself, as YYYY-MM-DD: its dateline ("WASHINGTON, Oct. 17, 2026 –",
+ * "WASHINGTON, April 20, 2015") or an announcement header ("Company Announcement Date: October 16, 2026").
+ * Other dates in the text (production windows, best-by dates) are not datelines and are ignored.
+ */
+export function datelineDate(text: string): string {
+  const m = text.match(/(?:\b[A-Z]{4,}(?:,\s[A-Z][A-Za-z.]+)?,|Announcement Date:|FOR IMMEDIATE RELEASE[\s\S]{0,4}?)\s*\(?\s*([A-Z][a-z]{2,8})\.?\s(\d{1,2}),\s(\d{4})\b/);
+  if (!m) return "";
+  const mo = MONTHS.indexOf(m[1].slice(0, 3).toLowerCase()) + 1;
+  const d = Number(m[2]);
+  if (!mo || d < 1 || d > 31) return "";
+  return `${m[3]}-${String(mo).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+}
 
 /** "2023-07-14", "July 2023", "07/2023" or "2023-07" as an ISO day; a month alone is its first or last day. */
 export function isoDay(d: string | null, side: "start" | "end"): string | null {
