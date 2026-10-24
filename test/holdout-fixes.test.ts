@@ -6,7 +6,7 @@ import { brandIn, codeCuts, joinCodeParts, lotLike, matchItem, printedIn, splitI
 import { lotsIn } from "../lib/sources/fda.ts";
 import { mainText } from "../lib/sources/web.ts";
 import { datelineDate } from "../lib/agent/read-notice.ts";
-import { wholeRange } from "../lib/agent/investigate.ts";
+import { keepNewest, wholeRange } from "../lib/agent/investigate.ts";
 import type { Item, Notice } from "../lib/types.ts";
 
 const notice = (n: Partial<Notice>): Notice => ({ source: "fda", id: "H-0001-2027", title: "Recalled drink", date: "2026-10-01", url: "https://example.org", models: [], lots: [], upcs: [], ...n });
@@ -113,6 +113,18 @@ test("a brand's recall of a whole range of products counts as the same product l
   assert.equal(wholeRange(item, w("Zenith Foods Recalls Meat and Poultry Products")), false);
 });
 
+test("an undated web page isn't pushed out by a brand's old records", () => {
+  const old = Array.from({ length: 10 }, (_, i) => notice({ id: `F-${i}`, date: `20${10 + i}-01-01` }));
+  const fresh = notice({ source: "web", id: "FDA website", date: "", url: "https://www.fda.gov/safety/x" });
+  const kept = keepNewest([...old, fresh]);
+  assert.ok(kept.includes(fresh));
+  assert.equal(kept.filter((n) => n.date).length, 8);
+  assert.equal(kept[0].date, "2019-01-01");
+  // Four undated pages and nothing dated: all four stay, as before.
+  const four = Array.from({ length: 4 }, (_, i) => notice({ source: "web", id: `W${i}`, date: "", url: `https://www.fsis.usda.gov/${i}` }));
+  assert.equal(keepNewest(four).length, 4);
+});
+
 // 4. Lag-window announcements: the deciding code typed without the word "lot".
 
 test("a pack date or bare code that the lot list lists is the lot; one it doesn't stays orange", () => {
@@ -126,6 +138,12 @@ test("a pack date or bare code that the lot list lists is the lot; one it doesn'
   // A calendar date is never taken for a lot.
   assert.deepEqual(lotLike({ ...lentils, made: "03/2026" }), []);
   assert.deepEqual(lotLike({ ...lentils, made: "JUN 07 2027" }), []);
+  // The reader read no lists (it failed on the page): the UPC and the pack date both printed in the text decide.
+  const unread = { ...ann, lots: [], upcs: [] };
+  assert.equal(matchItem(lentils, unread).level, "danger");
+  assert.equal(matchItem({ ...lentils, made: "31-141" }, unread).level, "warning");
+  assert.equal(matchItem({ ...lentils, upc: undefined }, unread).level, "warning");
+  assert.equal(matchItem({ ...lentils, upc: "000012345679" }, unread).level, "warning");
   // Without the brand, the UPC or a model tying it to the recall, a matching code alone is never red.
   assert.notEqual(matchItem({ ...lentils, brand: "Zenith", upc: undefined }, ann).level, "danger");
 });

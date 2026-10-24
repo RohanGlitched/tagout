@@ -270,6 +270,16 @@ export function matchItem(item: Item, notice: Notice): Match {
       proof.push({ field: "model", yours: printed, theirs: `${printed} (in the notice's text)`, matched: true });
     }
   }
+  // No lot list was read (a company announcement whose reader failed): the item's UPC and its pack or date code
+  // both printed in the notice's text pin it down. Either one alone doesn't.
+  if (!lots.length && !item.lot && !strongModel && !u && item.upc && printedIn(item.upc, notice.text)) {
+    const code = lotLike(item).find((c) => printedIn(c, notice.text));
+    if (code) {
+      proof.push({ field: "upc", yours: item.upc, theirs: `${item.upc} (in the notice's text)`, matched: true });
+      proof.push({ field: "lot", yours: code, theirs: `${code} (in the notice's text)`, matched: true });
+      return { level: "danger", proof, why: `UPC ${item.upc} and code ${code} are printed in this recall.` };
+    }
+  }
   if (!lots.length && lotInText && !strongModel && !u) {
     proof.push({ field: "lot", yours: item.lot!, theirs: `${item.lot} (in the notice's text)`, matched: true });
     return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.` };

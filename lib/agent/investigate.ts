@@ -438,13 +438,14 @@ const today = () => process.env.TAGOUT_TODAY || new Date().toISOString().slice(0
 const newestFirst = (ns: Notice[]) => [...ns].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
 /**
- * The eight newest dated notices, plus up to three undated ones. A web page often has no date until it is read,
+ * The eight newest notices, with room for at least three undated ones. A web page often has no date until it is read,
  * and sorting it as the oldest let a brand's eight old FDA records push out the company announcement of the week
  * (the eval's lag-window mung-bean recall, cleared green by the fixed plan).
  */
 export function keepNewest(ns: Notice[]): Notice[] {
   const sorted = newestFirst(ns);
-  return [...sorted.filter((n) => n.date).slice(0, 8), ...sorted.filter((n) => !n.date).slice(0, 3)];
+  const dated = sorted.filter((n) => n.date).slice(0, 8);
+  return [...dated, ...sorted.filter((n) => !n.date).slice(0, Math.max(3, 8 - dated.length))];
 }
 
 function safeArgs(s: string): Record<string, unknown> {
