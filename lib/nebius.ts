@@ -21,14 +21,17 @@ export const MODELS = {
   /** The notice reader for the lite tier (after the day's Ultra budget): the fixed search plan with Nano reading
    *  the notices measured 98 of 105 right, no recalled unit cleared, at about 0.3 cents an item. */
   lite: list(process.env.NEBIUS_LITE_READER_MODELS, ["nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B", "nvidia/nemotron-3-super-120b-a12b"]),
-  /** Reads label photos. There is no NVIDIA vision model on Token Factory today, so this is the one non-Nemotron role. */
-  vision: list(process.env.NEBIUS_VISION_MODELS, ["Qwen/Qwen3.8-27B", "google/gemma-3-27b-it"]),
+  /** Reads label photos. Nemotron 3.5 Super VL joined Token Factory on Oct 12 2026, after the photo step was built
+   *  on Qwen; on Oct 25 it read every code on the sample labels exactly (scripts/vision-eval.ts, eval/HOLDOUT.md),
+   *  so it leads and Qwen and Gemma stay as fallbacks. */
+  vision: list(process.env.NEBIUS_VISION_MODELS, ["nvidia/Nemotron-3.5-Super-VL", "Qwen/Qwen3.8-27B", "google/gemma-3-27b-it"]),
 };
 
 /** "nvidia/Nemotron-3-Ultra-550b-a55b" → "Nemotron 3 Ultra". */
 export function modelLabel(id: string): string {
   const n = id.split("/").pop() ?? id;
   if (/ultra/i.test(n)) return "Nemotron 3 Ultra";
+  if (/super-vl/i.test(n)) return "Nemotron 3.5 Super VL";
   if (/super/i.test(n)) return "Nemotron 3 Super";
   if (/lightning/i.test(n)) return "Nemotron 3.5 Lightning";
   if (/nano/i.test(n)) return "Nemotron 3 Nano";

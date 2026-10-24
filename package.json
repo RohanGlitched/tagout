@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test test/*.test.ts"
+    "test": "tsx --conditions=react-server --test test/*.test.ts"
   },
   "engines": {
     "node": "22.x"

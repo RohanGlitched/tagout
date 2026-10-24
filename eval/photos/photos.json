@@ -1,0 +1,4 @@
+[
+ { "id": "vornado-1", "file": "vornado-sample-1.jpg", "note": "Made-up sample label (the demo video's), not a real unit's.", "expect": { "brand": "Vornado", "codes": ["SRTH", "2211 04471", "2211"] } },
+ { "id": "vornado-2", "file": "vornado-sample-2.jpg", "note": "Made-up sample label, a second layout.", "expect": { "brand": "Vornado", "codes": ["SRTH", "VH-SRTH-BLK", "2210 4471 0093", "2211"] } }
+]
