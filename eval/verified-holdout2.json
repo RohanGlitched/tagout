@@ -1,0 +1,211 @@
+{
+ "at": "2026-10-24T22:47:07.560Z",
+ "results": [
+  {
+   "id": "g01",
+   "set": "database",
+   "group": "positive",
+   "probe": "range",
+   "ok": true,
+   "notes": [
+    "00010 2450 inside 00010 2303..00010 2607, printed nowhere"
+   ],
+   "date": "2026-10-08"
+  },
+  {
+   "id": "g02",
+   "set": "database",
+   "group": "near-miss",
+   "probe": "range",
+   "ok": true,
+   "notes": [
+    "00010 2650 outside 00010 2303..00010 2607, printed nowhere"
+   ],
+   "date": "2026-10-08"
+  },
+  {
+   "id": "g03",
+   "set": "database",
+   "group": "positive",
+   "probe": "family",
+   "ok": true,
+   "notes": [
+    "PR01 + 25230 inside 25091..26168"
+   ],
+   "date": "2026-09-03"
+  },
+  {
+   "id": "g04",
+   "set": "database",
+   "group": "near-miss",
+   "probe": "family",
+   "ok": true,
+   "notes": [
+    "PR01 + 26200 outside 25091..26168"
+   ],
+   "date": "2026-09-03"
+  },
+  {
+   "id": "g05",
+   "set": "database",
+   "group": "positive",
+   "probe": "listed",
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-01"
+  },
+  {
+   "id": "g06",
+   "set": "database",
+   "group": "positive",
+   "probe": "window",
+   "ok": true,
+   "notes": [
+    "2027-02-14 inside …..2027-03-30"
+   ],
+   "date": "20261014"
+  },
+  {
+   "id": "g07",
+   "set": "database",
+   "group": "near-miss",
+   "probe": "window",
+   "ok": true,
+   "notes": [
+    "2027-06-20 outside …..2027-03-30"
+   ],
+   "date": "20261014"
+  },
+  {
+   "id": "g08",
+   "set": "database",
+   "group": "positive",
+   "probe": "window",
+   "ok": true,
+   "notes": [
+    "2026-09-02 inside 2026-08-14..2026-09-25"
+   ],
+   "date": "20261014"
+  },
+  {
+   "id": "g09",
+   "set": "database",
+   "group": "no-code",
+   "probe": "window",
+   "ok": true,
+   "notes": [
+    "2026-09-10 inside 2026-09-03..2026-09-17"
+   ],
+   "date": "20261014"
+  },
+  {
+   "id": "g10",
+   "set": "database",
+   "group": "near-miss",
+   "probe": "gap",
+   "ok": true,
+   "notes": [
+    "05425110001 printed nowhere; 05425090001 and 05425120001 printed"
+   ],
+   "date": "20261014"
+  },
+  {
+   "id": "g11",
+   "set": "database",
+   "group": "positive",
+   "probe": "listed",
+   "ok": true,
+   "notes": [],
+   "date": "20261014"
+  },
+  {
+   "id": "g12",
+   "set": "database",
+   "group": "near-miss",
+   "probe": "gap",
+   "ok": true,
+   "notes": [
+    "AP-202626 printed nowhere; AP-202625 and AP-202627 printed"
+   ],
+   "date": "20261014"
+  },
+  {
+   "id": "g13",
+   "set": "database",
+   "group": "positive",
+   "probe": "listed",
+   "ok": true,
+   "notes": [],
+   "date": "2026-10-08"
+  },
+  {
+   "id": "g14",
+   "set": "database",
+   "group": "near-miss",
+   "probe": "gap",
+   "ok": true,
+   "notes": [
+    "5476625 printed nowhere; 5476624 printed"
+   ],
+   "date": "2026-10-08"
+  },
+  {
+   "id": "g15",
+   "set": "lag",
+   "group": "no-code",
+   "probe": "whole-line",
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Haifa Smoked Fish since Oct 1",
+    "openFDA: no report from D&M Smoked Fish since Oct 1"
+   ]
+  },
+  {
+   "id": "g16",
+   "set": "lag",
+   "group": "positive",
+   "probe": "listed",
+   "ok": true,
+   "notes": [
+    "openFDA: no report from Pan Pepin since Oct 1"
+   ]
+  },
+  {
+   "id": "g17",
+   "set": "lag",
+   "group": "near-miss",
+   "probe": "gap",
+   "ok": true,
+   "notes": [
+    "3B1 279 printed nowhere; 3B1 278 and 3B1 280 printed",
+    "openFDA: no report from Pan Pepin since Oct 1"
+   ]
+  },
+  {
+   "id": "g18",
+   "set": "database",
+   "group": "car",
+   "probe": "car",
+   "ok": true,
+   "notes": [],
+   "recalls": 7,
+   "campaigns": [
+    "26V104000 20/02/2026",
+    "26V550000 25/08/2026",
+    "26V576000 09/09/2026",
+    "26V577000 09/09/2026",
+    "26V578000 09/09/2026",
+    "26V655000 06/10/2026",
+    "26V653000 06/10/2026"
+   ]
+  },
+  {
+   "id": "g19",
+   "set": "database",
+   "group": "clean",
+   "probe": "clean",
+   "ok": true,
+   "notes": []
+  }
+ ]
+}
