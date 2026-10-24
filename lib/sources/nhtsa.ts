@@ -179,3 +179,10 @@ export async function childSeatRecalls(query: string): Promise<Notice[]> {
   }
   return [...byCampaign.values()].sort((a, b) => b.date.localeCompare(a.date));
 }
+
+/** Whether NHTSA still lists a campaign number at all (vehicles, equipment and car seats alike). Throws when
+ *  the API didn't answer, which says nothing either way. */
+export async function nhtsaCampaignExists(campaign: string): Promise<boolean> {
+  const j = await getJson<{ Count?: number; results?: unknown[] }>(`https://api.nhtsa.gov/recalls/campaignNumber?campaignNumber=${encodeURIComponent(campaign)}`, { timeoutMs: 10_000 });
+  return Boolean(j && ((j.Count ?? 0) > 0 || (j.results?.length ?? 0) > 0));
+}

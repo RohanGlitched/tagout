@@ -2,6 +2,7 @@ import "server-only";
 import type { Notice } from "../types";
 import { unstable_cache } from "next/cache";
 import { clean, getJson } from "./http";
+import { parseUnits } from "./units";
 import { webSearch } from "./web";
 
 /**
@@ -48,7 +49,7 @@ async function fetchRecs(params: Record<string, string>): Promise<Rec[]> {
 export const recallNo = (n: string) => (/^\d{5}$/.test(n) ? `${n.slice(0, 2)}-${n.slice(2)}` : n);
 
 export function toNotice(r: Rec): Notice {
-  const units = Number((r.Products?.[0]?.NumberOfUnits ?? "").replace(/,/g, "").match(/\d+/)?.[0] ?? NaN);
+  const units = parseUnits(r.Products?.[0]?.NumberOfUnits);
   const firm = r.Manufacturers?.[0]?.Name || r.Importers?.[0]?.Name || undefined;
   const captions = (r.Images ?? []).map((i) => clean(i.Caption)).filter(Boolean);
   return {
@@ -65,7 +66,7 @@ export function toNotice(r: Rec): Notice {
     models: [],
     lots: [],
     upcs: (r.ProductUPCs ?? []).map((u) => u.UPC).filter(Boolean),
-    units: Number.isFinite(units) ? units : undefined,
+    units,
     text: [clean(r.Title), ...(r.Products ?? []).map((p) => clean(p.Name)), clean(r.Description), ...captions].join("\n"),
   };
 }
@@ -92,14 +93,32 @@ export async function latestCpsc(since: string): Promise<Notice[]> {
   return recs.sort((a, b) => b.RecallDate.localeCompare(a.RecallDate)).map(toNotice);
 }
 
+/** Recalls whose record CPSC published or re-published since a date: new ones, and older ones it has edited. */
+export async function editedCpsc(since: string): Promise<Notice[]> {
+  const recs = await fetchRecs({ LastPublishDateStart: since });
+  return recs.sort((a, b) => b.RecallDate.localeCompare(a.RecallDate)).map(toNotice);
+}
+
+/** One recall by its number ("26-532"): null when CPSC has no such record. Throws when the API didn't answer. */
+export async function cpscByNumber(no: string): Promise<Notice | null> {
+  const recs = await fetchRecs({ RecallNumber: no.replace(/-/g, "") });
+  const rec = recs.find((r) => recallNo(r.RecallNumber) === no);
+  return rec ? toNotice(rec) : null;
+}
+
 /**
  * The CPSC newsroom feed: the newest ~40 recalls, often a week ahead of the API. Title and link only, so these
  * become notices without model lists; Tavily Extract can fill in the page when one looks relevant.
  */
 export async function cpscFeed(): Promise<Notice[]> {
-  const r = await fetch("https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS", { signal: AbortSignal.timeout(10_000), headers: { "user-agent": "Tagout/1.0" } }).catch(() => null);
   // cpsc.gov turns away some cloud hosts (measured from Vercel); find the week's recall pages through Tavily instead.
-  if (!r?.ok) return newsroomViaWeb();
+  return (await cpscRss()) ?? newsroomViaWeb();
+}
+
+/** The newsroom RSS feed itself, or null when cpsc.gov turned the request away. */
+export async function cpscRss(): Promise<Notice[] | null> {
+  const r = await fetch("https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS", { signal: AbortSignal.timeout(10_000), headers: { "user-agent": "Tagout/1.0" } }).catch(() => null);
+  if (!r?.ok) return null;
   const xml = await r.text();
   const out: Notice[] = [];
   for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {

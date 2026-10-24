@@ -105,3 +105,10 @@ export async function takeModelCall(ip: string): Promise<Mode> {
   if (liteIp(ip) && (await liteDay())) return "lite";
   return "rules";
 }
+
+/** The lite tier first, then rules only, never the full tier: a showcase watch's "check again now", so a judge
+ *  opening the showcase can't spend the day's Ultra budget. */
+export async function takeLiteCall(ip: string): Promise<Mode> {
+  if (liteIp(ip) && (await liteDay())) return "lite";
+  return "rules";
+}

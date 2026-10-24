@@ -19,6 +19,10 @@ export type CheckRecord = {
   error?: string;
   /** Curated examples shown on the home page. */
   showcase?: boolean;
+  /** The watch this check was queued for ("check again now"); its changes go into the watch's event log. */
+  watchId?: string;
+  /** "lite": run on the lite tier first (showcase watches), then rules only; never the full tier. */
+  prefer?: "lite";
 };
 
 export const CHECK_ID = /^[a-z0-9]{10}$/;

@@ -4,7 +4,6 @@ import Footer from "@/components/chrome/Footer";
 import WatchRoom from "@/components/watch/WatchRoom";
 import { publicCheck } from "@/lib/checks";
 import { loadCheck } from "@/lib/store";
-import { due } from "@/lib/watch";
 import { loadWatch } from "@/lib/watches";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +21,9 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
   return (
     <>
       <Header />
-      <WatchRoom watch={w} checks={recs.map(publicCheck)} due={due(w)} />
+      {/* Opening a watch never starts a check: the daily sweep does the looking (lib/sweep), and "check again now"
+          is the page's own button (POST /api/watches/<id>/recheck). due={false} keeps the old auto-run off. */}
+      <WatchRoom watch={w} checks={recs.map(publicCheck)} due={false} />
       <Footer />
     </>
   );

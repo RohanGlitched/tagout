@@ -57,3 +57,10 @@ export async function updateWatch(id: string, fn: (rec: WatchRecord) => WatchRec
   }
   return null;
 }
+
+/** Every saved watch's id (the sweep reads them all once a day). */
+export async function listWatchIds(): Promise<string[]> {
+  const s = storage();
+  const names = s ? await s.list("watches/") : (await fs.readdir(LOCAL_DIR).catch(() => [] as string[])).map((f) => `watches/${f}`);
+  return names.map((n) => n.replace(/^watches\//, "").replace(/\.json$/, "")).filter((id) => CHECK_ID.test(id));
+}

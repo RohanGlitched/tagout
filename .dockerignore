@@ -1,0 +1,10 @@
+node_modules
+.next
+.data
+.vercel
+.git
+.env*
+eval/.cache
+docs
+test-results
+*.log

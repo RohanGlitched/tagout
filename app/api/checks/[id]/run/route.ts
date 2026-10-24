@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { runCheck, type Event, type RunOptions } from "@/lib/agent/run";
 import type { CheckRecord } from "@/lib/checks";
-import { takeModelCall } from "@/lib/budget";
+import { takeLiteCall, takeModelCall } from "@/lib/budget";
 import { hasKey, MODELS } from "@/lib/nebius";
 import { loadCheck, updateCheck } from "@/lib/store";
+import { recordRecheck } from "@/lib/sweep/recheck";
 import { clientIp } from "@/lib/visitor";
 
 export const runtime = "nodejs";
@@ -30,7 +31,9 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
   }
 
   // Full (Ultra everywhere) while the day's allowance lasts, then lite (fixed plan, Nano notice reader), then rules.
-  const mode = hasKey() ? await takeModelCall(await clientIp()) : "rules";
+  // A showcase watch's re-check starts at lite.
+  const ip = await clientIp();
+  const mode = !hasKey() ? "rules" : claimed.prefer === "lite" ? await takeLiteCall(ip) : await takeModelCall(ip);
   const useModel = mode !== "rules";
   const opts: RunOptions = mode === "lite" ? { agent: false, reader: MODELS.lite, mode } : { mode };
   const input = { text: claimed.input.text, photos: claimed.photos ?? [] };
@@ -74,6 +77,8 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
         }
         if (!acc.status) acc.status = "done";
         await save(true);
+        // A watch's re-check: what changed goes into the watch's event log and feed.
+        if (claimed.watchId && acc.status === "done") await recordRecheck(claimed.watchId, id).catch((e) => console.error("[run] watch events failed", e));
         if (done) send(done);
         controller.close();
         return;

@@ -84,6 +84,7 @@ function toNotice(r: Rec): Notice {
     upcs: codes.upcs,
     category: r.product_type,
     severity: r.classification,
+    status: r.status,
     text: `${desc}\n${clean(r.code_info)}\n${clean(r.more_code_info)}`,
   };
 }
@@ -125,6 +126,29 @@ export async function searchFda(q: FdaQuery, limit = 10): Promise<Notice[]> {
     .sort((a, b) => b.report_date.localeCompare(a.report_date))
     .slice(0, limit)
     .map(toNotice);
+}
+
+/**
+ * Every enforcement report of a kind posted since a date (openFDA's report_date), up to `max`, newest first.
+ * openFDA pages at 1,000 a call; a month of device reports is a few hundred.
+ */
+export async function fdaSince(kind: FdaKind, since: string, max = 2000): Promise<Notice[]> {
+  const out: Rec[] = [];
+  const q = `report_date:%5B${since.replace(/-/g, "")}+TO+20991231%5D`;
+  for (let skip = 0; skip < max; skip += 1000) {
+    const j = await getJson<{ results: Rec[]; meta?: { results?: { total?: number } } }>(`https://api.fda.gov/${kind}/enforcement.json?search=${q}&sort=report_date:desc&limit=1000&skip=${skip}${apiKey()}`, { timeoutMs: 20_000 });
+    out.push(...(j?.results ?? []));
+    if (!j || out.length >= (j.meta?.results?.total ?? 0)) break;
+  }
+  return out.map(toNotice);
+}
+
+/** One enforcement report by its recall number ("D-0121-2026"; F- food, Z- devices): null when openFDA has none. */
+export async function fdaByNumber(no: string): Promise<Notice | null> {
+  const kind: FdaKind = no.startsWith("F-") ? "food" : no.startsWith("Z-") ? "device" : "drug";
+  const j = await getJson<{ results: Rec[] }>(`https://api.fda.gov/${kind}/enforcement.json?search=recall_number:${encodeURIComponent(quote(no))}&limit=1${apiKey()}`, { timeoutMs: 12_000 });
+  const rec = j?.results?.find((r) => r.recall_number === no);
+  return rec ? toNotice(rec) : null;
 }
 
 /** The newest enforcement reports of a kind (for the "Recalls today" board). */

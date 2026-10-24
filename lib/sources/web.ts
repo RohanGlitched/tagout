@@ -1,4 +1,5 @@
 import "server-only";
+import { AsyncLocalStorage } from "node:async_hooks";
 import type { Notice } from "../types";
 import { clean } from "./http";
 import { isListing } from "./listing";
@@ -23,7 +24,23 @@ function headers(): Record<string, string> {
  * One Tavily call. 429 is the rate limit, 432 and 433 mean the key's plan or pay-as-you-go limit is spent: the
  * demo then falls back to Tavily's keyless mode (slower, smaller quota) rather than lose the web half of a check.
  */
+/** Tavily calls inside one sweep or check: basic searches cost a credit each, basic extracts a credit per five URLs. */
+export type TavilyTally = { searches: number; extracts: number; extractUrls: number; credits: number };
+export const tavilyScope = new AsyncLocalStorage<TavilyTally>();
+
 async function tavily(path: string, body: Record<string, unknown>, timeoutMs: number): Promise<Response> {
+  const tally = tavilyScope.getStore();
+  if (tally) {
+    if (path === "/search") {
+      tally.searches++;
+      tally.credits += body.search_depth === "advanced" ? 2 : 1;
+    } else {
+      const n = Array.isArray(body.urls) ? body.urls.length : 1;
+      tally.extracts++;
+      tally.extractUrls += n;
+      tally.credits += Math.ceil(n / 5);
+    }
+  }
   const r = await fetch(`${API}${path}`, { method: "POST", headers: headers(), body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
   if (!process.env.TAVILY_API_KEY || ![429, 432, 433].includes(r.status)) return r;
   console.error(`[tavily] HTTP ${r.status} with the key; retrying keyless`);
