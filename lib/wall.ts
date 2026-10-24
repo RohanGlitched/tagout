@@ -26,7 +26,7 @@ export function hazardOf(n: Pick<Notice, "title" | "hazard">): Hazard {
 
 /** "Vornado Air Recalls SRTH Small Room Tower Heaters Due to Fire Hazard" → "SRTH Small Room Tower Heaters". */
 function shortTitle(title: string): string {
-  const m = title.match(/recalls?\s+(.*?)(?:\s+(?:due to|because)\b|;|$)/i);
+  const m = title.match(/recalls?\s+(?:of\s+)?(.*?)(?:\s+(?:due to|because)\b|;|$)/i);
   const t = (m?.[1] || title).replace(/\s+recalled$/i, "").trim();
   return t.length > 70 ? `${t.slice(0, 68).trimEnd()}…` : t;
 }

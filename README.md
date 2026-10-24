@@ -7,20 +7,19 @@
 [![CI](https://github.com/RohanGlitched/tagout/actions/workflows/ci.yml/badge.svg)](https://github.com/RohanGlitched/tagout/actions/workflows/ci.yml)
 [![Nemotron 3 Ultra on Nebius Token Factory](https://img.shields.io/badge/model-Nemotron%203%20Ultra%20on%20Nebius%20Token%20Factory-76b900)](#how-nemotron-and-nebius-token-factory-are-used)
 [![Tavily](https://img.shields.io/badge/web%20search-Tavily-2b6cb0)](#how-tavily-is-used)
-[![Eval](https://img.shields.io/badge/eval-104%2F105%20real%20cases-15191e)](#results-105-real-cases)
+[![Eval](https://img.shields.io/badge/eval-104%2F105%20%C2%B7%20held%20out%2031%2F39%2C%200%20false%20red-15191e)](#results-105-real-cases)
 [![Sources](https://img.shields.io/badge/recalls-NHTSA%20%C2%B7%20CPSC%20%C2%B7%20openFDA%20%C2%B7%20FSIS-c8102e)](#data-sources)
 [![License: MIT](https://img.shields.io/badge/license-MIT-15191e)](LICENSE)
 
-**[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/kj6iutme8c)** · **[The eval](https://tagout-recalls.vercel.app/proof)** · **[A watched household](https://tagout-recalls.vercel.app/watch/5ehharz7sr)** · **[Caught on the web](https://tagout-recalls.vercel.app/check/vk9vuyk3zi)** · **[How it works](https://tagout-recalls.vercel.app/how)**
+**[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/kj6iutme8c)** · **[The eval](https://tagout-recalls.vercel.app/proof)** · **[Held out](https://tagout-recalls.vercel.app/proof#held-h)** · **[A watched household](https://tagout-recalls.vercel.app/watch/5ehharz7sr)** · **[Caught on the web](https://tagout-recalls.vercel.app/check/vk9vuyk3zi)** · **[How it works](https://tagout-recalls.vercel.app/how)**
 
-<!-- TODO(video): swap in the public YouTube URL once the video is set to Public or re-uploaded -->
 **Demo video:** https://youtu.be/kqVtw3pK6nw (2:45)
 
 </div>
 
 ---
 
-**On 105 real recall cases, Tagout tagged all 46 recalled units Do not use and wrongly told nobody to stop using something. NVIDIA Nemotron 3 Ultra on its own caught 5 of the 46, cleared 36, and told five people to stop using things no recall lists.**
+**On 105 real recall cases, Tagout tagged all 46 recalled units Do not use and wrongly told nobody to stop using something; NVIDIA Nemotron 3 Ultra on its own caught 5 of the 46. On 39 new cases committed before a single run, it again wrongly flagged nothing, and Tavily was the difference on recalls no database listed yet: 8 of 10 flagged with it, none without.**
 
 Tagout checks what a household owns against live U.S. recalls. List what you own, or photograph the label. An agent on **NVIDIA Nemotron** (served by **Nebius Token Factory**) searches NHTSA, CPSC and the FDA with tools, and **Tavily** searches the agencies' newsrooms and USDA for anything the databases don't have yet. Nemotron reads each notice's list of affected models and lots, every code is checked against the notice's own text, and plain rules hang the tag. Save the list as a watch and a daily sweep reads every new recall once and matches it against the list; the watch's Atom feed tells you when one covers something you own.
 
@@ -38,7 +37,7 @@ Every check gets its own link, so you can send it to someone.
 
 ## Why
 
-CPSC alone announced 479 recalls in 2026 by Oct 8; the FDA and NHTSA add thousands more. Each sits in its own database, in its own words, and the deciding detail (a model number, a lot, a date window) is usually buried in a paragraph. CPSC's own staff measured what that costs: recalls announced only by press release got **6%** of consumers to act, while recalls sent straight to owners got **50%** ([CPSC Recall Effectiveness Workshop, recall data, closed cases FY2013–2016](https://www.slideshare.net/slideshow/cpsc-recall-effectiveness-workshop-recall-data/78744492)). Tagout takes the list of things a household actually owns, does the looking, and keeps looking.
+CPSC alone announced 490 recalls in the first ten months of 2026, covering about 53 million units by its own count; the FDA, NHTSA and USDA add thousands more. Each sits in its own database, in its own words, and the deciding detail (a model number, a lot, a date window) is usually buried in a paragraph. CPSC's own staff measured what that costs: recalls announced only by press release got **6%** of consumers to act, while recalls sent straight to owners got **50%** ([CPSC Recall Effectiveness Workshop, recall data, closed cases FY2013–2016](https://www.slideshare.net/slideshow/cpsc-recall-effectiveness-workshop-recall-data/78744492)). Tagout takes the list of things a household actually owns, does the looking, and keeps looking.
 
 ## Results: 105 real cases
 
@@ -57,6 +56,21 @@ Cases come from 2025–26 CPSC recalls, openFDA enforcement reports and NHTSA's 
 - **Where the agent earns its place.** With the same rules, the fixed search plan is nearly as safe on red tags but sends more needless "check the label" tags on things nobody recalled (3 of 8 right vs 7 of 8), and costs a ninth as much. So it became the fallback, not the default.
 - **Limits.** One run per arm, not an average. We picked the cases. Recalled units come from notices that print a code; a recall that prints none can only ever be orange.
 
+## Held out: 39 new cases, run once
+
+The 105 cases shaped the fixes above, so on Oct 25 we wrote 39 new cases from recalls published Oct 14–22, committed them (`eval/cases-holdout.json`, commit `d9dce10`) before anything ran, and ran each setup once. Twelve are recalls no agency database listed yet: FDA company announcements and a USDA FSIS recall that only a web search can find. Full write-up: [`eval/HOLDOUT.md`](eval/HOLDOUT.md).
+
+| Arm | Right | Wrongly red | Recalled, cleared | Not in a database yet | Cost per item, Tavily included |
+|---|---|---|---|---|---|
+| **Tagout** | **31/39** | **0/10** | 4/31 | 6/12 | 4.9¢ |
+| Tagout, Tavily off | 27/39 | 0/10 | 12/31 | 2/12 | 2.2¢ |
+| Fixed plan, Ultra readers | 29/39 | 0/10 | 7/31 | 6/12 | 2.5¢ |
+| Lite tier (fixed plan, Nano reader) | 30/39 | 0/10 | 6/31 | 7/12 | 1.7¢ |
+| Lite tier, Tavily off | 26/39 | 0/10 | 12/31 | 3/12 | 0.26¢ |
+
+- **Tavily, measured.** With Tavily off, Tagout cleared all 10 recalled units that no database listed yet; with it, it flagged 8. On the 27 database cases Tavily changed nothing.
+- **The misses.** Four recalled units were cleared: a two-part lot code (`091026 DL`), a whole-line air-rifle recall dropped before the tag, and two USDA FSIS lines. Each was traced and fixed afterwards; the after-fix numbers are reported separately in `eval/HOLDOUT.md`, so the table above stays a held-out result.
+
 Reproduce it (every HTTP response is cached, so a re-run reads the same data and costs nothing):
 
 ```bash
@@ -72,7 +86,7 @@ The whole eval, including the runs thrown away while the harness was fixed, cost
 
 ```mermaid
 flowchart LR
-  A[Your list or a label photo] --> B[Read into items<br/>Nemotron 3 Ultra · photos: Qwen3.8 27B]
+  A[Your list or a label photo] --> B[Read into items<br/>Nemotron 3 Ultra · photos: Nemotron 3.5 Super VL]
   B -->|codes not in what you typed are dropped| C[Agent searches with tools<br/>Nemotron 3 Ultra]
   C --> D1[NHTSA vehicles]
   C --> D2[NHTSA car seats]
@@ -87,7 +101,7 @@ flowchart LR
   G --> K[Checked]
 ```
 
-1. **Read.** Nemotron turns each line into a kind of product, a brand and the codes a recall turns on (model, lot, VIN, UPC, NDC). Each code it returns must appear in what the person typed or it is dropped. VINs are decoded with NHTSA's vPIC. Label photos are read by Qwen3.8 27B on Token Factory, with Gemma 3 27B as its fallback (Token Factory has no NVIDIA vision model today).
+1. **Read.** Nemotron turns each line into a kind of product, a brand and the codes a recall turns on (model, lot, VIN, UPC, NDC). Each code it returns must appear in what the person typed or it is dropped. VINs are decoded with NHTSA's vPIC. Label photos are read by NVIDIA Nemotron 3.5 Super VL on Token Factory (7 of 7 codes on the sample labels), with Qwen3.8 27B and Gemma 3 27B as fallbacks.
 2. **Search.** Nemotron 3 Ultra runs an agent loop with six tools: NHTSA vehicle recalls, NHTSA child-seat recalls, CPSC (SaferProducts.gov), openFDA enforcement reports, Tavily search and Tavily extract. It reads results and searches again with better words (CPSC files a space heater under "tower heaters"). It always runs a Tavily search too, because the databases trail the agencies' newsrooms by one to six weeks, and USDA FSIS is only reachable through the web. A few rules keep recalls the model may not drop: any notice containing the item's own code, a brand's car-seat campaigns, and a brand's FDA recalls of the product when no lot was given.
 3. **Read the notices.** CPSC prints model numbers only in prose ("The model 'TYPE SRTH' is printed on the silver rating label"). Nemotron reads the affected models, lots, UPCs and date windows from each notice. Every code is then looked up in the notice's text, character for character; anything not printed there is struck, and the check says so.
 4. **Match.** [`lib/match.ts`](lib/match.ts) compares the household's codes with each list, without a model: exact codes, printed ranges (`2LC1234 through 2LC1240`), family codes (`5160X`, in model lists only), TYPE codes and manufacture-date windows, open at one end or both. When the reader's list missed a code that the notice's own text prints, the text wins. A near miss (`CT22425` vs `CT22425B`), or a model match when the recall is limited to date codes that yours isn't, is orange, never red. Cars are orange at most: NHTSA has no public per-VIN API, so the tag links to its VIN lookup.
@@ -111,11 +125,11 @@ All model calls go to **Nebius Token Factory**'s OpenAI-compatible API (`https:/
 | Read each recall notice | `nvidia/Nemotron-3-Ultra-550b-a55b` | Strict `json_schema`; codes verified against the notice text | Super: 1 unit wrongly red; Nano: 2 |
 | Lite tier notice reader | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` | With the fixed search plan, once the day's Ultra budget is spent | 98 of 105 right, none cleared, 0.29¢ an item |
 | Fallback for every role | `nvidia/nemotron-3-super-120b-a12b` | Same calls; used when the first model errors or times out | |
-| Read label photos | `Qwen/Qwen3.8-27B`, then `google/gemma-3-27b-it` | Vision chat with `json_schema` | |
+| Read label photos | `nvidia/Nemotron-3.5-Super-VL`, then `Qwen/Qwen3.8-27B`, then `google/gemma-3-27b-it` | Vision chat with `json_schema` | All three read 7 of 7 codes on the sample labels |
 
 The track asks for Ultra where reasoning is hard and Nano or Super for the everyday calls. We measured each size in each role and kept Ultra where a cheaper model made a mistake that matters (a wrong red tag, a medicine searched in the wrong database). Where Nano held up, it now runs: when the demo's daily Ultra allowance is spent, checks drop to the **lite tier** (fixed plan plus Nano reading the notices, about a ninth of the cost), where they used to drop to no model at all (87 of 105, 10 recalled units cleared). Past the lite allowance too, the rules-only plan still runs, and the page says which tier a check used.
 
-A full check costs about **2.6¢ an item**; the five-item showcase took 37 Token Factory calls and about 114k tokens. Each finished check reports its own calls and tokens under "How this check ran". Model chains are set by env (`NEBIUS_AGENT_MODELS`, `NEBIUS_READER_MODELS`, `NEBIUS_INTAKE_MODELS`, `NEBIUS_LITE_READER_MODELS`, `NEBIUS_VISION_MODELS`).
+Across the 105-case eval a full check averaged **2.6¢ of Nemotron an item** (plus about 2.2¢ of Tavily credits at $0.008 each); the five-item showcase took 37 Token Factory calls and about 114k tokens (15.5¢, 3.1¢ an item). Each finished check reports its own calls and tokens under "How this check ran". Model chains are set by env (`NEBIUS_AGENT_MODELS`, `NEBIUS_READER_MODELS`, `NEBIUS_INTAKE_MODELS`, `NEBIUS_LITE_READER_MODELS`, `NEBIUS_VISION_MODELS`).
 
 ## How Tavily is used
 
@@ -157,13 +171,12 @@ On Nebius: push the image to Nebius Container Registry (`docker tag tagout-sweep
 
 ## Who pays
 
-Households use it free. The people who lose money when a recall doesn't reach an owner would pay to run it for their customers:
-- **Home, renters and auto insurers, and home-warranty firms**: a recalled heater or dryer is a claim waiting to happen. They already hold the list of insured items.
-- **Property managers**: appliances in every unit, one watch per building.
-- **Baby-registry retailers and pediatric practices**: car seats, bassinets and formula are where recalls hit hardest, and they know what was bought.
-- **The recalling firms**: CPSC's own numbers say direct notice moves consumer response from 6% to 50%. A watch's feed is a direct channel the owner set up: a new recall that lists their code reaches them without their having to look.
+Households use it free.
+- **First customer: property managers and home-warranty firms.** They already keep each unit's appliance list (brand, model, serial). Tagout watches it, and a recall that names one of those models becomes a work order with the agency's own sentence as proof. $1 per unit per month; our cost is a few cents once per unit, then a share of a daily sweep that costs a few cents a day for everyone.
+- **Second: resale.** Selling a recalled consumer product is unlawful in the U.S. (15 U.S.C. 2068). A seller photographs the label; Tagout red-tags a listing only when the item's own code is in a recall, so honest sellers aren't blocked.
+- **Later:** baby registries, insurers' loss-prevention programs, recalling firms (CPSC's own numbers: direct notice moves consumer response from 6% to 50%).
 
-At 2.6¢ an item for a full check (0.29¢ on the lite tier), checking a 20-item household every month costs about $6 a year on the full tier, or 70¢ on the lite tier.
+All-in costs (Nemotron plus Tavily): about 4.8¢ an item for a full check, 1.7¢ on the lite tier. Details and the API: [/business](https://tagout-recalls.vercel.app/business).
 
 ## Data sources
 
@@ -243,7 +256,7 @@ npx tsx --conditions=react-server scripts/try-check.ts "Vornado heater TYPE SRTH
 - Green means nothing was found that day, not that a product is safe.
 - CPSC's API returns a fake error record and caches it per URL, so every call carries a cache-buster and retries. Its `Model` field is always empty, which is why model numbers are read from the prose.
 - The demo has per-visitor and daily limits on model calls: 12 checks per 10 minutes and 15 a day per address on the full tier, 60 a day in all (`IP_DAILY_MODEL_CAP`, `DAILY_MODEL_CAP`); then 30 and 120 on the lite tier (`IP_DAILY_LITE_CAP`, `DAILY_LITE_CAP`); past both, the rules-only plan.
-- The vision fallback changed on Oct 5: GLM-5.3-Flash took over three minutes to answer a one-line prompt, so Gemma 3 27B (7 s on the sample label) now backs up Qwen3.8 27B.
+- Photos: Nemotron 3.5 Super VL leads since Oct 25. It can spend its whole output budget reasoning on a hard photo, so the call has a generous token budget and Qwen3.8 27B and Gemma 3 27B stand behind it.
 - Tagout isn't affiliated with NHTSA, CPSC, FDA or USDA. Always confirm with the recall notice; every tag links to it.
 
 ## License

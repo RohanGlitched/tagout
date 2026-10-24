@@ -1,6 +1,7 @@
 /* The replay console: a panel bolted to the station steel. */
 .panel {
   position: relative;
+  container-type: inline-size;
   border-radius: 14px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -262,7 +263,7 @@
   font-weight: 650;
 }
 
-@media (max-width: 720px) {
+@container (max-width: 680px) {
   .head {
     grid-template-columns: minmax(0, 1fr) auto;
   }

@@ -101,7 +101,7 @@ export default function HeroReplay({ replay }: { replay: Replay }) {
                       </span>
                     )}
                     <span className={s.what}>{l.kind === "read" ? l.text.replace(/^Read /, "") : l.text}</span>
-                    {l.kind === "search" ? <span className={s.found}>{l.found ?? 0} found</span> : null}
+                    {l.kind === "search" ? <span className={s.found}>{l.text === "Tavily extract" ? "page read" : `${l.found ?? 0} found`}</span> : null}
                   </li>
                 ))}
               </ul>
