@@ -1,0 +1,42 @@
+name: Token Factory canary
+
+# Once a day, one 1-token call to Nemotron 3 Nano with the demo's key. A 401, 402 or 403 (a revoked key or an
+# empty balance) fails the run, and GitHub emails a failed scheduled run to whoever last edited this schedule.
+# Needs the repository secret NEBIUS_API_KEY. Costs a fraction of a millionth of a dollar a day.
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: One-token Nemotron Nano call
+        env:
+          NEBIUS_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
+        run: |
+          if [ -z "$NEBIUS_API_KEY" ]; then
+            echo "::error::The NEBIUS_API_KEY repository secret is not set."
+            exit 1
+          fi
+          code=$(curl -sS -o body.json -w '%{http_code}' --max-time 60 \
+            https://api.tokenfactory.nebius.com/v1/chat/completions \
+            -H "Authorization: Bearer $NEBIUS_API_KEY" \
+            -H 'Content-Type: application/json' \
+            -d '{"model":"nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B","max_tokens":1,"messages":[{"role":"user","content":"ok"}]}' || echo 000)
+          echo "Token Factory answered HTTP $code"
+          case "$code" in
+            200) echo "The key works and the balance isn't empty." ;;
+            401|402|403)
+              echo "::error::Token Factory refused the key (HTTP $code): the balance is empty or the key was revoked. Live checks fall back to rules only, and greens are held at orange."
+              head -c 300 body.json; echo
+              exit 1 ;;
+            *)
+              echo "::warning::Token Factory HTTP $code: not a key or balance problem (a rate limit or an outage); not failing."
+              head -c 300 body.json; echo ;;
+          esac
