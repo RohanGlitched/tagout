@@ -38,7 +38,7 @@ export default function How() {
               <p>
                 {modelLabel(MODELS.intake[0])} reads each line into a kind of product, a brand, and the codes a recall turns on: model, lot, VIN, UPC, NDC. Every code it returns is
                 checked against the words you typed, and dropped if it isn&apos;t there, so the reader can&apos;t invent the number a match depends on. A VIN is decoded by NHTSA&apos;s
-                own decoder. A label photo is read by {modelLabel(MODELS.vision[0])}, the one model here that isn&apos;t Nemotron: Token Factory has no NVIDIA vision model today.
+                own decoder. A label photo is read by {modelLabel(MODELS.vision[0])}, NVIDIA&apos;s vision model on Token Factory, so every step that reads runs on Nemotron; {modelLabel(MODELS.vision[1])} takes over if it doesn&apos;t answer.
               </p>
             </li>
             <li>

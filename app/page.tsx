@@ -2,7 +2,9 @@ import Link from "next/link";
 import Header from "@/components/chrome/Header";
 import Footer from "@/components/chrome/Footer";
 import CheckForm from "@/components/check/CheckForm";
-import Board, { type BoardEntry } from "@/components/home/Board";
+import type { BoardEntry } from "@/components/home/Board";
+import HeroReplay from "@/components/home/HeroReplay";
+import { buildReplay } from "@/components/home/replay";
 import Specimen from "@/components/home/Specimen";
 import TagWall from "@/components/home/TagWall";
 import MyWatches from "@/components/watch/MyWatches";
@@ -47,8 +49,7 @@ export default async function Home() {
       entries.push({ item, level: v!.level, headline: v!.headline, line: v!.notice ? noticeRef(v!.notice) : undefined, marks, hits: v!.proof.filter((p) => p.matched).map((p) => p.yours) });
     }
   }
-  const counts = { danger: 0, warning: 0, inspected: 0 };
-  demo?.verdicts?.forEach((v) => counts[v.level]++);
+  const replay = demo ? buildReplay(demo, entries.map((e) => e.item.id)) : null;
 
   // A mix of agencies: CPSC publishes in weekly batches, so the newest eight would otherwise be all CPSC.
   const all = latest?.notices ?? [];
@@ -59,6 +60,10 @@ export default async function Home() {
     return seen.has(k) ? false : (seen.add(k), true);
   });
   const week = [...distinct.filter((n) => n.source === "cpsc").slice(0, 5), ...distinct.filter((n) => n.source === "fda").slice(0, 3)].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  // The newest recall and how many landed in the week before it, as of the hourly refresh.
+  const newest = distinct.find((n) => /^\d{4}-\d{2}-\d{2}/.test(n.date ?? ""));
+  const weekAgo = newest ? new Date(Date.parse(newest.date.slice(0, 10)) - 7 * 86400000).toISOString().slice(0, 10) : "";
+  const lastWeek = newest ? distinct.filter((n) => (n.date ?? "") > weekAgo).length : 0;
 
   const months = wall ? wall.months.length : 0;
   const red = demo?.items?.find((i) => demo.verdicts?.find((v) => v.itemId === i.id)?.level === "danger");
@@ -83,16 +88,24 @@ export default async function Home() {
                 <MyWatches className={s.fine} />
               </div>
             </div>
-            {entries.length ? (
+            {replay?.rows.length ? (
               <div className={s.boardCol}>
-                <Board entries={entries} />
-                <p className={s.caption}>
-                  A real check from {fmtDate(demo!.createdAt)}: {plural(demo!.items!.length, "thing")}, {counts.danger} tagged do not use.{" "}
-                  <Link href={`/check/${demo!.id}`}>Open the whole check</Link>
-                </p>
+                <HeroReplay replay={replay} />
               </div>
             ) : null}
           </div>
+          {newest ? (
+            <div className={s.ticker}>
+              <p>
+                <b>{lastWeek} recalls</b> from CPSC and the FDA in the week to {fmtDate(newest.date)}. Newest:{" "}
+                <a href={newest.url} target="_blank" rel="noreferrer">
+                  {newest.title}
+                </a>{" "}
+                ({AGENCY[newest.source]})
+              </p>
+              <Link href="/recalls">All recent recalls</Link>
+            </div>
+          ) : null}
         </section>
 
         <section className={s.band} aria-labelledby="see-h">

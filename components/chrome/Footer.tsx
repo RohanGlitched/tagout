@@ -36,6 +36,8 @@ export default function Footer() {
         </nav>
         <nav className={s.footCol} aria-label="Project">
           <h2>Project</h2>
+          <Link href="/business">For business</Link>
+          <Link href="/privacy">Privacy</Link>
           <a href={REPO_URL}>Source code</a>
           <a href={`${REPO_URL}/blob/main/LICENSE`}>MIT licence</a>
           <a href={DEVPOST_URL}>Devpost entry</a>

@@ -6,6 +6,7 @@ const LINKS = [
   { href: "/recalls", label: "Recalls today" },
   { href: "/how", label: "How it works" },
   { href: "/proof", label: "Proof" },
+  { href: "/business", label: "For business" },
 ];
 
 export default function Header() {

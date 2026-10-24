@@ -1,0 +1,291 @@
+/* The replay console: a panel bolted to the station steel. */
+.panel {
+  position: relative;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 40px 80px -40px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(2px);
+  color: #e9edf1;
+}
+.head {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.title b {
+  font-size: 15px;
+  font-weight: 750;
+  font-variation-settings: "wdth" 112;
+  color: #fff;
+}
+.title span {
+  font-size: 13px;
+  color: #9ea8b2;
+}
+.clock {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.time {
+  font-size: 30px;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #fff;
+  min-width: 2.6em;
+  text-align: right;
+}
+.of {
+  font-size: 12.5px;
+  color: #9ea8b2;
+  white-space: nowrap;
+}
+.again {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.2s;
+}
+.again:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+}
+.again:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  overflow: hidden;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--danger);
+  transform-origin: 0 50%;
+}
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 210px) minmax(0, 1fr) 176px;
+  gap: 18px;
+  align-items: start;
+  min-height: 178px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.plate {
+  min-width: 0;
+  padding-top: 4px;
+}
+
+/* The agent's trace for this item, one tool call per line. */
+.trace {
+  list-style: none;
+  margin: 0;
+  padding: 2px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+.line {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  font-size: 13.5px;
+  line-height: 1.3;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.22s ease-out;
+}
+.line[data-on] {
+  opacity: 1;
+  transform: none;
+}
+.src {
+  --dot: #9aa3ad;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 64px;
+  padding: 3px 8px 3px 7px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 11.5px;
+  font-weight: 700;
+  font-variation-settings: "wdth" 108;
+  color: #fff;
+  white-space: nowrap;
+}
+.src::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dot);
+}
+.src[data-source="cpsc"] {
+  --dot: #f2b705;
+}
+.src[data-source="fda"] {
+  --dot: #5b9bff;
+}
+.src[data-source="nhtsa"] {
+  --dot: #c9d1d9;
+}
+.src[data-source="fsis"] {
+  --dot: #7cc36e;
+}
+.src[data-source="web"] {
+  --dot: #c58bff;
+}
+.what {
+  min-width: 0;
+  color: #d3d9df;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.found {
+  font-size: 12.5px;
+  color: #9ea8b2;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.line[data-kind="read"] .what {
+  color: #fff;
+}
+/* The rule's verdict: an equals sign where your code is on the recall's list. */
+.line[data-kind="match"] {
+  margin-top: 4px;
+  padding-top: 9px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.16);
+  grid-template-columns: auto minmax(0, 1fr);
+}
+.line[data-kind="match"] .what {
+  color: #fff;
+  font-weight: 650;
+  white-space: normal;
+}
+.eq {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  color: #fff;
+  background: var(--danger);
+}
+.row[data-level="warning"] .eq {
+  background: var(--warning);
+  color: var(--ink);
+}
+.row[data-level="inspected"] .eq {
+  background: var(--inspected);
+}
+
+/* The tag's hook. Before the verdict, an empty outline waits for it. */
+.hook {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
+}
+.hook::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  width: 2px;
+  height: 22px;
+  margin-left: -1px;
+  background: linear-gradient(#59616b, #8d959e);
+}
+.waiting {
+  width: 150px;
+  height: 128px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.22);
+  clip-path: polygon(18% 0, 82% 0, 100% 11%, 100% 100%, 0 100%, 0 11%);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.tagHead {
+  font-weight: 700;
+  line-height: 1.3;
+}
+.foot {
+  padding: 12px 18px 14px;
+  font-size: 13px;
+  color: #9ea8b2;
+}
+.foot a {
+  color: #fff;
+  font-weight: 650;
+}
+
+@media (max-width: 720px) {
+  .head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .clock {
+    display: none;
+  }
+  .row {
+    grid-template-columns: minmax(0, 1fr) 138px;
+    gap: 12px;
+    padding: 16px 12px 12px;
+  }
+  .trace {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .hook {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .hook > div {
+    --w: 134px;
+  }
+  .waiting {
+    width: 124px;
+  }
+}

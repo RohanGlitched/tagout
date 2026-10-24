@@ -16,8 +16,8 @@
   margin: 0 auto;
   padding: 64px var(--gutter) 72px;
   display: grid;
-  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
-  gap: 56px;
+  grid-template-columns: minmax(0, 450px) minmax(0, 1fr);
+  gap: 48px;
   align-items: start;
 }
 .copy {
@@ -27,7 +27,7 @@
   min-width: 0;
 }
 .h1 {
-  font-size: clamp(46px, 6vw, 80px);
+  font-size: clamp(44px, 4.9vw, 66px);
   font-variation-settings: "wdth" 122;
   font-weight: 850;
   letter-spacing: -0.035em;
@@ -72,6 +72,32 @@
 .caption a {
   color: #fff;
   font-weight: 600;
+}
+
+/* The latest recalls, along the bottom edge of the station. */
+.ticker {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px var(--gutter) 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px 32px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 14px;
+  color: #aab3bb;
+}
+.ticker p {
+  min-width: 0;
+  flex: 1 1 520px;
+}
+.ticker b {
+  color: #fff;
+}
+.ticker a {
+  color: #fff;
+  overflow-wrap: anywhere;
 }
 
 /* Section bands */
