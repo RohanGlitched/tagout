@@ -954,12 +954,14 @@
     "withTavily": {
      "right": 6,
      "flagged": 8,
-     "red": 2
+     "red": 3,
+     "redOnExactCode": 2
     },
     "withoutTavily": {
      "right": 2,
      "flagged": 0,
-     "red": 0
+     "red": 0,
+     "redOnExactCode": 0
     },
     "positives": 6
    },
@@ -1061,12 +1063,14 @@
     "withTavily": {
      "right": 7,
      "flagged": 7,
-     "red": 2
+     "red": 2,
+     "redOnExactCode": 2
     },
     "withoutTavily": {
      "right": 3,
      "flagged": 1,
-     "red": 0
+     "red": 0,
+     "redOnExactCode": 0
     },
     "positives": 6
    },
