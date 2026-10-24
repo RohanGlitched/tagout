@@ -84,6 +84,8 @@ The whole eval, including the runs thrown away while the harness was fixed, cost
 
 ## What happens in a check
 
+<img src="docs/architecture.png" alt="How Tagout is built: Nemotron on Nebius Token Factory reads the list, runs the search agent with NHTSA, CPSC, openFDA and Tavily tools, and reads each notice; every code is verified and a deterministic matcher hangs the tag; a daily sweep reads each new recall once and alerts watched lists." width="100%">
+
 ```mermaid
 flowchart LR
   A[Your list or a label photo] --> B[Read into items<br/>Nemotron 3 Ultra · photos: Nemotron 3.5 Super VL]
