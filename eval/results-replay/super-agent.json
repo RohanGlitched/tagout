@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a1d8b21",
+   "commit": "a9a0f8f",
    "libChanged": false
   }
  },
- "at": "2026-10-24T19:31:40.173Z",
+ "at": "2026-10-24T20:14:08.579Z",
  "cases": [
   {
    "id": "p01",
@@ -43,7 +43,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 7966,
-     "completion": 1247
+     "completion": 1247,
+     "usd": 0.0060615
     }
    },
    "items": [
@@ -76,7 +77,7 @@
     "completion": 1247
    },
    "usd": 0.00606,
-   "ms": 84,
+   "ms": 66,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -100,7 +101,8 @@
     "tokens": {
      "calls": 6,
      "prompt": 10332,
-     "completion": 2337
+     "completion": 2337,
+     "usd": 0.0113475
     }
    },
    "items": [
@@ -134,7 +136,7 @@
     "completion": 2337
    },
    "usd": 0.01135,
-   "ms": 81,
+   "ms": 63,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -157,7 +159,8 @@
     "tokens": {
      "calls": 6,
      "prompt": 10001,
-     "completion": 3819
+     "completion": 3819,
+     "usd": 0.014981600000000001
     }
    },
    "items": [
@@ -190,7 +193,7 @@
     "completion": 3819
    },
    "usd": 0.01498,
-   "ms": 77,
+   "ms": 61,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -214,7 +217,8 @@
     "tokens": {
      "calls": 10,
      "prompt": 10663,
-     "completion": 5751
+     "completion": 5751,
+     "usd": 0.0219093
     }
    },
    "items": [
@@ -249,7 +253,7 @@
     "completion": 5751
    },
    "usd": 0.02191,
-   "ms": 77,
+   "ms": 61,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -273,7 +277,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 8880,
-     "completion": 1409
+     "completion": 1409,
+     "usd": 0.0061706999999999994
     }
    },
    "items": [
@@ -306,17 +311,13 @@
     "completion": 1409
    },
    "usd": 0.00617,
-   "ms": 438,
+   "ms": 43,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "d06",
@@ -333,7 +334,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 8499,
-     "completion": 2607
+     "completion": 2607,
+     "usd": 0.0097596
     }
    },
    "items": [
@@ -366,17 +368,13 @@
     "completion": 2607
    },
    "usd": 0.00976,
-   "ms": 454,
+   "ms": 41,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "f01",
@@ -394,7 +392,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 9388,
-     "completion": 1261
+     "completion": 1261,
+     "usd": 0.0062816
     }
    },
    "items": [
@@ -427,17 +426,13 @@
     "completion": 1261
    },
    "usd": 0.00628,
-   "ms": 461,
+   "ms": 41,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 10,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "f08",
@@ -455,7 +450,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 10169,
-     "completion": 1015
+     "completion": 1015,
+     "usd": 0.0056413999999999995
     }
    },
    "items": [
@@ -488,12 +484,12 @@
     "completion": 1015
    },
    "usd": 0.00564,
-   "ms": 487,
+   "ms": 456,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 22,
+   "cacheMisses": 16,
    "missed": [
     "api.fda.gov /food/enforcement.json",
     "api.fda.gov /drug/enforcement.json",
@@ -516,7 +512,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 9147,
-     "completion": 1937
+     "completion": 1937,
+     "usd": 0.0089282
     }
    },
    "items": [
@@ -550,7 +547,7 @@
     "completion": 1937
    },
    "usd": 0.00893,
-   "ms": 4,
+   "ms": 22,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 0,
@@ -573,7 +570,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 7605,
-     "completion": 1893
+     "completion": 1893,
+     "usd": 0.0079059
     }
    },
    "items": [
@@ -607,7 +605,7 @@
     "completion": 1893
    },
    "usd": 0.00791,
-   "ms": 4,
+   "ms": 23,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -629,7 +627,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 22387,
-     "completion": 1252
+     "completion": 1252,
+     "usd": 0.0088915
     }
    },
    "items": [
@@ -680,17 +679,13 @@
     "completion": 1252
    },
    "usd": 0.00889,
-   "ms": 410,
+   "ms": 47,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
    "tavilyExtract": 2,
-   "cacheMisses": 16,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "n21",
@@ -706,7 +701,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 20339,
-     "completion": 1767
+     "completion": 1767,
+     "usd": 0.0094462
     }
    },
    "items": [
@@ -757,17 +753,13 @@
     "completion": 1767
    },
    "usd": 0.00945,
-   "ms": 818,
+   "ms": 60,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
    "tavilyExtract": 2,
-   "cacheMisses": 34,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "c05",
@@ -783,9 +775,10 @@
     "agent": "Nemotron 3 Super",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 12,
-     "prompt": 15159,
-     "completion": 6518
+     "calls": 15,
+     "prompt": 23570,
+     "completion": 9982,
+     "usd": 0.043741199999999994
     }
    },
    "items": [
@@ -810,18 +803,18 @@
      "fresh": 6
     }
    ],
-   "calls": 12,
+   "calls": 15,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 15159,
-    "completion": 6518
+    "prompt": 23570,
+    "completion": 9982
    },
-   "usd": 0.02494,
-   "ms": 14,
+   "usd": 0.04374,
+   "ms": 57,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -830,17 +823,19 @@
    "group": "no-code",
    "expect": "warning",
    "level": "warning",
-   "notice": "FDA D-0871-2026",
+   "notice": "FDA D-0870-2026",
    "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
-   "planned": "fixed",
+   "planned": "model",
    "engine": {
-    "planned": "fixed",
+    "planned": "model",
     "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Super",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 10,
-     "prompt": 9060,
-     "completion": 7900
+     "calls": 11,
+     "prompt": 14107,
+     "completion": 8348,
+     "usd": 0.029644300000000002
     }
    },
    "items": [
@@ -863,37 +858,22 @@
      "label": "Tavily web search “Clear Eyes Redness Relief eye drops recall 2026”",
      "found": 4,
      "fresh": 4
-    },
-    {
-     "tool": "search_fda",
-     "label": "FDA drug recalls, brand “Clear Eyes”",
-     "found": 10,
-     "fresh": 3
-    },
-    {
-     "tool": "search_web",
-     "label": "Tavily web search “Clear Eyes Redness Relief eye drops recall”",
-     "found": 6,
-     "fresh": 5
     }
    ],
-   "calls": 10,
+   "calls": 11,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 9060,
-    "completion": 7900
+    "prompt": 14107,
+    "completion": 8348
    },
-   "usd": 0.02773,
-   "ms": 3043,
+   "usd": 0.02964,
+   "ms": 38,
    "msFresh": false,
-   "tavily": 2,
-   "tavilySearch": 2,
+   "tavily": 1,
+   "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.tokenfactory.nebius.com nvidia/nemotron-3-super-120b-a12b",
-    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "v08",
@@ -910,7 +890,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 6969,
-     "completion": 603
+     "completion": 603,
+     "usd": 0.0035069999999999997
     }
    },
    "items": [
@@ -942,7 +923,7 @@
     "completion": 603
    },
    "usd": 0.00351,
-   "ms": 4,
+   "ms": 17,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -965,7 +946,8 @@
     "tokens": {
      "calls": 8,
      "prompt": 18761,
-     "completion": 1227
+     "completion": 1227,
+     "usd": 0.010277399999999999
     }
    },
    "items": [
@@ -1015,7 +997,7 @@
     "completion": 1227
    },
    "usd": 0.01028,
-   "ms": 9,
+   "ms": 29,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 1,
@@ -1037,7 +1019,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 20257,
-     "completion": 875
+     "completion": 875,
+     "usd": 0.0078656
     }
    },
    "items": [
@@ -1082,7 +1065,7 @@
     "completion": 875
    },
    "usd": 0.00787,
-   "ms": 11,
+   "ms": 24,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1105,7 +1088,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 10979,
-     "completion": 2437
+     "completion": 2437,
+     "usd": 0.0117758
     }
    },
    "items": [
@@ -1144,7 +1128,7 @@
     "completion": 2437
    },
    "usd": 0.01178,
-   "ms": 7,
+   "ms": 16,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,

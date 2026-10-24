@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a1d8b21",
+   "commit": "a9a0f8f",
    "libChanged": false
   }
  },
- "at": "2026-10-24T19:31:08.364Z",
+ "at": "2026-10-24T20:13:53.175Z",
  "cases": [
   {
    "id": "p01",
@@ -42,7 +42,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 2628,
-     "completion": 5707
+     "completion": 5707,
+     "usd": 0.0037939799999999997
     }
    },
    "items": [
@@ -81,7 +82,7 @@
     "completion": 5707
    },
    "usd": 0.00379,
-   "ms": 62,
+   "ms": 71,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -104,7 +105,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1173,
-     "completion": 2299
+     "completion": 2299,
+     "usd": 0.00193932
     }
    },
    "items": [
@@ -143,7 +145,7 @@
     "completion": 2299
    },
    "usd": 0.00194,
-   "ms": 55,
+   "ms": 62,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -166,7 +168,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2269,
-     "completion": 2081
+     "completion": 2081,
+     "usd": 0.00207884
     }
    },
    "items": [
@@ -205,7 +208,7 @@
     "completion": 2081
    },
    "usd": 0.00208,
-   "ms": 56,
+   "ms": 62,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -228,7 +231,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 3453,
-     "completion": 4818
+     "completion": 4818,
+     "usd": 0.00265308
     }
    },
    "items": [
@@ -267,7 +271,7 @@
     "completion": 4818
    },
    "usd": 0.00265,
-   "ms": 57,
+   "ms": 63,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -290,7 +294,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 669,
-     "completion": 1436
+     "completion": 1436,
+     "usd": 0.00220886
     }
    },
    "items": [
@@ -329,7 +334,7 @@
     "completion": 1436
    },
    "usd": 0.00221,
-   "ms": 30,
+   "ms": 31,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -351,7 +356,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2658,
-     "completion": 3705
+     "completion": 3705,
+     "usd": 0.0032934
     }
    },
    "items": [
@@ -391,7 +397,7 @@
     "completion": 3705
    },
    "usd": 0.00329,
-   "ms": 33,
+   "ms": 36,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -414,7 +420,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2538,
-     "completion": 1958
+     "completion": 1958,
+     "usd": 0.00275082
     }
    },
    "items": [
@@ -453,7 +460,7 @@
     "completion": 1958
    },
    "usd": 0.00275,
-   "ms": 33,
+   "ms": 35,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -475,8 +482,9 @@
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
      "calls": 8,
-     "prompt": 5191,
-     "completion": 7968
+     "prompt": 5444,
+     "completion": 8440,
+     "usd": 0.00412018
     }
    },
    "items": [
@@ -511,15 +519,15 @@
    "calls": 8,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 5191,
-    "completion": 7968
+    "prompt": 5444,
+    "completion": 8440
    },
-   "usd": 0.00399,
-   "ms": 34,
+   "usd": 0.00412,
+   "ms": 36,
    "msFresh": false,
-   "tavily": 4,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 3,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -538,7 +546,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1264,
-     "completion": 2156
+     "completion": 2156,
+     "usd": 0.0029087
     }
    },
    "items": [
@@ -577,7 +586,7 @@
     "completion": 2156
    },
    "usd": 0.00291,
-   "ms": 34,
+   "ms": 32,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -600,7 +609,8 @@
     "tokens": {
      "calls": 8,
      "prompt": 4367,
-     "completion": 8608
+     "completion": 8608,
+     "usd": 0.0037078400000000004
     }
    },
    "items": [
@@ -639,7 +649,7 @@
     "completion": 8608
    },
    "usd": 0.00371,
-   "ms": 37,
+   "ms": 34,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -662,7 +672,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 3424,
-     "completion": 5596
+     "completion": 5596,
+     "usd": 0.0030395399999999994
     }
    },
    "items": [
@@ -701,7 +712,7 @@
     "completion": 5596
    },
    "usd": 0.00304,
-   "ms": 35,
+   "ms": 32,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -724,7 +735,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2657,
-     "completion": 2933
+     "completion": 2933,
+     "usd": 0.0024363199999999996
     }
    },
    "items": [
@@ -763,7 +775,7 @@
     "completion": 2933
    },
    "usd": 0.00244,
-   "ms": 34,
+   "ms": 32,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -786,7 +798,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 2103,
-     "completion": 4315
+     "completion": 4315,
+     "usd": 0.00245882
     }
    },
    "items": [
@@ -825,7 +838,7 @@
     "completion": 4315
    },
    "usd": 0.00246,
-   "ms": 16,
+   "ms": 19,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -848,7 +861,8 @@
     "tokens": {
      "calls": 6,
      "prompt": 2357,
-     "completion": 5081
+     "completion": 5081,
+     "usd": 0.00282344
     }
    },
    "items": [
@@ -887,7 +901,7 @@
     "completion": 5081
    },
    "usd": 0.00282,
-   "ms": 23,
+   "ms": 27,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -910,7 +924,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 738,
-     "completion": 1340
+     "completion": 1340,
+     "usd": 0.0016282799999999997
     }
    },
    "items": [
@@ -950,7 +965,7 @@
     "completion": 1340
    },
    "usd": 0.00163,
-   "ms": 22,
+   "ms": 23,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -973,7 +988,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1346,
-     "completion": 3239
+     "completion": 3239,
+     "usd": 0.0022921
     }
    },
    "items": [
@@ -1012,7 +1028,7 @@
     "completion": 3239
    },
    "usd": 0.00229,
-   "ms": 23,
+   "ms": 25,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1034,7 +1050,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 656,
-     "completion": 1853
+     "completion": 1853,
+     "usd": 0.00174412
     }
    },
    "items": [
@@ -1094,9 +1111,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3565,
-     "completion": 9271
+     "calls": 11,
+     "prompt": 7207,
+     "completion": 11847,
+     "usd": 0.00469036
     }
    },
    "items": [
@@ -1124,18 +1142,18 @@
      "fresh": 2
     }
    ],
-   "calls": 9,
+   "calls": 11,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3565,
-    "completion": 9271
+    "prompt": 7207,
+    "completion": 11847
    },
-   "usd": 0.00385,
-   "ms": 33,
+   "usd": 0.00469,
+   "ms": 53,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -1154,7 +1172,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 4973,
-     "completion": 8550
+     "completion": 8550,
+     "usd": 0.00413582
     }
    },
    "items": [
@@ -1193,7 +1212,7 @@
     "completion": 8550
    },
    "usd": 0.00414,
-   "ms": 38,
+   "ms": 54,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1214,9 +1233,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 7342,
-     "completion": 8992
+     "calls": 11,
+     "prompt": 17793,
+     "completion": 11992,
+     "usd": 0.005449580000000001
     }
    },
    "items": [
@@ -1248,14 +1268,14 @@
      "fresh": 5
     }
    ],
-   "calls": 9,
+   "calls": 11,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 7342,
-    "completion": 8992
+    "prompt": 17793,
+    "completion": 11992
    },
-   "usd": 0.0041,
-   "ms": 38,
+   "usd": 0.00545,
+   "ms": 57,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1278,7 +1298,8 @@
     "tokens": {
      "calls": 8,
      "prompt": 4831,
-     "completion": 6809
+     "completion": 6809,
+     "usd": 0.0035034599999999995
     }
    },
    "items": [
@@ -1317,7 +1338,7 @@
     "completion": 6809
    },
    "usd": 0.0035,
-   "ms": 37,
+   "ms": 59,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1340,7 +1361,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 2999,
-     "completion": 3835
+     "completion": 3835,
+     "usd": 0.00254448
     }
    },
    "items": [
@@ -1379,7 +1401,7 @@
     "completion": 3835
    },
    "usd": 0.00254,
-   "ms": 27,
+   "ms": 35,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1402,7 +1424,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 644,
-     "completion": 1400
+     "completion": 1400,
+     "usd": 0.00209572
     }
    },
    "items": [
@@ -1441,7 +1464,7 @@
     "completion": 1400
    },
    "usd": 0.0021,
-   "ms": 24,
+   "ms": 29,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1464,7 +1487,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 2629,
-     "completion": 5575
+     "completion": 5575,
+     "usd": 0.0033476599999999997
     }
    },
    "items": [
@@ -1504,7 +1528,7 @@
     "completion": 5575
    },
    "usd": 0.00335,
-   "ms": 29,
+   "ms": 37,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1527,7 +1551,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 2790,
-     "completion": 7655
+     "completion": 7655,
+     "usd": 0.0037294399999999997
     }
    },
    "items": [
@@ -1566,7 +1591,7 @@
     "completion": 7655
    },
    "usd": 0.00373,
-   "ms": 32,
+   "ms": 38,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1589,7 +1614,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2265,
-     "completion": 1484
+     "completion": 1484,
+     "usd": 0.0023355200000000002
     }
    },
    "items": [
@@ -1628,7 +1654,7 @@
     "completion": 1484
    },
    "usd": 0.00234,
-   "ms": 26,
+   "ms": 41,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1650,7 +1676,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2848,
-     "completion": 3683
+     "completion": 3683,
+     "usd": 0.0032359800000000003
     }
    },
    "items": [
@@ -1689,7 +1716,7 @@
     "completion": 3683
    },
    "usd": 0.00324,
-   "ms": 28,
+   "ms": 40,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1712,7 +1739,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 1608,
-     "completion": 4543
+     "completion": 4543,
+     "usd": 0.00276436
     }
    },
    "items": [
@@ -1745,17 +1773,13 @@
     "completion": 4543
    },
    "usd": 0.00276,
-   "ms": 425,
+   "ms": 33,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "d02",
@@ -1772,7 +1796,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 2617,
-     "completion": 8803
+     "completion": 8803,
+     "usd": 0.0037378999999999997
     }
    },
    "items": [
@@ -1805,7 +1830,7 @@
     "completion": 8803
    },
    "usd": 0.00374,
-   "ms": 22,
+   "ms": 39,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1828,7 +1853,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 2585,
-     "completion": 3652
+     "completion": 3652,
+     "usd": 0.00285748
     }
    },
    "items": [
@@ -1861,24 +1887,20 @@
     "completion": 3652
    },
    "usd": 0.00286,
-   "ms": 419,
+   "ms": 51,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "d04",
    "group": "positive",
    "expect": "danger",
    "level": "danger",
-   "notice": "FDA D-0871-2026",
+   "notice": "FDA D-0870-2026",
    "headline": "Lot RL25G04 is listed in this recall.",
    "planned": "fixed",
    "engine": {
@@ -1888,7 +1910,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 3191,
-     "completion": 10496
+     "completion": 10496,
+     "usd": 0.004619259999999999
     }
    },
    "items": [
@@ -1921,7 +1944,7 @@
     "completion": 10496
    },
    "usd": 0.00462,
-   "ms": 27,
+   "ms": 50,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1943,7 +1966,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 4472,
-     "completion": 12513
+     "completion": 12513,
+     "usd": 0.00497966
     }
    },
    "items": [
@@ -1976,17 +2000,13 @@
     "completion": 12513
    },
    "usd": 0.00498,
-   "ms": 427,
+   "ms": 50,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "d06",
@@ -2003,7 +2023,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 922,
-     "completion": 2677
+     "completion": 2677,
+     "usd": 0.0026203600000000004
     }
    },
    "items": [
@@ -2036,17 +2057,13 @@
     "completion": 2677
    },
    "usd": 0.00262,
-   "ms": 425,
+   "ms": 36,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "d07",
@@ -2063,7 +2080,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 931,
-     "completion": 2882
+     "completion": 2882,
+     "usd": 0.00283388
     }
    },
    "items": [
@@ -2096,17 +2114,13 @@
     "completion": 2882
    },
    "usd": 0.00283,
-   "ms": 415,
+   "ms": 25,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "d08",
@@ -2123,7 +2137,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1580,
-     "completion": 2489
+     "completion": 2489,
+     "usd": 0.0034924
     }
    },
    "items": [
@@ -2156,12 +2171,12 @@
     "completion": 2489
    },
    "usd": 0.00349,
-   "ms": 409,
+   "ms": 431,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 10,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json",
     "api.fda.gov /drug/enforcement.json",
@@ -2183,7 +2198,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 632,
-     "completion": 2009
+     "completion": 2009,
+     "usd": 0.00322032
     }
    },
    "items": [
@@ -2215,25 +2231,21 @@
     "completion": 2009
    },
    "usd": 0.00322,
-   "ms": 412,
+   "ms": 25,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "d10",
    "group": "positive",
    "expect": "danger",
    "level": "danger",
-   "notice": "FDA D-0572-2026",
-   "headline": "Lot 1716089 is printed in this recall.",
+   "notice": "FDA D-0561-2026",
+   "headline": "Lot 1716089 is listed in this recall.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -2242,7 +2254,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 2595,
-     "completion": 10500
+     "completion": 10500,
+     "usd": 0.00431228
     }
    },
    "items": [
@@ -2275,7 +2288,7 @@
     "completion": 10500
    },
    "usd": 0.00431,
-   "ms": 6,
+   "ms": 28,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2298,7 +2311,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 798,
-     "completion": 2068
+     "completion": 2068,
+     "usd": 0.00185586
     }
    },
    "items": [
@@ -2331,7 +2345,7 @@
     "completion": 2068
    },
    "usd": 0.00186,
-   "ms": 5,
+   "ms": 11,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2354,7 +2368,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 1269,
-     "completion": 3509
+     "completion": 3509,
+     "usd": 0.00229174
     }
    },
    "items": [
@@ -2387,7 +2402,7 @@
     "completion": 3509
    },
    "usd": 0.00229,
-   "ms": 405,
+   "ms": 617,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2412,9 +2427,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3489,
-     "completion": 9965
+     "calls": 10,
+     "prompt": 4226,
+     "completion": 11242,
+     "usd": 0.004137279999999999
     }
    },
    "items": [
@@ -2440,14 +2456,14 @@
      "fresh": 2
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3489,
-    "completion": 9965
+    "prompt": 4226,
+    "completion": 11242
    },
-   "usd": 0.00379,
-   "ms": 412,
+   "usd": 0.00414,
+   "ms": 621,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2472,9 +2488,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3772,
-     "completion": 11169
+     "calls": 11,
+     "prompt": 7329,
+     "completion": 14169,
+     "usd": 0.00552556
     }
    },
    "items": [
@@ -2500,24 +2517,20 @@
      "fresh": 5
     }
    ],
-   "calls": 9,
+   "calls": 11,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3772,
-    "completion": 11169
+    "prompt": 7329,
+    "completion": 14169
    },
-   "usd": 0.00459,
-   "ms": 420,
+   "usd": 0.00553,
+   "ms": 14,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
-   "cacheMisses": 10,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "f04",
@@ -2534,7 +2547,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1361,
-     "completion": 2931
+     "completion": 2931,
+     "usd": 0.0025605
     }
    },
    "items": [
@@ -2567,12 +2581,12 @@
     "completion": 2931
    },
    "usd": 0.00256,
-   "ms": 535,
+   "ms": 608,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 10,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json",
     "api.fda.gov /drug/enforcement.json",
@@ -2594,7 +2608,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 983,
-     "completion": 2912
+     "completion": 2912,
+     "usd": 0.00194538
     }
    },
    "items": [
@@ -2627,17 +2642,13 @@
     "completion": 2912
    },
    "usd": 0.00195,
-   "ms": 526,
+   "ms": 7,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 10,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "f06",
@@ -2654,7 +2665,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 1896,
-     "completion": 5803
+     "completion": 5803,
+     "usd": 0.0027160799999999996
     }
    },
    "items": [
@@ -2687,7 +2699,7 @@
     "completion": 5803
    },
    "usd": 0.00272,
-   "ms": 5,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2710,7 +2722,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1257,
-     "completion": 3580
+     "completion": 3580,
+     "usd": 0.0035362600000000003
     }
    },
    "items": [
@@ -2743,17 +2756,13 @@
     "completion": 3580
    },
    "usd": 0.00354,
-   "ms": 414,
+   "ms": 7,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "f08",
@@ -2768,9 +2777,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 1963,
-     "completion": 8697
+     "calls": 10,
+     "prompt": 3538,
+     "completion": 10197,
+     "usd": 0.003928180000000001
     }
    },
    "items": [
@@ -2796,18 +2806,18 @@
      "fresh": 1
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 1963,
-    "completion": 8697
+    "prompt": 3538,
+    "completion": 10197
    },
-   "usd": 0.00347,
-   "ms": 7,
+   "usd": 0.00393,
+   "ms": 9,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2826,7 +2836,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 2628,
-     "completion": 5380
+     "completion": 5380,
+     "usd": 0.00281298
     }
    },
    "items": [
@@ -2888,7 +2899,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 678,
-     "completion": 725
+     "completion": 725,
+     "usd": 0.00132762
     }
    },
    "items": [
@@ -2927,7 +2939,7 @@
     "completion": 725
    },
    "usd": 0.00133,
-   "ms": 4,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2948,7 +2960,8 @@
     "tokens": {
      "calls": 1,
      "prompt": 311,
-     "completion": 732
+     "completion": 732,
+     "usd": 0.002507
     }
    },
    "items": [
@@ -2987,7 +3000,7 @@
     "completion": 732
    },
    "usd": 0.00251,
-   "ms": 4,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -3009,7 +3022,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2658,
-     "completion": 3623
+     "completion": 3623,
+     "usd": 0.0030474000000000005
     }
    },
    "items": [
@@ -3071,7 +3085,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 3424,
-     "completion": 5927
+     "completion": 5927,
+     "usd": 0.004032539999999999
     }
    },
    "items": [
@@ -3110,7 +3125,7 @@
     "completion": 5927
    },
    "usd": 0.00403,
-   "ms": 8,
+   "ms": 9,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -3133,7 +3148,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1347,
-     "completion": 3239
+     "completion": 3239,
+     "usd": 0.0022930999999999997
     }
    },
    "items": [
@@ -3195,7 +3211,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 2103,
-     "completion": 4257
+     "completion": 4257,
+     "usd": 0.00228482
     }
    },
    "items": [
@@ -3257,7 +3274,8 @@
     "tokens": {
      "calls": 6,
      "prompt": 2357,
-     "completion": 5073
+     "completion": 5073,
+     "usd": 0.0027994400000000003
     }
    },
    "items": [
@@ -3296,7 +3314,7 @@
     "completion": 5073
    },
    "usd": 0.0028,
-   "ms": 5,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -3318,7 +3336,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 738,
-     "completion": 1617
+     "completion": 1617,
+     "usd": 0.00245928
     }
    },
    "items": [
@@ -3358,7 +3377,7 @@
     "completion": 1617
    },
    "usd": 0.00246,
-   "ms": 4,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -3381,7 +3400,8 @@
     "tokens": {
      "calls": 8,
      "prompt": 3249,
-     "completion": 8012
+     "completion": 8012,
+     "usd": 0.00472674
     }
    },
    "items": [
@@ -3420,7 +3440,7 @@
     "completion": 8012
    },
    "usd": 0.00473,
-   "ms": 5,
+   "ms": 7,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -3443,7 +3463,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 643,
-     "completion": 1529
+     "completion": 1529,
+     "usd": 0.0024817199999999998
     }
    },
    "items": [
@@ -3505,7 +3526,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 2629,
-     "completion": 5733
+     "completion": 5733,
+     "usd": 0.0038216599999999997
     }
    },
    "items": [
@@ -3545,7 +3567,7 @@
     "completion": 5733
    },
    "usd": 0.00382,
-   "ms": 10,
+   "ms": 9,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -3558,17 +3580,18 @@
    "group": "near-miss",
    "expect": "not-danger",
    "level": "warning",
-   "notice": "CPSC 25-093",
-   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
+   "notice": "CPSC 24-109",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3565,
-     "completion": 9220
+     "calls": 12,
+     "prompt": 7533,
+     "completion": 12097,
+     "usd": 0.004629160000000001
     }
    },
    "items": [
@@ -3600,18 +3623,18 @@
      "fresh": 3
     }
    ],
-   "calls": 9,
+   "calls": 12,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3565,
-    "completion": 9220
+    "prompt": 7533,
+    "completion": 12097
    },
-   "usd": 0.0037,
-   "ms": 8,
+   "usd": 0.00463,
+   "ms": 15,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -3629,8 +3652,9 @@
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
      "calls": 9,
-     "prompt": 8352,
-     "completion": 10593
+     "prompt": 8265,
+     "completion": 10996,
+     "usd": 0.0049102799999999995
     }
    },
    "items": [
@@ -3665,15 +3689,15 @@
    "calls": 9,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 8352,
-    "completion": 10593
+    "prompt": 8265,
+    "completion": 10996
    },
-   "usd": 0.00482,
-   "ms": 11,
+   "usd": 0.00491,
+   "ms": 14,
    "msFresh": false,
-   "tavily": 4,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 3,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -3690,9 +3714,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 7342,
-     "completion": 9103
+     "calls": 11,
+     "prompt": 17793,
+     "completion": 12103,
+     "usd": 0.005782580000000001
     }
    },
    "items": [
@@ -3724,14 +3749,14 @@
      "fresh": 5
     }
    ],
-   "calls": 9,
+   "calls": 11,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 7342,
-    "completion": 9103
+    "prompt": 17793,
+    "completion": 12103
    },
-   "usd": 0.00444,
-   "ms": 10,
+   "usd": 0.00578,
+   "ms": 17,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -3754,7 +3779,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1425,
-     "completion": 2351
+     "completion": 2351,
+     "usd": 0.0021380400000000003
     }
    },
    "items": [
@@ -3793,7 +3819,7 @@
     "completion": 2351
    },
    "usd": 0.00214,
-   "ms": 5,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -3815,7 +3841,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2848,
-     "completion": 3728
+     "completion": 3728,
+     "usd": 0.00337098
     }
    },
    "items": [
@@ -3854,7 +3881,7 @@
     "completion": 3728
    },
    "usd": 0.00337,
-   "ms": 5,
+   "ms": 9,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -3876,7 +3903,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 632,
-     "completion": 838
+     "completion": 838,
+     "usd": 0.00166844
     }
    },
    "items": [
@@ -3915,7 +3943,7 @@
     "completion": 838
    },
    "usd": 0.00167,
-   "ms": 5,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -3938,7 +3966,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 1608,
-     "completion": 4473
+     "completion": 4473,
+     "usd": 0.00255436
     }
    },
    "items": [
@@ -3971,17 +4000,13 @@
     "completion": 4473
    },
    "usd": 0.00255,
-   "ms": 413,
+   "ms": 10,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "n20",
@@ -3998,7 +4023,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 2617,
-     "completion": 8783
+     "completion": 8783,
+     "usd": 0.0036779000000000004
     }
    },
    "items": [
@@ -4031,7 +4057,7 @@
     "completion": 8783
    },
    "usd": 0.00368,
-   "ms": 5,
+   "ms": 7,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4043,17 +4069,19 @@
    "id": "n21",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "Recalls exist for this brand, but none lists your lot number.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
+    "modelUnavailable": 1,
     "tokens": {
      "calls": 4,
      "prompt": 2585,
-     "completion": 3828
+     "completion": 3828,
+     "usd": 0.0033854799999999997
     }
    },
    "items": [
@@ -4086,33 +4114,31 @@
     "completion": 3828
    },
    "usd": 0.00339,
-   "ms": 419,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "n22",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "Recalls exist for this brand, but none lists your lot number.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
+    "modelUnavailable": 1,
     "tokens": {
      "calls": 9,
      "prompt": 3191,
-     "completion": 10722
+     "completion": 10722,
+     "usd": 0.00529726
     }
    },
    "items": [
@@ -4145,7 +4171,7 @@
     "completion": 10722
    },
    "usd": 0.0053,
-   "ms": 12,
+   "ms": 11,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4167,7 +4193,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 1312,
-     "completion": 1267
+     "completion": 1267,
+     "usd": 0.00234124
     }
    },
    "items": [
@@ -4200,12 +4227,12 @@
     "completion": 1267
    },
    "usd": 0.00234,
-   "ms": 413,
+   "ms": 412,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 10,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json",
     "api.fda.gov /drug/enforcement.json",
@@ -4226,7 +4253,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 1269,
-     "completion": 3512
+     "completion": 3512,
+     "usd": 0.00230074
     }
    },
    "items": [
@@ -4259,7 +4287,7 @@
     "completion": 3512
    },
    "usd": 0.0023,
-   "ms": 419,
+   "ms": 571,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4276,7 +4304,7 @@
    "group": "near-miss",
    "expect": "not-danger",
    "level": "warning",
-   "notice": "FDA H-1265-2026",
+   "notice": "FDA H-1264-2026",
    "headline": "This product line is recalled. Check the lot code and dates on yours.",
    "planned": "fixed",
    "engine": {
@@ -4284,9 +4312,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3489,
-     "completion": 9937
+     "calls": 10,
+     "prompt": 4226,
+     "completion": 11214,
+     "usd": 0.004053279999999999
     }
    },
    "items": [
@@ -4312,14 +4341,14 @@
      "fresh": 2
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3489,
-    "completion": 9937
+    "prompt": 4226,
+    "completion": 11214
    },
-   "usd": 0.0037,
-   "ms": 408,
+   "usd": 0.00405,
+   "ms": 566,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4335,17 +4364,19 @@
    "id": "n26",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "Recalls exist for this brand, but none lists your lot code.",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3772,
-     "completion": 11154
+     "calls": 11,
+     "prompt": 7329,
+     "completion": 14154,
+     "usd": 0.00548056
     }
    },
    "items": [
@@ -4371,24 +4402,20 @@
      "fresh": 5
     }
    ],
-   "calls": 9,
+   "calls": 11,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3772,
-    "completion": 11154
+    "prompt": 7329,
+    "completion": 14154
    },
-   "usd": 0.00455,
-   "ms": 411,
+   "usd": 0.00548,
+   "ms": 13,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
-   "cacheMisses": 10,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "c01",
@@ -4405,7 +4432,8 @@
     "tokens": {
      "calls": 2,
      "prompt": 671,
-     "completion": 691
+     "completion": 691,
+     "usd": 0.00121862
     }
    },
    "items": [
@@ -4437,7 +4465,7 @@
     "completion": 691
    },
    "usd": 0.00122,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4460,7 +4488,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 3415,
-     "completion": 5469
+     "completion": 5469,
+     "usd": 0.0026495399999999997
     }
    },
    "items": [
@@ -4492,7 +4521,7 @@
     "completion": 5469
    },
    "usd": 0.00265,
-   "ms": 6,
+   "ms": 7,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4515,7 +4544,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1338,
-     "completion": 3434
+     "completion": 3434,
+     "usd": 0.0028691
     }
    },
    "items": [
@@ -4547,7 +4577,7 @@
     "completion": 3434
    },
    "usd": 0.00287,
-   "ms": 4,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4570,7 +4600,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 2604,
-     "completion": 7232
+     "completion": 7232,
+     "usd": 0.00359996
     }
    },
    "items": [
@@ -4623,9 +4654,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3358,
-     "completion": 9088
+     "calls": 10,
+     "prompt": 5708,
+     "completion": 10588,
+     "usd": 0.0038224799999999996
     }
    },
    "items": [
@@ -4650,18 +4682,18 @@
      "fresh": 6
     }
    ],
-   "calls": 9,
+   "calls": 10,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3358,
-    "completion": 9088
+    "prompt": 5708,
+    "completion": 10588
    },
-   "usd": 0.00332,
-   "ms": 11,
+   "usd": 0.00382,
+   "ms": 14,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -4680,7 +4712,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 1601,
-     "completion": 4357
+     "completion": 4357,
+     "usd": 0.00219936
     }
    },
    "items": [
@@ -4712,17 +4745,13 @@
     "completion": 4357
    },
    "usd": 0.0022,
-   "ms": 483,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "c07",
@@ -4739,7 +4768,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 2579,
-     "completion": 3476
+     "completion": 3476,
+     "usd": 0.0023234799999999997
     }
    },
    "items": [
@@ -4771,24 +4801,20 @@
     "completion": 3476
    },
    "usd": 0.00232,
-   "ms": 416,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "c08",
    "group": "no-code",
    "expect": "warning",
    "level": "warning",
-   "notice": "FDA D-0871-2026",
+   "notice": "FDA D-0870-2026",
    "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
    "planned": "fixed",
    "engine": {
@@ -4798,7 +4824,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 3183,
-     "completion": 10241
+     "completion": 10241,
+     "usd": 0.0038462600000000002
     }
    },
    "items": [
@@ -4853,7 +4880,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 1254,
-     "completion": 3381
+     "completion": 3381,
+     "usd": 0.00189274
     }
    },
    "items": [
@@ -4885,7 +4913,7 @@
     "completion": 3381
    },
    "usd": 0.00189,
-   "ms": 405,
+   "ms": 487,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -4912,7 +4940,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 2612,
-     "completion": 5289
+     "completion": 5289,
+     "usd": 0.00247266
     }
    },
    "items": [
@@ -4944,7 +4973,7 @@
     "completion": 5289
    },
    "usd": 0.00247,
-   "ms": 9,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -4967,7 +4996,8 @@
     "tokens": {
      "calls": 8,
      "prompt": 3238,
-     "completion": 7443
+     "completion": 7443,
+     "usd": 0.00300874
     }
    },
    "items": [
@@ -5022,7 +5052,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 2090,
-     "completion": 4362
+     "completion": 4362,
+     "usd": 0.00258682
     }
    },
    "items": [
@@ -5054,7 +5085,7 @@
     "completion": 4362
    },
    "usd": 0.00259,
-   "ms": 6,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -5073,10 +5104,12 @@
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 1,
-     "prompt": 303,
-     "completion": 270
+     "calls": 4,
+     "prompt": 4823,
+     "completion": 3162,
+     "usd": 0.00207828
     }
    },
    "items": [
@@ -5101,18 +5134,18 @@
      "fresh": 4
     }
    ],
-   "calls": 1,
+   "calls": 4,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 303,
-    "completion": 270
+    "prompt": 4823,
+    "completion": 3162
    },
-   "usd": 0.00111,
-   "ms": 2,
+   "usd": 0.00208,
+   "ms": 7,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5127,10 +5160,12 @@
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 1,
-     "prompt": 302,
-     "completion": 311
+     "calls": 4,
+     "prompt": 3365,
+     "completion": 3843,
+     "usd": 0.00226646
     }
    },
    "items": [
@@ -5155,18 +5190,18 @@
      "fresh": 5
     }
    ],
-   "calls": 1,
+   "calls": 4,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 302,
-    "completion": 311
+    "prompt": 3365,
+    "completion": 3843
    },
-   "usd": 0.00123,
-   "ms": 3,
+   "usd": 0.00227,
+   "ms": 7,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5181,10 +5216,12 @@
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 1,
-     "prompt": 304,
-     "completion": 239
+     "calls": 4,
+     "prompt": 3162,
+     "completion": 3229,
+     "usd": 0.00191008
     }
    },
    "items": [
@@ -5209,18 +5246,18 @@
      "fresh": 6
     }
    ],
-   "calls": 1,
+   "calls": 4,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 304,
-    "completion": 239
+    "prompt": 3162,
+    "completion": 3229
    },
-   "usd": 0.00102,
-   "ms": 3,
+   "usd": 0.00191,
+   "ms": 6,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5235,10 +5272,12 @@
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 1,
-     "prompt": 303,
-     "completion": 237
+     "calls": 4,
+     "prompt": 4010,
+     "completion": 4297,
+     "usd": 0.0022108199999999996
     }
    },
    "items": [
@@ -5263,18 +5302,18 @@
      "fresh": 5
     }
    ],
-   "calls": 1,
+   "calls": 4,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 303,
-    "completion": 237
+    "prompt": 4010,
+    "completion": 4297
    },
-   "usd": 0.00101,
-   "ms": 2,
+   "usd": 0.00221,
+   "ms": 5,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5291,9 +5330,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 2,
-     "prompt": 1338,
-     "completion": 932
+     "calls": 4,
+     "prompt": 3010,
+     "completion": 2269,
+     "usd": 0.00197234
     }
    },
    "items": [
@@ -5318,14 +5358,14 @@
      "fresh": 5
     }
    ],
-   "calls": 2,
+   "calls": 4,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 1338,
-    "completion": 932
+    "prompt": 3010,
+    "completion": 2269
    },
-   "usd": 0.00155,
-   "ms": 3,
+   "usd": 0.00197,
+   "ms": 6,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -5348,7 +5388,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 3308,
-     "completion": 3821
+     "completion": 3821,
+     "usd": 0.0021483
     }
    },
    "items": [
@@ -5382,9 +5423,9 @@
    "usd": 0.00215,
    "ms": 4,
    "msFresh": false,
-   "tavily": 3,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 2,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5403,7 +5444,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 4650,
-     "completion": 3644
+     "completion": 3644,
+     "usd": 0.00243204
     }
    },
    "items": [
@@ -5437,9 +5479,9 @@
    "usd": 0.00243,
    "ms": 5,
    "msFresh": false,
-   "tavily": 4,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 3,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5457,7 +5499,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 6389,
-     "completion": 3314
+     "completion": 3314,
+     "usd": 0.00233298
     }
    },
    "items": [
@@ -5489,11 +5532,11 @@
     "completion": 3314
    },
    "usd": 0.00233,
-   "ms": 5,
+   "ms": 6,
    "msFresh": false,
-   "tavily": 3,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 2,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5511,7 +5554,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 4907,
-     "completion": 3281
+     "completion": 3281,
+     "usd": 0.0021431799999999997
     }
    },
    "items": [
@@ -5555,17 +5599,19 @@
    "id": "v10",
    "group": "car",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for the 2024 Kia Soul.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
+    "modelUnavailable": 1,
     "tokens": {
      "calls": 5,
      "prompt": 5991,
-     "completion": 4899
+     "completion": 4899,
+     "usd": 0.0026949599999999997
     }
    },
    "items": [
@@ -5599,9 +5645,9 @@
    "usd": 0.00269,
    "ms": 5,
    "msFresh": false,
-   "tavily": 3,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 2,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5609,17 +5655,19 @@
    "id": "v11",
    "group": "car",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for the 2023 Subaru BRZ.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
+    "modelUnavailable": 1,
     "tokens": {
      "calls": 3,
      "prompt": 3935,
-     "completion": 3031
+     "completion": 3031,
+     "usd": 0.00212698
     }
    },
    "items": [
@@ -5651,7 +5699,7 @@
     "completion": 3031
    },
    "usd": 0.00213,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -5663,17 +5711,19 @@
    "id": "v12",
    "group": "car",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for the 2014 Honda Fit.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
+    "modelUnavailable": 1,
     "tokens": {
      "calls": 4,
      "prompt": 5755,
-     "completion": 4241
+     "completion": 4241,
+     "usd": 0.00238946
     }
    },
    "items": [
@@ -5707,9 +5757,9 @@
    "usd": 0.00239,
    "ms": 5,
    "msFresh": false,
-   "tavily": 3,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 2,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5726,9 +5776,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Nano",
     "tokens": {
-     "calls": 9,
-     "prompt": 3883,
-     "completion": 10606
+     "calls": 12,
+     "prompt": 10757,
+     "completion": 14309,
+     "usd": 0.005401339999999999
     }
    },
    "items": [
@@ -5760,18 +5811,18 @@
      "fresh": 4
     }
    ],
-   "calls": 9,
+   "calls": 12,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 3883,
-    "completion": 10606
+    "prompt": 10757,
+    "completion": 14309
    },
-   "usd": 0.0041,
-   "ms": 8,
+   "usd": 0.0054,
+   "ms": 17,
    "msFresh": false,
-   "tavily": 1,
+   "tavily": 2,
    "tavilySearch": 1,
-   "tavilyExtract": 0,
+   "tavilyExtract": 1,
    "cacheMisses": 0,
    "missed": []
   },
@@ -5790,7 +5841,8 @@
     "tokens": {
      "calls": 5,
      "prompt": 2167,
-     "completion": 5863
+     "completion": 5863,
+     "usd": 0.00394546
     }
    },
    "items": [
@@ -5851,7 +5903,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 1427,
-     "completion": 2639
+     "completion": 2639,
+     "usd": 0.00193856
     }
    },
    "items": [
@@ -5890,7 +5943,7 @@
     "completion": 2639
    },
    "usd": 0.00194,
-   "ms": 6,
+   "ms": 7,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -5912,7 +5965,8 @@
     "tokens": {
      "calls": 4,
      "prompt": 2141,
-     "completion": 5127
+     "completion": 5127,
+     "usd": 0.0033771
     }
    },
    "items": [
@@ -5972,7 +6026,8 @@
     "tokens": {
      "calls": 1,
      "prompt": 306,
-     "completion": 701
+     "completion": 701,
+     "usd": 0.002409
     }
    },
    "items": [
@@ -6011,7 +6066,7 @@
     "completion": 701
    },
    "usd": 0.00241,
-   "ms": 1,
+   "ms": 2,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -6034,7 +6089,8 @@
     "tokens": {
      "calls": 9,
      "prompt": 3375,
-     "completion": 7791
+     "completion": 7791,
+     "usd": 0.0037741
     }
    },
    "items": [
@@ -6096,7 +6152,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 890,
-     "completion": 2799
+     "completion": 2799,
+     "usd": 0.0019458000000000001
     }
    },
    "items": [
@@ -6129,17 +6186,13 @@
     "completion": 2799
    },
    "usd": 0.00195,
-   "ms": 414,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "k08",
@@ -6155,7 +6208,8 @@
     "tokens": {
      "calls": 7,
      "prompt": 3429,
-     "completion": 5511
+     "completion": 5511,
+     "usd": 0.0027895399999999996
     }
    },
    "items": [
@@ -6194,7 +6248,7 @@
     "completion": 5511
    },
    "usd": 0.00279,
-   "ms": 9,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -6217,7 +6271,8 @@
     "tokens": {
      "calls": 3,
      "prompt": 2542,
-     "completion": 2465
+     "completion": 2465,
+     "usd": 0.0022195
     }
    },
    "items": [
@@ -6256,7 +6311,7 @@
     "completion": 2465
    },
    "usd": 0.00222,
-   "ms": 6,
+   "ms": 5,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,

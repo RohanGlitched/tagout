@@ -54,7 +54,7 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 - **Tuned set.** Turning the web step off in the no-model arm (free, replayed from the cache) took it from 87/105 to 81/105, and its recalled units cleared green from 10 to 19 (`replay-summary.json`, arm `rules-noweb`).
 - **Caveat.** On the database cases, Tavily also turned one green near miss orange (h12, still right). In the tuned set's no-model arm it caused one wrong red (n12) that the Tavily-off variant doesn't have.
 
-## What went wrong on the held-out set (not fixed; fixing would tune on it)
+## What went wrong on the held-out set (as run; fixed afterwards, see "After the fixes")
 
 - **h15: a Gatorade lot with a space in it, cleared green by every arm.** The line was `Gatorade Lemon Lime 28 oz, lot 091026 DL`. The FDA lot search found H-0009-2027, which prints `Lot 091026 DL`, and the tag even says a recall exists for the brand. But two checks missed the lot:
   - the notice reader listed it as `091026`, dropping the `DL` line code (`eval/replay.ts tagout h15 results-holdout cases-holdout.json` shows this);
@@ -77,7 +77,72 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 
 - **Decision: Nemotron 3.5 Super VL leads `MODELS.vision`; Qwen and Gemma stay as fallbacks.** It read the sample labels exactly. When it runs out of budget, the same call falls through the chain. In the held-out run (h07), VL failed, Qwen read the tag, and the case came out red.
 - **Budget probe.** With an 8,000-token budget, VL read the real tag correctly (about 3,000 tokens, 2,900 of them reasoning, 7.4 s).
-- **One-line fix (in `lib/agent/intake.ts`, not made here).** Raise the photo call's `maxTokens` from 2,500 to about 6,000, or turn reasoning off for it.
+- **One-line fix (in `lib/agent/intake.ts`, not made here).** Raise the photo call's `maxTokens` from 2,500 to about 6,000, or turn reasoning off for it. Made later in `cda64eb` (6,000 tokens; see "After the fixes").
+
+## After the fixes (Oct 25; these 39 cases are no longer held out)
+
+**These numbers come after reading the misses above and fixing them, so the 39 cases are now in-sample, like the 105.** The held-out numbers above (Tagout 31/39, measured once at `a1d8b21`) stay the headline. The fixes are in commits `9677671`, `37ee47f`, `cda64eb` and `a9a0f8f`, on top of the Oct 25 changes to `lib/` (`3adbbab` to `2965b11`). Every rule is general: no case ids or brand names in the logic. `test/holdout-fixes.test.ts` covers each failure mode on made-up examples, with near misses that must still not match.
+
+What each miss was, and what changed:
+
+- **h15, a lot printed in two parts (`091026 DL`).** Three causes:
+  - openFDA's own lot parse split on spaces and dropped `DL`;
+  - `splitIds` split a reader's `091026 DL` the same way;
+  - `printedIn()` compared one word at a time.
+
+  Now a lot list keeps a 1-3 letter capital line code with the number before it, and `printedIn()` finds a code printed in parts. It joins words only where the code itself breaks (a space or dash in it, or digits meeting letters). It never matches a number the text prints with a line code after it.
+  - Near misses stay out: `091226 DL` (h16) and `091026 TL` don't match, and digits never join across a date (`0607` in `JUN 06 07`).
+  - A lot that is a listed lot minus its line code (`091026` against `091026 DL`) is orange, not green.
+  - At this commit the Ultra reader runs out of its 1,500 tokens on this record, so the record's own lot list decides.
+- **h08, a whole product line with no codes.** CPSC's title says "HatsanUSA", and `brandIn()` needed "Hatsan" as a separate word, so the notice matched nothing and the tag was green. Two changes:
+  - a brand written as one word with a company suffix (`usa`, `inc`, `llc`, ...) now counts;
+  - a recall that prints no codes at all and names the brand in its text is orange for that brand's item, never green.
+
+  Also, for a product with no model number, the brand's CPSC recalls of that kind of product stay whatever the agent picks.
+- **h38 and h39, the FSIS recall (Kayem).** The agent did search the web and did read the FSIS page. But that page prints about 28,000 characters of menus before the announcement, and pages were cut at 16,000 characters, so the reader and the agent's excerpt saw only navigation. The agent then left the page out of `finish`. Three changes:
+  - a long page is now read from its dateline (`WASHINGTON, Oct. 17, 2026 –`, `FSIS Announcement`, `Company Announcement Date:`) when the dateline sits past the middle of the window. Of the 182 pages read in the eval cache, only this one changes;
+  - for food, drugs and devices with no lot, UPC or NDC, the brand's recalls on the official sites now stay whatever the agent chose, as FDA records already did. That includes range recalls such as "Recalls Meat and Poultry Products";
+  - an undated web page is dated by its own dateline, so the brand's 2015-2025 recalls count as old.
+
+  The `read_page` off-item refusal was not involved: both pages named the brand.
+- **Lag-window units orange instead of red.**
+  - **h32 and h40 are fixed.** The code on the item was a pack date typed without the word "lot" (`pack date 26-196`, or a bare `26-196`). A pack date, serial or bare code that the notice's lot list lists is now the lot, when the brand, UPC or model ties the item to the recall. A code the list doesn't print stays orange: the near miss h33, `26-161`, is orange. When the reader read no lists at all, the UPC and the pack code both printed in the text decide; either one alone doesn't.
+  - **h37 and h42 stay orange, correctly for the data.** The Starfish salmon lot `D080-148` is in none of the text Tavily returns: not in search snippets, not in basic extract, and not in advanced extract (probed once; the same 3,153 characters with no product table). Orange is the most that text supports.
+- **Found while tracing, in the fixed plan.** Notices were cut to the eight newest, with undated web pages sorted last. So a brand's eight old FDA records pushed out the week's company announcement (the lite tier cleared the mung beans this way). Undated pages now get the room the dated ones leave, and at least three.
+- **Label photos.** The vision call now has 6,000 output tokens. On the Primark tag (h07), Super VL answered with about 3,900 tokens, and the Tagout arm tagged it red.
+
+Results at `a9a0f8f` (`holdout-after-fixes.json`, `results-holdout-after/`). Live calls ran only where the eval cache had no answer, and an offline replay of both arms gives the same 39 tags:
+
+| Arm | Right | Wrongly red | Wrongly cleared | Database | Lag window | Model cost per item | Tavily credits per item |
+|---|---|---|---|---|---|---|---|
+| Tagout, first run (headline, `a1d8b21`) | 31/39 | 0/10 | 4/31 | 25/27 | 6/12 | 2.65¢ | 2.77 |
+| **Tagout, after the fixes** | **37/39** | **0/10** | **0/31** | 27/27 | 10/12 | 2.72¢ | 2.26 |
+| Lite tier, first run (`a1d8b21`) | 30/39 | 0/10 | 6/31 | 23/27 | 7/12 | 0.28¢ | 1.72 |
+| **Lite tier, after the fixes** | **33/39** | **0/10** | **1/31** | 24/27 | 9/12 | 0.29¢ | 1.56 |
+
+- **Still wrong, Tagout:** h37 and h42, orange where red is right (see above).
+- **Still wrong, lite tier:**
+  - h37 and h42, the same as Tagout;
+  - h43 green: the single web search didn't return the Wedgewood announcement;
+  - h07 orange, held by the "never green without a model" guard: the fixed plan searches CPSC by brand, and the photo has none;
+  - h23 and h24 orange where green is right. h23 is held by the same guard after a Nano read failed. h24 was orange in the first run too.
+- **The 105 tuned cases at `a9a0f8f`** (`summary-current.json`, `results-after/`; `summary.json` is unchanged):
+  - **Tagout: 105/105**, 0/59 wrongly red, 0/67 cleared;
+  - **lite tier: 95/105**, 1/59 wrongly red (n12, as before), 0/67 cleared.
+
+  The fixes in this section changed no tag on the 105. An offline replay of the code just before them (`665dd4e`, whose `lib/` differs from `2965b11` by one line in `lib/wall.ts`), on the same cache, gives the same tags for both arms. The lite tier's three lost cases (v10-v12, clean cars now orange) come from the earlier "never green without a model" change: Nano fails to read NHTSA's PDF pages within 1,500 tokens.
+- **Replay.** `npm run eval:replay` now replays every 105 arm with no model or Tavily cache misses at `a9a0f8f`, and `replay-summary.json` is rewritten. `holdout-replay-summary.json` is untouched and still describes `a1d8b21`.
+- **Spend.** $0.36 of Token Factory through the harness (ledger $4.9448 → $5.3000):
+
+  | Run | Spend |
+  |---|---|
+  | Held-out Tagout arm | $0.11 |
+  | Held-out lite arm | under $0.01 |
+  | 105 Tagout arm | $0.14 |
+  | 105 lite arm | $0.01 |
+  | Every other 105 arm | $0.09 |
+
+  Tavily: 55 credits (53 keyed calls, plus 2 for the advanced-extract probe), and 15 keyless calls.
 
 ## Replaying (`npm run eval:replay`)
 
@@ -141,6 +206,8 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 | `results-replay/`, `replay-summary.json` | Offline replay of the 105 |
 | `results-holdout-replay/`, `holdout-replay-summary.json` | Offline replay of this set |
 | `results-current/` | The 11 refilled tuned cases |
+| `results-holdout-after/`, `holdout-after-fixes.json` | This set after the fixes (no longer held out) |
+| `results-after/`, `summary-current.json` | Every arm of the 105 at `a9a0f8f` |
 
 Commands:
 

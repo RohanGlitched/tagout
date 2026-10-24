@@ -12,11 +12,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a1d8b21",
+   "commit": "a9a0f8f",
    "libChanged": false
   }
  },
- "at": "2026-10-24T19:31:34.495Z",
+ "at": "2026-10-24T20:14:06.085Z",
  "cases": [
   {
    "id": "p01",
@@ -32,7 +32,7 @@
     "completion": 436
    },
    "usd": 0.00167,
-   "ms": 11,
+   "ms": 13,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -53,7 +53,7 @@
     "completion": 2500
    },
    "usd": 0.00792,
-   "ms": 8,
+   "ms": 10,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -65,24 +65,23 @@
    "id": "p03",
    "group": "positive",
    "expect": "danger",
-   "level": "error",
-   "error": "not cached: https://api.tokenfactory.nebius.com/v1/chat/completions",
-   "calls": 0,
+   "level": "danger",
+   "notice": "CPSC recall: Kobayashi Recalls Rechargeable Hand Warmers (HotHands brand, model H163650) due to fire and burn hazards. See https://www.cpsc.gov/Recalls/2027/Kobayashi-Recalls-Rechargeable-Hand-Warmers-Due-to-Risk-of-Serious-Injury-from-Fire-and-Burn-Hazards",
+   "reason": "The CPSC recall explicitly lists model number H163650 for HotHands-branded rechargeable hand warmers.",
+   "calls": 1,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 0,
-    "completion": 0
+    "prompt": 1027,
+    "completion": 1062
    },
-   "usd": 0,
-   "ms": 1511,
-   "msFresh": true,
+   "usd": 0.00421,
+   "ms": 9,
+   "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 2,
-   "missed": [
-    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "p04",
@@ -98,7 +97,7 @@
     "completion": 451
    },
    "usd": 0.00259,
-   "ms": 8,
+   "ms": 10,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -120,7 +119,7 @@
     "completion": 1771
    },
    "usd": 0.00644,
-   "ms": 6,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -164,7 +163,7 @@
     "completion": 793
    },
    "usd": 0.00305,
-   "ms": 4,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -186,7 +185,7 @@
     "completion": 620
    },
    "usd": 0.00313,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -208,7 +207,7 @@
     "completion": 646
    },
    "usd": 0.00319,
-   "ms": 3,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -252,7 +251,7 @@
     "completion": 766
    },
    "usd": 0.00305,
-   "ms": 3,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -274,7 +273,7 @@
     "completion": 1007
    },
    "usd": 0.00377,
-   "ms": 3,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -296,7 +295,7 @@
     "completion": 812
    },
    "usd": 0.0037,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -318,7 +317,7 @@
     "completion": 702
    },
    "usd": 0.00255,
-   "ms": 3,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -340,7 +339,7 @@
     "completion": 961
    },
    "usd": 0.00451,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -362,7 +361,7 @@
     "completion": 572
    },
    "usd": 0.00216,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -384,7 +383,7 @@
     "completion": 705
    },
    "usd": 0.00331,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -406,7 +405,7 @@
     "completion": 949
    },
    "usd": 0.0038,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -428,7 +427,7 @@
     "completion": 560
    },
    "usd": 0.00281,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -450,7 +449,7 @@
     "completion": 503
    },
    "usd": 0.0027,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -494,7 +493,7 @@
     "completion": 268
    },
    "usd": 0.00142,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -516,7 +515,7 @@
     "completion": 323
    },
    "usd": 0.00211,
-   "ms": 3,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -528,24 +527,23 @@
    "id": "p24",
    "group": "positive",
    "expect": "danger",
-   "level": "error",
-   "error": "not cached: https://api.tokenfactory.nebius.com/v1/chat/completions",
-   "calls": 0,
+   "level": "danger",
+   "notice": "CPSC recall (2026) for Thermos Stainless King Food Jars model SK3000 and SK3020 manufactured before July 2023 due to missing pressure relief in stopper causing impact injury and laceration hazards. The household's SK3000 jar made 2022-05 falls within the recalled manufacture date range.",
+   "reason": "Model SK3000 and manufacture date May 2022 match the recall criteria exactly.",
+   "calls": 1,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 0,
-    "completion": 0
+    "prompt": 1217,
+    "completion": 501
    },
-   "usd": 0,
-   "ms": 1506,
-   "msFresh": true,
+   "usd": 0.00272,
+   "ms": 5,
+   "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 2,
-   "missed": [
-    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "p25",
@@ -561,7 +559,7 @@
     "completion": 758
    },
    "usd": 0.00267,
-   "ms": 2,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -583,7 +581,7 @@
     "completion": 500
    },
    "usd": 0.0027,
-   "ms": 2,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -605,7 +603,7 @@
     "completion": 649
    },
    "usd": 0.00243,
-   "ms": 2,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -626,7 +624,7 @@
     "completion": 490
    },
    "usd": 0.00183,
-   "ms": 2,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -647,7 +645,7 @@
     "completion": 387
    },
    "usd": 0.00251,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -669,7 +667,7 @@
     "completion": 689
    },
    "usd": 0.00259,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -690,7 +688,7 @@
     "completion": 588
    },
    "usd": 0.00306,
-   "ms": 2,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -711,7 +709,7 @@
     "completion": 417
    },
    "usd": 0.00241,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -732,7 +730,7 @@
     "completion": 448
    },
    "usd": 0.00274,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -753,7 +751,7 @@
     "completion": 691
    },
    "usd": 0.00332,
-   "ms": 2,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -775,7 +773,7 @@
     "completion": 589
    },
    "usd": 0.00218,
-   "ms": 2,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -796,7 +794,7 @@
     "completion": 781
    },
    "usd": 0.00252,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -818,7 +816,7 @@
     "completion": 699
    },
    "usd": 0.00335,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -840,7 +838,7 @@
     "completion": 1413
    },
    "usd": 0.0059,
-   "ms": 2,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -861,7 +859,7 @@
     "completion": 536
    },
    "usd": 0.00177,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -883,7 +881,7 @@
     "completion": 325
    },
    "usd": 0.00155,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -905,7 +903,7 @@
     "completion": 443
    },
    "usd": 0.00194,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -927,7 +925,7 @@
     "completion": 384
    },
    "usd": 0.00155,
-   "ms": 1,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -948,7 +946,7 @@
     "completion": 475
    },
    "usd": 0.00277,
-   "ms": 2,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -969,7 +967,7 @@
     "completion": 448
    },
    "usd": 0.00235,
-   "ms": 3,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -991,7 +989,7 @@
     "completion": 1084
    },
    "usd": 0.00467,
-   "ms": 2,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1013,7 +1011,7 @@
     "completion": 695
    },
    "usd": 0.00256,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1035,7 +1033,7 @@
     "completion": 627
    },
    "usd": 0.00303,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1047,24 +1045,23 @@
    "id": "n02",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "error",
-   "error": "not cached: https://api.tokenfactory.nebius.com/v1/chat/completions",
-   "calls": 0,
+   "level": "warning",
+   "notice": "CPSC recall (2027) – Gobi Heat Rechargeable Hand Warmers (URL: https://www.cpsc.gov/Recalls/2027/Gobi-Heat-Recalls-Rechargeable-Hand-Warmers-Due-to-Risk-of-Serious-Injury-from-Fire-and-Burn-Hazards)",
+   "reason": "A CPSC recall exists for Gobi Heat rechargeable hand warmers, but the notice does not list specific model numbers (such as UT3054). Therefore, it is unclear whether this exact unit is covered.",
+   "calls": 1,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 0,
-    "completion": 0
+    "prompt": 692,
+    "completion": 972
    },
-   "usd": 0,
-   "ms": 1507,
-   "msFresh": true,
+   "usd": 0.00361,
+   "ms": 5,
+   "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 2,
-   "missed": [
-    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "n03",
@@ -1080,7 +1077,7 @@
     "completion": 655
    },
    "usd": 0.00325,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1102,7 +1099,7 @@
     "completion": 540
    },
    "usd": 0.0027,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1124,7 +1121,7 @@
     "completion": 920
    },
    "usd": 0.00319,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1146,7 +1143,7 @@
     "completion": 274
    },
    "usd": 0.00121,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1168,7 +1165,7 @@
     "completion": 943
    },
    "usd": 0.00409,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1190,7 +1187,7 @@
     "completion": 1224
    },
    "usd": 0.005,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1212,7 +1209,7 @@
     "completion": 822
    },
    "usd": 0.00354,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1234,7 +1231,7 @@
     "completion": 799
    },
    "usd": 0.00281,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1255,7 +1252,7 @@
     "completion": 278
    },
    "usd": 0.00191,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1267,24 +1264,23 @@
    "id": "n12",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "error",
-   "error": "not cached: https://api.tokenfactory.nebius.com/v1/chat/completions",
-   "calls": 0,
+   "level": "danger",
+   "notice": "CPSC recall: Thermos Recalls 8.2 Million Stainless King Food Jars and Bottles (2026) – model SK3000 16-oz Stainless King Food Jar",
+   "reason": "The CPSC recall explicitly lists the Thermos 16-oz Stainless King Food Jar (model SK3000) as a recalled product. The household’s unit matches the recalled model exactly (SK3000, made 2024-02). The recall covers 8.2 million units due to a stopper lacking pressure relief, posing impact injury and laceration hazards.",
+   "calls": 1,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 0,
-    "completion": 0
+    "prompt": 1353,
+    "completion": 830
    },
-   "usd": 0,
-   "ms": 1513,
-   "msFresh": true,
+   "usd": 0.00384,
+   "ms": 4,
+   "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 2,
-   "missed": [
-    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "n13",
@@ -1300,7 +1296,7 @@
     "completion": 596
    },
    "usd": 0.00242,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1322,7 +1318,7 @@
     "completion": 804
    },
    "usd": 0.00303,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1344,7 +1340,7 @@
     "completion": 687
    },
    "usd": 0.00335,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1366,7 +1362,7 @@
     "completion": 639
    },
    "usd": 0.00323,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1388,7 +1384,7 @@
     "completion": 598
    },
    "usd": 0.00349,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1410,7 +1406,7 @@
     "completion": 881
    },
    "usd": 0.00392,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1431,7 +1427,7 @@
     "completion": 342
    },
    "usd": 0.00138,
-   "ms": 0,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1452,7 +1448,7 @@
     "completion": 426
    },
    "usd": 0.00264,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1474,7 +1470,7 @@
     "completion": 1084
    },
    "usd": 0.00479,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1495,7 +1491,7 @@
     "completion": 719
    },
    "usd": 0.00345,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1517,7 +1513,7 @@
     "completion": 867
    },
    "usd": 0.00386,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1538,7 +1534,7 @@
     "completion": 672
    },
    "usd": 0.00343,
-   "ms": 1,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1559,7 +1555,7 @@
     "completion": 754
    },
    "usd": 0.0039,
-   "ms": 1,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1581,7 +1577,7 @@
     "completion": 824
    },
    "usd": 0.00464,
-   "ms": 1,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1603,7 +1599,7 @@
     "completion": 1943
    },
    "usd": 0.00703,
-   "ms": 1,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1625,7 +1621,7 @@
     "completion": 455
    },
    "usd": 0.00261,
-   "ms": 2,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1647,7 +1643,7 @@
     "completion": 639
    },
    "usd": 0.00301,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1669,7 +1665,7 @@
     "completion": 504
    },
    "usd": 0.00265,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1691,7 +1687,7 @@
     "completion": 503
    },
    "usd": 0.00291,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1712,7 +1708,7 @@
     "completion": 759
    },
    "usd": 0.0037,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1734,7 +1730,7 @@
     "completion": 873
    },
    "usd": 0.00319,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1756,7 +1752,7 @@
     "completion": 1160
    },
    "usd": 0.00494,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1777,7 +1773,7 @@
     "completion": 301
    },
    "usd": 0.00126,
-   "ms": 0,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1789,24 +1785,23 @@
    "id": "c10",
    "group": "no-code",
    "expect": "warning",
-   "level": "error",
-   "error": "not cached: https://api.tokenfactory.nebius.com/v1/chat/completions",
-   "calls": 0,
+   "level": "warning",
+   "notice": "CPSC recall (2026) for Thermos Stainless King Food Jars with model numbers SK3000 and SK3020 manufactured before July 2023 (8.2 million units). The recall involves a missing pressure relief in the stopper, posing impact injury and laceration hazards.",
+   "reason": "The household's item is a 'Thermos Stainless King food jar' but the model number and manufacture date are unknown. The recall covers specific model numbers (SK3000, SK3020) and units made before July 2023. Without that information, we cannot confirm this exact unit is affected.",
+   "calls": 1,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 0,
-    "completion": 0
+    "prompt": 1079,
+    "completion": 543
    },
-   "usd": 0,
-   "ms": 1510,
-   "msFresh": true,
+   "usd": 0.00271,
+   "ms": 5,
+   "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
-   "cacheMisses": 2,
-   "missed": [
-    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "c11",
@@ -1822,7 +1817,7 @@
     "completion": 487
    },
    "usd": 0.00259,
-   "ms": 1,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1844,7 +1839,7 @@
     "completion": 458
    },
    "usd": 0.00263,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1866,7 +1861,7 @@
     "completion": 477
    },
    "usd": 0.00205,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1888,7 +1883,7 @@
     "completion": 761
    },
    "usd": 0.00334,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1910,7 +1905,7 @@
     "completion": 1517
    },
    "usd": 0.00575,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1932,7 +1927,7 @@
     "completion": 809
    },
    "usd": 0.00343,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1954,7 +1949,7 @@
     "completion": 1508
    },
    "usd": 0.00559,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1976,7 +1971,7 @@
     "completion": 646
    },
    "usd": 0.0027,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1998,7 +1993,7 @@
     "completion": 1067
    },
    "usd": 0.00411,
-   "ms": 2,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2019,7 +2014,7 @@
     "completion": 934
    },
    "usd": 0.00296,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2040,7 +2035,7 @@
     "completion": 818
    },
    "usd": 0.00408,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2062,7 +2057,7 @@
     "completion": 915
    },
    "usd": 0.00395,
-   "ms": 0,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2083,7 +2078,7 @@
     "completion": 935
    },
    "usd": 0.00296,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2105,7 +2100,7 @@
     "completion": 1165
    },
    "usd": 0.00448,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2127,7 +2122,7 @@
     "completion": 552
    },
    "usd": 0.00296,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2148,7 +2143,7 @@
     "completion": 462
    },
    "usd": 0.0031,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2169,7 +2164,7 @@
     "completion": 655
    },
    "usd": 0.0024,
-   "ms": 1,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2190,7 +2185,7 @@
     "completion": 351
    },
    "usd": 0.00142,
-   "ms": 0,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2212,7 +2207,7 @@
     "completion": 1692
    },
    "usd": 0.00523,
-   "ms": 1,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2233,7 +2228,7 @@
     "completion": 456
    },
    "usd": 0.00232,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2254,7 +2249,7 @@
     "completion": 339
    },
    "usd": 0.00165,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2276,7 +2271,7 @@
     "completion": 886
    },
    "usd": 0.00392,
-   "ms": 1,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,

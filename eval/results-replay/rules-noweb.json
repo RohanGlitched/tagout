@@ -21,21 +21,22 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a1d8b21",
+   "commit": "a9a0f8f",
    "libChanged": false
   }
  },
- "at": "2026-10-24T19:31:57.271Z",
+ "at": "2026-10-24T20:14:20.393Z",
  "cases": [
   {
    "id": "p01",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Dollar Tree model 406198.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -67,7 +68,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 27,
+   "ms": 29,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -123,7 +124,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 32,
+   "ms": 34,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -179,7 +180,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 31,
+   "ms": 33,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -235,7 +236,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 32,
+   "ms": 35,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -291,7 +292,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 12,
+   "ms": 14,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -347,7 +348,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -403,7 +404,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -459,7 +460,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -515,7 +516,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -571,7 +572,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 14,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -627,7 +628,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 16,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -683,7 +684,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 13,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -739,7 +740,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 12,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -752,11 +753,12 @@
    "id": "p14",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Brookstone model BSFIREPIT02.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -788,7 +790,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -845,7 +847,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -901,7 +903,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -957,7 +959,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1006,7 +1008,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 12,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1062,7 +1064,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 14,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1118,7 +1120,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 10,
+   "ms": 13,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1174,7 +1176,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1230,7 +1232,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1243,8 +1245,9 @@
    "id": "p23",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Wyze Solar Cam Pan model WYZESCPWH.",
+   "level": "warning",
+   "notice": "CPSC 26-524",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed"
@@ -1285,7 +1288,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1298,11 +1301,12 @@
    "id": "p24",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Thermos Stainless King model SK3000.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -1334,7 +1338,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1347,11 +1351,12 @@
    "id": "p25",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Build-A-Bear Heartwarming Hugs model 034464.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -1389,7 +1394,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1445,7 +1450,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1501,7 +1506,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1551,7 +1556,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1601,7 +1606,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1614,11 +1619,12 @@
    "id": "d03",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot YH9X.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -1650,7 +1656,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1664,7 +1670,7 @@
    "group": "positive",
    "expect": "danger",
    "level": "danger",
-   "notice": "FDA D-0871-2026",
+   "notice": "FDA D-0870-2026",
    "headline": "Lot RL25G04 is listed in this recall.",
    "planned": "fixed",
    "engine": {
@@ -1700,7 +1706,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1749,7 +1755,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1762,11 +1768,12 @@
    "id": "d06",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 4V15.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -1798,7 +1805,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1847,7 +1854,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1860,11 +1867,12 @@
    "id": "d08",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 5950.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -1896,7 +1904,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1946,7 +1954,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1996,7 +2004,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 9,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2046,7 +2054,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2059,11 +2067,12 @@
    "id": "f01",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 260201MA.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2095,7 +2104,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2108,11 +2117,12 @@
    "id": "f02",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot LLA616803.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2144,7 +2154,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2194,7 +2204,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2207,11 +2217,12 @@
    "id": "f04",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot L2755.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2243,7 +2254,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2256,11 +2267,12 @@
    "id": "f05",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 041-26.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2292,7 +2304,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2342,7 +2354,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2355,11 +2367,12 @@
    "id": "f07",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 2025-43282.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2404,11 +2417,12 @@
    "id": "f08",
    "group": "positive",
    "expect": "danger",
-   "level": "inspected",
-   "headline": "No recall found for Wawa Diet Iced Tea Lemon pint, UPC 726191018548.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2453,11 +2467,12 @@
    "id": "n01",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for Dollar Tree model 406199.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2489,7 +2504,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 2,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2558,11 +2573,12 @@
    "id": "n03",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for HotHands model H163651.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2600,7 +2616,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2768,7 +2784,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2824,7 +2840,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2837,11 +2853,12 @@
    "id": "n08",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for Brookstone model BSFIREPIT04.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2873,7 +2890,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2930,7 +2947,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2943,11 +2960,12 @@
    "id": "n10",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for Panasonic FlashXpress model NB-G110P.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -2985,7 +3003,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2998,11 +3016,12 @@
    "id": "n11",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for Wyze Cam model WYZEC3.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3040,7 +3059,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3053,11 +3072,12 @@
    "id": "n12",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for Thermos Stainless King model SK3000.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3089,7 +3109,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3145,7 +3165,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 15,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3201,7 +3221,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 13,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3257,7 +3277,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 13,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3313,7 +3333,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 11,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3369,7 +3389,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3438,11 +3458,12 @@
    "id": "n19",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "A recall exists for this brand, but none lists your lot number.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3474,7 +3495,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3487,11 +3508,12 @@
    "id": "n20",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 1096079.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3536,11 +3558,12 @@
    "id": "n21",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for lot YH9Z.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3585,11 +3608,12 @@
    "id": "n22",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "Recalls exist for this brand, but none lists your lot number.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3621,7 +3645,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3634,11 +3658,12 @@
    "id": "n23",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 5951.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3683,11 +3708,12 @@
    "id": "n24",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for lot 260203MA.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3719,7 +3745,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 2,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3732,11 +3758,12 @@
    "id": "n25",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "No recall found for lot LLA616804.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3768,7 +3795,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3781,11 +3808,12 @@
    "id": "n26",
    "group": "near-miss",
    "expect": "not-danger",
-   "level": "inspected",
-   "headline": "Recalls exist for this brand, but none lists your lot code.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -3817,7 +3845,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3915,7 +3943,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3977,11 +4005,12 @@
    "id": "c04",
    "group": "no-code",
    "expect": "warning",
-   "level": "inspected",
-   "headline": "No recall found for Skip Hop Elmo silicone teether.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4061,7 +4090,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 14,
+   "ms": 12,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4110,7 +4139,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4123,11 +4152,12 @@
    "id": "c07",
    "group": "no-code",
    "expect": "warning",
-   "level": "inspected",
-   "headline": "No recall found for Gas-X Extra Strength softgels.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4158,7 +4188,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4172,7 +4202,7 @@
    "group": "no-code",
    "expect": "warning",
    "level": "warning",
-   "notice": "FDA D-0871-2026",
+   "notice": "FDA D-0870-2026",
    "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
    "planned": "fixed",
    "engine": {
@@ -4207,7 +4237,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 8,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4220,11 +4250,12 @@
    "id": "c09",
    "group": "no-code",
    "expect": "warning",
-   "level": "inspected",
-   "headline": "No recall found for Lundberg jasmine white rice.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4268,11 +4299,12 @@
    "id": "c10",
    "group": "no-code",
    "expect": "warning",
-   "level": "inspected",
-   "headline": "No recall found for Thermos Stainless King food jar.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4303,7 +4335,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 2,
+   "ms": 3,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4352,7 +4384,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4401,7 +4433,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4450,7 +4482,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4499,7 +4531,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4512,11 +4544,12 @@
    "id": "v03",
    "group": "car",
    "expect": "warning",
-   "level": "inspected",
-   "headline": "No recall found for 2021 Tesla Model 3.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4638,7 +4671,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4785,7 +4818,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4834,7 +4867,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 7,
+   "ms": 8,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4847,11 +4880,12 @@
    "id": "v10",
    "group": "car",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for the 2024 Kia Soul.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4882,7 +4916,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4895,11 +4929,12 @@
    "id": "v11",
    "group": "car",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for the 2023 Subaru BRZ.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4930,7 +4965,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 7,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -4943,11 +4978,12 @@
    "id": "v12",
    "group": "car",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for the 2014 Honda Fit.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -4978,7 +5014,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 6,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5034,7 +5070,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 9,
+   "ms": 13,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5047,11 +5083,12 @@
    "id": "k02",
    "group": "clean",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for KitchenAid Artisan model KSM150PS.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -5089,7 +5126,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5145,7 +5182,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 5,
+   "ms": 10,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5158,11 +5195,12 @@
    "id": "k04",
    "group": "clean",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for Shark Navigator model NV352.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -5200,7 +5238,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5213,11 +5251,12 @@
    "id": "k05",
    "group": "clean",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for Lodge model L8SK3.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -5255,7 +5294,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5268,11 +5307,12 @@
    "id": "k06",
    "group": "clean",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for Hamilton Beach FlexBrew model 49976.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -5360,7 +5400,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 5,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5416,7 +5456,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 4,
+   "ms": 6,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,
@@ -5429,11 +5469,12 @@
    "id": "k09",
    "group": "clean",
    "expect": "inspected",
-   "level": "inspected",
-   "headline": "No recall found for Dyson V8 model SV25.",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
    "planned": "fixed",
    "engine": {
-    "planned": "fixed"
+    "planned": "fixed",
+    "modelUnavailable": 1
    },
    "items": [
     {
@@ -5471,7 +5512,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 3,
+   "ms": 4,
    "msFresh": true,
    "tavily": 0,
    "tavilySearch": 0,

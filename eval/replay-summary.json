@@ -1,5 +1,5 @@
 {
- "at": "2026-10-24T19:39:36.307Z",
+ "at": "2026-10-24T20:14:20.536Z",
  "firstRun": null,
  "cases": 105,
  "groups": {
@@ -63,50 +63,30 @@
      "right": 8
     }
    },
-   "usdPerItem": 0.025156000000000008,
-   "usdTotal": 2.6413800000000007,
-   "tavilyPerItem": 2.4,
-   "tavilyUsdPerItem": 0.0192,
-   "usdPerItemWithTavily": 0.04435600000000001,
+   "usdPerItem": 0.025771142857142864,
+   "usdTotal": 2.7059700000000007,
+   "tavilyPerItem": 2.1619047619047618,
+   "tavilyUsdPerItem": 0.017295238095238096,
+   "usdPerItemWithTavily": 0.04306638095238096,
    "medianMs": null,
    "webOnlyReds": [
     "p18"
    ],
    "webCited": [
     "p18",
-    "n12"
+    "n12",
+    "c07"
    ],
    "fellBack": [
     "n13"
    ],
    "cacheMisses": [
-    "d01",
-    "d02",
-    "d03",
-    "d04",
-    "d05",
-    "d06",
-    "d07",
     "d08",
-    "d09",
-    "d10",
-    "f01",
     "f02",
-    "f03",
-    "f04",
-    "f05",
-    "f07",
-    "n19",
-    "n20",
-    "n21",
-    "n22",
     "n23",
     "n24",
     "n25",
-    "c06",
-    "c07",
-    "c09",
-    "k07"
+    "c09"
    ],
    "config": {
     "today": "2026-10-15",
@@ -114,7 +94,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
@@ -185,9 +165,9 @@
     "n18": "inspected",
     "n19": "warning",
     "n20": "inspected",
-    "n21": "inspected",
+    "n21": "warning",
     "n22": "inspected",
-    "n23": "inspected",
+    "n23": "warning",
     "n24": "inspected",
     "n25": "inspected",
     "n26": "inspected",
@@ -230,10 +210,10 @@
    "arm": "fixed-plan-nano",
    "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
    "n": 105,
-   "right": 98,
+   "right": 95,
    "rightInterval": [
-    0.867,
-    0.973
+    0.832,
+    0.953
    ],
    "redPrecision": 0.9782608695652174,
    "redRecall": 0.9782608695652174,
@@ -274,48 +254,34 @@
     },
     "car": {
      "n": 12,
-     "right": 12
+     "right": 9
     },
     "clean": {
      "n": 8,
      "right": 3
     }
    },
-   "usdPerItem": 0.002895714285714286,
-   "usdTotal": 0.30405000000000004,
-   "tavilyPerItem": 1.4285714285714286,
-   "tavilyUsdPerItem": 0.011428571428571429,
-   "usdPerItemWithTavily": 0.014324285714285715,
+   "usdPerItem": 0.003029333333333335,
+   "usdTotal": 0.31808000000000014,
+   "tavilyPerItem": 1.438095238095238,
+   "tavilyUsdPerItem": 0.011504761904761905,
+   "usdPerItemWithTavily": 0.01453409523809524,
    "medianMs": null,
    "webOnlyReds": [],
    "webCited": [
+    "n26",
     "k09"
    ],
    "fellBack": [],
    "cacheMisses": [
-    "d01",
-    "d03",
-    "d05",
-    "d06",
-    "d07",
     "d08",
-    "d09",
     "f01",
     "f02",
-    "f03",
     "f04",
-    "f05",
-    "f07",
-    "n19",
-    "n21",
     "n23",
     "n24",
     "n25",
-    "n26",
-    "c06",
-    "c07",
-    "c09",
-    "k07"
+    "c09"
    ],
    "config": {
     "today": "2026-10-15",
@@ -323,7 +289,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
@@ -394,12 +360,12 @@
     "n18": "inspected",
     "n19": "warning",
     "n20": "warning",
-    "n21": "inspected",
-    "n22": "inspected",
+    "n21": "warning",
+    "n22": "warning",
     "n23": "inspected",
     "n24": "inspected",
     "n25": "warning",
-    "n26": "inspected",
+    "n26": "warning",
     "c01": "warning",
     "c02": "warning",
     "c03": "warning",
@@ -421,9 +387,9 @@
     "v07": "warning",
     "v08": "warning",
     "v09": "warning",
-    "v10": "inspected",
-    "v11": "inspected",
-    "v12": "inspected",
+    "v10": "warning",
+    "v11": "warning",
+    "v12": "warning",
     "k01": "warning",
     "k02": "warning",
     "k03": "inspected",
@@ -439,10 +405,10 @@
    "arm": "rules",
    "label": "No model at all: fixed plan, pattern reader, rules",
    "n": 105,
-   "right": 87,
+   "right": 83,
    "rightInterval": [
-    0.743,
-    0.895
+    0.7,
+    0.864
    ],
    "redPrecision": 0.9487179487179487,
    "redRecall": 0.8043478260869565,
@@ -462,22 +428,11 @@
     0.004,
     0.117
    ],
-   "falseClear": [
-    "p01",
-    "p23",
-    "p25",
-    "d06",
-    "f01",
-    "f05",
-    "f08",
-    "c04",
-    "c09",
-    "v03"
-   ],
+   "falseClear": [],
    "falseClearOf": 67,
    "falseClearInterval": [
-    0.074,
-    0.257
+    0,
+    0.054
    ],
    "errors": [],
    "byGroup": {
@@ -491,22 +446,22 @@
     },
     "no-code": {
      "n": 12,
-     "right": 10
+     "right": 12
     },
     "car": {
      "n": 12,
-     "right": 11
+     "right": 9
     },
     "clean": {
      "n": 8,
-     "right": 4
+     "right": 0
     }
    },
    "usdPerItem": 0,
    "usdTotal": 0,
-   "tavilyPerItem": 1.4761904761904763,
-   "tavilyUsdPerItem": 0.01180952380952381,
-   "usdPerItemWithTavily": 0.01180952380952381,
+   "tavilyPerItem": 1.4285714285714286,
+   "tavilyUsdPerItem": 0.011428571428571429,
+   "usdPerItemWithTavily": 0.011428571428571429,
    "medianMs": null,
    "webOnlyReds": [
     "d03",
@@ -520,36 +475,23 @@
     "f02",
     "f04",
     "f07",
+    "f08",
     "n21",
     "n23",
     "n25",
+    "n26",
     "c07"
    ],
    "fellBack": [],
    "cacheMisses": [
-    "d01",
-    "d03",
-    "d05",
-    "d06",
-    "d07",
     "d08",
-    "d09",
     "f01",
     "f02",
-    "f03",
     "f04",
-    "f05",
-    "f07",
-    "n19",
-    "n21",
     "n23",
     "n24",
     "n25",
-    "n26",
-    "c06",
-    "c07",
-    "c09",
-    "k07"
+    "c09"
    ],
    "config": {
     "today": "2026-10-15",
@@ -557,12 +499,12 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
    "levels": {
-    "p01": "inspected",
+    "p01": "warning",
     "p02": "danger",
     "p03": "danger",
     "p04": "danger",
@@ -584,9 +526,9 @@
     "p20": "danger",
     "p21": "danger",
     "p22": "danger",
-    "p23": "inspected",
+    "p23": "warning",
     "p24": "danger",
-    "p25": "inspected",
+    "p25": "warning",
     "p26": "danger",
     "p27": "danger",
     "d01": "danger",
@@ -594,23 +536,23 @@
     "d03": "danger",
     "d04": "danger",
     "d05": "danger",
-    "d06": "inspected",
+    "d06": "warning",
     "d07": "danger",
     "d08": "danger",
     "d09": "danger",
     "d10": "danger",
     "d11": "danger",
-    "f01": "inspected",
+    "f01": "warning",
     "f02": "warning",
     "f03": "danger",
     "f04": "danger",
-    "f05": "inspected",
+    "f05": "warning",
     "f06": "danger",
     "f07": "danger",
-    "f08": "inspected",
-    "n01": "inspected",
+    "f08": "warning",
+    "n01": "warning",
     "n02": "warning",
-    "n03": "inspected",
+    "n03": "warning",
     "n04": "danger",
     "n05": "warning",
     "n06": "warning",
@@ -618,7 +560,7 @@
     "n08": "warning",
     "n09": "warning",
     "n10": "warning",
-    "n11": "inspected",
+    "n11": "warning",
     "n12": "danger",
     "n13": "warning",
     "n14": "warning",
@@ -626,57 +568,57 @@
     "n16": "warning",
     "n17": "warning",
     "n18": "warning",
-    "n19": "inspected",
-    "n20": "inspected",
+    "n19": "warning",
+    "n20": "warning",
     "n21": "warning",
-    "n22": "inspected",
+    "n22": "warning",
     "n23": "warning",
-    "n24": "inspected",
+    "n24": "warning",
     "n25": "warning",
-    "n26": "inspected",
+    "n26": "warning",
     "c01": "warning",
     "c02": "warning",
     "c03": "warning",
-    "c04": "inspected",
+    "c04": "warning",
     "c05": "warning",
     "c06": "warning",
     "c07": "warning",
     "c08": "warning",
-    "c09": "inspected",
+    "c09": "warning",
     "c10": "warning",
     "c11": "warning",
     "c12": "warning",
     "v01": "warning",
     "v02": "warning",
-    "v03": "inspected",
+    "v03": "warning",
     "v04": "warning",
     "v05": "warning",
     "v06": "warning",
     "v07": "warning",
     "v08": "warning",
     "v09": "warning",
-    "v10": "inspected",
-    "v11": "inspected",
-    "v12": "inspected",
+    "v10": "warning",
+    "v11": "warning",
+    "v12": "warning",
     "k01": "warning",
     "k02": "warning",
     "k03": "warning",
-    "k04": "inspected",
-    "k05": "inspected",
-    "k06": "inspected",
+    "k04": "warning",
+    "k05": "warning",
+    "k06": "warning",
     "k07": "warning",
     "k08": "warning",
-    "k09": "inspected"
+    "k09": "warning"
    }
   },
   {
    "arm": "rules-noweb",
    "label": "No model at all: fixed plan, pattern reader, rules (Tavily off)",
    "n": 105,
-   "right": 81,
+   "right": 78,
    "rightInterval": [
-    0.679,
-    0.848
+    0.648,
+    0.823
    ],
    "redPrecision": 0.96875,
    "redRecall": 0.6739130434782609,
@@ -695,31 +637,11 @@
     0,
     0.091
    ],
-   "falseClear": [
-    "p01",
-    "p14",
-    "p23",
-    "p24",
-    "p25",
-    "d03",
-    "d06",
-    "d08",
-    "f01",
-    "f02",
-    "f04",
-    "f05",
-    "f07",
-    "f08",
-    "c04",
-    "c07",
-    "c09",
-    "c10",
-    "v03"
-   ],
+   "falseClear": [],
    "falseClearOf": 67,
    "falseClearInterval": [
-    0.18,
-    0.407
+    0,
+    0.054
    ],
    "errors": [],
    "byGroup": {
@@ -733,15 +655,15 @@
     },
     "no-code": {
      "n": 12,
-     "right": 8
+     "right": 12
     },
     "car": {
      "n": 12,
-     "right": 11
+     "right": 9
     },
     "clean": {
      "n": 8,
-     "right": 5
+     "right": 0
     }
    },
    "usdPerItem": 0,
@@ -760,12 +682,12 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
    "levels": {
-    "p01": "inspected",
+    "p01": "warning",
     "p02": "danger",
     "p03": "danger",
     "p04": "danger",
@@ -778,7 +700,7 @@
     "p11": "danger",
     "p12": "danger",
     "p13": "danger",
-    "p14": "inspected",
+    "p14": "warning",
     "p15": "danger",
     "p16": "danger",
     "p17": "danger",
@@ -787,110 +709,111 @@
     "p20": "danger",
     "p21": "danger",
     "p22": "danger",
-    "p23": "inspected",
-    "p24": "inspected",
-    "p25": "inspected",
+    "p23": "warning",
+    "p24": "warning",
+    "p25": "warning",
     "p26": "danger",
     "p27": "danger",
     "d01": "danger",
     "d02": "danger",
-    "d03": "inspected",
+    "d03": "warning",
     "d04": "danger",
     "d05": "danger",
-    "d06": "inspected",
+    "d06": "warning",
     "d07": "danger",
-    "d08": "inspected",
+    "d08": "warning",
     "d09": "danger",
     "d10": "danger",
     "d11": "danger",
-    "f01": "inspected",
-    "f02": "inspected",
+    "f01": "warning",
+    "f02": "warning",
     "f03": "danger",
-    "f04": "inspected",
-    "f05": "inspected",
+    "f04": "warning",
+    "f05": "warning",
     "f06": "danger",
-    "f07": "inspected",
-    "f08": "inspected",
-    "n01": "inspected",
+    "f07": "warning",
+    "f08": "warning",
+    "n01": "warning",
     "n02": "warning",
-    "n03": "inspected",
+    "n03": "warning",
     "n04": "danger",
     "n05": "warning",
     "n06": "warning",
     "n07": "warning",
-    "n08": "inspected",
+    "n08": "warning",
     "n09": "warning",
-    "n10": "inspected",
-    "n11": "inspected",
-    "n12": "inspected",
+    "n10": "warning",
+    "n11": "warning",
+    "n12": "warning",
     "n13": "warning",
     "n14": "warning",
     "n15": "warning",
     "n16": "warning",
     "n17": "warning",
     "n18": "warning",
-    "n19": "inspected",
-    "n20": "inspected",
-    "n21": "inspected",
-    "n22": "inspected",
-    "n23": "inspected",
-    "n24": "inspected",
-    "n25": "inspected",
-    "n26": "inspected",
+    "n19": "warning",
+    "n20": "warning",
+    "n21": "warning",
+    "n22": "warning",
+    "n23": "warning",
+    "n24": "warning",
+    "n25": "warning",
+    "n26": "warning",
     "c01": "warning",
     "c02": "warning",
     "c03": "warning",
-    "c04": "inspected",
+    "c04": "warning",
     "c05": "warning",
     "c06": "warning",
-    "c07": "inspected",
+    "c07": "warning",
     "c08": "warning",
-    "c09": "inspected",
-    "c10": "inspected",
+    "c09": "warning",
+    "c10": "warning",
     "c11": "warning",
     "c12": "warning",
     "v01": "warning",
     "v02": "warning",
-    "v03": "inspected",
+    "v03": "warning",
     "v04": "warning",
     "v05": "warning",
     "v06": "warning",
     "v07": "warning",
     "v08": "warning",
     "v09": "warning",
-    "v10": "inspected",
-    "v11": "inspected",
-    "v12": "inspected",
+    "v10": "warning",
+    "v11": "warning",
+    "v12": "warning",
     "k01": "warning",
-    "k02": "inspected",
+    "k02": "warning",
     "k03": "warning",
-    "k04": "inspected",
-    "k05": "inspected",
-    "k06": "inspected",
+    "k04": "warning",
+    "k05": "warning",
+    "k06": "warning",
     "k07": "warning",
     "k08": "warning",
-    "k09": "inspected"
+    "k09": "warning"
    }
   },
   {
    "arm": "search-ultra",
    "label": "Nemotron 3 Ultra reading Tavily results, no rules",
    "n": 105,
-   "right": 71,
+   "right": 75,
    "rightInterval": [
-    0.578,
-    0.764
+    0.618,
+    0.798
    ],
-   "redPrecision": 0.8709677419354839,
-   "redRecall": 0.5869565217391305,
+   "redPrecision": 0.8529411764705882,
+   "redRecall": 0.6304347826086957,
    "redRecallInterval": [
-    0.432,
-    0.73
+    0.475,
+    0.768
    ],
-   "reds": 31,
-   "truePositives": 27,
+   "reds": 34,
+   "truePositives": 29,
    "positives": 46,
    "falseRed": [
+    "n12",
     "v05",
     "v06",
     "v07",
@@ -898,8 +821,8 @@
    ],
    "falseRedOf": 59,
    "falseRedInterval": [
-    0.019,
-    0.165
+    0.028,
+    0.187
    ],
    "falseClear": [
     "d01",
@@ -921,25 +844,20 @@
     0.292
    ],
    "errors": [
-    "p02",
-    "p03",
-    "p24",
-    "n02",
-    "n12",
-    "c10"
+    "p02"
    ],
    "byGroup": {
     "positive": {
      "n": 46,
-     "right": 27
+     "right": 29
     },
     "near-miss": {
      "n": 27,
-     "right": 25
+     "right": 26
     },
     "no-code": {
      "n": 12,
-     "right": 9
+     "right": 10
     },
     "car": {
      "n": 12,
@@ -950,36 +868,30 @@
      "right": 6
     }
    },
-   "usdPerItem": 0.003028571428571428,
-   "usdTotal": 0.31799999999999995,
+   "usdPerItem": 0.0031913333333333325,
+   "usdTotal": 0.3350899999999999,
    "tavilyPerItem": 1,
    "tavilyUsdPerItem": 0.008,
-   "usdPerItemWithTavily": 0.01102857142857143,
+   "usdPerItemWithTavily": 0.011191333333333333,
    "medianMs": null,
    "webOnlyReds": [],
    "webCited": [],
    "fellBack": [],
-   "cacheMisses": [
-    "p03",
-    "p24",
-    "n02",
-    "n12",
-    "c10"
-   ],
+   "cacheMisses": [],
    "config": {
     "today": "2026-10-15",
     "noWeb": false,
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
    "levels": {
     "p01": "danger",
     "p02": "error",
-    "p03": "error",
+    "p03": "danger",
     "p04": "danger",
     "p05": "warning",
     "p06": "danger",
@@ -1000,7 +912,7 @@
     "p21": "danger",
     "p22": "danger",
     "p23": "danger",
-    "p24": "error",
+    "p24": "danger",
     "p25": "danger",
     "p26": "danger",
     "p27": "danger",
@@ -1024,7 +936,7 @@
     "f07": "danger",
     "f08": "warning",
     "n01": "warning",
-    "n02": "error",
+    "n02": "warning",
     "n03": "warning",
     "n04": "inspected",
     "n05": "warning",
@@ -1034,7 +946,7 @@
     "n09": "warning",
     "n10": "warning",
     "n11": "inspected",
-    "n12": "error",
+    "n12": "danger",
     "n13": "warning",
     "n14": "warning",
     "n15": "warning",
@@ -1058,7 +970,7 @@
     "c07": "warning",
     "c08": "warning",
     "c09": "inspected",
-    "c10": "error",
+    "c10": "warning",
     "c11": "warning",
     "c12": "warning",
     "v01": "warning",
@@ -1199,7 +1111,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
@@ -1366,51 +1278,30 @@
      "right": 8
     }
    },
-   "usdPerItem": 0.020750857142857137,
-   "usdTotal": 2.178839999999999,
-   "tavilyPerItem": 2.4,
-   "tavilyUsdPerItem": 0.0192,
-   "usdPerItemWithTavily": 0.039950857142857135,
+   "usdPerItem": 0.020881904761904754,
+   "usdTotal": 2.192599999999999,
+   "tavilyPerItem": 2.1619047619047618,
+   "tavilyUsdPerItem": 0.017295238095238096,
+   "usdPerItemWithTavily": 0.038177142857142854,
    "medianMs": null,
    "webOnlyReds": [
     "p18"
    ],
    "webCited": [
     "p18",
-    "n23"
+    "n23",
+    "c07"
    ],
    "fellBack": [
     "n13"
    ],
    "cacheMisses": [
-    "p04",
-    "d01",
-    "d02",
-    "d03",
-    "d04",
-    "d05",
-    "d06",
-    "d07",
     "d08",
-    "d09",
-    "d10",
-    "f01",
     "f02",
-    "f03",
-    "f04",
-    "f05",
-    "f07",
-    "n19",
-    "n20",
-    "n21",
-    "n22",
     "n23",
     "n24",
     "n25",
-    "c06",
-    "c07",
-    "c09",
-    "k07"
+    "c09"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1418,7 +1309,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
@@ -1482,7 +1373,7 @@
     "n11": "inspected",
     "n12": "danger",
     "n13": "warning",
-    "n14": "inspected",
+    "n14": "warning",
     "n15": "warning",
     "n16": "warning",
     "n17": "warning",
@@ -1534,10 +1425,10 @@
    "arm": "nano-readers",
    "label": "Ultra list reader and agent, Nano notice reader",
    "n": 105,
-   "right": 102,
+   "right": 98,
    "rightInterval": [
-    0.919,
-    0.994
+    0.867,
+    0.973
    ],
    "redPrecision": 0.9574468085106383,
    "redRecall": 0.9782608695652174,
@@ -1579,18 +1470,18 @@
     },
     "car": {
      "n": 12,
-     "right": 12
+     "right": 10
     },
     "clean": {
      "n": 8,
-     "right": 8
+     "right": 6
     }
    },
-   "usdPerItem": 0.01998571428571429,
-   "usdTotal": 2.0985000000000005,
-   "tavilyPerItem": 2.4,
-   "tavilyUsdPerItem": 0.0192,
-   "usdPerItemWithTavily": 0.03918571428571429,
+   "usdPerItem": 0.01998838095238095,
+   "usdTotal": 2.0987799999999996,
+   "tavilyPerItem": 2.1619047619047618,
+   "tavilyUsdPerItem": 0.017295238095238096,
+   "usdPerItemWithTavily": 0.037283619047619045,
    "medianMs": null,
    "webOnlyReds": [],
    "webCited": [],
@@ -1598,33 +1489,12 @@
     "n13"
    ],
    "cacheMisses": [
-    "d01",
-    "d02",
-    "d03",
-    "d04",
-    "d05",
-    "d06",
-    "d07",
     "d08",
-    "d09",
-    "d10",
-    "f01",
     "f02",
-    "f03",
-    "f04",
-    "f05",
-    "f07",
-    "n19",
-    "n20",
-    "n21",
-    "n22",
     "n23",
     "n24",
     "n25",
-    "c06",
-    "c07",
-    "c09",
-    "k07"
+    "c09"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1632,7 +1502,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
@@ -1696,19 +1566,19 @@
     "n11": "inspected",
     "n12": "danger",
     "n13": "warning",
-    "n14": "warning",
+    "n14": "inspected",
     "n15": "warning",
     "n16": "warning",
     "n17": "inspected",
     "n18": "warning",
     "n19": "warning",
-    "n20": "inspected",
-    "n21": "inspected",
-    "n22": "inspected",
+    "n20": "warning",
+    "n21": "warning",
+    "n22": "warning",
     "n23": "danger",
     "n24": "warning",
     "n25": "warning",
-    "n26": "inspected",
+    "n26": "warning",
     "c01": "warning",
     "c02": "warning",
     "c03": "warning",
@@ -1730,15 +1600,15 @@
     "v07": "warning",
     "v08": "warning",
     "v09": "warning",
-    "v10": "inspected",
-    "v11": "inspected",
+    "v10": "warning",
+    "v11": "warning",
     "v12": "inspected",
     "k01": "inspected",
     "k02": "inspected",
-    "k03": "inspected",
+    "k03": "warning",
     "k04": "inspected",
     "k05": "inspected",
-    "k06": "inspected",
+    "k06": "warning",
     "k07": "warning",
     "k08": "inspected",
     "k09": "inspected"
@@ -1797,11 +1667,11 @@
      "right": 1
     }
    },
-   "usdPerItem": 0.011302222222222222,
-   "usdTotal": 0.20344,
+   "usdPerItem": 0.012452777777777778,
+   "usdTotal": 0.22415000000000002,
    "tavilyPerItem": 1.6666666666666667,
    "tavilyUsdPerItem": 0.013333333333333334,
-   "usdPerItemWithTavily": 0.024635555555555556,
+   "usdPerItemWithTavily": 0.025786111111111114,
    "medianMs": null,
    "webOnlyReds": [
     "p18"
@@ -1809,17 +1679,9 @@
    "webCited": [
     "p18"
    ],
-   "fellBack": [
-    "c08"
-   ],
+   "fellBack": [],
    "cacheMisses": [
-    "d01",
-    "d06",
-    "f01",
-    "f08",
-    "n19",
-    "n21",
-    "c08"
+    "f08"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1827,7 +1689,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
@@ -1905,11 +1767,11 @@
      "right": 0
     }
    },
-   "usdPerItem": 0.012629444444444445,
-   "usdTotal": 0.22733,
-   "tavilyPerItem": 1.3888888888888888,
-   "tavilyUsdPerItem": 0.011111111111111112,
-   "usdPerItemWithTavily": 0.023740555555555556,
+   "usdPerItem": 0.013850555555555557,
+   "usdTotal": 0.24931000000000003,
+   "tavilyPerItem": 1.2777777777777777,
+   "tavilyUsdPerItem": 0.010222222222222221,
+   "usdPerItemWithTavily": 0.024072777777777776,
    "medianMs": null,
    "webOnlyReds": [],
    "webCited": [
@@ -1919,14 +1781,10 @@
     "p06",
     "n19",
     "c05",
-    "v08",
     "k01"
    ],
    "cacheMisses": [
-    "f01",
-    "n19",
-    "n21",
-    "v08"
+    "f01"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1934,7 +1792,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "a1d8b21",
+     "commit": "a9a0f8f",
      "libChanged": false
     }
    },
