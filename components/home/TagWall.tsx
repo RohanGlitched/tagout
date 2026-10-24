@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { Hazard, Wall } from "@/lib/wall";
 import s from "./wall.module.css";
 
@@ -26,24 +26,7 @@ const tilt = (i: number) => ((((i * 2654435761) >>> 0) % 13) - 6) * 0.9;
 export default function TagWall({ wall }: { wall: Wall }) {
   const ref = useRef<HTMLDivElement>(null);
   const tip = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
   const [pick, setPick] = useState<Hazard | null>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   const flat = wall.months.flatMap((m) => m.tags);
 
@@ -81,7 +64,7 @@ export default function TagWall({ wall }: { wall: Wall }) {
 
       <div
         ref={ref}
-        className={`${s.wall} ${shown ? s.shown : ""}`}
+        className={s.wall}
         data-pick={pick ?? undefined}
         style={{ "--cols": wall.months.length } as React.CSSProperties}
         onPointerOver={point}

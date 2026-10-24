@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Tagged from "@/components/tag/Tagged";
 import type { Item, Proof, TagLevel } from "@/lib/types";
 import s from "./board.module.css";
@@ -16,45 +13,21 @@ export type BoardEntry = {
 };
 
 /**
- * The hero: a real household's labels laid on the bench. When the board is a fifth in view (the stacked phone board is taller than the screen), each tag is hung in
- * turn, red ones first, as if the check had just ruled on them.
+ * The hero: a real household's labels hung on the lockout board, each with the tag the check gave it. Everything is
+ * in the first frame; the tags only settle on their strings with one short swing, red first.
  */
-export default function Board({ entries, caption }: { entries: BoardEntry[]; caption?: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [hung, setHung] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    // Nothing to play under reduced motion: show the tags at once.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setHung(true);
-      return;
-    }
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setHung(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
+export default function Board({ entries }: { entries: BoardEntry[] }) {
   return (
-    <div ref={ref} className={s.board} data-count={entries.length}>
+    <div className={s.board} data-count={entries.length}>
       {entries.map((e, i) => (
         <div key={e.item.id} className={s.slot} data-i={i}>
           <Tagged
             item={e.item}
-            level={hung ? e.level : undefined}
-            marks={hung ? e.marks : undefined}
+            level={e.level}
+            marks={e.marks}
             hits={e.hits}
             swing
-            delay={250 + i * 650}
+            delay={80 + i * 120}
             rest={[-4, 3, -2, 5][i % 4]}
             size="sm"
             dx={38}
@@ -66,7 +39,6 @@ export default function Board({ entries, caption }: { entries: BoardEntry[]; cap
           </Tagged>
         </div>
       ))}
-      {caption ? <p className={s.caption}>{caption}</p> : null}
     </div>
   );
 }

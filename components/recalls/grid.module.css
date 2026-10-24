@@ -24,9 +24,11 @@
 }
 .card[data-h="ingest"] {
   --c: #c99700;
+  --ct: #7f6200;
 }
 .card[data-h="injury"] {
   --c: #f26b0f;
+  --ct: #b4470a;
 }
 .card[data-h="shock"] {
   --c: #6e2c91;
@@ -40,7 +42,7 @@
   font-size: 12.5px;
   font-weight: 700;
   font-variation-settings: "wdth" 108;
-  color: var(--c);
+  color: var(--ct, var(--c));
 }
 .when {
   color: var(--ink-soft);
@@ -88,6 +90,7 @@
   line-height: 1.2;
   font-variation-settings: "wdth" 92;
   overflow: hidden;
+  overflow-wrap: anywhere;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -110,6 +113,7 @@
   font-size: 15.5px;
   line-height: 1.38;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 .title:hover {
   text-decoration: underline;
@@ -206,15 +210,18 @@
 }
 .freshRow[data-h="ingest"] {
   --c: #c99700;
+  --ct: #7f6200;
 }
 .freshRow[data-h="injury"] {
   --c: #f26b0f;
+  --ct: #b4470a;
 }
 .freshRow[data-h="shock"] {
   --c: #6e2c91;
 }
 .freshRow a {
   text-decoration: none;
+  overflow-wrap: anywhere;
   line-height: 1.4;
 }
 .freshRow a:hover {
@@ -230,7 +237,7 @@
 }
 .freshMeta {
   font-size: 13px;
-  color: var(--c);
+  color: var(--ct, var(--c));
   font-weight: 600;
 }
 .ownSmall {

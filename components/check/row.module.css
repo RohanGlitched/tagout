@@ -12,6 +12,14 @@
   padding-right: 170px;
   min-height: 300px;
 }
+/* On wide screens the label and its tag stay in view while the evidence beside it scrolls. */
+@media (min-width: 1001px) {
+  .left {
+    position: sticky;
+    top: 86px;
+    align-self: start;
+  }
+}
 .row[data-level="pending"] .left {
   min-height: 0;
 }

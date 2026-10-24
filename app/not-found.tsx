@@ -2,20 +2,35 @@ import Link from "next/link";
 import Header from "@/components/chrome/Header";
 import Footer from "@/components/chrome/Footer";
 import Tag from "@/components/tag/Tag";
+import { SHOWCASE } from "@/lib/site";
+import s from "./not-found.module.css";
+
+export const metadata = { title: "Page not found" };
 
 export default function NotFound() {
   return (
     <>
       <Header />
-      <main style={{ maxWidth: "var(--max)", margin: "0 auto", padding: "64px var(--gutter) 0", display: "flex", gap: 48, flexWrap: "wrap", alignItems: "flex-start" }}>
-        <Tag level="warning" rest={4}>
-          <b>Nothing is filed under this link.</b>
-        </Tag>
-        <div style={{ maxWidth: 520 }}>
-          <h1 style={{ fontSize: 44, fontVariationSettings: '"wdth" 116', fontWeight: 800 }}>That page doesn&apos;t exist.</h1>
-          <p style={{ marginTop: 12, fontSize: 17, color: "var(--ink-soft)" }}>
-            Check links stay valid once a check has run. If you followed one, it may be mistyped. <Link href="/#check" style={{ color: "var(--focus)" }}>Start a new check</Link>.
-          </p>
+      <main className={s.main}>
+        <div className={s.tag}>
+          <Tag level="warning" rest={4}>
+            <b>Nothing is filed under this link.</b>
+          </Tag>
+        </div>
+        <div className={s.copy}>
+          <h1 className={s.h1}>That page doesn&apos;t exist.</h1>
+          <p>The link may be mistyped or cut short. A check&apos;s link keeps working once the check has run.</p>
+          <ul className={s.links}>
+            <li>
+              <Link href="/#check">Start a new check</Link>
+            </li>
+            <li>
+              <Link href={`/check/${SHOWCASE.household}`}>See a real household check</Link>
+            </li>
+            <li>
+              <Link href="/recalls">Browse today&apos;s recalls</Link>
+            </li>
+          </ul>
         </div>
       </main>
       <Footer />

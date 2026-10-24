@@ -13,6 +13,8 @@
 .tag[data-level="warning"] {
   --tone: var(--warning);
   --tone-deep: var(--warning-deep);
+  /* ANSI Z535 WARNING: black on safety orange. */
+  --tone-ink: var(--ink);
 }
 .tag[data-level="inspected"] {
   --tone: var(--inspected);
@@ -32,6 +34,7 @@
 /* Card stock with chamfered top corners, like a cut shipping or lockout tag. */
 .card {
   position: relative;
+  color: var(--ink);
   background:
     radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.6), transparent 60%),
     #fdfdfc;
@@ -69,7 +72,7 @@
 
 .head {
   background: var(--tone);
-  color: #fff;
+  color: var(--tone-ink, #fff);
   padding: 10px 14px 9px;
   text-align: center;
   border-top: 3px solid var(--tone-deep);
@@ -123,32 +126,23 @@
 
 /* Hung once: dropped onto its string, swings, settles. */
 .swing {
-  animation: swing 1.9s cubic-bezier(0.2, 0.7, 0.3, 1) var(--delay, 0ms) both;
+  animation: swing 0.9s cubic-bezier(0.25, 0.8, 0.35, 1) var(--delay, 0ms) both;
 }
 @keyframes swing {
   0% {
-    opacity: 0;
-    transform: translateY(-26px) rotate(-62deg);
+    transform: rotate(calc(var(--rest, -3deg) + 16deg));
   }
-  12% {
-    opacity: 1;
+  40% {
+    transform: rotate(calc(var(--rest, -3deg) - 7deg));
   }
-  32% {
-    transform: translateY(0) rotate(19deg);
-  }
-  50% {
-    transform: rotate(-11deg);
-  }
-  66% {
-    transform: rotate(6deg);
-  }
-  80% {
-    transform: rotate(calc(var(--rest, -3deg) - 3deg));
+  72% {
+    transform: rotate(calc(var(--rest, -3deg) + 2.5deg));
   }
   100% {
     transform: rotate(var(--rest, -3deg));
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .swing {
     animation: none;

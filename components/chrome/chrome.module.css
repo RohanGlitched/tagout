@@ -2,15 +2,15 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(233, 236, 239, 0.88);
-  backdrop-filter: saturate(1.4) blur(10px);
+  background: color-mix(in srgb, var(--galv) 86%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid var(--rule-soft);
 }
 .bar {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 var(--gutter);
-  height: 60px;
+  height: 62px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,75 +29,196 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 4px;
   font-size: 15px;
 }
 .nav a {
   text-decoration: none;
   color: var(--ink-soft);
+  padding: 8px 12px;
+  border-radius: 6px;
 }
 .nav a:hover {
   color: var(--ink);
+  background: rgba(21, 25, 30, 0.05);
 }
+.cta,
 .nav .cta {
+  margin-left: 8px;
   color: #fff;
   background: var(--ink);
-  padding: 8px 14px;
-  border-radius: 4px;
-  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-weight: 650;
+  text-decoration: none;
 }
 .nav .cta:hover {
   color: #fff;
-  background: #000;
+  background: var(--danger);
 }
-@media (max-width: 640px) {
-  .nav a:not(.cta) {
+
+.menu {
+  display: none;
+  position: relative;
+}
+.menu summary {
+  list-style: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.menu summary::-webkit-details-marker {
+  display: none;
+}
+.burger,
+.burger::before,
+.burger::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--ink);
+  transition: transform 0.18s, opacity 0.18s;
+}
+.burger {
+  position: relative;
+}
+.burger::before,
+.burger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+.burger::before {
+  top: -6px;
+}
+.burger::after {
+  top: 6px;
+}
+.menu[open] .burger {
+  background: transparent;
+}
+.menu[open] .burger::before {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu[open] .burger::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+.sheet {
+  position: absolute;
+  right: 0;
+  top: 52px;
+  width: min(280px, calc(100vw - 32px));
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  box-shadow: 0 24px 48px -20px rgba(21, 25, 30, 0.35);
+}
+.sheet a {
+  padding: 12px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+}
+.sheet a:hover {
+  background: var(--galv);
+}
+.sheet .cta {
+  margin: 6px 0 0;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .nav {
     display: none;
+  }
+  .menu {
+    display: block;
   }
 }
 
+/* Footer: the steel of the lockout station. */
 .footer {
-  border-top: 1px solid var(--rule);
-  margin-top: 96px;
+  margin-top: 112px;
+  background: var(--steel);
+  color: #d5dade;
 }
 .footInner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 36px var(--gutter) 48px;
+  padding: 56px var(--gutter) 64px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 28px;
+  grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 0.7fr));
+  gap: 40px;
   align-items: start;
 }
 .footBrand {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 800;
-  font-variation-settings: "wdth" 120;
-}
-.footNote {
-  max-width: 62ch;
-  font-size: 13.5px;
-  color: var(--ink-soft);
-  line-height: 1.55;
-}
-.footNav {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 16px;
+}
+.footMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 800;
+  font-size: 22px;
+  font-variation-settings: "wdth" 120;
+  color: #fff;
+  text-decoration: none;
+}
+.footNote {
+  max-width: 52ch;
   font-size: 14px;
+  color: #a9b1b9;
+  line-height: 1.6;
 }
-.footNav a {
-  color: var(--ink-soft);
+.runs {
+  font-size: 14px;
+  color: #a9b1b9;
 }
-@media (max-width: 760px) {
+.runs b {
+  color: #fff;
+  font-weight: 650;
+}
+.footCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14.5px;
+}
+.footCol h2 {
+  font-size: 14px;
+  font-weight: 700;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: 0;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.footCol a {
+  color: #b8c0c8;
+  text-decoration: none;
+}
+.footCol a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+@media (max-width: 900px) {
   .footInner {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .footNav {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 16px;
+  .footBrand {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 520px) {
+  .footInner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px 20px;
   }
 }

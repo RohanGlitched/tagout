@@ -14,6 +14,10 @@
   --inspected: #0b7a3e;
   --inspected-deep: #075c2e;
   --focus: #1d4ed8;
+  --steel: #20262c;
+  --steel-2: #2a3138;
+  --steel-line: #3a434c;
+  --warning-ink: #b4470a;
   --gutter: clamp(16px, 4vw, 56px);
   --max: 1320px;
   --wide: "wdth" 118;
@@ -30,7 +34,11 @@ html {
 }
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  /* Full-bleed bands reach past the content column; clip (not hidden) keeps sticky elements working. */
+  overflow-x: clip;
   background: var(--galv);
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
@@ -41,6 +49,12 @@ body {
 }
 a {
   color: inherit;
+}
+body > main {
+  flex: 1 0 auto;
+}
+html {
+  scroll-padding-top: 128px;
 }
 :focus-visible {
   outline: 2px solid var(--focus);

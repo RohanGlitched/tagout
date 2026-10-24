@@ -8,11 +8,14 @@ import TagWall from "@/components/home/TagWall";
 import MyWatches from "@/components/watch/MyWatches";
 import WhereCodes from "@/components/home/WhereCodes";
 import Tag from "@/components/tag/Tag";
+import Ladder from "@/components/home/Ladder";
+import { SHOWCASE } from "@/lib/site";
 import { latestRecalls } from "@/lib/latest";
 import { showcase } from "@/lib/showcase";
 import { yearWall } from "@/lib/wall";
 import { AGENCY, fmtDate, noticeRef, plural } from "@/lib/format";
 import type { Proof } from "@/lib/types";
+import summary from "@/eval/summary.json";
 import s from "./home.module.css";
 
 export const revalidate = 600;
@@ -58,34 +61,88 @@ export default async function Home() {
   const week = [...distinct.filter((n) => n.source === "cpsc").slice(0, 5), ...distinct.filter((n) => n.source === "fda").slice(0, 3)].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
   const months = wall ? wall.months.length : 0;
+  const red = demo?.items?.find((i) => demo.verdicts?.find((v) => v.itemId === i.id)?.level === "danger");
   const monthWords = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
 
   return (
     <>
       <Header />
       <main className={s.main}>
-        <section className={s.hero} id="check">
-          <div className={s.copy}>
-            <h1 className={s.h1}>Is anything you own recalled?</h1>
-            <p className={s.lede}>
-              List what you own, or photograph the label. An agent searches the official recall databases and the web, compares your model and lot numbers with each recall, and tags
-              anything recalled with what to do.
-            </p>
-            <CheckForm examples={EXAMPLES} />
-            <p className={s.fine}>Searches NHTSA, CPSC, FDA and the web. No account, nothing to install.</p>
-            <MyWatches className={s.fine} />
-          </div>
-          {entries.length ? (
-            <div className={s.boardCol}>
-              <div className={s.peg}>
-                <Board entries={entries} />
-              </div>
-              <p className={s.caption}>
-                A real check from {fmtDate(demo!.createdAt)}: {plural(demo!.items!.length, "thing")}, {counts.danger} tagged do not use.{" "}
-                <Link href={`/check/${demo!.id}`}>See the whole check</Link>
+        {/* The lockout station: the household's labels hang on the steel board with the tags the check gave them. */}
+        <section className={s.station} id="check">
+          <div className={s.hero}>
+            <div className={s.copy}>
+              <h1 className={s.h1}>Is anything you own recalled?</h1>
+              <p className={s.lede}>
+                List what you own, or photograph the label. An agent on NVIDIA Nemotron searches the official recall databases and the web, compares your model and lot numbers
+                with each recall, and tags anything recalled with what to do.
               </p>
+              <div className={s.formCard}>
+                <CheckForm examples={EXAMPLES} />
+                <p className={s.fine}>Searches NHTSA, CPSC, FDA, USDA and the web. No account, nothing to install.</p>
+                <MyWatches className={s.fine} />
+              </div>
             </div>
-          ) : null}
+            {entries.length ? (
+              <div className={s.boardCol}>
+                <Board entries={entries} />
+                <p className={s.caption}>
+                  A real check from {fmtDate(demo!.createdAt)}: {plural(demo!.items!.length, "thing")}, {counts.danger} tagged do not use.{" "}
+                  <Link href={`/check/${demo!.id}`}>Open the whole check</Link>
+                </p>
+              </div>
+            ) : null}
+          </div>
+        </section>
+
+        <section className={s.band} aria-labelledby="see-h">
+          <div className={s.bandHead}>
+            <h2 id="see-h" className={s.h2}>
+              Three tags, three real checks.
+            </h2>
+            <p className={s.sub}>
+              Red only when a code on your product is on the recall&apos;s list. When Tagout can&apos;t be sure, it says what to check instead of guessing. Each tag opens a
+              check that really ran.
+            </p>
+          </div>
+          <div className={s.rail}>
+            <Link href={`/check/${SHOWCASE.household}`} className={s.hook}>
+              <Tag level="danger" rest={-3} foot="A household of five things">
+                <b>A code on your product is on the recall&apos;s list.</b>
+                <span className={s.legendNote}>{red ? `${[red.brand, red.product].filter(Boolean).join(" ") || red.said}: stop using it. You get the remedy and the firm's contact.` : "You get the remedy, the firm's contact and the notice."}</span>
+                <span className={s.open}>Open this check</span>
+              </Tag>
+            </Link>
+            <Link href={`/check/${SHOWCASE.webcatch}`} className={s.hook}>
+              <Tag level="warning" rest={2} foot="Caught on the web by Tavily">
+                <b>The product line is recalled; yours isn&apos;t confirmed either way.</b>
+                <span className={s.legendNote}>These recalls were found on the web before the agency databases listed them. The tag says where the code is printed.</span>
+                <span className={s.open}>Open this check</span>
+              </Tag>
+            </Link>
+            <Link href={`/watch/${SHOWCASE.watch}`} className={s.hook}>
+              <Tag level="inspected" rest={-1} foot="Saved as a watch">
+                <b>No recall lists it on the day of the check.</b>
+                <span className={s.legendNote}>Save a check as a watch and Tagout keeps comparing it with new recalls.</span>
+                <span className={s.open}>Open this watch</span>
+              </Tag>
+            </Link>
+          </div>
+        </section>
+
+        <section className={s.band} aria-labelledby="proof-h">
+          <div className={s.bandHead}>
+            <h2 id="proof-h" className={s.h2}>
+              Measured on {summary.cases} real recall cases.
+            </h2>
+            <p className={s.sub}>
+              Each line answered the same cases, checked against the agencies&apos; own records. The rules are what keep a recalled unit from being cleared.{" "}
+              <Link href="/proof" className={s.more}>
+                Every case and every miss
+              </Link>
+            </p>
+          </div>
+          <Ladder />
         </section>
 
         {wall ? (
@@ -123,35 +180,6 @@ export default async function Home() {
           <WhereCodes />
         </section>
 
-        <section className={s.band} aria-labelledby="tags-h">
-          <div className={s.bandHead}>
-            <h2 id="tags-h" className={s.h2}>
-              Three tags
-            </h2>
-            <p className={s.sub}>Red only when a code on your product is on the recall&apos;s list. When Tagout can&apos;t be sure, it says what to check instead of guessing.</p>
-          </div>
-          <ul className={s.legend}>
-            <li>
-              <Tag level="danger" rest={-3}>
-                <b>A code on your product is on the recall&apos;s list.</b>
-                <span className={s.legendNote}>You get the remedy, the firm&apos;s contact and the notice.</span>
-              </Tag>
-            </li>
-            <li>
-              <Tag level="warning" rest={2}>
-                <b>The product line is recalled; yours isn&apos;t confirmed either way.</b>
-                <span className={s.legendNote}>The tag says where the code is printed. Cars stop here: only NHTSA&apos;s VIN lookup can say.</span>
-              </Tag>
-            </li>
-            <li>
-              <Tag level="inspected" rest={-1}>
-                <b>No recall lists it on the day of the check.</b>
-                <span className={s.legendNote}>The tag names the sources searched and the date.</span>
-              </Tag>
-            </li>
-          </ul>
-        </section>
-
         {week.length ? (
           <section className={s.week} aria-labelledby="week-h">
             <div className={s.weekHead}>
@@ -166,7 +194,9 @@ export default async function Home() {
             <ul className={s.feed}>
               {week.map((n) => (
                 <li key={`${n.source}${n.id}`}>
-                  <span className={s.agency}>{AGENCY[n.source]}</span>
+                  <span className={s.agency} data-source={n.source}>
+                    {AGENCY[n.source]}
+                  </span>
                   <a href={n.url} target="_blank" rel="noreferrer" className={s.feedTitle}>
                     {n.title}
                   </a>
@@ -178,33 +208,14 @@ export default async function Home() {
         ) : null}
 
         <section className={s.close} aria-labelledby="close-h">
-          <div className={s.closeInner}>
-            <div className={s.closeCopy}>
-              <h2 id="close-h" className={s.closeH}>
-                Check the things you own.
-              </h2>
-              <p>Type what&apos;s in the house, or photograph a few labels. Every check gets its own link, so you can send it to whoever needs it.</p>
-              <Link href="/#check" className={s.closeGo}>
-                Check my things
-              </Link>
-            </div>
-            <div className={s.closeTags} aria-hidden="true">
-              <div className={s.hanger}>
-                <Tag level="inspected" size="lg" rest={-4}>
-                  <b>No recall found for Lasko model CT22425.</b>
-                </Tag>
-              </div>
-              <div className={s.hanger}>
-                <Tag level="warning" size="lg" rest={3}>
-                  <b>Some Evenflo car seats are recalled. Check the model number under the seat.</b>
-                </Tag>
-              </div>
-              <div className={s.hanger}>
-                <Tag level="danger" size="lg" rest={-2}>
-                  <b>Lot EJA022 is listed in this recall.</b>
-                </Tag>
-              </div>
-            </div>
+          <div className={s.closeCopy}>
+            <h2 id="close-h" className={s.closeH}>
+              Check the things you own.
+            </h2>
+            <p>Type what&apos;s in the house, or photograph a few labels. Every check gets its own link, so you can send it to whoever needs it.</p>
+            <Link href="/#check" className={s.closeGo}>
+              Check my things
+            </Link>
           </div>
         </section>
       </main>

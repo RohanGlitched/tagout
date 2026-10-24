@@ -77,7 +77,8 @@ export default function CheckForm({ examples, compact = false }: { examples: Exa
       if (!r.ok || !j.id) throw new Error(j.error || "The check couldn't start. Try again in a moment.");
       router.push(`/check/${j.id}`);
     } catch (err) {
-      setError((err as Error).message);
+      // A network failure surfaces as the browser's own TypeError ("Failed to fetch"); say what it means instead.
+      setError(err instanceof TypeError ? "Tagout couldn't be reached. Check your connection and try again." : (err as Error).message);
       setBusy(false);
     }
   }

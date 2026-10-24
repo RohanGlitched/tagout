@@ -119,7 +119,6 @@ export default function Proof() {
       <Header />
       <main className={s.main}>
         <header className={s.top}>
-          <p className={s.kicker}>Proof</p>
           <h1 className={s.h1}>{summary.cases} real cases, measured against the model alone.</h1>
           <p className={s.lede}>
             We built a test set from 2026 recall records: units whose code is printed in a CPSC, FDA or NHTSA notice, the same products with a neighbouring lot or model, recalled
@@ -127,6 +126,21 @@ export default function Proof() {
             Tagout, through Nemotron 3 Ultra on its own, through Nemotron reading Tavily&apos;s results, through a fixed search plan, and on three Nemotron sizes.
           </p>
         </header>
+        <nav className={s.index} aria-label="On this page">
+          {[
+            ["head-h", "Short answer"],
+            ["arms-h", "Each setup"],
+            ["cases-h", "Every case"],
+            ["wrong-h", "What went wrong"],
+            ["first-h", "First run"],
+            ["models-h", "Which Nemotron"],
+            ["method-h", "Method"],
+          ].map(([id, label]) => (
+            <a key={id} href={`#${id}`}>
+              {label}
+            </a>
+          ))}
+        </nav>
 
         {t ? (
           <section className={s.section} aria-labelledby="head-h">

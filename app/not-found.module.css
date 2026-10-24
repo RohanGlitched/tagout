@@ -1,0 +1,50 @@
+.main {
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 80px var(--gutter) 0;
+  display: flex;
+  gap: 56px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.tag {
+  padding-top: 8px;
+}
+.copy {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.h1 {
+  font-size: clamp(38px, 5vw, 60px);
+  font-variation-settings: "wdth" 122;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+}
+.copy p {
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+.links {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--ink);
+}
+.links li {
+  border-bottom: 1px solid var(--rule);
+}
+.links a {
+  display: block;
+  padding: 14px 0;
+  font-weight: 650;
+  font-size: 17px;
+  text-decoration: none;
+}
+.links a:hover {
+  color: var(--danger);
+}

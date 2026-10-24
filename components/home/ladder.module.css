@@ -1,0 +1,146 @@
+.ladder {
+  --r: var(--ink);
+  --c: var(--danger);
+  --f: var(--warning);
+  --o: #c3c9d0;
+}
+.rungs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid var(--ink);
+}
+.rung {
+  display: grid;
+  grid-template-columns: minmax(0, 250px) minmax(0, 1fr) auto;
+  gap: 12px 32px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.rung[data-us] {
+  border-bottom: 2px solid var(--ink);
+}
+.who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.who b {
+  font-size: 17px;
+  font-variation-settings: "wdth" 112;
+  font-weight: 750;
+}
+.rung[data-us] .who b {
+  color: var(--danger);
+}
+.who span {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+.ticks {
+  display: grid;
+  grid-template-columns: repeat(35, minmax(0, 1fr));
+  gap: 3px;
+}
+.ticks i,
+.key i {
+  display: block;
+  height: 12px;
+  border-radius: 1.5px;
+  background: var(--o);
+}
+.ticks i[data-k="r"],
+.key i[data-k="r"] {
+  background: var(--r);
+}
+.ticks i[data-k="c"],
+.key i[data-k="c"] {
+  background: var(--c);
+}
+.ticks i[data-k="f"],
+.key i[data-k="f"] {
+  background: var(--f);
+}
+.nums {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 104px 84px 84px;
+  gap: 12px;
+  align-items: start;
+}
+.nums div {
+  display: grid;
+  gap: 3px;
+}
+.nums dd {
+  grid-row: 1;
+}
+.nums dt {
+  grid-row: 2;
+}
+.nums dt {
+  font-size: 11.5px;
+  line-height: 1.25;
+  color: var(--ink-soft);
+}
+.nums dd {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.nums small {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.nums dd[data-bad] {
+  color: var(--danger);
+}
+.nums dd[data-warn] {
+  color: var(--warning-ink);
+}
+.key {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.key i {
+  width: 10px;
+}
+@media (max-width: 980px) {
+  .rung {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .ticks {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+@media (max-width: 520px) {
+  .ticks {
+    grid-template-columns: repeat(21, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .ticks i {
+    height: 9px;
+  }
+  .rung {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .nums {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
