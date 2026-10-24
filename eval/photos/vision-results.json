@@ -1,0 +1,346 @@
+{
+ "at": "2026-10-24T19:34:25.661Z",
+ "manifest": "eval/photos/photos.json",
+ "rows": [
+  {
+   "photo": "vornado-1",
+   "model": "nvidia/Nemotron-3.5-Super-VL",
+   "answered": "nvidia/Nemotron-3.5-Super-VL",
+   "ms": 6418,
+   "tokens": {
+    "calls": 1,
+    "prompt": 1381,
+    "completion": 1828,
+    "usd": 0.006865
+   },
+   "brandOk": true,
+   "codes": [
+    {
+     "code": "SRTH",
+     "ok": true
+    },
+    {
+     "code": "2211 04471",
+     "ok": true
+    },
+    {
+     "code": "2211",
+     "ok": true
+    }
+   ],
+   "allCodes": true,
+   "item": {
+    "id": "i1",
+    "kind": "product",
+    "said": "Vornado Small Room Tower Heater label",
+    "brand": "VORNADO",
+    "product": "SMALL ROOM TOWER HEATER",
+    "made": "2211",
+    "serial": "2211 04471",
+    "codes": [
+     "TYPE SRTH"
+    ],
+    "readFrom": "photo"
+   }
+  },
+  {
+   "photo": "vornado-1",
+   "model": "Qwen/Qwen3.8-27B",
+   "answered": "Qwen/Qwen3.8-27B",
+   "ms": 2094,
+   "tokens": {
+    "calls": 1,
+    "prompt": 1413,
+    "completion": 510,
+    "usd": 0.002943
+   },
+   "brandOk": true,
+   "codes": [
+    {
+     "code": "SRTH",
+     "ok": true
+    },
+    {
+     "code": "2211 04471",
+     "ok": true
+    },
+    {
+     "code": "2211",
+     "ok": true
+    }
+   ],
+   "allCodes": true,
+   "item": {
+    "id": "i1",
+    "kind": "product",
+    "said": "Vornado small room tower heater (from a photo)",
+    "brand": "VORNADO",
+    "product": "SMALL ROOM TOWER HEATER",
+    "made": "2211",
+    "serial": "2211 04471",
+    "codes": [
+     "TYPE SRTH"
+    ],
+    "readFrom": "photo"
+   }
+  },
+  {
+   "photo": "vornado-1",
+   "model": "google/gemma-3-27b-it",
+   "answered": "google/gemma-3-27b-it",
+   "ms": 46146,
+   "tokens": {
+    "calls": 1,
+    "prompt": 429,
+    "completion": 136,
+    "usd": 0.000837
+   },
+   "brandOk": true,
+   "codes": [
+    {
+     "code": "SRTH",
+     "ok": true
+    },
+    {
+     "code": "2211 04471",
+     "ok": true
+    },
+    {
+     "code": "2211",
+     "ok": true
+    }
+   ],
+   "allCodes": true,
+   "item": {
+    "id": "i1",
+    "kind": "product",
+    "said": "Vornado heater (from a photo)",
+    "brand": "Vornado",
+    "product": "SMALL ROOM TOWER HEATER",
+    "made": "2211",
+    "serial": "2211 04471",
+    "codes": [
+     "TYPE SRTH"
+    ],
+    "readFrom": "photo"
+   }
+  },
+  {
+   "photo": "vornado-2",
+   "model": "nvidia/Nemotron-3.5-Super-VL",
+   "answered": "nvidia/Nemotron-3.5-Super-VL",
+   "ms": 4950,
+   "tokens": {
+    "calls": 1,
+    "prompt": 751,
+    "completion": 1973,
+    "usd": 0.00667
+   },
+   "brandOk": true,
+   "codes": [
+    {
+     "code": "SRTH",
+     "ok": true
+    },
+    {
+     "code": "VH-SRTH-BLK",
+     "ok": true
+    },
+    {
+     "code": "2210 4471 0093",
+     "ok": true
+    },
+    {
+     "code": "2211",
+     "ok": true
+    }
+   ],
+   "allCodes": true,
+   "item": {
+    "id": "i1",
+    "kind": "product",
+    "said": "Vornado label",
+    "brand": "VORNADO",
+    "model": "VH-SRTH-BLK",
+    "made": "2211",
+    "serial": "2210 4471 0093",
+    "codes": [
+     "TYPE SRTH"
+    ],
+    "readFrom": "photo"
+   }
+  },
+  {
+   "photo": "vornado-2",
+   "model": "Qwen/Qwen3.8-27B",
+   "answered": "Qwen/Qwen3.8-27B",
+   "ms": 1672,
+   "tokens": {
+    "calls": 1,
+    "prompt": 735,
+    "completion": 483,
+    "usd": 0.002184
+   },
+   "brandOk": true,
+   "codes": [
+    {
+     "code": "SRTH",
+     "ok": true
+    },
+    {
+     "code": "VH-SRTH-BLK",
+     "ok": true
+    },
+    {
+     "code": "2210 4471 0093",
+     "ok": true
+    },
+    {
+     "code": "2211",
+     "ok": true
+    }
+   ],
+   "allCodes": true,
+   "item": {
+    "id": "i1",
+    "kind": "product",
+    "said": "Vornado heater label (from a photo)",
+    "brand": "VORNADO",
+    "product": "heater",
+    "model": "VH-SRTH-BLK",
+    "made": "2211",
+    "serial": "2210 4471 0093",
+    "codes": [
+     "TYPE SRTH"
+    ],
+    "readFrom": "photo"
+   }
+  },
+  {
+   "photo": "vornado-2",
+   "model": "google/gemma-3-27b-it",
+   "answered": "google/gemma-3-27b-it",
+   "ms": 6906,
+   "tokens": {
+    "calls": 1,
+    "prompt": 429,
+    "completion": 141,
+    "usd": 0.000852
+   },
+   "brandOk": true,
+   "codes": [
+    {
+     "code": "SRTH",
+     "ok": true
+    },
+    {
+     "code": "VH-SRTH-BLK",
+     "ok": true
+    },
+    {
+     "code": "2210 4471 0093",
+     "ok": true
+    },
+    {
+     "code": "2211",
+     "ok": true
+    }
+   ],
+   "allCodes": true,
+   "item": {
+    "id": "i1",
+    "kind": "product",
+    "said": "Vornado heater (from a photo)",
+    "brand": "Vornado",
+    "product": "heater",
+    "model": "VH-SRTH-BLK",
+    "made": "2211",
+    "serial": "2210 4471 0093",
+    "codes": [
+     "TYPE SRTH"
+    ],
+    "readFrom": "photo"
+   }
+  },
+  {
+   "photo": "primark-tag",
+   "model": "nvidia/Nemotron-3.5-Super-VL",
+   "answered": null,
+   "ms": 6489,
+   "tokens": {
+    "calls": 1,
+    "prompt": 453,
+    "completion": 2500,
+    "usd": 0.007953
+   },
+   "brandOk": null,
+   "codes": [
+    {
+     "code": "2595301",
+     "ok": false
+    }
+   ],
+   "allCodes": false,
+   "item": null
+  },
+  {
+   "photo": "primark-tag",
+   "model": "Qwen/Qwen3.8-27B",
+   "answered": null,
+   "ms": 6735,
+   "tokens": {
+    "calls": 1,
+    "prompt": 285,
+    "completion": 2500,
+    "usd": 0.007785
+   },
+   "brandOk": null,
+   "codes": [
+    {
+     "code": "2595301",
+     "ok": false
+    }
+   ],
+   "allCodes": false,
+   "item": null
+  },
+  {
+   "photo": "primark-tag",
+   "model": "google/gemma-3-27b-it",
+   "answered": "google/gemma-3-27b-it",
+   "ms": 5663,
+   "tokens": {
+    "calls": 1,
+    "prompt": 429,
+    "completion": 191,
+    "usd": 0.001002
+   },
+   "brandOk": null,
+   "codes": [
+    {
+     "code": "2595301",
+     "ok": true
+    }
+   ],
+   "allCodes": true,
+   "item": {
+    "id": "i1",
+    "kind": "product",
+    "said": "clothing label",
+    "lot": "01-04-04",
+    "made": "01-04-04",
+    "upc": "5397356164483",
+    "serial": "212046247",
+    "codes": [
+     "BLACK",
+     "ONE SIZE",
+     "83710",
+     "2595301",
+     "3210",
+     "991174725"
+    ],
+    "readFrom": "photo"
+   }
+  }
+ ]
+}

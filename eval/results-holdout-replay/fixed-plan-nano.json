@@ -1,0 +1,2340 @@
+{
+ "arm": "fixed-plan-nano",
+ "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+  ],
+  "useAgent": false,
+  "useModel": true,
+  "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
+  "cases": "cases-holdout.json",
+  "today": "2026-10-25",
+  "noWeb": false,
+  "offline": true,
+  "keyless": false,
+  "code": {
+   "commit": "a1d8b21",
+   "libChanged": false
+  }
+ },
+ "at": "2026-10-24T19:32:11.119Z",
+ "cases": [
+  {
+   "id": "h01",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-024",
+   "headline": "TL1302Z is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 1573,
+     "completion": 4951
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Scotch",
+     "product": "thermal laminator",
+     "model": "TL1302Z",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Scotch”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “TL1302Z”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Scotch thermal laminator recall”",
+     "found": 6,
+     "fresh": 2
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1573,
+    "completion": 4951
+   },
+   "usd": 0.00337,
+   "ms": 80,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h02",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-024",
+   "headline": "TL1302Z is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 1571,
+     "completion": 4868
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Scotch",
+     "product": "laminator",
+     "model": "TL1302Z",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Scotch”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “TL1302Z”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Scotch laminator recall”",
+     "found": 5,
+     "fresh": 2
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1571,
+    "completion": 4868
+   },
+   "usd": 0.00312,
+   "ms": 77,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h03",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 23-064",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 1572,
+     "completion": 4838
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Scotch",
+     "product": "thermal laminator",
+     "model": "TL1306",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Scotch”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “TL1306”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Scotch thermal laminator recall”",
+     "found": 6,
+     "fresh": 2
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1572,
+    "completion": 4838
+   },
+   "usd": 0.00303,
+   "ms": 77,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h04",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-027",
+   "headline": "PAPA03001AI is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 4,
+     "prompt": 2308,
+     "completion": 3343
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Papablic",
+     "product": "convertible bedside sleeper",
+     "model": "PAPA03001AI",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Papablic”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “PAPA03001AI”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Papablic convertible bedside sleeper recall”",
+     "found": 6,
+     "fresh": 4
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2308,
+    "completion": 3343
+   },
+   "usd": 0.00344,
+   "ms": 78,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h05",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-027",
+   "headline": "PAPA03001AI is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 3,
+     "prompt": 1931,
+     "completion": 1928
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Papablik",
+     "product": "bassinet",
+     "model": "PAPA03001AI",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Papablik”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “PAPA03001AI”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Papablik bassinet recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 3,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1931,
+    "completion": 1928
+   },
+   "usd": 0.00222,
+   "ms": 56,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h06",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-028",
+   "headline": "Model 2595301 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 3011,
+     "completion": 8587
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Primark",
+     "product": "101 Dalmatians coin purse",
+     "model": "2595301",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Primark”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “2595301”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Primark 101 Dalmatians coin purse recall”",
+     "found": 6,
+     "fresh": 4
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3011,
+    "completion": 8587
+   },
+   "usd": 0.00442,
+   "ms": 56,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h07",
+   "group": "positive",
+   "set": "database",
+   "form": "photo",
+   "expect": "danger",
+   "level": "inspected",
+   "headline": "No recall found for Retail price tag for black one-size garment (from a photo).",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "vision": "Qwen3.8 27B",
+    "tokens": {
+     "calls": 2,
+     "prompt": 738,
+     "completion": 3796
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "upc": "5397356164483",
+     "codes": [
+      "212046247",
+      "991174725",
+      "83710",
+      "2595301",
+      "3210"
+     ],
+     "made": "01-04-04",
+     "readFrom": "photo"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “Retail price tag for black one-size garment (from a photo)”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Retail price tag for black one-size garment (from a photo) recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 738,
+    "completion": 3796
+   },
+   "usd": 0.00656,
+   "ms": 41,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h08",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "inspected",
+   "headline": "No recall found for Hatsan Blitz air rifle.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 301,
+     "completion": 366
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Hatsan",
+     "product": "Blitz air rifle",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hatsan”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hatsan Blitz air rifle recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 301,
+    "completion": 366
+   },
+   "usd": 0.0014,
+   "ms": 36,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h10",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0006-2027",
+   "headline": "Lot LT25B01 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 4,
+     "prompt": 3559,
+     "completion": 4671
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "Leader",
+     "product": "dry eye relief lubricant eye drops",
+     "lot": "LT25B01",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot LT25B01, brand “Leader”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Leader dry eye relief lubricant eye drops recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3559,
+    "completion": 4671
+   },
+   "usd": 0.00262,
+   "ms": 58,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h11",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0006-2027",
+   "headline": "Lot LT25B01 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 4,
+     "prompt": 3563,
+     "completion": 4887
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "Leader",
+     "product": "Dry Eye Drops",
+     "lot": "LT25B01",
+     "made": "02/2027",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot LT25B01, brand “Leader”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Leader Dry Eye Drops recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3563,
+    "completion": 4887
+   },
+   "usd": 0.00327,
+   "ms": 57,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h12",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 4,
+     "prompt": 3559,
+     "completion": 4797
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "Leader",
+     "product": "dry eye relief lubricant eye drops",
+     "lot": "LT25B03",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot LT25B03, brand “Leader”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Leader dry eye relief lubricant eye drops recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3559,
+    "completion": 4797
+   },
+   "usd": 0.003,
+   "ms": 51,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h15",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 2567,
+     "completion": 8606
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Gatorade",
+     "product": "Lemon Lime 28 oz",
+     "lot": "091026 DL",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 091026 DL, brand “Gatorade”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gatorade Lemon Lime 28 oz recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2567,
+    "completion": 8606
+   },
+   "usd": 0.00345,
+   "ms": 50,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h16",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 2567,
+     "completion": 8600
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Gatorade",
+     "product": "Lemon Lime 28 oz",
+     "lot": "091226 DL",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 091226 DL, brand “Gatorade”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gatorade Lemon Lime 28 oz recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2567,
+    "completion": 8600
+   },
+   "usd": 0.00343,
+   "ms": 50,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h18",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0007-2027",
+   "headline": "Lot 720106 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 4,
+     "prompt": 2238,
+     "completion": 3250
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Mezzetta",
+     "product": "golden greek peperoncini",
+     "lot": "720106",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 720106, brand “Mezzetta”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Mezzetta golden greek peperoncini recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2238,
+    "completion": 3250
+   },
+   "usd": 0.00234,
+   "ms": 53,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h19",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0014-2027",
+   "headline": "Lot L6081A is printed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 6,
+     "prompt": 2328,
+     "completion": 6682
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "bettergoods",
+     "product": "lemon alfredo fettuccine",
+     "lot": "L6081A",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot L6081A, brand “bettergoods”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “bettergoods lemon alfredo fettuccine recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 6,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2328,
+    "completion": 6682
+   },
+   "usd": 0.00325,
+   "ms": 52,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h20",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "danger",
+   "notice": "FDA H-0021-2027",
+   "headline": "UPC 666186277621 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 8,
+     "prompt": 3333,
+     "completion": 9962
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Saint Francis",
+     "product": "Apizza frozen pepperoni pizza",
+     "upc": "666186277621",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 666186277621, brand “Saint Francis”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Saint Francis Apizza frozen pepperoni pizza recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 8,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3333,
+    "completion": 9962
+   },
+   "usd": 0.00389,
+   "ms": 63,
+   "msFresh": false,
+   "tavily": 4,
+   "tavilySearch": 1,
+   "tavilyExtract": 3,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h21",
+   "group": "car",
+   "set": "database",
+   "form": "clean",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V685000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 7,
+     "prompt": 4243,
+     "completion": 7038
+    }
+   },
+   "items": [
+    {
+     "kind": "vehicle",
+     "brand": "Subaru",
+     "product": "Crosstrek",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2026 Subaru Crosstrek",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Subaru Crosstrek recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 7,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 4243,
+    "completion": 7038
+   },
+   "usd": 0.00298,
+   "ms": 37,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h22",
+   "group": "car",
+   "set": "database",
+   "form": "clean",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V693000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 7,
+     "prompt": 4681,
+     "completion": 4218
+    }
+   },
+   "items": [
+    {
+     "kind": "vehicle",
+     "brand": "Hyundai",
+     "product": "Venue",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2026 Hyundai Venue",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hyundai Venue recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 7,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 4681,
+    "completion": 4218
+   },
+   "usd": 0.00243,
+   "ms": 35,
+   "msFresh": false,
+   "tavily": 6,
+   "tavilySearch": 1,
+   "tavilyExtract": 5,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h23",
+   "group": "car",
+   "set": "database",
+   "form": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for the 2026 Mazda CX-70.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 6429,
+     "completion": 4592
+    }
+   },
+   "items": [
+    {
+     "kind": "vehicle",
+     "brand": "Mazda",
+     "product": "CX-70",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2026 Mazda CX-70",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Mazda CX-70 recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 6429,
+    "completion": 4592
+   },
+   "usd": 0.00267,
+   "ms": 42,
+   "msFresh": false,
+   "tavily": 3,
+   "tavilySearch": 1,
+   "tavilyExtract": 2,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h24",
+   "group": "clean",
+   "set": "database",
+   "form": "clean",
+   "expect": "inspected",
+   "level": "warning",
+   "notice": "CPSC 18-146",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 3883,
+     "completion": 10643
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Honeywell",
+     "product": "tower fan",
+     "model": "HYF290B",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Honeywell”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “HYF290B”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Honeywell tower fan recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3883,
+    "completion": 10643
+   },
+   "usd": 0.00421,
+   "ms": 39,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h25",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-039",
+   "headline": "VQQQ-A1 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 622,
+     "completion": 1538
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "VQQQ",
+     "product": "natural gas patio heater",
+     "model": "VQQQ-A1",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “VQQQ”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “VQQQ-A1”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “VQQQ natural gas patio heater recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 622,
+    "completion": 1538
+   },
+   "usd": 0.00204,
+   "ms": 34,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h26",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-039",
+   "headline": "VQQQ001 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 619,
+     "completion": 1456
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "vqqq",
+     "product": "patio heater",
+     "model": "VQQQ001",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “vqqq”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “VQQQ001”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “vqqq patio heater recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 619,
+    "completion": 1456
+   },
+   "usd": 0.00179,
+   "ms": 38,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h27",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 622,
+     "completion": 1474
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "VQQQ",
+     "product": "natural gas patio heater",
+     "model": "VQQQ-A2",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “VQQQ”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “VQQQ-A2”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “VQQQ natural gas patio heater recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 622,
+    "completion": 1474
+   },
+   "usd": 0.00184,
+   "ms": 39,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h28",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-040",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 6,
+     "prompt": 2555,
+     "completion": 4873
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Costway",
+     "product": "convertible high chair",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Costway”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Costway convertible high chair recall”",
+     "found": 6,
+     "fresh": 3
+    }
+   ],
+   "calls": 6,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2555,
+    "completion": 4873
+   },
+   "usd": 0.00305,
+   "ms": 37,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h29",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-038",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 648,
+     "completion": 726
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "CIYTI",
+     "product": "light-up princess costume",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “CIYTI”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “CIYTI light-up princess costume recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 648,
+    "completion": 726
+   },
+   "usd": 0.00119,
+   "ms": 35,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h30",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-042",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 641,
+     "completion": 1098
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Bamamon",
+     "product": "LED finger lights",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Bamamon”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Bamamon LED finger lights recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 641,
+    "completion": 1098
+   },
+   "usd": 0.00129,
+   "ms": 31,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h31",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-041",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 3114,
+     "completion": 7479
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Lithonia",
+     "product": "RSX area light on an AASP tilt arm mount",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lithonia RSX area light on an AASP tilt arm mount recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3114,
+    "completion": 7479
+   },
+   "usd": 0.00327,
+   "ms": 59,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h32",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "inspected",
+   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 2772,
+     "completion": 10947
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Natural Grocers",
+     "product": "organic mung beans 2 lb",
+     "upc": "000080112600",
+     "made": "26-196",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 000080112600, brand “Natural Grocers”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Natural Grocers organic mung beans 2 lb recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2772,
+    "completion": 10947
+   },
+   "usd": 0.00566,
+   "ms": 57,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h33",
+   "group": "near-miss",
+   "set": "lag",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 2772,
+     "completion": 11043
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Natural Grocers",
+     "product": "organic mung beans 2 lb",
+     "upc": "000080112600",
+     "made": "26-161",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 000080112600, brand “Natural Grocers”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Natural Grocers organic mung beans 2 lb recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2772,
+    "completion": 11043
+   },
+   "usd": 0.00595,
+   "ms": 58,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h34",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "FDA H-0008-2027",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 2206,
+     "completion": 6145
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "WinCo",
+     "product": "hoagie rolls 16 oz",
+     "upc": "2-70552-00649-2",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 2-70552-00649-2, brand “WinCo”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “WinCo hoagie rolls 16 oz recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2206,
+    "completion": 6145
+   },
+   "usd": 0.0031,
+   "ms": 63,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h35",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Lot 085261 is printed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1282,
+     "completion": 1767
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Gelatelli",
+     "product": "coffee & vanilla gelato",
+     "lot": "085261",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 085261, brand “Gelatelli”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gelatelli coffee & vanilla gelato recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1282,
+    "completion": 1767
+   },
+   "usd": 0.0017,
+   "ms": 34,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h36",
+   "group": "near-miss",
+   "set": "lag",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1282,
+     "completion": 1770
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Gelatelli",
+     "product": "coffee & vanilla gelato",
+     "lot": "085216",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 085216, brand “Gelatelli”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gelatelli coffee & vanilla gelato recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1282,
+    "completion": 1770
+   },
+   "usd": 0.00171,
+   "ms": 34,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h37",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1280,
+     "completion": 1915
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Starfish Seafood",
+     "product": "cold smoked salmon 8 oz",
+     "lot": "D080-148",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot D080-148, brand “Starfish Seafood”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Starfish Seafood cold smoked salmon 8 oz recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1280,
+    "completion": 1915
+   },
+   "usd": 0.00198,
+   "ms": 28,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h38",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB USDA FSIS",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1486,
+     "completion": 1927
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Kayem",
+     "product": "natural casing hot dogs",
+     "codes": [
+      "EST. 7839"
+     ],
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Kayem”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kayem natural casing hot dogs recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1486,
+    "completion": 1927
+   },
+   "usd": 0.00202,
+   "ms": 22,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h39",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB USDA FSIS",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 6884,
+     "completion": 4897
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Kayem",
+     "product": "hot dogs",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Kayem”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kayem hot dogs recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 6884,
+    "completion": 4897
+   },
+   "usd": 0.00256,
+   "ms": 43,
+   "msFresh": false,
+   "tavily": 5,
+   "tavilySearch": 1,
+   "tavilyExtract": 4,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h40",
+   "group": "positive",
+   "set": "lag",
+   "form": "messy",
+   "expect": "danger",
+   "level": "inspected",
+   "headline": "Only older recalls found (latest 2022), too old to cover what you have now.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 9,
+     "prompt": 2761,
+     "completion": 10370
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "NATURAL GROCERS",
+     "product": "ORGANIC MUNG BEANS 2 LB",
+     "codes": [
+      "26-196"
+     ],
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “NATURAL GROCERS”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “NATURAL GROCERS ORGANIC MUNG BEANS 2 LB recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2761,
+    "completion": 10370
+   },
+   "usd": 0.00392,
+   "ms": 44,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h41",
+   "group": "positive",
+   "set": "lag",
+   "form": "messy",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Lot 085261 is printed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1279,
+     "completion": 1767
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "gelatelli",
+     "product": "coffee vanilla gelato",
+     "lot": "085261",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 085261, brand “gelatelli”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “gelatelli coffee vanilla gelato recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1279,
+    "completion": 1767
+   },
+   "usd": 0.0017,
+   "ms": 41,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h42",
+   "group": "positive",
+   "set": "lag",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1271,
+     "completion": 1805
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "starfish",
+     "product": "smoked salmon",
+     "lot": "D080148",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot D080148, brand “starfish”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “starfish smoked salmon recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1271,
+    "completion": 1805
+   },
+   "usd": 0.00164,
+   "ms": 40,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h43",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "inspected",
+   "headline": "No recall found for Wedgewood Pharmacy compounded methimazole for my cat.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 308,
+     "completion": 319
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "Wedgewood Pharmacy",
+     "product": "methimazole",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, brand “Wedgewood Pharmacy”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Wedgewood Pharmacy methimazole recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 308,
+    "completion": 319
+   },
+   "usd": 0.00127,
+   "ms": 8,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "cacheMisses": 0,
+   "missed": []
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "casesCommitted": { "commit": "d9dce10", "at": "2026-10-25T00:37:01+05:30", "file": "eval/cases-holdout.json" },
+ "groundTruthCommitted": { "commit": "e2d6481", "at": "2026-10-25T00:37:05+05:30", "files": ["eval/verify-holdout.mjs", "eval/verified-holdout.json", "eval/notices-holdout/", "eval/photos/primark-tag-cpsc-27-028.png"], "verified": "39/39" },
+ "codeMeasured": {
+  "commit": "a1d8b21",
+  "note": "Every arm ran from a detached git worktree at a1d8b21, so uncommitted work in the main checkout could not leak in. Its lib/ is the Oct 15 20:28 IST code (a18f18c) plus one change: Nemotron 3.5 Super VL first for label photos (ed1a9a1, Oct 25 00:20 IST). Two harness-only fixes to eval/run.ts were applied in the worktree before the runs that count (a retry gets its own timeout; past the Tavily credit cap a call goes keyless instead of failing); they are committed after a1d8b21."
+ },
+ "runs": [
+  { "arm": "tagout", "at": "2026-10-25T00:52:37+05:30", "tavily": "keyed (54 credits); the cases finished in the stopped first attempt were keyless", "note": "A first attempt (keyless Tavily) was stopped after 17 cases: the harness waited out Tavily's keyless rate limit with the request's own 15 s timeout already running, so retried calls failed at once. The harness was fixed and the arm re-run once. Calls that had succeeded in the first attempt were answered from the cache (the same answers); calls that had failed, and everything after them, ran live." },
+  { "arm": "fixed-plan-nano", "at": "2026-10-25T00:55:45+05:30", "tavily": "keyed (30 credits)" },
+  { "arm": "fixed-plan-nano-noweb", "at": "2026-10-25T00:55:56+05:30", "tavily": "off" },
+  { "arm": "tagout-noweb", "at": "2026-10-25T00:57:19+05:30", "tavily": "off" },
+  { "arm": "fixed-plan", "at": "2026-10-25T00:58:53+05:30", "tavily": "keyless", "note": "Its $0.15 run cap stopped it after 34 cases; the last five then ran, and every call they needed was already cached from the other arms." }
+ ],
+ "spend": {
+  "tokenFactoryUsd": 1.8001,
+  "tokenFactoryByRun": { "tagout (both attempts)": 1.0361, "fixed-plan-nano": 0.0341, "fixed-plan-nano-noweb": 0, "tagout-noweb": 0.4700, "fixed-plan": 0.1681, "refill of 11 tuned cases for the replay": 0.0919 },
+  "tokenFactoryOutsideHarness": "about $0.02: the vision model comparison (scripts/vision-eval.ts, twice) and two Nemotron 3.5 Super VL probes with a larger output budget",
+  "tavilyCreditsKeyed": 84,
+  "tavilyKeylessCalls": 36,
+  "tavilyUsdPerCredit": 0.008,
+  "source": "eval/.cache/spend.json ledger: $3.1447 before, $4.9448 after; 319 keyed Tavily calls before, 403 after"
+ }
+}
