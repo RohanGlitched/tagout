@@ -51,19 +51,37 @@ if (KEYLESS) delete process.env.TAVILY_API_KEY;
 // The agent is told the date; pinning it keeps a replay on a later day a cache hit.
 process.env.TAGOUT_TODAY = flag("today") ?? process.env.TAGOUT_TODAY ?? "2026-10-15";
 
-/** $ per million tokens, from Token Factory's /v1/models on Oct 15 2026 (Super VL from its catalog on Oct 25). */
-export const PRICES: Record<string, [number, number]> = {
-  "nvidia/Nemotron-3-Ultra-550b-a55b": [1, 3],
-  "nvidia/nemotron-3-super-120b-a12b": [0.3, 0.9],
-  "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": [0.06, 0.24],
-  "nvidia/Nemotron-3.5-Super-VL": [0.3, 0.9],
-};
+/** $ per million tokens: the app's own table (lib/prices.json, from Token Factory's /v1/models pricing). */
+export const PRICES: Record<string, [number, number]> = JSON.parse(fs.readFileSync(path.join(ROOT, "lib", "prices.json"), "utf8")).usdPerMillion;
 const ULTRA = "nvidia/Nemotron-3-Ultra-550b-a55b";
 const SUPER = "nvidia/nemotron-3-super-120b-a12b";
 const NANO = "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B";
 
 type Call = { model: string; prompt: number; completion: number; cached: boolean; ms: number };
-type Ctx = { calls: Call[]; tavily: number; cachedTavily: number; search: number; extract: number; webBlocked: number; misses: string[] };
+type Ctx = { calls: Call[]; tavily: number; cachedTavily: number; search: number; extract: number; credits: number; truncated: number; webBlocked: number; misses: string[] };
+
+/** Tavily credits one call is billed: a basic search 1 (advanced 2); an extract 1 per 5 URLs it returned
+ *  (basic; advanced 2 per 5), and nothing when no URL came back. */
+export function tavilyCredits(url: string, reqBody: string, resBody: string, ok: boolean): number {
+  if (!ok) return 0;
+  let req: { search_depth?: string; extract_depth?: string } = {};
+  try {
+    req = JSON.parse(reqBody || "{}");
+  } catch {}
+  if (!url.includes("/extract")) return req.search_depth === "advanced" ? 2 : 1;
+  let n = 0;
+  try {
+    n = (JSON.parse(resBody).results ?? []).length;
+  } catch {}
+  return Math.ceil(n / 5) * (req.extract_depth === "advanced" ? 2 : 1);
+}
+const finishedAtCap = (resBody: string) => {
+  try {
+    return JSON.parse(resBody).choices?.[0]?.finish_reason === "length";
+  } catch {
+    return false;
+  }
+};
 const caseCtx = new AsyncLocalStorage<Ctx>();
 
 /** Dollars this run may spend on Token Factory (the ledger keeps the running total across runs). */
@@ -122,8 +140,12 @@ globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
     if (tf && ctx) {
       const u = JSON.parse(hit.body).usage ?? {};
       ctx.calls.push({ model, prompt: u.prompt_tokens ?? 0, completion: u.completion_tokens ?? 0, cached: true, ms: hit.ms ?? 0 });
+      if (finishedAtCap(hit.body)) ctx.truncated++;
     }
-    if (tv && ctx) ctx.cachedTavily++;
+    if (tv && ctx) {
+      ctx.cachedTavily++;
+      ctx.credits += tavilyCredits(url, body, hit.body, hit.status >= 200 && hit.status < 300);
+    }
     return new Response(hit.body, { status: hit.status, headers: { "content-type": hit.type } });
   }
   if (OFFLINE) {
@@ -168,13 +190,17 @@ globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
     ledger.byModel[model] = (ledger.byModel[model] ?? 0) + c;
     saveLedger();
     ctx?.calls.push({ model, prompt: u.prompt_tokens ?? 0, completion: u.completion_tokens ?? 0, cached: false, ms });
+    if (ctx && finishedAtCap(text)) ctx.truncated++;
   }
   if (tv) {
     ledger.tavilyLive++;
     if (keyed && r!.ok) ledger.tavilyKeyed = (ledger.tavilyKeyed ?? 0) + 1;
     if (!r!.ok) console.error(`[eval] Tavily HTTP ${r!.status}: ${text.slice(0, 160)}`);
     saveLedger();
-    if (ctx) ctx.tavily++;
+    if (ctx) {
+      ctx.tavily++;
+      ctx.credits += tavilyCredits(url, body, text, r!.ok);
+    }
   }
   return new Response(text, { status: r!.status, headers: { "content-type": type } });
 }) as typeof fetch;
@@ -314,7 +340,7 @@ const worker = async () => {
       console.log(`stop: run budget $${CAP} reached`);
       return;
     }
-    const ctx: Ctx = { calls: [], tavily: 0, cachedTavily: 0, search: 0, extract: 0, webBlocked: 0, misses: [] };
+    const ctx: Ctx = { calls: [], tavily: 0, cachedTavily: 0, search: 0, extract: 0, credits: 0, truncated: 0, webBlocked: 0, misses: [] };
     const t0 = Date.now();
     const out = await caseCtx.run(ctx, async () => (arm.kind === "ask" ? ask(arm, c) : arm.kind === "intake" ? intakeOnly(c) : pipeline(arm, c))).catch((e: Error) => ({ level: "error", error: e.message }));
     const ms = Date.now() - t0;
@@ -339,6 +365,9 @@ const worker = async () => {
       tavily: ctx.tavily + ctx.cachedTavily,
       tavilySearch: ctx.search,
       tavilyExtract: ctx.extract,
+      // Billed credits (an extract is 1 per 5 URLs returned), and model replies cut off at their output cap.
+      tavilyCredits: ctx.credits,
+      truncated: ctx.truncated,
       ...(NOWEB ? { webBlocked: ctx.webBlocked } : {}),
       ...(OFFLINE ? { cacheMisses: ctx.misses.length, missed: [...new Set(ctx.misses)].slice(0, 6) } : {}),
     };

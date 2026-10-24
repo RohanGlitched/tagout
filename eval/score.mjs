@@ -23,8 +23,9 @@ const ok = new Set(verified.results.filter((r) => r.ok).map((r) => r.id));
 const truth = cases.filter((c) => ok.has(c.id));
 
 /** Tavily pay-as-you-go price per API credit (docs.tavily.com, API credits page, checked Oct 25 2026). A basic
- *  search is 1 credit; a basic extract is 1 credit per 5 successful URLs, and Tagout sends one URL per extract, so
- *  each extract call is counted as 1 credit (an upper bound: a failed extract costs nothing). */
+ *  search is 1 credit; a basic extract is 1 credit per 5 successful URLs. Rows that carry `tavilyCredits` (run.ts
+ *  since Oct 25) are billed exactly that way; older rows count each search and extract call as 1 credit (an upper
+ *  bound: an extract call takes at most 5 URLs, and a failed one costs nothing). */
 export const TAVILY_USD_PER_CREDIT = 0.008;
 
 /** Is this tag right for this case? "not-danger" accepts orange and green; "flag" accepts orange and red. */
@@ -89,7 +90,7 @@ for (const f of files) {
   const errors = got.filter((x) => lv(x) === "error");
   const exact = got.filter((x) => right(x.c, lv(x)));
   const usd = got.map((x) => x.r.usd ?? 0);
-  const tav = got.map((x) => (x.r.tavilySearch ?? 0) + (x.r.tavilyExtract ?? 0) || x.r.tavily || 0);
+  const tav = got.map((x) => x.r.tavilyCredits ?? ((x.r.tavilySearch ?? 0) + (x.r.tavilyExtract ?? 0) || x.r.tavily || 0));
   const ms = got.filter((x) => x.r.msFresh && x.r.calls > 0).map((x) => x.r.ms).sort((a, b) => a - b);
   const byGroup = {};
   for (const g of GROUPS) {

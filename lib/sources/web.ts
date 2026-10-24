@@ -24,23 +24,30 @@ function headers(): Record<string, string> {
  * One Tavily call. 429 is the rate limit, 432 and 433 mean the key's plan or pay-as-you-go limit is spent: the
  * demo then falls back to Tavily's keyless mode (slower, smaller quota) rather than lose the web half of a check.
  */
-/** Tavily calls inside one sweep or check: basic searches cost a credit each, basic extracts a credit per five URLs. */
+/** Tavily calls inside one sweep or check, and the credits Tavily bills for them: a basic search is 1 credit
+ *  (advanced 2); a basic extract is 1 credit per 5 URLs it read successfully (advanced 2 per 5), so an extract call
+ *  of up to five URLs is at most 1 credit, and one that read nothing is free. `extractUrls` counts URLs read. */
 export type TavilyTally = { searches: number; extracts: number; extractUrls: number; credits: number };
 export const tavilyScope = new AsyncLocalStorage<TavilyTally>();
 
-async function tavily(path: string, body: Record<string, unknown>, timeoutMs: number): Promise<Response> {
+/** Credits for one call, as Tavily bills it (docs.tavily.com, API credits page, checked Oct 25 2026). */
+export function creditsFor(path: string, body: Record<string, unknown>, urlsRead: number): number {
+  if (path === "/search") return body.search_depth === "advanced" ? 2 : 1;
+  return Math.ceil(urlsRead / 5) * (body.extract_depth === "advanced" ? 2 : 1);
+}
+
+function count(path: string, body: Record<string, unknown>, urlsRead: number): void {
   const tally = tavilyScope.getStore();
-  if (tally) {
-    if (path === "/search") {
-      tally.searches++;
-      tally.credits += body.search_depth === "advanced" ? 2 : 1;
-    } else {
-      const n = Array.isArray(body.urls) ? body.urls.length : 1;
-      tally.extracts++;
-      tally.extractUrls += n;
-      tally.credits += Math.ceil(n / 5);
-    }
+  if (!tally) return;
+  if (path === "/search") tally.searches++;
+  else {
+    tally.extracts++;
+    tally.extractUrls += urlsRead;
   }
+  tally.credits += creditsFor(path, body, urlsRead);
+}
+
+async function tavily(path: string, body: Record<string, unknown>, timeoutMs: number): Promise<Response> {
   const r = await fetch(`${API}${path}`, { method: "POST", headers: headers(), body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
   if (!process.env.TAVILY_API_KEY || ![429, 432, 433].includes(r.status)) return r;
   console.error(`[tavily] HTTP ${r.status} with the key; retrying keyless`);
@@ -70,6 +77,7 @@ export async function webSearch(q: WebQuery): Promise<{ notices: Notice[]; answe
   if (q.days) body.time_range = q.days <= 7 ? "week" : q.days <= 31 ? "month" : "year";
   const r = await tavily("/search", body, 15_000);
   if (!r.ok) throw new Error(`Tavily search failed (HTTP ${r.status}).`);
+  count("/search", body, 0);
   const j = (await r.json()) as { results: SearchResult[] };
   const notices = (j.results ?? [])
     .filter((x) => /recall|alert|warning|safety/i.test(`${x.url} ${x.title}`) && !isListing(x.url))
@@ -96,9 +104,11 @@ export async function webSearch(q: WebQuery): Promise<{ notices: Notice[]; answe
 export async function webExtract(urls: string[]): Promise<Map<string, string>> {
   const out = new Map<string, string>();
   if (!urls.length) return out;
-  const r = await tavily("/extract", { urls: urls.slice(0, 5), extract_depth: "basic", format: "text" }, 20_000);
+  const body = { urls: urls.slice(0, 5), extract_depth: "basic", format: "text" };
+  const r = await tavily("/extract", body, 20_000);
   if (!r.ok) return out;
   const j = (await r.json()) as { results: { url: string; raw_content: string }[] };
+  count("/extract", body, (j.results ?? []).length);
   for (const x of j.results ?? []) out.set(x.url, mainText(clean(x.raw_content)));
   return out;
 }

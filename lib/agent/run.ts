@@ -1,6 +1,7 @@
 import "server-only";
 import type { Item, Verdict } from "../types";
 import { deadlineScope, modelLabel, MODELS, usageScope, type Usage } from "../nebius";
+import { tavilyScope, type TavilyTally } from "../sources/web";
 import { readItems } from "./intake";
 import { investigate, type Step } from "./investigate";
 import { fillWebText, readNotice } from "./read-notice";
@@ -27,6 +28,8 @@ export type Engine = {
   planned: "model" | "fixed";
   mode?: "full" | "lite" | "rules";
   tokens?: Usage;
+  /** Tavily calls this check made and the credits Tavily bills for them (an extract is 1 credit per 5 URLs read). */
+  tavily?: TavilyTally;
   readsReused?: number;
   modelUnavailable?: number;
   lateLite?: number;
@@ -78,18 +81,22 @@ function channel<T>() {
  *  tier); `reader` names the notice reader's model chain for this check. */
 export type RunOptions = { agent?: boolean; reader?: string[]; mode?: Engine["mode"] };
 
-/** One check, with every Token Factory call inside it counted onto the engine, under a 200 s overall deadline. */
+/** One check, with every Token Factory and Tavily call inside it counted onto the engine, under a 200 s overall
+ *  deadline. */
 export async function* runCheck(input: { text: string; photos: string[] }, useModel: boolean, opts: RunOptions = {}): AsyncGenerator<Event> {
   const usage: Usage = { calls: 0, prompt: 0, completion: 0 };
+  const tavily: TavilyTally = { searches: 0, extracts: 0, extractUrls: 0, credits: 0 };
   const t0 = Date.now();
   const ch = channel<Event>();
   usageScope.run(usage, () =>
-    deadlineScope.run({ at: t0 + DEADLINE_MS }, () =>
-      (async () => {
-        for await (const e of run(input, useModel, opts, t0 + SOFT_MS)) ch.push(e);
-      })()
-        .catch((e) => ch.push({ t: "error", message: (e as Error).message }))
-        .finally(() => ch.close()),
+    tavilyScope.run(tavily, () =>
+      deadlineScope.run({ at: t0 + DEADLINE_MS }, () =>
+        (async () => {
+          for await (const e of run(input, useModel, opts, t0 + SOFT_MS)) ch.push(e);
+        })()
+          .catch((e) => ch.push({ t: "error", message: (e as Error).message }))
+          .finally(() => ch.close()),
+      ),
     ),
   );
   yield* ch.drain();
@@ -172,5 +179,7 @@ async function* run(input: { text: string; photos: string[] }, useModel: boolean
   yield* ch.drain();
   const used = usageScope.getStore();
   if (used?.calls) engine.tokens = { ...used };
+  const web = tavilyScope.getStore();
+  if (web && web.searches + web.extracts) engine.tavily = { ...web };
   yield { t: "done", at: new Date().toISOString(), engine };
 }
