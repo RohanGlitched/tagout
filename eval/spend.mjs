@@ -2,12 +2,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const PRICES = {
-  "nvidia/Nemotron-3-Ultra-550b-a55b": [1, 3],
-  "nvidia/nemotron-3-super-120b-a12b": [0.3, 0.9],
-  "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B": [0.06, 0.24],
-};
-const root = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), ".cache", "http");
+const here = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
+// The app's own price table (Token Factory's /v1/models pricing).
+const PRICES = JSON.parse(fs.readFileSync(path.join(here, "..", "lib", "prices.json"), "utf8")).usdPerMillion;
+const root = path.join(here, ".cache", "http");
 const by = {};
 let total = 0;
 let calls = 0;

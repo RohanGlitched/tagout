@@ -1,5 +1,6 @@
 import "server-only";
 import { AsyncLocalStorage } from "node:async_hooks";
+import PRICE_TABLE from "./prices.json";
 
 /**
  * Nebius Token Factory (OpenAI-compatible) with NVIDIA Nemotron. Each role names a chain of models so one
@@ -49,24 +50,39 @@ export type Msg =
 export type ToolCall = { id: string; type: "function"; function: { name: string; arguments: string } };
 export type ToolDef = { type: "function"; function: { name: string; description: string; parameters: Record<string, unknown> } };
 
-export type ChatResult = { model: string; content: string; toolCalls: ToolCall[]; usage?: { prompt_tokens: number; completion_tokens: number } };
+export type ChatResult = { model: string; content: string; toolCalls: ToolCall[]; usage?: { prompt_tokens: number; completion_tokens: number }; finishReason?: string };
 
 /** Token Factory calls and tokens spent inside one check, so the page can say what the check cost. `usd` is the
- *  same at Token Factory's list prices (PRICES). */
-export type Usage = { calls: number; prompt: number; completion: number; usd?: number };
+ *  same at Token Factory's list prices (PRICES). `truncated`: replies cut off at the output cap (finish_reason
+ *  "length"); `retried`: of those, how many were asked again with a larger cap. */
+export type Usage = { calls: number; prompt: number; completion: number; usd?: number; truncated?: number; retried?: number };
 export const usageScope = new AsyncLocalStorage<Usage>();
 
-/** List prices in dollars per million tokens, [input, output]; an unlisted model is priced like Ultra. */
-export const PRICES: Record<string, [number, number]> = {
-  "nvidia/nemotron-3-ultra-550b-a55b": [1, 3],
-  "nvidia/nemotron-3-super-120b-a12b": [0.3, 0.9],
-  "nvidia/nvidia-nemotron-3-nano-30b-a3b": [0.06, 0.24],
-};
+/** List prices in dollars per million tokens, [input, output], keyed by lowercase model id. From Token Factory's
+ *  `GET /v1/models?verbose=true` pricing field (Oct 25 2026). An unlisted model is priced like Ultra. eval/run.ts
+ *  and eval/spend.mjs read this same table (lib/prices.json). */
+export const PRICES: Record<string, [number, number]> = Object.fromEntries(Object.entries(PRICE_TABLE.usdPerMillion as unknown as Record<string, [number, number]>).map(([k, v]) => [k.toLowerCase(), v]));
 
 export function priceOf(model: string, prompt: number, completion: number): number {
   const [a, b] = PRICES[model.toLowerCase()] ?? [1, 3];
   return (prompt * a + completion * b) / 1e6;
 }
+
+/**
+ * Models that answer a role with reasoning switched off: the call carries Nemotron's chat-template switch
+ * `chat_template_kwargs: {enable_thinking: false}`. Probed through Token Factory on Oct 25 2026: Ultra, Nano and
+ * Super VL all honour it (0 reasoning tokens), and a `/no_think` line in the system prompt is ignored by all three
+ * (eval/HOLDOUT.md, "Reasoning control, tested"). Only Nemotron ids get the switch. It is on for the Nano notice
+ * reader (the lite tier) and Super VL, where the eval was re-run with it; the Ultra reader keeps reasoning on until
+ * its reads are re-measured. Set NEBIUS_READER_NO_THINK / NEBIUS_VISION_NO_THINK to a list of ids, or "none".
+ */
+export const NO_THINKING = {
+  reader: list(process.env.NEBIUS_READER_NO_THINK, ["nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"]),
+  vision: list(process.env.NEBIUS_VISION_NO_THINK, ["nvidia/Nemotron-3.5-Super-VL"]),
+};
+
+/** The output cap for the one retry after a reply was cut off with nothing usable in it. */
+export const retryCap = (cap: number) => Math.min(Math.round(cap * 2.5), 16_000);
 
 /**
  * A deadline for every model call made inside it (one check, or one sweep). Each call's timeout is cut to the
@@ -136,9 +152,10 @@ async function once(model: string, body: Record<string, unknown>, timeoutMs: num
     console.error(`[nebius] ${model} HTTP ${r.status}: ${text}`);
     throw new ModelError(`HTTP ${r.status}`, r.status, retryAfter(r.headers.get("retry-after")));
   }
-  const j = (await r.json().catch(() => ({}))) as { choices?: { message: { content: string | null; tool_calls?: ToolCall[] } }[]; usage?: ChatResult["usage"] };
+  const j = (await r.json().catch(() => ({}))) as { choices?: { message: { content: string | null; tool_calls?: ToolCall[] }; finish_reason?: string }[]; usage?: ChatResult["usage"] };
   const m = j.choices?.[0]?.message;
   if (!m) throw new ModelError("empty response");
+  const finishReason = j.choices?.[0]?.finish_reason;
   const tally = usageScope.getStore();
   if (tally && j.usage) {
     tally.calls++;
@@ -146,8 +163,36 @@ async function once(model: string, body: Record<string, unknown>, timeoutMs: num
     tally.completion += j.usage.completion_tokens ?? 0;
     tally.usd = (tally.usd ?? 0) + priceOf(model, j.usage.prompt_tokens ?? 0, j.usage.completion_tokens ?? 0);
   }
-  console.log(`[nebius] ${model} ${Date.now() - t0}ms ${j.usage?.prompt_tokens ?? "?"}+${j.usage?.completion_tokens ?? "?"} tokens`);
-  return { model, content: (m.content ?? "").trim(), toolCalls: m.tool_calls ?? [], usage: j.usage };
+  if (tally && finishReason === "length") tally.truncated = (tally.truncated ?? 0) + 1;
+  console.log(`[nebius] ${model} ${Date.now() - t0}ms ${j.usage?.prompt_tokens ?? "?"}+${j.usage?.completion_tokens ?? "?"} tokens${finishReason === "length" ? " (cut off at the cap)" : ""}`);
+  return { model, content: (m.content ?? "").trim(), toolCalls: m.tool_calls ?? [], usage: j.usage, finishReason };
+}
+
+/** A reply with something in it: text or a tool call. */
+const hasContent = (r: ChatResult) => Boolean(r.content || r.toolCalls.length);
+
+/**
+ * One model, once, with one more try when the reply was cut off at the output cap (finish_reason "length") with
+ * nothing usable in it: Nemotron reasons before it answers, and a long notice can use the whole cap on reasoning.
+ * The retry asks the same model with 2.5 times the cap (at most 16,000 tokens). A call made with reasoning off is
+ * retried with reasoning on: there the cut-off is a decoding runaway (Nano under a strict JSON schema once padded a
+ * reply with whitespace to the cap, at 1,500 and at 3,750 tokens), which more room alone doesn't fix. If the retry
+ * fails, the first reply is returned as it was, so the caller's fallback runs as before.
+ */
+async function onceWithRoom(model: string, body: Record<string, unknown>, timeoutMs: number, usable: (r: ChatResult) => boolean): Promise<ChatResult> {
+  const first = await once(model, body, timeoutMs);
+  if (first.finishReason !== "length" || usable(first)) return first;
+  const cap = Number(body.max_tokens ?? 2000);
+  const tally = usageScope.getStore();
+  if (tally) tally.retried = (tally.retried ?? 0) + 1;
+  console.error(`[nebius] ${model} cut off at ${cap} tokens with nothing usable; once more with ${retryCap(cap)}`);
+  const { chat_template_kwargs: _off, ...rest } = body;
+  try {
+    return await once(model, { ...rest, max_tokens: retryCap(cap) }, timeoutMs);
+  } catch (e) {
+    if (fatal(e)) throw e;
+    return first;
+  }
 }
 
 /**
@@ -155,8 +200,19 @@ async function once(model: string, body: Record<string, unknown>, timeoutMs: num
  * retrying (429, 5xx, a timeout) gets one more try after a backoff with jitter, longer if Token Factory sent
  * Retry-After; a 400 or 404 moves straight to the next model; 401, 402 and 403 end the chain at once.
  */
-export async function chat(chain: string[], body: { messages: Msg[]; tools?: ToolDef[]; tool_choice?: unknown; response_format?: unknown; max_tokens?: number; temperature?: number }, timeoutMs = 30_000): Promise<ChatResult> {
+export type ChatBody = { messages: Msg[]; tools?: ToolDef[]; tool_choice?: unknown; response_format?: unknown; max_tokens?: number; temperature?: number };
+
+/** `noThink`: models in the chain that are asked with reasoning off. `usable`: what counts as an answer when
+ *  deciding whether a reply cut off at the cap deserves a retry (default: any text or tool call). */
+export async function chat(chain: string[], body: ChatBody, timeoutMs = 30_000, opts: { noThink?: string[]; usable?: (r: ChatResult) => boolean } = {}): Promise<ChatResult> {
   if (!hasKey()) throw new Error("NEBIUS_API_KEY is not set");
+  const off = new Set((opts.noThink ?? []).map((m) => m.toLowerCase()));
+  const request = (model: string): Record<string, unknown> => ({
+    temperature: 0.2,
+    max_tokens: 2000,
+    ...body,
+    ...(off.has(model.toLowerCase()) && /nemotron/i.test(model) ? { chat_template_kwargs: { enable_thinking: false } } : {}),
+  });
   let last: unknown;
   let again = chain;
   for (let pass = 0; pass < 2 && again.length; pass++) {
@@ -170,7 +226,7 @@ export async function chat(chain: string[], body: { messages: Msg[]; tools?: Too
     const next: string[] = [];
     for (const model of again) {
       try {
-        return await once(model, { temperature: 0.2, max_tokens: 2000, ...body }, timeoutMs);
+        return await onceWithRoom(model, request(model), timeoutMs, opts.usable ?? hasContent);
       } catch (e) {
         last = e;
         console.error(`[nebius] ${model} failed: ${(e as Error).message}`);
@@ -196,14 +252,23 @@ export function parseJson<T>(text: string): T {
 }
 
 /** Structured output under a strict JSON schema. Retries the next model when one returns something unparsable. */
-export async function structured<T>(chain: string[], opts: { name: string; schema: Record<string, unknown>; messages: Msg[]; maxTokens?: number; timeoutMs?: number }): Promise<{ data: T; model: string }> {
+export async function structured<T>(chain: string[], opts: { name: string; schema: Record<string, unknown>; messages: Msg[]; maxTokens?: number; timeoutMs?: number; noThink?: string[] }): Promise<{ data: T; model: string }> {
   let last: unknown;
+  const parses = (r: ChatResult) => {
+    try {
+      parseJson(r.content);
+      return true;
+    } catch {
+      return false;
+    }
+  };
   for (const model of chain) {
     try {
       const r = await chat(
         [model],
         { messages: opts.messages, max_tokens: opts.maxTokens ?? 2500, response_format: { type: "json_schema", json_schema: { name: opts.name, strict: true, schema: opts.schema } } },
         opts.timeoutMs ?? 30_000,
+        { noThink: opts.noThink, usable: parses },
       );
       return { data: parseJson<T>(r.content), model: r.model };
     } catch (e) {

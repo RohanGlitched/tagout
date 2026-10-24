@@ -2,7 +2,7 @@ import "server-only";
 import type { Notice } from "../types";
 import { docKey, readDoc, sha256, writeDoc } from "../docs";
 import { looksLikeCode, norm } from "../match";
-import { MODELS, structured } from "../nebius";
+import { MODELS, NO_THINKING, structured } from "../nebius";
 import { storage } from "../storage";
 import { webExtract } from "../sources/web";
 
@@ -129,6 +129,7 @@ export async function readNotice(n: Notice, useModel: boolean, chain: string[] =
         ],
         maxTokens: 1500,
         timeoutMs: 25_000,
+        noThink: NO_THINKING.reader,
       });
     } catch {
       return { notice: n, struck: [], failed: true };

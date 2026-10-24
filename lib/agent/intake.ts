@@ -1,7 +1,7 @@
 import "server-only";
 import type { Item, ItemKind } from "../types";
 import { norm } from "../match";
-import { MODELS, structured, type Msg } from "../nebius";
+import { MODELS, NO_THINKING, structured, type Msg } from "../nebius";
 import { decodeVin } from "../sources/nhtsa";
 
 /**
@@ -134,6 +134,7 @@ export async function readItems(text: string, photos: string[], useModel: boolea
           // tokens reasoning and returned nothing; with 8,000 it read the tag in about 3,000 (eval/HOLDOUT.md).
           maxTokens: 6000,
           timeoutMs: 40_000,
+          noThink: NO_THINKING.vision,
         }).catch(() => null),
       ),
     );
