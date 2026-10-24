@@ -121,7 +121,7 @@ export default function Proof() {
         <header className={s.top}>
           <h1 className={s.h1}>{summary.cases} real cases, measured against the model alone.</h1>
           <p className={s.lede}>
-            We built a test set from 2026 recall records: units whose code is printed in a CPSC, FDA or NHTSA notice, the same products with a neighbouring lot or model, recalled
+            We built a test set from 2025–26 recall records: units whose code is printed in a CPSC, FDA or NHTSA notice, the same products with a neighbouring lot or model, recalled
             lines with no code, cars, and things no recall lists. Every answer was checked against the agency&apos;s own record, not against Tagout. Then the same cases ran through
             Tagout, through Nemotron 3 Ultra on its own, through Nemotron reading Tavily&apos;s results, through a fixed search plan, and on three Nemotron sizes.
           </p>
@@ -193,7 +193,7 @@ export default function Proof() {
                 .
               </li>
               <li>
-                A check cost <b>{cents(t.usdPerItem)}</b> per item on Nemotron 3 Ultra and took a median <b>{secs(t.medianMs)}</b>.
+                A check cost <b>{cents(t.usdPerItem)}</b> per item on Nemotron 3 Ultra and took a median <b>{secs(t.medianMs)}</b> over the cases that ran live (the rest replayed from the cache).
               </li>
             </ul>
           </section>
@@ -333,7 +333,7 @@ export default function Proof() {
           </h2>
           <p className={s.sub}>
             Tagout has three model jobs: reading the list, running the search agent, and reading each notice&apos;s codes. The track asks for Ultra where the reasoning is hard and
-            smaller models for the everyday calls, so every size ran every case.
+            smaller models for the everyday calls, so every size ran in every role: all 105 cases as the notice reader and the list reader, and an 18-case sample as the search agent.
           </p>
           <div className={s.tableWrap}>
             <table className={s.table}>
@@ -391,7 +391,7 @@ export default function Proof() {
               We chose the cases. Recalled units come from recent notices that print a code, which is the case Tagout is built for; a product whose notice prints no code can only ever
               be orange.
             </li>
-            <li>Cost is tokens times Token Factory&apos;s list prices ($1/$3 per million for Ultra, $0.30/$0.90 for Super, $0.06/$0.24 for Nano). Agency APIs and Tavily cost nothing here.</li>
+            <li>Cost is tokens times Token Factory&apos;s list prices ($1/$3 per million for Ultra, $0.30/$0.90 for Super, $0.06/$0.24 for Nano). Tavily credits are counted separately ($0.008 each at pay-as-you-go rates; see the business page for the all-in cost). Agency APIs are free.</li>
           </ul>
           <p className={s.more}>
             Reproduce it: <span className="code">node eval/verify.mjs</span>, then <span className="code">npx tsx --conditions=react-server eval/run.ts tagout</span> for each arm, then{" "}

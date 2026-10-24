@@ -8,7 +8,7 @@ export type Hazard = "fire" | "ingest" | "breath" | "injury" | "shock" | "other"
 
 export type WallTag = { t: string; d: string; u: string; h: Hazard; n?: string };
 export type WallMonth = { key: string; tags: WallTag[] };
-export type Wall = { months: WallMonth[]; total: number; counts: Record<Hazard, number>; at: string; year: number };
+export type Wall = { months: WallMonth[]; total: number; counts: Record<Hazard, number>; at: string; year: number; /** Units the recalls cover, as CPSC counts them. */ units: number };
 
 const RULES: [Hazard, RegExp][] = [
   ["fire", /fire|burn|overheat|flame|explo/],
@@ -49,8 +49,10 @@ async function load(): Promise<Wall> {
     if (!byMonth.has(key)) byMonth.set(key, []);
     byMonth.get(key)!.push({ t: shortTitle(n.title), d: n.date, u: n.url, h, ...(/^\d{2}-\d{3}$/.test(n.id) ? { n: n.id } : {}) });
   }
+  // CPSC's own unit counts; an expansion of an earlier recall is skipped so its units aren't counted twice.
+  const units = api.filter((n) => !/previously recalled|expan/i.test(n.title)).reduce((sum, n) => sum + (n.units ?? 0), 0);
   const months = [...byMonth.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([key, tags]) => ({ key, tags }));
-  return { months, total: all.length, counts, at: new Date().toISOString(), year };
+  return { months, total: all.length, counts, at: new Date().toISOString(), year, units };
 }
 
-export const yearWall = unstable_cache(load, ["year-wall-v1"], { revalidate: 6 * 3600 });
+export const yearWall = unstable_cache(load, ["year-wall-v2"], { revalidate: 6 * 3600 });

@@ -165,8 +165,8 @@ export default async function Home() {
                 {wall.total} recalls in {monthWords[months] ?? months} months.
               </h2>
               <p className={s.sub}>
-                Every Consumer Product Safety Commission recall of {wall.year} so far, one tag each, hung by month and coloured by hazard. Point at a tag to read it; pick a hazard to
-                see how often it comes up.
+                Every Consumer Product Safety Commission recall of {wall.year} so far, one tag each, hung by month and coloured by hazard{wall.units >= 1e6 ? `: about ${(wall.units / 1e6).toFixed(0)} million units, by CPSC's own count` : ""}. Point at a tag to read it; pick a hazard to see how often it comes
+                up.
               </p>
             </div>
             <TagWall wall={wall} />

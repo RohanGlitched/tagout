@@ -106,7 +106,7 @@ export default function How() {
             <tbody>
               <tr>
                 <td>NHTSA</td>
-                <td>Vehicles, child car seats, tires</td>
+                <td>Vehicles and child car seats</td>
                 <td>VIN decoding (vPIC), recalls by make, model and year, and child seat recalls with their campaigns. &ldquo;Do not drive&rdquo; flags are shown first.</td>
               </tr>
               <tr>
