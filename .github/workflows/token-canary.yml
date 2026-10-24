@@ -2,7 +2,7 @@ name: Token Factory canary
 
 # Once a day, one 1-token call to Nemotron 3 Nano with the demo's key. A 401, 402 or 403 (a revoked key or an
 # empty balance) fails the run, and GitHub emails a failed scheduled run to whoever last edited this schedule.
-# Needs the repository secret NEBIUS_API_KEY. Costs a fraction of a millionth of a dollar a day.
+# Needs the repository secret NEBIUS_API_KEY, and fails when it is missing. Costs a fraction of a millionth of a dollar a day.
 on:
   schedule:
     - cron: "17 4 * * *"
@@ -21,8 +21,8 @@ jobs:
           NEBIUS_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
         run: |
           if [ -z "$NEBIUS_API_KEY" ]; then
-            echo "::warning::The NEBIUS_API_KEY repository secret is not set; skipping."
-            exit 0
+            echo "::error::The NEBIUS_API_KEY repository secret is not set, so this canary protects nothing. Add it under Settings, Secrets and variables, Actions."
+            exit 1
           fi
           code=$(curl -sS -o body.json -w '%{http_code}' --max-time 60 \
             https://api.tokenfactory.nebius.com/v1/chat/completions \

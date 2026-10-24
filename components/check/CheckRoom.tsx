@@ -288,6 +288,7 @@ function Engine({ rec }: { rec: Pub }) {
   const extras = [
     e.readsReused ? `${plural(e.readsReused, "notice")} already read by an earlier check, reused` : "",
     e.lateLite ? `${plural(e.lateLite, "item")} ran on the lite tier after the time limit` : "",
+    e.liteItems ? `${plural(e.liteItems, "item")} past the first five ran on the lite tier (the demo's per-check limit)` : "",
     e.modelUnavailable ? `${plural(e.modelUnavailable, "item")} held at orange because no model answered` : "",
   ].filter(Boolean);
   return (

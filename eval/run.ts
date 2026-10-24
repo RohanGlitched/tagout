@@ -48,6 +48,8 @@ if (!OFFLINE) {
 }
 const KEYLESS = args.includes("--keyless");
 if (KEYLESS) delete process.env.TAVILY_API_KEY;
+// The demo's daily dollar and Tavily allowances (lib/budget.ts) don't apply to the harness: it has its own caps.
+process.env.TAGOUT_SPEND_GUARD = "off";
 // The agent is told the date; pinning it keeps a replay on a later day a cache hit.
 process.env.TAGOUT_TODAY = flag("today") ?? process.env.TAGOUT_TODAY ?? "2026-10-15";
 

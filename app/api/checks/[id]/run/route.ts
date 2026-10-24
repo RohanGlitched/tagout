@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { runCheck, type Event, type RunOptions } from "@/lib/agent/run";
 import type { CheckRecord } from "@/lib/checks";
-import { takeLiteCall, takeModelCall } from "@/lib/budget";
+import { flushSpend, FULL_ITEMS_PER_CHECK, takeLiteCall, takeModelCall } from "@/lib/budget";
 import { hasKey, MODELS } from "@/lib/nebius";
 import { loadCheck, updateCheck } from "@/lib/store";
 import { recordRecheck } from "@/lib/sweep/recheck";
@@ -35,7 +35,8 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
   const ip = await clientIp();
   const mode = !hasKey() ? "rules" : claimed.prefer === "lite" ? await takeLiteCall(ip) : await takeModelCall(ip);
   const useModel = mode !== "rules";
-  const opts: RunOptions = mode === "lite" ? { agent: false, reader: MODELS.lite, mode } : { mode };
+  // A full-tier check runs its first five items (FULL_ITEMS_PER_CHECK) on the full tier and the rest lite.
+  const opts: RunOptions = mode === "lite" ? { agent: false, reader: MODELS.lite, mode } : mode === "full" ? { mode, fullItems: FULL_ITEMS_PER_CHECK } : { mode };
   const input = { text: claimed.input.text, photos: claimed.photos ?? [] };
   const enc = new TextEncoder();
 
@@ -77,6 +78,8 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
         }
         if (!acc.status) acc.status = "done";
         await save(true);
+        // What this check spent goes into today's counter before the function can stop.
+        await flushSpend().catch(() => {});
         // A watch's re-check: what changed goes into the watch's event log and feed.
         if (claimed.watchId && acc.status === "done") await recordRecheck(claimed.watchId, id).catch((e) => console.error("[run] watch events failed", e));
         if (done) send(done);
@@ -89,6 +92,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
         send({ t: "error", message: acc.error });
       }
       await save(true);
+      await flushSpend().catch(() => {});
       controller.close();
     },
   });

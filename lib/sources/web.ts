@@ -1,6 +1,7 @@
 import "server-only";
 import { AsyncLocalStorage } from "node:async_hooks";
 import type { Notice } from "../types";
+import { noteSpend, tavilyModeNow } from "../budget";
 import { clean } from "./http";
 import { isListing } from "./listing";
 
@@ -36,7 +37,9 @@ export function creditsFor(path: string, body: Record<string, unknown>, urlsRead
   return Math.ceil(urlsRead / 5) * (body.extract_depth === "advanced" ? 2 : 1);
 }
 
-function count(path: string, body: Record<string, unknown>, urlsRead: number): void {
+function count(path: string, body: Record<string, unknown>, urlsRead: number, keyless = false): void {
+  // The demo's daily allowance (lib/budget.ts): credits on the key, calls in keyless mode.
+  noteSpend(keyless ? { keyless: 1 } : { credits: creditsFor(path, body, urlsRead) });
   const tally = tavilyScope.getStore();
   if (!tally) return;
   if (path === "/search") tally.searches++;
@@ -47,11 +50,23 @@ function count(path: string, body: Record<string, unknown>, urlsRead: number): v
   tally.credits += creditsFor(path, body, urlsRead);
 }
 
-async function tavily(path: string, body: Record<string, unknown>, timeoutMs: number): Promise<Response> {
-  const r = await fetch(`${API}${path}`, { method: "POST", headers: headers(), body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
-  if (!process.env.TAVILY_API_KEY || ![429, 432, 433].includes(r.status)) return r;
+/** Thrown when today's Tavily allowance (credits on the key, then keyless calls) is spent: the check goes on with
+ *  the agency databases only, and its search step says why. */
+export class WebAllowanceSpent extends Error {
+  constructor() {
+    super("today's web-search allowance is spent; the agency databases were searched");
+  }
+}
+
+/** A Tavily call and whether it went out in keyless mode. */
+async function tavily(path: string, body: Record<string, unknown>, timeoutMs: number): Promise<{ r: Response; keyless: boolean }> {
+  const mode = await tavilyModeNow();
+  if (mode === "off") throw new WebAllowanceSpent();
+  const keyed = Boolean(process.env.TAVILY_API_KEY) && mode === "keyed";
+  const r = await fetch(`${API}${path}`, { method: "POST", headers: keyed ? headers() : KEYLESS, body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
+  if (!keyed || ![429, 432, 433].includes(r.status)) return { r, keyless: !keyed };
   console.error(`[tavily] HTTP ${r.status} with the key; retrying keyless`);
-  return fetch(`${API}${path}`, { method: "POST", headers: KEYLESS, body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
+  return { r: await fetch(`${API}${path}`, { method: "POST", headers: KEYLESS, body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) }), keyless: true };
 }
 
 const SITE: Record<string, string> = {
@@ -75,9 +90,9 @@ export async function webSearch(q: WebQuery): Promise<{ notices: Notice[]; answe
     include_answer: false,
   };
   if (q.days) body.time_range = q.days <= 7 ? "week" : q.days <= 31 ? "month" : "year";
-  const r = await tavily("/search", body, 15_000);
+  const { r, keyless } = await tavily("/search", body, 15_000);
   if (!r.ok) throw new Error(`Tavily search failed (HTTP ${r.status}).`);
-  count("/search", body, 0);
+  count("/search", body, 0, keyless);
   const j = (await r.json()) as { results: SearchResult[] };
   const notices = (j.results ?? [])
     .filter((x) => /recall|alert|warning|safety/i.test(`${x.url} ${x.title}`) && !isListing(x.url))
@@ -105,10 +120,10 @@ export async function webExtract(urls: string[]): Promise<Map<string, string>> {
   const out = new Map<string, string>();
   if (!urls.length) return out;
   const body = { urls: urls.slice(0, 5), extract_depth: "basic", format: "text" };
-  const r = await tavily("/extract", body, 20_000);
+  const { r, keyless } = await tavily("/extract", body, 20_000);
   if (!r.ok) return out;
   const j = (await r.json()) as { results: { url: string; raw_content: string }[] };
-  count("/extract", body, (j.results ?? []).length);
+  count("/extract", body, (j.results ?? []).length, keyless);
   for (const x of j.results ?? []) out.set(x.url, mainText(clean(x.raw_content)));
   return out;
 }

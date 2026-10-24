@@ -171,6 +171,19 @@ On Nebius: push the image to Nebius Container Registry (`docker tag tagout-sweep
 
 **When the model isn't there.** A tag is never green when no model answered for the thing (the rules tier, an empty balance, every call timing out): it is held at orange with "Model unavailable: not cleared". Model calls are retried only on 429, 5xx and timeouts (honouring Retry-After); 401, 402 and 403 end the chain at once. Each check has a 200-second deadline: after 150 s the remaining things run on the lite tier, and after 200 s no model call starts. A daily GitHub Actions canary ([`.github/workflows/token-canary.yml`](.github/workflows/token-canary.yml)) makes one 1-token Nemotron Nano call and fails on a 401, 402 or 403, so GitHub emails the owner.
 
+## Spend guards
+
+The live demo runs on one Token Factory balance and one Tavily plan, and it has to keep working through the judging period (Dec 1-15). [`lib/budget.ts`](lib/budget.ts) counts dollars, not just checks:
+
+- **Every Token Factory call is priced as it returns** (list price, [`lib/prices.json`](lib/prices.json)) and added to one counter per day in storage, under a version check so server instances can't overwrite each other. Checks and the daily sweep's notice readings go into the same counter.
+- **Past $1.00 in a day, checks run on the lite tier** (fixed plan, Nemotron 3 Nano reading the notices, about 0.2¢ an item); **past $1.50, rules only** (never green; the page says so). The sweep then uses only readings already in its cache. Set by `DAILY_FULL_USD` and `DAILY_LITE_USD`.
+- **Reserved for judging Dec 1-15: $6.** A running total keeps `JUDGING_RESERVE_USD` ($6) of `SPEND_BALANCE_USD` ($15, set it to the key's real balance): before `JUDGING_FROM` (2026-12-01) checks drop to rules only once the total reaches the balance less the reserve, and at the balance itself they always do.
+- **At most five things per check run on the full agent** (`FULL_ITEMS_PER_CHECK`); the rest of the list runs on the lite tier, and "How this check ran" says how many.
+- **Tavily: 60 credits a day on the key** (`DAILY_TAVILY_CREDITS`), **then 60 calls in Tavily's keyless mode** (`DAILY_TAVILY_KEYLESS`), **then the agency databases only** for the rest of the day; the search step says the web allowance is spent. A key that hits its plan limit (HTTP 429, 432 or 433) is retried once keyless.
+- **The count caps still apply on top:** 12 checks per 10 minutes and 15 a day per address on the full tier, 60 a day in all, then 30 and 120 on the lite tier.
+- **Worst case, a busy day costs $1.50 of Token Factory and 60 Tavily credits** (about 48¢), whatever the traffic.
+- **The canary fails loudly.** [`.github/workflows/token-canary.yml`](.github/workflows/token-canary.yml) makes one 1-token Nano call a day and fails on a 401, 402 or 403, and also when its `NEBIUS_API_KEY` secret is missing, so a green run always means the key answered.
+
 ## Who pays
 
 Households use it free.

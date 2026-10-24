@@ -1,6 +1,7 @@
 import "server-only";
 import { AsyncLocalStorage } from "node:async_hooks";
 import PRICE_TABLE from "./prices.json";
+import { noteSpend } from "./budget";
 
 /**
  * Nebius Token Factory (OpenAI-compatible) with NVIDIA Nemotron. Each role names a chain of models so one
@@ -158,6 +159,8 @@ async function once(model: string, body: Record<string, unknown>, timeoutMs: num
   if (!m) throw new ModelError("empty response");
   const finishReason = j.choices?.[0]?.finish_reason;
   const tally = usageScope.getStore();
+  // Every call counts toward the demo's daily dollar allowance (lib/budget.ts), whoever made it.
+  if (j.usage) noteSpend({ usd: priceOf(model, j.usage.prompt_tokens ?? 0, j.usage.completion_tokens ?? 0) });
   if (tally && j.usage) {
     tally.calls++;
     tally.prompt += j.usage.prompt_tokens ?? 0;

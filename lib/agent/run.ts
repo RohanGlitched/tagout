@@ -33,6 +33,8 @@ export type Engine = {
   readsReused?: number;
   modelUnavailable?: number;
   lateLite?: number;
+  /** Items past the full tier's per-check limit (lib/budget.ts FULL_ITEMS_PER_CHECK) that ran on the lite tier. */
+  liteItems?: number;
   pagesSkipped?: number;
 };
 
@@ -79,7 +81,7 @@ function channel<T>() {
 
 /** `agent: false` keeps the model readers but searches by the fixed plan (the eval's "no agent" arm, and the lite
  *  tier); `reader` names the notice reader's model chain for this check. */
-export type RunOptions = { agent?: boolean; reader?: string[]; mode?: Engine["mode"] };
+export type RunOptions = { agent?: boolean; reader?: string[]; mode?: Engine["mode"]; /** Items (in list order) that run on the full tier; the rest run lite. */ fullItems?: number };
 
 /** One check, with every Token Factory and Tavily call inside it counted onto the engine, under a 200 s overall
  *  deadline. */
@@ -116,17 +118,20 @@ async function* run(input: { text: string; photos: string[] }, useModel: boolean
   const ch = channel<Event>();
   const checkedAt = new Date().toISOString();
 
-  const add = (k: "readsReused" | "modelUnavailable" | "lateLite" | "pagesSkipped", n = 1) => {
+  const add = (k: "readsReused" | "modelUnavailable" | "lateLite" | "liteItems" | "pagesSkipped", n = 1) => {
     if (n) engine[k] = (engine[k] ?? 0) + n;
   };
 
-  const one = async (item: Item) => {
+  const one = async (item: Item, index: number) => {
     try {
       // Past the soft deadline an item that hasn't started runs on the lite tier: the fixed plan, Nano reading.
       const late = Date.now() > softAt;
       if (late && useModel && opts.agent !== false) add("lateLite");
-      const agentOn = useModel && opts.agent !== false && !late;
-      const chain = late && useModel ? MODELS.lite : opts.reader;
+      // A full-tier check runs its first `fullItems` items on the full tier and the rest on the lite tier.
+      const capped = !late && useModel && opts.agent !== false && opts.fullItems !== undefined && index >= opts.fullItems;
+      if (capped) add("liteItems");
+      const agentOn = useModel && opts.agent !== false && !late && !capped;
+      const chain = (late || capped) && useModel ? MODELS.lite : opts.reader;
       const inv = await investigate(item, agentOn, (step) => ch.push({ t: "step", step }), { until: softAt });
       if (inv.fallback === "deadline") add("lateLite");
       add("pagesSkipped", (inv.skipped?.repeat ?? 0) + (inv.skipped?.offItem ?? 0));
@@ -171,9 +176,12 @@ async function* run(input: { text: string; photos: string[] }, useModel: boolean
   };
 
   // Up to four items at a time keeps Token Factory and the agency APIs inside their rate limits.
-  const queue = [...intake.items];
+  const queue = intake.items.map((item, index) => ({ item, index }));
   const workers = Array.from({ length: Math.min(4, queue.length) }, async () => {
-    while (queue.length) await one(queue.shift()!);
+    while (queue.length) {
+      const next = queue.shift()!;
+      await one(next.item, next.index);
+    }
   });
   Promise.all(workers).finally(() => ch.close());
   yield* ch.drain();
