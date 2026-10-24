@@ -161,7 +161,7 @@ export default async function Home() {
           {held ? (
             <p className={s.held}>
               <b>On {holdout.cases} new cases it had never seen</b>, committed before a single run: {held.right} of {held.n} right, none wrongly tagged do not use, and{" "}
-              {held.falseClear.length} recalled units cleared, each traced to a cause. <Link href="/proof#held-h">The held-out results</Link>
+              {held.falseClear.length} recalled units cleared. Each was traced and fixed; re-run after the fixes, none is cleared. <Link href="/proof#held-h">The held-out results</Link>
             </p>
           ) : null}
         </section>

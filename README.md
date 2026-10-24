@@ -69,7 +69,7 @@ The 105 cases shaped the fixes above, so on Oct 25 we wrote 39 new cases from re
 | Lite tier, Tavily off | 26/39 | 0/10 | 12/31 | 3/12 | 0.26¢ |
 
 - **Tavily, measured.** With Tavily off, Tagout cleared all 10 recalled units that no database listed yet; with it, it flagged 8. On the 27 database cases Tavily changed nothing.
-- **The misses.** Four recalled units were cleared: a two-part lot code (`091026 DL`), a whole-line air-rifle recall dropped before the tag, and two USDA FSIS lines. Each was traced and fixed afterwards; the after-fix numbers are reported separately in `eval/HOLDOUT.md`, so the table above stays a held-out result.
+- **The misses.** Four recalled units were cleared: a two-part lot code (`091026 DL`), a whole-line air-rifle recall dropped before the tag, and two USDA FSIS lines. Each was traced and fixed afterwards (commits `9677671`..`a9a0f8f`, tests in `test/holdout-fixes.test.ts`). Re-run after the fixes, Tagout gets **37/39 with none cleared and none wrongly red**, and 105/105 on the tuned set; that re-run is no longer held out, so the table above stays the headline (`eval/holdout-after-fixes.json`).
 
 Reproduce it (every HTTP response is cached, so a re-run reads the same data and costs nothing):
 

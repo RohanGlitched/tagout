@@ -6,6 +6,7 @@ import { REPO_URL } from "@/lib/site";
 import type { TagLevel } from "@/lib/types";
 import summary from "@/eval/summary.json";
 import holdout from "@/eval/holdout-summary.json";
+import heldAfter from "@/eval/holdout-after-fixes.json";
 import caseFile from "@/eval/cases.json";
 import notes from "@/eval/notes.json";
 import s from "./proof.module.css";
@@ -262,8 +263,12 @@ export default function Proof() {
               {heldTav?.lagFlagged ?? 8} ({heldTav?.lagRed ?? 3} red, the rest orange with the FDA notice).
             </li>
             <li>
-              <b>No wrong red tag</b> on new cases either: 0 of {held?.falseRedOf}. Four recalled units were cleared, which is the error that matters most; each cause is in the eval notes and is
-              being fixed, and those fixes are measured separately so these numbers stay held out.
+              <b>No wrong red tag</b> on new cases either: 0 of {held?.falseRedOf}. Four recalled units were cleared, the error that matters most. Each was traced and fixed in code
+              (a lot printed in two parts, a brand glued to &ldquo;USA&rdquo;, a USDA page whose text began after 28,000 characters of menus); re-run afterwards, Tagout got{" "}
+              <b>
+                {heldAfter.after.tagout.right}/{heldAfter.after.tagout.n}
+              </b>{" "}
+              with none cleared and none wrongly red. That re-run is no longer held out, so the table above stays the headline.
             </li>
           </ul>
         </section>
