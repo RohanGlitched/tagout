@@ -33,7 +33,16 @@ async function writeRaw(rec: WatchRecord, etag?: string): Promise<void> {
   await s.write(key(rec.id), JSON.stringify(rec), { ifMatch: etag });
 }
 
+/** A watch as the page and the API may see it: without its webhook URL. */
 export async function loadWatch(id: string): Promise<WatchRecord | null> {
+  const rec = (await readRaw(id))?.rec;
+  if (!rec) return null;
+  const { webhook: _hook, ...rest } = rec;
+  return rest;
+}
+
+/** The whole record, webhook included: for the sweep only. */
+export async function loadWatchPrivate(id: string): Promise<WatchRecord | null> {
   return (await readRaw(id))?.rec ?? null;
 }
 

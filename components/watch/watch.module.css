@@ -235,3 +235,47 @@
     white-space: normal;
   }
 }
+/* A replayed example: a plain banner above the head, so nobody mistakes it for a live watch. */
+.replay {
+  box-sizing: border-box;
+  width: min(var(--max), calc(100% - 32px));
+  margin: 16px auto 0;
+  padding: 14px 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #fdf0d5;
+  border: 1px solid #e8c27a;
+  border-radius: 8px;
+  color: #3d2a00;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.replayBadge {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #7a3e00;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.replayHead {
+  font-weight: 700;
+}
+.replayList {
+  margin: 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15px;
+}
+@media (max-width: 520px) {
+  .replay {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

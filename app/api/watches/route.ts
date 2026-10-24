@@ -4,6 +4,7 @@ import { loadCheck } from "@/lib/store";
 import { clientIp } from "@/lib/visitor";
 import type { WatchRecord } from "@/lib/watch";
 import { saveWatch } from "@/lib/watches";
+import { webhookUrl } from "@/lib/webhook";
 
 export const runtime = "nodejs";
 
@@ -21,17 +22,23 @@ function allowed(ip: string): boolean {
   return true;
 }
 
-/** Starts watching a finished check's list: the watch begins with that check as its first one. */
+/**
+ * Starts watching a finished check's list: the watch begins with that check as its first one. An optional
+ * `webhook` (an https URL) gets each new event the daily sweep finds for the watch, POSTed as JSON; it can only be
+ * set here, by whoever creates the watch, and it is never shown on the page or by the API.
+ */
 export async function POST(req: Request) {
-  const body = (await req.json().catch(() => null)) as { checkId?: unknown } | null;
+  const body = (await req.json().catch(() => null)) as { checkId?: unknown; webhook?: unknown } | null;
   const checkId = typeof body?.checkId === "string" && CHECK_ID.test(body.checkId) ? body.checkId : null;
   if (!checkId) return NextResponse.json({ error: "That isn't a check link." }, { status: 400 });
+  const webhook = body?.webhook === undefined || body.webhook === null || body.webhook === "" ? undefined : webhookUrl(body.webhook);
+  if (webhook === null) return NextResponse.json({ error: "A webhook must be a public https URL." }, { status: 400 });
   const check = await loadCheck(checkId);
   if (!check) return NextResponse.json({ error: "No check with that link." }, { status: 404 });
   if (check.status !== "done") return NextResponse.json({ error: "Wait for the check to finish, then watch it." }, { status: 409 });
   if (!check.input.text.trim()) return NextResponse.json({ error: "Photos aren't kept after a check, so a photo-only check can't be watched. Type the things instead." }, { status: 422 });
   if (!allowed(await clientIp())) return NextResponse.json({ error: "That's a lot of watches in a few minutes. Try again in ten minutes." }, { status: 429 });
-  const rec: WatchRecord = { id: newCheckId(), createdAt: new Date().toISOString(), text: check.input.text, checks: [{ id: check.id, at: check.finishedAt ?? check.createdAt }] };
+  const rec: WatchRecord = { id: newCheckId(), createdAt: new Date().toISOString(), text: check.input.text, checks: [{ id: check.id, at: check.finishedAt ?? check.createdAt }], ...(webhook ? { webhook } : {}) };
   await saveWatch(rec);
-  return NextResponse.json({ id: rec.id });
+  return NextResponse.json({ id: rec.id, ...(webhook ? { webhook: "set" } : {}) });
 }

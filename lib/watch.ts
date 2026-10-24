@@ -15,6 +15,13 @@ export type WatchRecord = {
   /** The typed list, one thing per line (photos aren't kept, so photo items can't be watched). */
   text: string;
   checks: { id: string; at: string }[];
+  /** A replayed example (scripts/backtest-watch.mts): the list as it stood on `asOf`, with the alerts the daily
+   *  sweep's own matcher produced over the recalls published after it. The page says so in a banner; the sweep
+   *  and "check again now" leave it alone. */
+  replay?: { asOf: string; note: string };
+  /** Optional https URL the sweep POSTs each new event to (lib/webhook.ts). Server-side only: loadWatch leaves it
+   *  out, so the page and the API never show it. */
+  webhook?: string;
 };
 
 /** A watch was re-checked on a visit once its newest check was this old (kept for the old page; see `due`). */

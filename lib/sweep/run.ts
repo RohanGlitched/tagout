@@ -11,7 +11,10 @@ import { childSeatRecalls, nhtsaCampaignExists, vehicleRecalls } from "../source
 import { isListing } from "../sources/listing";
 import { tavilyScope, webSearch, type TavilyTally } from "../sources/web";
 import { loadCheck } from "../store";
-import { listWatchIds, loadWatch } from "../watches";
+import { ceilingNow, flushSpend, type Mode } from "../budget";
+import { SITE_URL } from "../site";
+import { listWatchIds, loadWatchPrivate } from "../watches";
+import { deliverEvents } from "../webhook";
 import { changeEvent, droppedEvent, newRecallEvent, sameRecord, type EventKind, type EventLog, type WatchEvent } from "./events";
 import { buildIndex, candidates, itemKey, noticeKey, noticeKeys, type Watched } from "./index";
 import { appendEvents, claimRun, finishRun, loadEventLog, loadState, releaseRun, saveReport } from "./store";
@@ -71,7 +74,9 @@ export type SweepReport = {
   reads: { needed: number; cached: number; fresh: number; failed: number; deferred: number };
   watches: { total: number; indexed: number; things: number; brands: number; codes: number; vehicles: number; seatBrands: number; skipped: number };
   tracked: { recalls: number; same: number; changed: number; missing: number; unknown: number };
-  events: { added: number; watches: number; byKind: Partial<Record<EventKind, number>> };
+  events: { added: number; watches: number; byKind: Partial<Record<EventKind, number>>; webhooks?: { sent: number; failed: number } };
+  /** The tier today's dollar allowance allowed (lib/budget.ts): "rules" means no fresh notice reads this run. */
+  spendCeiling?: Mode;
   cost: { tokenFactory: Usage & { cents: number }; tavily: TavilyTally; agencyCalls: number };
 };
 
@@ -103,14 +108,17 @@ const asNotice = (e: WatchEvent): Notice | null =>
     ? { source: e.notice.source, id: e.notice.id, title: e.notice.title, date: e.notice.date, url: e.notice.url, firm: e.notice.firm, hazard: e.notice.hazard, remedy: e.notice.remedy, contact: e.notice.contact, urgent: e.notice.urgent, image: e.notice.image, status: e.notice.status, models: e.notice.models, lots: e.notice.lots, upcs: e.notice.upcs }
     : null;
 
-async function loadWatched(ids: string[]): Promise<{ entries: Watched[]; tracked: Tracked[]; logs: Map<string, EventLog>; skipped: number }> {
+async function loadWatched(ids: string[]): Promise<{ entries: Watched[]; tracked: Tracked[]; logs: Map<string, EventLog>; hooks: Map<string, string>; skipped: number }> {
   const entries: Watched[] = [];
   const tracked: Tracked[] = [];
   const logs = new Map<string, EventLog>();
+  const hooks = new Map<string, string>();
   let skipped = 0;
   await pool(ids, 8, async (id) => {
-    const w = await loadWatch(id).catch(() => null);
-    if (!w) return void skipped++;
+    const w = await loadWatchPrivate(id).catch(() => null);
+    // A replayed example keeps the alerts it was built with; the sweep doesn't add to it.
+    if (!w || w.replay) return void skipped++;
+    if (w.webhook) hooks.set(id, w.webhook);
     let check: CheckRecord | null = null;
     for (const c of [...w.checks].reverse().slice(0, 3)) {
       const r = await loadCheck(c.id).catch(() => null);
@@ -152,7 +160,7 @@ async function loadWatched(ids: string[]): Promise<{ entries: Watched[]; tracked
       }
     }
   });
-  return { entries, tracked, logs, skipped };
+  return { entries, tracked, logs, hooks, skipped };
 }
 
 type Search = typeof webSearch;
@@ -243,7 +251,7 @@ async function sweep(opts: SweepOptions, usage: Usage, tavilyTally: TavilyTally,
   try {
     // 1. Watches and the index.
     const ids = opts.watchIds ?? (await listWatchIds());
-    const { entries, tracked, logs, skipped } = await loadWatched(ids);
+    const { entries, tracked, logs, hooks, skipped } = await loadWatched(ids);
     const idx = buildIndex(entries);
     report.watches = { total: ids.length, indexed: logs.size, things: entries.length, brands: idx.brands.size, codes: idx.codes.size, vehicles: idx.vehicles.size, seatBrands: idx.seats.size, skipped };
 
@@ -375,7 +383,9 @@ async function sweep(opts: SweepOptions, usage: Usage, tavilyTally: TavilyTally,
       await fillWebText(toRead);
       // Cache only, eight at a time; then fresh reads, three at a time, up to the cap and the deadline.
       const cachedFirst = await pool(toRead, 8, async (n) => ({ n, r: await readNotice(n, true, MODELS.reader, { allowFresh: false }) }));
-      let budget = maxReads;
+      // Past today's dollar allowance (lib/budget.ts), only readings already in the cache are used.
+      report.spendCeiling = await ceilingNow();
+      let budget = report.spendCeiling === "rules" ? 0 : maxReads;
       const misses: Notice[] = [];
       for (const { n, r } of cachedFirst) {
         if (r.deferred) misses.push(n);
@@ -425,7 +435,9 @@ async function sweep(opts: SweepOptions, usage: Usage, tavilyTally: TavilyTally,
       emit(t.entry.watchId, droppedEvent(t.entry, t.stored, rest, at));
     }
 
-    // 6. Write.
+    // 6. Write. A watch with a webhook gets each new event POSTed to it; deliveries run alongside the writes,
+    // each with a 5-second timeout, and only their count is waited for at the end.
+    const deliveries: Promise<{ sent: number; failed: number }>[] = [];
     for (const [watchId, evs] of out) {
       const added = dryRun ? evs : await appendEvents(watchId, evs).catch((e) => {
         console.error("[sweep] events write failed", watchId, (e as Error).message);
@@ -434,7 +446,14 @@ async function sweep(opts: SweepOptions, usage: Usage, tavilyTally: TavilyTally,
       if (added.length) report.events.watches++;
       report.events.added += added.length;
       for (const e of added) report.events.byKind[e.kind] = (report.events.byKind[e.kind] ?? 0) + 1;
+      const hook = hooks.get(watchId);
+      if (hook && added.length && !dryRun) deliveries.push(deliverEvents(hook, watchId, added, { siteUrl: SITE_URL }));
     }
+    if (deliveries.length) {
+      const done = await Promise.all(deliveries);
+      report.events.webhooks = { sent: done.reduce((a, d) => a + d.sent, 0), failed: done.reduce((a, d) => a + d.failed, 0) };
+    }
+    await flushSpend().catch(() => {});
     finish();
     if (!dryRun) {
       await finishRun(runId, { lastRunAt: startedAt, seen, missing });

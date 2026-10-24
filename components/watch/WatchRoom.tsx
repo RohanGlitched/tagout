@@ -81,15 +81,34 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
   const running = latest && latest.status !== "done" && latest.status !== "failed";
   const lines = watch.text.split("\n").filter((l) => l.trim()).length;
   const sweep = feed.lastSweep;
+  // A replayed example (scripts/backtest-watch.mts): its alerts were produced after the fact, and the page says so.
+  const replay = watch.replay;
 
   return (
     <main className={s.main}>
+      {replay ? (
+        <aside className={s.replay} role="note" aria-label="Replayed example">
+          <b className={s.replayBadge}>Replayed</b>
+          <div>
+            <p className={s.replayHead}>What this watch would have received.</p>
+            <p>
+              This list is dated {fmtDate(replay.asOf)}. Nobody was watching it then: the alerts below were made afterwards, by the daily sweep&apos;s own matcher run over the recalls published since. {replay.note}
+            </p>
+          </div>
+        </aside>
+      ) : null}
       <header className={s.top}>
         <div className={s.title}>
           <h1 className={s.h1}>Watching {plural(lines, "thing")}.</h1>
           <p className={s.meta}>
-            Saved {fmtDate(watch.createdAt)}. Every new recall from CPSC, the FDA, NHTSA and USDA is compared with this list {feed.schedule.label}
-            {sweep ? `; the last run, ${time(sweep.at)}, checked ${sweep.recallsChecked.toLocaleString("en-US")} recalls` : ""}.
+            {replay ? (
+              <>Dated {fmtDate(replay.asOf)}. A replay: the sweep doesn&apos;t add to it, and it isn&apos;t checked again.</>
+            ) : (
+              <>
+                Saved {fmtDate(watch.createdAt)}. Every new recall from CPSC, the FDA, NHTSA and USDA is compared with this list {feed.schedule.label}
+                {sweep ? `; the last run, ${time(sweep.at)}, checked ${sweep.recallsChecked.toLocaleString("en-US")} recalls` : ""}.
+              </>
+            )}
           </p>
         </div>
         <div className={s.actions}>
@@ -102,7 +121,7 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
           <button type="button" className={s.ghost} onClick={copy} aria-live="polite">
             {copied ? "Link copied" : "Copy link"}
           </button>
-          {feed.recheck.tier === "lite" ? null : (
+          {feed.recheck.tier === "lite" || replay ? null : (
             <button type="button" className={s.ghost} onClick={checkAgain} disabled={again.state === "starting" || Boolean(running)}>
               {again.state === "starting" || running ? "Checking…" : "Check again now"}
             </button>
@@ -126,6 +145,7 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
                     <b>{EVENT[e.kind]}</b> for {e.item.said}
                   </p>
                   <p>{e.headline}</p>
+                  {replay && e.origin === "sweep" ? <p className={s.dim}>The sweep of {time(e.at)} would have posted this.</p> : null}
                   {e.notice ? (
                     <a href={e.notice.url} target="_blank" rel="noreferrer" className={s.notice}>
                       {e.notice.ref}: {e.notice.title}
@@ -208,6 +228,23 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
       ) : null}
 
       {latest ? <CheckRoom key={latest.id} initial={latest} onDone={finished} embedded /> : null}
+      {!latest && replay ? (
+        <section className={s.block} aria-labelledby="list-h">
+          <h2 id="list-h" className={s.h2}>
+            The list, as of {fmtDate(replay.asOf)}
+          </h2>
+          <ol className={s.replayList}>
+            {watch.text
+              .split("\n")
+              .filter((l) => l.trim())
+              .map((l, i) => (
+                <li key={i} className="code">
+                  {l}
+                </li>
+              ))}
+          </ol>
+        </section>
+      ) : null}
     </main>
   );
 }

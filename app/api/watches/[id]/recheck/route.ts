@@ -18,6 +18,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
   const { id } = await params;
   const w = await loadWatch(id);
   if (!w) return NextResponse.json({ error: "No watch with that link." }, { status: 404 });
+  if (w.replay) return NextResponse.json({ error: "This is a replayed example: it keeps the alerts it was built with and isn't checked again." }, { status: 409 });
   const showcase = isShowcaseWatch(id);
   const tier = showcase ? "lite" : "full";
   const fresh = newCheckId();
