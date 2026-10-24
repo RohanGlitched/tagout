@@ -63,7 +63,10 @@ export function splitIds(text: string, dashRanges = true): string[] {
       out.push(`${dash[1]}..${dash[2]}`);
       continue;
     }
-    for (const tok of p.split(/\s+/)) {
+    // In a lot list, a short capital-letter part printed after a numbered part belongs to it: "091026 DL" is one
+    // lot (a date and a line code), and the neighbouring "091026 TL" is another. Model lists keep each word apart.
+    const toks = dashRanges ? joinCodeParts(p.split(/\s+/)) : p.split(/\s+/);
+    for (const tok of toks) {
       const n = norm(tok);
       // An identifier is at least three characters and has a digit, or is printed in capitals ("SRTH");
       // ordinary words like "blue" aren't ids.
@@ -71,6 +74,24 @@ export function splitIds(text: string, dashRanges = true): string[] {
     }
   }
   return [...new Set(out)];
+}
+
+/** Words that follow a code in a lot clause without being part of it: units, labels and joining words. */
+const NOT_A_PART = /^(AND|OR|TO|THE|FOR|OF|BY|IN|ON|AT|USA|US|EXP|LOT|LOTS|UPC|NDC|SKU|BB|BBD|MFG|BEST|USE|OZ|FL|LB|LBS|KG|G|MG|ML|L|CT|PK|PC|PCS|EA)$/;
+
+/**
+ * Joins a 1-3 letter part in capitals to the numbered part printed just before it: ["091026", "DL", "-", "JUN"]
+ * → ["091026 DL", "-", "JUN"]. One part at most; units and labels ("OZ", "EXP", "UPC") and lower-case words are
+ * never joined, and any other word in between (a dash, an empty token) breaks the run.
+ */
+export function joinCodeParts(tokens: string[]): string[] {
+  const out: string[] = [];
+  for (const t of tokens) {
+    const prev = out.at(-1);
+    if (prev && /\d/.test(prev) && /^[A-Z]{1,3}$/.test(t) && !NOT_A_PART.test(t) && !prev.includes(" ")) out[out.length - 1] = `${prev} ${t}`;
+    else out.push(t);
+  }
+  return out;
 }
 
 /** Split an identifier into a letter prefix, its digits and any suffix: "2LC1234" → ["2LC", "1234", ""]. */
@@ -120,10 +141,25 @@ export function brandIn(brand: string | undefined, notice: Notice): boolean {
   if (b.length < 3 || /^(my|our|the|old|new|hello|this|that|kids?|baby|home|children s?)$/.test(b)) return false;
   const hay = ` ${normBrand([notice.firm, notice.title, notice.make, ...notice.models].filter(Boolean).join(" "))} `;
   if (hay.includes(` ${b} `) || hay.includes(` ${b.replace(/ /g, "")} `)) return true;
+  // A company name written as one word with its suffix: "HatsanUSA", "AcmeInc" name Hatsan and Acme.
+  if (b.length >= 4 && new RegExp(` ${b.replace(/ /g, "")}(${SUFFIXES}) `).test(hay)) return true;
   // A product brand and its company often share only the first word ("Hillshire Farm" / "Hillshire Brands").
   // Accept that when the word is long enough to be a name rather than an ordinary word.
   const first = b.split(" ")[0];
   return b.includes(" ") && first.length >= 6 && !COMMON.has(first) && hay.includes(` ${first} `);
+}
+
+const SUFFIXES = "usa|us|inc|llc|ltd|co|corp|america|intl|international|group|brands|products|mfg";
+
+/**
+ * The brand named as a word in the notice's own text, for a recall that prints no codes: "This recall involves
+ * all units of the Hatsan Blitz" names Hatsan even when the title says "HatsanUSA" and the firm field is empty.
+ */
+export function brandInText(brand: string | undefined, notice: Notice): boolean {
+  if (!brand) return false;
+  const b = normBrand(brand);
+  if (b.length < 3 || /^(my|our|the|old|new|hello|this|that|kids?|baby|home|children s?)$/.test(b) || COMMON.has(b)) return false;
+  return ` ${normBrand(notice.text ?? "")} `.includes(` ${b} `);
 }
 
 const COMMON = new Set(["little", "simple", "nature", "natural", "healthy", "family", "global", "classic", "original", "premium", "summer", "golden", "garden", "kitchen", "comfort", "sunset", "spring", "silver", "united", "modern", "better", "bright"]);
@@ -201,11 +237,29 @@ export function matchItem(item: Item, notice: Notice): Match {
       proof.push({ field: "lot", yours: item.lot, theirs: `${item.lot} (in the notice's text)`, matched: true });
       return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.` };
     }
+    // Yours is a listed lot without its last letters ("091026" against "091026 DL"), or with letters it doesn't
+    // print: the line or plant code decides, and only the label shows it.
+    if (l?.how === "variant") {
+      return { level: "warning", proof, why: `The recall lists lot ${l.theirs}, which is close to your ${item.lot}. Compare the full lot code on the label.` };
+    }
     proof.push({ field: "lot", yours: item.lot, theirs: lots.slice(0, 4).join(", ").replace(/\.\./g, " through "), matched: false });
     return { level: null, proof, why: `Lot ${item.lot} isn't among the lots this recall lists.` };
   }
-  if (lots.length && !item.lot && (strongModel || u || brandIn(item.brand, notice))) {
-    return { level: "warning", proof, why: "This recall is limited to certain lots. Check the lot number printed on yours." };
+  if (lots.length && !item.lot) {
+    // The deciding code was given, but not as a lot: a pack or date code ("pack date 26-196"), a serial, or a bare
+    // code on the line. One that the lot list itself lists is the lot. A code the list doesn't print decides
+    // nothing (it may be a model or style number), so the tag stays orange.
+    const listed = lotLike(item)
+      .map((c) => ({ c, b: best(c, lots, false) }))
+      .find((x) => x.b && x.b.how !== "variant");
+    const tied = strongModel || u || brandIn(item.brand, notice);
+    if (listed && tied) {
+      proof.push({ field: "lot", yours: listed.c, theirs: listed.b!.theirs, matched: true });
+      return { level: "danger", proof, why: `Lot ${listed.c} is listed in this recall.` };
+    }
+    if (tied) {
+      return { level: "warning", proof, why: "This recall is limited to certain lots. Check the lot number printed on yours." };
+    }
   }
 
   if (!strongModel && !u && m?.how !== "variant") {
@@ -250,7 +304,9 @@ export function matchItem(item: Item, notice: Notice): Match {
     proof.push({ field: "model", yours: item.model, theirs: models.slice(0, 4).join(", ").replace(/\.\./g, " through "), matched: false });
     return { level: null, proof, why: `Model ${item.model} isn't among the models this recall lists.` };
   }
-  if (brandIn(item.brand, notice)) {
+  // A recall that prints no codes at all covers the whole line it names: never clear the brand's item against it.
+  const wholeLine = !models.length && !lots.length && !upcs.length && brandInText(item.brand, notice);
+  if (brandIn(item.brand, notice) || wholeLine) {
     proof.push({ field: "make", yours: item.brand!, theirs: notice.firm ?? notice.title, matched: true });
     return {
       level: "warning",
@@ -280,11 +336,62 @@ export function printedIn(code: string | undefined, text: string | undefined): b
   if (!code || !text) return false;
   const c = norm(code);
   if (c.length < 4 || !/\d/.test(c)) return false;
+  const cuts = codeCuts(code);
   for (const sentence of text.split(/(?<=[.;!?])\s+|\n+/)) {
     if (EXCLUDED.test(sentence)) continue;
-    if (sentence.split(/[^A-Za-z0-9./+-]+/).some((t) => norm(t) === c)) return true;
+    // Words as printed; a lone dash or other punctuation is an empty word, which breaks a run.
+    const raw = sentence.split(/[^A-Za-z0-9./+-]+/);
+    const words = raw.map(norm);
+    // The printed code goes on past the match ("Lot 091026 DL" when yours is "091026"): that is another lot.
+    const goesOn = (next: number) => /\d$/.test(c) && next < raw.length && /^[A-Z]{1,3}$/.test(raw[next]) && !NOT_A_PART.test(raw[next]);
+    for (let i = 0; i < words.length; i++) {
+      if (!words[i]) continue;
+      if (words[i] === c) {
+        if (!goesOn(i + 1)) return true;
+        continue;
+      }
+      // A code printed in parts ("Lot 091026 DL"): consecutive words that spell it, joined only where the code
+      // itself breaks (a space or dash in it, or a switch between digits and letters). So "091026 DL" is found in
+      // "091026 DL" and "091026DL", but "0607" is not found in "JUN 06 07", and "091226 DL" never in "091026 DL".
+      let acc = words[i];
+      for (let j = i + 1; j < Math.min(words.length, i + 4) && words[j] && c.startsWith(acc) && cuts.has(acc.length); j++) {
+        acc += words[j];
+        if (acc === c && !goesOn(j + 1)) return true;
+      }
+    }
   }
   return false;
+}
+
+/**
+ * Where a code can be split into printed parts, as positions in its normalised form: at its own spaces, dashes,
+ * dots and slashes, and where digits meet letters ("091026DL" → {6}; "D080-148" → {1, 4}).
+ */
+export function codeCuts(code: string): Set<number> {
+  const cuts = new Set<number>();
+  let n = 0;
+  let prev = "";
+  for (const ch of code.toUpperCase().normalize("NFKD")) {
+    if (!/[A-Z0-9*]/.test(ch)) {
+      if (n) cuts.add(n);
+      prev = "";
+      continue;
+    }
+    if (prev && /\d/.test(prev) !== /\d/.test(ch)) cuts.add(n);
+    prev = ch;
+    n++;
+  }
+  return cuts;
+}
+
+/**
+ * Codes on an item with no lot that could still be its lot: a pack or date code that isn't a calendar date
+ * ("26-196", not "03/2026" or "JUN 07 2027"), a serial, and other printed codes.
+ */
+export function lotLike(item: Item): string[] {
+  const dateish = (s: string) => Boolean(parseMade(s)) || /^\d{1,2}[\/.]\d{1,2}([\/.]\d{2,4})?$/.test(s.trim()) || /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b/i.test(s);
+  const made = item.made && !dateish(item.made) ? item.made : undefined;
+  return [...new Set([made, item.serial, ...(item.codes ?? [])].filter((c): c is string => Boolean(c && norm(c).length >= 3 && /\d/.test(c))))];
 }
 
 /** The lot, serial or date code printed on the item (a date code that isn't a calendar date, like "7W16TN"). */

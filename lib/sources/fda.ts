@@ -1,6 +1,7 @@
 import "server-only";
 import type { Notice } from "../types";
 import { clean, getJson } from "./http";
+import { joinCodeParts } from "../match";
 
 /**
  * FDA enforcement reports (drugs, food, medical devices) through openFDA. No key: 240 requests a minute and
@@ -46,8 +47,9 @@ export function codesIn(text: string): { ndcs: string[]; upcs: string[] } {
 export function lotsIn(codeInfo: string): string[] {
   const out: string[] = [];
   for (const m of codeInfo.matchAll(/\b(?:lot|lots|batch)(?:\s*(?:numbers?|nos?\.?|codes?|#))?\s*[:#]?\s*([^;.\n]*?)(?=(?:\b(?:exp|expiry|expiration|best|use by|sell by|upc|ndc)\b)|[;\n]|$)/gi)) {
-    for (const tok of m[1].split(/[,\s]+|\band\b/)) {
-      const t = tok.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, "");
+    // "Lot 091026 DL - JUN 07 27": the line code "DL" after the number is part of the lot ("091026 DL").
+    const toks = joinCodeParts(m[1].split(/[,\s]+|\band\b/).map((tok) => tok.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, "")));
+    for (const t of toks) {
       if (t.length >= 2 && /\d/.test(t) && !/^\d{1,2}\/\d{1,2}(\/\d{2,4})?$/.test(t) && !/^(19|20)\d{2}$/.test(t)) out.push(t);
     }
   }
