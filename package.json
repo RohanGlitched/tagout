@@ -8,7 +8,11 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --conditions=react-server --test test/*.test.ts"
+    "test": "tsx --conditions=react-server --test test/*.test.ts",
+    "eval:replay": "node eval/replay-all.mjs",
+    "eval:score": "node eval/score.mjs",
+    "eval:holdout:score": "node eval/score.mjs --cases cases-holdout.json --verified verified-holdout.json --results results-holdout --out holdout-summary.json --first none && node eval/holdout-report.mjs",
+    "eval:verify": "node eval/verify.mjs && node eval/verify-holdout.mjs"
   },
   "engines": {
     "node": "22.x"

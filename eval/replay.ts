@@ -1,11 +1,11 @@
 // Replays one case from the eval cache only (no live calls, no spend) and prints the items, the notices read and
-// the verdict with its proof. Usage: npx tsx --conditions=react-server eval/replay.ts <arm> <case id>
+// the verdict with its proof. Usage: npx tsx --conditions=react-server eval/replay.ts <arm> <case id> [results dir] [cases file]
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..");
-const CACHE = path.join(ROOT, "eval", ".cache", "http");
+const CACHE = path.join(process.env.EVAL_CACHE ? path.resolve(process.env.EVAL_CACHE) : path.join(ROOT, "eval", ".cache"), "http");
 process.env.NEBIUS_API_KEY ||= "replay";
 delete process.env.TAVILY_API_KEY;
 process.env.TAGOUT_TODAY ||= "2026-10-15";
@@ -13,7 +13,11 @@ process.env.TAGOUT_TODAY ||= "2026-10-15";
 globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
   const url = typeof input === "string" ? input : input instanceof URL ? input.href : input.url;
   const body = typeof init?.body === "string" ? init.body : "";
-  const keyUrl = url.replace(/([?&])_=\d+&?/, "$1").replace(/[?&]$/, "");
+  // Same key as run.ts: the CPSC cache-buster and the openFDA firm check's wall-clock date are left out.
+  const keyUrl = url
+    .replace(/([?&])_=\d+&?/, "$1")
+    .replace(/[?&]$/, "")
+    .replace(/(recalling_firm(?:%3A|:).*?report_date(?:%3A|:)(?:%5B|\[))\d{8}(\+TO\+20991231)/i, "$1SINCE$2");
   const key = crypto.createHash("sha256").update(`${init?.method ?? "GET"} ${keyUrl} ${body}`).digest("hex");
   const file = path.join(CACHE, key.slice(0, 2), `${key}.json`);
   if (!fs.existsSync(file)) throw new Error(`not cached: ${url.slice(0, 120)}`);
@@ -24,8 +28,11 @@ globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
 const { runCheck } = await import("../lib/agent/run.ts");
 const { MODELS } = await import("../lib/nebius.ts");
 const [armName, id] = process.argv.slice(2);
-const res = JSON.parse(fs.readFileSync(path.join(ROOT, "eval", "results", `${armName}.json`), "utf8"));
-const { cases } = JSON.parse(fs.readFileSync(path.join(ROOT, "eval", "cases.json"), "utf8"));
+// A third argument names another results folder and cases file, e.g. results-holdout cases-holdout.json.
+const [, , resultsDir = "results", casesFile = "cases.json"] = process.argv.slice(2);
+const res = JSON.parse(fs.readFileSync(path.join(ROOT, "eval", resultsDir, `${armName}.json`), "utf8"));
+const { cases } = JSON.parse(fs.readFileSync(path.join(ROOT, "eval", casesFile), "utf8"));
+if (res.config?.today) process.env.TAGOUT_TODAY = res.config.today;
 const c = cases.find((x: { id: string }) => x.id === id);
 const cfg = res.config;
 if (cfg.kind !== "pipeline") throw new Error("only pipeline arms replay");

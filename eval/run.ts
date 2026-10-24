@@ -133,13 +133,18 @@ globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
     throw new Error(`not cached: ${url.slice(0, 120)}`);
   }
   if (tf && ledger.total - startSpend >= CAP) throw new Error(`run budget of $${CAP} reached`);
-  const keyed = tv && /authorization/i.test(JSON.stringify(init?.headers ?? {}));
-  if (keyed && (ledger.tavilyKeyed ?? 0) >= TAVILY_CAP) throw new Error(`eval Tavily cap of ${TAVILY_CAP} credits reached`);
+  let keyed = tv && /authorization/i.test(JSON.stringify(init?.headers ?? {}));
+  if (keyed && (ledger.tavilyKeyed ?? 0) >= TAVILY_CAP) {
+    // Past the credit cap: the same call in Tavily's keyless mode (what the app does when its credits run out).
+    init = { ...init, headers: { "x-tavily-access-mode": "keyless", "content-type": "application/json" } };
+    keyed = false;
+  }
 
   const t0 = Date.now();
   let r: Response | null = null;
   for (let i = 0; i < 60; i++) {
-    r = await realFetch(input, init);
+    // A retry gets its own timeout: the caller's signal started before the wait and would abort it at once.
+    r = await realFetch(input, i === 0 ? init : { ...init, signal: AbortSignal.timeout(60_000) });
     if (!(tv && r.status === 429) && !(tf && r.status === 429)) break;
     if (tf && i >= 4) break;
     // Keyless Tavily answers 429 with an hourly cap and a Retry-After: wait it out rather than record a failure.

@@ -114,7 +114,8 @@ for (const f of files) {
     n: got.length,
     right: exact.length,
     rightInterval: interval(exact.length, got.length),
-    redPrecision: reds.length ? tpRed.length / reds.length : null,
+    // Share of red tags that were right (a red on an orange-or-red case counts as right).
+    redPrecision: reds.length ? (reds.length - falseRed.length) / reds.length : null,
     redRecall: pos.length ? tpRed.length / pos.length : null,
     redRecallInterval: interval(tpRed.length, pos.length),
     reds: reds.length,
@@ -168,6 +169,6 @@ const pct = (x) => (x == null ? "–" : `${Math.round(x * 100)}%`);
 console.log(`| Arm | Right | Red precision | Red recall | Wrongly red | Wrongly cleared | Cost per item (TF) | Tavily credits per item | Median time |`);
 console.log(`|---|---|---|---|---|---|---|---|---|`);
 for (const a of arms) {
-  console.log(`| ${a.label} | ${a.right}/${a.n} | ${pct(a.redPrecision)} (${a.truePositives}/${a.reds}) | ${pct(a.redRecall)} (${a.truePositives}/${a.positives}) | ${a.falseRed.length}/${a.falseRedOf} | ${a.falseClear.length}/${a.falseClearOf} | ${a.usdPerItem ? `${(a.usdPerItem * 100).toFixed(2)}¢` : "0¢"} | ${a.tavilyPerItem.toFixed(2)} | ${a.medianMs ? `${(a.medianMs / 1000).toFixed(1)} s` : "–"} |`);
+  console.log(`| ${a.label} | ${a.right}/${a.n} | ${pct(a.redPrecision)} (${a.reds - a.falseRed.length}/${a.reds}) | ${pct(a.redRecall)} (${a.truePositives}/${a.positives}) | ${a.falseRed.length}/${a.falseRedOf} | ${a.falseClear.length}/${a.falseClearOf} | ${a.usdPerItem ? `${(a.usdPerItem * 100).toFixed(2)}¢` : "0¢"} | ${a.tavilyPerItem.toFixed(2)} | ${a.medianMs ? `${(a.medianMs / 1000).toFixed(1)} s` : "–"} |`);
 }
 for (const a of arms) console.log(`${a.arm}: wrongly red ${a.falseRed.join(" ") || "-"}; wrongly cleared ${a.falseClear.join(" ") || "-"}; errors ${a.errors.join(" ") || "-"}; web-only reds ${a.webOnlyReds.join(" ") || "-"}; fell back ${a.fellBack.join(" ") || "-"}${a.cacheMisses ? `; cache misses ${a.cacheMisses.length}` : ""}`);
