@@ -8,6 +8,7 @@ import { deadlineScope, hasKey, MODELS, usageScope, type Usage } from "../nebius
 import { cpscByNumber, cpscRss, editedCpsc, latestCpsc } from "../sources/cpsc";
 import { fdaByNumber, fdaSince } from "../sources/fda";
 import { childSeatRecalls, nhtsaCampaignExists, vehicleRecalls } from "../sources/nhtsa";
+import { isListing } from "../sources/listing";
 import { tavilyScope, webSearch, type TavilyTally } from "../sources/web";
 import { loadCheck } from "../store";
 import { listWatchIds, loadWatch } from "../watches";
@@ -23,7 +24,7 @@ import { appendEvents, claimRun, finishRun, loadEventLog, loadState, releaseRun,
  * 2. Pull the recalls published in the last LOOKBACK days: CPSC's database (by recall date, and records it
  *    re-published since the last run), its newsroom feed (a week ahead of the database), openFDA's drug, food
  *    and device enforcement reports, NHTSA's recalls for each distinct watched vehicle and car-seat brand (NHTSA
- *    has no "published since" query), and USDA FSIS through one Tavily search.
+ *    has no "published since" query), and USDA FSIS and FDA company announcements through one Tavily search each.
  * 3. Look each recall up in the index. Only a recall that names a watched brand (for the same kind of product)
  *    or prints a watched code goes on; the rest cost nothing.
  * 4. Nemotron reads each of those once, through the read cache (source, number, text hash, model), so a recall
@@ -46,7 +47,8 @@ export type SweepOptions = {
   useModel?: boolean;
   /** Don't write events, state or the report. */
   dryRun?: boolean;
-  /** Use Tavily for the CPSC newsroom (when cpsc.gov turns the host away) and USDA FSIS (default true). */
+  /** Use Tavily for the CPSC newsroom (when cpsc.gov turns the host away), USDA FSIS and FDA company
+   *  announcements (default true). */
   tavily?: boolean;
   /** Stop starting model reads after this long (default 240 s; the cron route has 300). */
   deadlineMs?: number;
@@ -153,6 +155,46 @@ async function loadWatched(ids: string[]): Promise<{ entries: Watched[]; tracked
   return { entries, tracked, logs, skipped };
 }
 
+type Search = typeof webSearch;
+
+/** The firm a press-release title names: "Kayem Foods Recalls Hot Dog Products ..." gives "Kayem Foods". */
+const firmOf = (title: string) => title.split(/\s+(?:Recalls|Issues|Voluntarily|Expands|Announces)\b/)[0].trim() || undefined;
+
+/** Each page once, by its link (without query, fragment or trailing slash), at most `max`. */
+function oncePerPage(notices: Notice[], max: number): Notice[] {
+  const seen = new Set<string>();
+  return notices
+    .filter((n) => {
+      const k = n.url.toLowerCase().replace(/^https?:\/\/(www\.)?/, "").replace(/[?#].*$/, "").replace(/\/+$/, "");
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    })
+    .slice(0, max);
+}
+
+/**
+ * USDA FSIS recalls through one Tavily search (FSIS has no API, and its site turns scripts away). Tavily gives these
+ * pages no date, so the search is limited to the past month; a recall page is /recalls-alerts/<slug> (the
+ * /recalls?f[...] pages are filtered lists, never notices).
+ */
+export async function fsisRecalls(search: Search = webSearch): Promise<Notice[]> {
+  const { notices } = await search({ query: "recalls meat poultry products", domains: ["fsis.usda.gov"], days: 31, max: 10 });
+  return oncePerPage(notices.filter((n) => /fsis\.usda\.gov\/recalls-alerts\/[^?]+/i.test(n.url)), 10).map((n) => ({ ...n, firm: firmOf(n.title) }));
+}
+
+/**
+ * FDA company announcements (fda.gov/safety/recalls-market-withdrawals-safety-alerts/<slug>) through one Tavily
+ * search. They come out one to six weeks before openFDA's enforcement report lists the same recall (most of the
+ * held-out eval's lag window was these), so without this the sweep met them only when a watch was re-checked. The
+ * listing page itself and anything outside that path are dropped; each page once, at most 10, from the past month.
+ */
+export async function fdaAnnouncements(search: Search = webSearch): Promise<Notice[]> {
+  const { notices } = await search({ query: "company announcement recall", domains: ["fda.gov"], days: 31, max: 10 });
+  const page = /fda\.gov\/safety\/recalls-market-withdrawals-safety-alerts\/[^/?#]+/i;
+  return oncePerPage(notices.filter((n) => page.test(n.url) && !isListing(n.url)), 10).map((n) => ({ ...n, firm: firmOf(n.title) }));
+}
+
 export async function runSweep(opts: SweepOptions = {}): Promise<SweepReport> {
   const usage: Usage = { calls: 0, prompt: 0, completion: 0, usd: 0 };
   const tavily: TavilyTally = { searches: 0, extracts: 0, extractUrls: 0, credits: 0 };
@@ -240,19 +282,12 @@ async function sweep(opts: SweepOptions, usage: Usage, tavilyTally: TavilyTally,
       }),
       src("nhtsa-car-seats", seatQueries.length, async () => (await pool(seatQueries, 4, (q) => childSeatRecalls(q.brand))).flat()),
     ]);
-    const fsis = useTavily
-      ? await src("usda-fsis", 0, async () => {
-          // Tavily gives these pages no date, so the search is limited to the past month; a recall page is
-          // /recalls-alerts/<slug> (the /recalls?f[...] pages are filtered lists, never notices).
-          const { notices } = await webSearch({ query: "recalls meat poultry products", domains: ["fsis.usda.gov"], days: 31, max: 10 });
-          return notices.filter((n) => /fsis\.usda\.gov\/recalls-alerts\/[^?]+/i.test(n.url)).map((n) => ({ ...n, firm: n.title.split(/\s+(?:Recalls|Issues)/)[0] || undefined }));
-        })
-      : [];
+    const [fsis, fdaWeb] = useTavily ? await Promise.all([src("usda-fsis", 0, () => fsisRecalls()), src("fda-announcements", 0, () => fdaAnnouncements())]) : [[], []];
 
     // One copy of each recall: the database record before a newsroom or web copy of it.
     const all = new Map<string, Notice>();
     const alias = new Map<string, string>();
-    for (const n of [...cpscApi, ...cpscEdited, ...drug, ...food, ...device, ...vehicles, ...seats, ...rss, ...fsis]) {
+    for (const n of [...cpscApi, ...cpscEdited, ...drug, ...food, ...device, ...vehicles, ...seats, ...rss, ...fsis, ...fdaWeb]) {
       const keys = noticeKeys(n);
       if (keys.some((k) => alias.has(k))) continue;
       all.set(keys[0], n);
