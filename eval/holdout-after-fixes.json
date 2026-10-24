@@ -268,6 +268,43 @@
     "h41": "danger",
     "h42": "warning",
     "h43": "warning"
+   },
+   "redBasis": {
+    "n": 19,
+    "by": {
+     "reader-list": 15,
+     "record-list": 4
+    },
+    "how": {
+     "exact": 19
+    },
+    "window": 0,
+    "cases": {
+     "h01": "reader-list",
+     "h02": "reader-list",
+     "h04": "reader-list",
+     "h05": "reader-list",
+     "h06": "reader-list",
+     "h07": "reader-list",
+     "h10": "record-list",
+     "h11": "record-list",
+     "h15": "record-list",
+     "h18": "reader-list",
+     "h19": "reader-list",
+     "h20": "record-list",
+     "h25": "reader-list",
+     "h26": "reader-list",
+     "h32": "reader-list",
+     "h34": "reader-list",
+     "h35": "reader-list",
+     "h40": "reader-list",
+     "h41": "reader-list"
+    },
+    "from": "holdout-replay-summary.json",
+    "code": {
+     "commit": "836f185",
+     "libChanged": true
+    }
    }
   },
   {
@@ -439,7 +476,44 @@
     "h41": "danger",
     "h42": "warning",
     "h43": "inspected"
+   },
+   "redBasis": {
+    "n": 18,
+    "by": {
+     "reader-list": 14,
+     "record-list": 4
+    },
+    "how": {
+     "exact": 18
+    },
+    "window": 0,
+    "cases": {
+     "h01": "reader-list",
+     "h02": "reader-list",
+     "h04": "reader-list",
+     "h05": "reader-list",
+     "h06": "reader-list",
+     "h10": "record-list",
+     "h11": "record-list",
+     "h15": "record-list",
+     "h18": "reader-list",
+     "h19": "reader-list",
+     "h20": "record-list",
+     "h25": "reader-list",
+     "h26": "reader-list",
+     "h32": "reader-list",
+     "h34": "reader-list",
+     "h35": "reader-list",
+     "h40": "reader-list",
+     "h41": "reader-list"
+    },
+    "from": "holdout-replay-summary.json",
+    "code": {
+     "commit": "836f185",
+     "libChanged": true
+    }
    }
   }
- ]
+ ],
+ "redBasisNote": "redBasis: what decided each red tag, from an offline replay of this arm at the current code (eval:replay), which gives the same tag as the recorded run on every case. by: reader-list = the code is in a model, lot or UPC list Nemotron's notice reader read; record-list = in the agency record's own field or its deterministic parse (openFDA code_info lots, UPCs and NDCs in the description); text = only in the notice's text (the matcher's fallback). how: exact, range (inside a printed range) or family (a family code). window: a made-date window was checked too. Every code a reader lists is also printed in the notice (lib/agent/verify-codes.ts), so reader-list says which path decided, not that only the reader could find it: the no-model arm (record-list and text only) is the comparison."
 }

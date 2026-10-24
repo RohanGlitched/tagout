@@ -1,5 +1,5 @@
 {
- "at": "2026-10-24T21:17:14.356Z",
+ "at": "2026-10-24T22:34:35.274Z",
  "firstRun": null,
  "cases": 105,
  "groups": {
@@ -81,12 +81,17 @@
     "n13"
    ],
    "cacheMisses": [
+    "d03",
+    "d07",
     "d08",
-    "f02",
+    "d10",
+    "f03",
+    "f04",
+    "f07",
+    "f08",
+    "n22",
     "n23",
-    "n24",
-    "n25",
-    "c09"
+    "c07"
    ],
    "config": {
     "today": "2026-10-15",
@@ -94,8 +99,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -204,6 +209,65 @@
     "k07": "warning",
     "k08": "inspected",
     "k09": "inspected"
+   },
+   "redBasis": {
+    "n": 46,
+    "by": {
+     "reader-list": 31,
+     "record-list": 15
+    },
+    "how": {
+     "exact": 46
+    },
+    "window": 1,
+    "cases": {
+     "p01": "reader-list",
+     "p02": "reader-list",
+     "p03": "reader-list",
+     "p04": "reader-list",
+     "p05": "reader-list",
+     "p06": "reader-list",
+     "p07": "reader-list",
+     "p08": "reader-list",
+     "p09": "reader-list",
+     "p10": "reader-list",
+     "p11": "reader-list",
+     "p12": "reader-list",
+     "p13": "reader-list",
+     "p14": "reader-list",
+     "p15": "reader-list",
+     "p16": "reader-list",
+     "p17": "reader-list",
+     "p18": "reader-list",
+     "p19": "reader-list",
+     "p20": "reader-list",
+     "p21": "reader-list",
+     "p22": "reader-list",
+     "p23": "reader-list",
+     "p24": "reader-list+window",
+     "p25": "reader-list",
+     "p26": "reader-list",
+     "p27": "reader-list",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d03": "record-list",
+     "d04": "record-list",
+     "d05": "reader-list",
+     "d06": "reader-list",
+     "d07": "record-list",
+     "d08": "record-list",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f01": "reader-list",
+     "f02": "reader-list",
+     "f03": "record-list",
+     "f04": "record-list",
+     "f05": "record-list",
+     "f06": "record-list",
+     "f07": "record-list",
+     "f08": "record-list"
+    }
    }
   },
   {
@@ -276,15 +340,19 @@
    ],
    "fellBack": [],
    "cacheMisses": [
+    "d03",
     "d08",
     "d10",
-    "f01",
     "f02",
+    "f03",
     "f04",
+    "f07",
+    "f08",
+    "n21",
     "n23",
-    "n24",
     "n25",
-    "c09",
+    "n26",
+    "c07",
     "v09"
    ],
    "config": {
@@ -293,8 +361,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -403,6 +471,67 @@
     "k07": "warning",
     "k08": "inspected",
     "k09": "warning"
+   },
+   "redBasis": {
+    "n": 47,
+    "by": {
+     "reader-list": 31,
+     "record-list": 15,
+     "text": 1
+    },
+    "how": {
+     "exact": 47
+    },
+    "window": 0,
+    "cases": {
+     "p01": "reader-list",
+     "p02": "reader-list",
+     "p03": "reader-list",
+     "p04": "reader-list",
+     "p05": "reader-list",
+     "p06": "reader-list",
+     "p07": "reader-list",
+     "p08": "reader-list",
+     "p09": "reader-list",
+     "p10": "reader-list",
+     "p11": "text",
+     "p12": "reader-list",
+     "p13": "reader-list",
+     "p14": "reader-list",
+     "p15": "reader-list",
+     "p16": "reader-list",
+     "p17": "reader-list",
+     "p18": "reader-list",
+     "p19": "reader-list",
+     "p20": "reader-list",
+     "p21": "reader-list",
+     "p22": "reader-list",
+     "p23": "reader-list",
+     "p24": "reader-list",
+     "p25": "reader-list",
+     "p26": "reader-list",
+     "p27": "reader-list",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d03": "record-list",
+     "d04": "record-list",
+     "d05": "reader-list",
+     "d06": "reader-list",
+     "d07": "record-list",
+     "d08": "record-list",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f01": "reader-list",
+     "f02": "reader-list",
+     "f03": "record-list",
+     "f04": "record-list",
+     "f05": "record-list",
+     "f06": "record-list",
+     "f07": "record-list",
+     "f08": "record-list",
+     "n12": "reader-list"
+    }
    }
   },
   {
@@ -488,14 +617,18 @@
    ],
    "fellBack": [],
    "cacheMisses": [
+    "d03",
     "d08",
-    "f01",
     "f02",
+    "f03",
     "f04",
+    "f07",
+    "f08",
+    "n21",
     "n23",
-    "n24",
     "n25",
-    "c09"
+    "n26",
+    "c07"
    ],
    "config": {
     "today": "2026-10-15",
@@ -503,8 +636,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -613,6 +746,58 @@
     "k07": "warning",
     "k08": "warning",
     "k09": "warning"
+   },
+   "redBasis": {
+    "n": 39,
+    "by": {
+     "record-list": 9,
+     "text": 30
+    },
+    "how": {
+     "exact": 39
+    },
+    "window": 0,
+    "cases": {
+     "p02": "text",
+     "p03": "text",
+     "p04": "text",
+     "p05": "text",
+     "p06": "text",
+     "p07": "text",
+     "p08": "text",
+     "p09": "text",
+     "p10": "text",
+     "p11": "text",
+     "p12": "text",
+     "p13": "text",
+     "p14": "text",
+     "p15": "text",
+     "p16": "text",
+     "p17": "text",
+     "p19": "text",
+     "p20": "text",
+     "p21": "text",
+     "p22": "text",
+     "p24": "text",
+     "p26": "text",
+     "p27": "text",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d03": "text",
+     "d04": "record-list",
+     "d05": "text",
+     "d07": "record-list",
+     "d08": "text",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f03": "record-list",
+     "f04": "text",
+     "f06": "record-list",
+     "f07": "text",
+     "n04": "text",
+     "n12": "text"
+    }
    }
   },
   {
@@ -686,8 +871,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -796,6 +981,51 @@
     "k07": "warning",
     "k08": "warning",
     "k09": "warning"
+   },
+   "redBasis": {
+    "n": 32,
+    "by": {
+     "record-list": 9,
+     "text": 23
+    },
+    "how": {
+     "exact": 32
+    },
+    "window": 0,
+    "cases": {
+     "p02": "text",
+     "p03": "text",
+     "p04": "text",
+     "p05": "text",
+     "p06": "text",
+     "p07": "text",
+     "p08": "text",
+     "p09": "text",
+     "p10": "text",
+     "p11": "text",
+     "p12": "text",
+     "p13": "text",
+     "p15": "text",
+     "p16": "text",
+     "p17": "text",
+     "p19": "text",
+     "p20": "text",
+     "p21": "text",
+     "p22": "text",
+     "p26": "text",
+     "p27": "text",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d04": "record-list",
+     "d05": "text",
+     "d07": "record-list",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f03": "record-list",
+     "f06": "record-list",
+     "n04": "text"
+    }
    }
   },
   {
@@ -890,8 +1120,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -1120,8 +1350,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -1305,15 +1535,19 @@
     "n13"
    ],
    "cacheMisses": [
+    "d03",
+    "d07",
     "d08",
-    "f02",
+    "d10",
     "f03",
+    "f04",
+    "f07",
+    "f08",
     "n05",
+    "n22",
     "n23",
-    "n24",
-    "n25",
     "c05",
-    "c09"
+    "c07"
    ],
    "config": {
     "today": "2026-10-15",
@@ -1321,8 +1555,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -1431,6 +1665,66 @@
     "k07": "warning",
     "k08": "inspected",
     "k09": "inspected"
+   },
+   "redBasis": {
+    "n": 46,
+    "by": {
+     "reader-list": 8,
+     "record-list": 15,
+     "text": 23
+    },
+    "how": {
+     "exact": 46
+    },
+    "window": 0,
+    "cases": {
+     "p01": "text",
+     "p02": "text",
+     "p03": "text",
+     "p04": "text",
+     "p05": "text",
+     "p06": "text",
+     "p07": "reader-list",
+     "p08": "text",
+     "p09": "text",
+     "p10": "reader-list",
+     "p11": "reader-list",
+     "p12": "text",
+     "p13": "text",
+     "p14": "text",
+     "p15": "text",
+     "p16": "text",
+     "p17": "reader-list",
+     "p18": "reader-list",
+     "p19": "text",
+     "p20": "reader-list",
+     "p21": "reader-list",
+     "p22": "reader-list",
+     "p24": "text",
+     "p25": "text",
+     "p26": "text",
+     "p27": "text",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d03": "record-list",
+     "d04": "record-list",
+     "d05": "text",
+     "d06": "text",
+     "d07": "record-list",
+     "d08": "record-list",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f01": "text",
+     "f02": "text",
+     "f03": "record-list",
+     "f04": "record-list",
+     "f05": "record-list",
+     "f06": "record-list",
+     "f07": "record-list",
+     "f08": "record-list",
+     "n12": "text"
+    }
    }
   },
   {
@@ -1512,12 +1806,12 @@
     "p17",
     "p18",
     "p27",
+    "d03",
     "d05",
     "d07",
     "d08",
     "d10",
     "f01",
-    "f02",
     "f03",
     "f04",
     "f07",
@@ -1540,12 +1834,12 @@
     "n22",
     "n23",
     "n24",
-    "n25",
     "n26",
     "c01",
     "c03",
     "c05",
     "c06",
+    "c07",
     "c09",
     "c11",
     "v02",
@@ -1562,8 +1856,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -1672,6 +1966,67 @@
     "k07": "warning",
     "k08": "inspected",
     "k09": "inspected"
+   },
+   "redBasis": {
+    "n": 47,
+    "by": {
+     "reader-list": 27,
+     "record-list": 15,
+     "text": 5
+    },
+    "how": {
+     "exact": 47
+    },
+    "window": 0,
+    "cases": {
+     "p01": "reader-list",
+     "p02": "reader-list",
+     "p03": "reader-list",
+     "p04": "reader-list",
+     "p05": "reader-list",
+     "p06": "reader-list",
+     "p07": "reader-list",
+     "p08": "reader-list",
+     "p09": "text",
+     "p10": "reader-list",
+     "p11": "text",
+     "p12": "text",
+     "p13": "reader-list",
+     "p14": "reader-list",
+     "p15": "reader-list",
+     "p16": "reader-list",
+     "p17": "reader-list",
+     "p18": "reader-list",
+     "p19": "reader-list",
+     "p20": "reader-list",
+     "p21": "reader-list",
+     "p22": "reader-list",
+     "p23": "reader-list",
+     "p24": "reader-list",
+     "p25": "reader-list",
+     "p26": "reader-list",
+     "p27": "text",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d03": "record-list",
+     "d04": "record-list",
+     "d05": "reader-list",
+     "d06": "reader-list",
+     "d07": "record-list",
+     "d08": "record-list",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f01": "text",
+     "f02": "reader-list",
+     "f03": "record-list",
+     "f04": "record-list",
+     "f05": "record-list",
+     "f06": "record-list",
+     "f07": "record-list",
+     "f08": "record-list",
+     "n12": "reader-list"
+    }
    }
   },
   {
@@ -1741,7 +2096,6 @@
    ],
    "fellBack": [],
    "cacheMisses": [
-    "f08",
     "k04"
    ],
    "config": {
@@ -1750,8 +2104,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -1773,6 +2127,27 @@
     "v12": "inspected",
     "k01": "inspected",
     "k04": "warning"
+   },
+   "redBasis": {
+    "n": 8,
+    "by": {
+     "reader-list": 6,
+     "record-list": 2
+    },
+    "how": {
+     "exact": 8
+    },
+    "window": 0,
+    "cases": {
+     "p01": "reader-list",
+     "p06": "reader-list",
+     "p11": "reader-list",
+     "p18": "reader-list",
+     "d01": "record-list",
+     "d06": "reader-list",
+     "f01": "reader-list",
+     "f08": "record-list"
+    }
    }
   },
   {
@@ -1848,7 +2223,6 @@
     "p06",
     "p18",
     "d01",
-    "f01",
     "f08",
     "n12",
     "n19",
@@ -1865,8 +2239,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "ed2dc77",
-     "libChanged": false
+     "commit": "836f185",
+     "libChanged": true
     }
    },
    "levels": {
@@ -1888,6 +2262,26 @@
     "v12": "inspected",
     "k01": "warning",
     "k04": "warning"
+   },
+   "redBasis": {
+    "n": 7,
+    "by": {
+     "reader-list": 5,
+     "record-list": 2
+    },
+    "how": {
+     "exact": 7
+    },
+    "window": 0,
+    "cases": {
+     "p01": "reader-list",
+     "p06": "reader-list",
+     "p11": "reader-list",
+     "d01": "record-list",
+     "d06": "reader-list",
+     "f01": "reader-list",
+     "f08": "record-list"
+    }
    }
   }
  ]

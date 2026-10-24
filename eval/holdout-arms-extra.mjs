@@ -122,13 +122,19 @@ function cascade(liteFile, fullFile, truth = HELD) {
 
 const rulesRows = rowsOf("results-holdout-extra/rules.json");
 const exactRules = rulesRows.filter((r) => !r.cacheMisses);
+const rulesLive = read("results-holdout-extra/rules.json").config?.offline === false;
 const out = {
   at: new Date().toISOString(),
-  note: "No new model or Tavily calls: the rules arm is an offline replay from eval/.cache, the cascade is combined from recorded rows. The first-run cascade is the held-out measurement; the current-code one is in-sample (these cases were read while fixing).",
+  note: rulesLive
+    ? "No model calls and no Tavily credits: the rules arm ran with free agency calls and Tavily's keyless mode where the eval cache had no answer, so all 39 cases are measured; the cascade is combined from recorded rows. The first-run cascade is the held-out measurement; the current-code one is in-sample (these cases were read while fixing)."
+    : "No new model or Tavily calls: the rules arm is an offline replay from eval/.cache, the cascade is combined from recorded rows. The first-run cascade is the held-out measurement; the current-code one is in-sample (these cases were read while fixing).",
   rules: {
     label: "No model at all: fixed plan, pattern reader, rules (and never green without a model)",
     commit: read("results-holdout-extra/rules.json").config?.code?.commit,
-    replay: "offline from the eval cache; a call the cache doesn't have fails as an unreachable API would",
+    replay: rulesLive
+      ? "run on Oct 25 (--today 2026-10-25) with no model: calls already in the eval cache reused, the rest live (CPSC, openFDA and NHTSA are free; Tavily in keyless mode, no credits), so no case is missing data"
+      : "offline from the eval cache; a call the cache doesn't have fails as an unreachable API would",
+    ...(rulesLive ? { beforeFill: { right: 24, n: 39, casesWithMisses: 21, onExactReplays: "14/18", note: "the offline replay at ed2dc77, before the 21 cases' missing CPSC searches and 9 Tavily queries were filled" } } : {}),
     ...score(rulesRows),
     casesWithMisses: rulesRows.filter((r) => r.cacheMisses).map((r) => r.id),
     missedCalls: [...new Set(rulesRows.flatMap((r) => r.missed ?? []))],
@@ -149,7 +155,7 @@ const out = {
 };
 fs.writeFileSync(new URL("holdout-arms-extra.json", dir), JSON.stringify(out, null, 1) + "\n");
 const line = (name, s) => console.log(`${name.padEnd(28)} ${s.right}/${s.n}  wrongly red ${s.falseRed.length}/${s.falseRedOf} [${s.falseRed}]  cleared ${s.falseClear.length}/${s.falseClearOf} [${s.falseClear}]  ${s.database ? `db ${s.database}  lag ${s.lag}  ` : ""}${(s.usdPerItem * 100).toFixed(2)}¢ + ${s.tavilyPerItem} credits = ${(s.usdPerItemWithTavily * 100).toFixed(2)}¢`);
-line("rules (offline replay)", out.rules);
+line(rulesLive ? "rules (all 39, filled)" : "rules (offline replay)", out.rules);
 line(`rules, ${exactRules.length} exact replays`, out.rules.onExactReplays);
 for (const k of ["firstRun", "current", "tuned105"]) {
   const c = out.cascade[k];

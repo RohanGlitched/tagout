@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "ed2dc77",
-   "libChanged": false
+   "commit": "836f185",
+   "libChanged": true
   }
  },
- "at": "2026-10-24T21:16:31.339Z",
+ "at": "2026-10-24T22:33:21.158Z",
  "cases": [
   {
    "id": "p01",
@@ -34,6 +34,7 @@
    "level": "danger",
    "notice": "CPSC 27-012",
    "headline": "Model 406198 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -88,6 +89,7 @@
    "level": "danger",
    "notice": "CPSC 26-798",
    "headline": "LTD-SM23 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -163,7 +165,7 @@
     "completion": 7671
    },
    "usd": 0.01817,
-   "ms": 97,
+   "ms": 107,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
@@ -182,6 +184,7 @@
    "level": "danger",
    "notice": "CPSC 26-717",
    "headline": "CCB-5014 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -291,7 +294,7 @@
     "completion": 8161
    },
    "usd": 0.01528,
-   "ms": 60,
+   "ms": 55,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -310,6 +313,7 @@
    "level": "danger",
    "notice": "FDA D-0121-2026",
    "headline": "Lot EJA022 is listed in this recall.",
+   "basis": "record-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -349,7 +353,7 @@
     "completion": 3321
    },
    "usd": 0.00417,
-   "ms": 34,
+   "ms": 39,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -368,6 +372,7 @@
    "level": "danger",
    "notice": "FDA D-0492-2026",
    "headline": "Lot 4V15 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -407,7 +412,7 @@
     "completion": 3805
    },
    "usd": 0.00933,
-   "ms": 35,
+   "ms": 49,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -424,6 +429,7 @@
    "level": "danger",
    "notice": "FDA H-0767-2026",
    "headline": "Lot 260201MA is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -473,19 +479,15 @@
     "completion": 2799
    },
    "usd": 0.00424,
-   "ms": 441,
+   "ms": 49,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
    "tavilyCredits": 1,
    "truncated": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "f08",
@@ -493,7 +495,9 @@
    "expect": "danger",
    "level": "danger",
    "notice": "FDA H-0856-2026",
-   "headline": "UPC 726191018548 is listed in this recall.",
+   "headline": "Do not eat if anyone in your home is allergic to milk; follow the recall's remedy below.",
+   "basis": "record-list",
+   "allergen": "milk",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -545,7 +549,7 @@
     "completion": 4257
    },
    "usd": 0.00445,
-   "ms": 30,
+   "ms": 45,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 0,
@@ -620,7 +624,7 @@
     "completion": 4214
    },
    "usd": 0.01301,
-   "ms": 37,
+   "ms": 54,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
@@ -688,7 +692,7 @@
     "completion": 6444
    },
    "usd": 0.00758,
-   "ms": 24,
+   "ms": 39,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -769,7 +773,7 @@
     "completion": 12388
    },
    "usd": 0.01488,
-   "ms": 66,
+   "ms": 68,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -845,16 +849,17 @@
     "completion": 11927
    },
    "usd": 0.02077,
-   "ms": 65,
+   "ms": 877,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 4,
-   "cacheMisses": 2,
+   "cacheMisses": 6,
    "missed": [
-    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "api.fda.gov /drug/enforcement.json"
    ]
   },
   {
@@ -925,7 +930,7 @@
     "completion": 13583
    },
    "usd": 0.03847,
-   "ms": 67,
+   "ms": 72,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
@@ -983,7 +988,7 @@
     "completion": 11283
    },
    "usd": 0.02707,
-   "ms": 27,
+   "ms": 38,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1050,7 +1055,7 @@
     "completion": 3066
    },
    "usd": 0.00245,
-   "ms": 24,
+   "ms": 34,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1103,7 +1108,7 @@
     "completion": 2730
    },
    "usd": 0.00206,
-   "ms": 13,
+   "ms": 24,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1196,7 +1201,7 @@
     "completion": 19662
    },
    "usd": 0.04248,
-   "ms": 47,
+   "ms": 42,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 2,
@@ -1278,7 +1283,7 @@
     "completion": 7202
    },
    "usd": 0.01132,
-   "ms": 41,
+   "ms": 30,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,

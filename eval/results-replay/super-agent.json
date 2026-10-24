@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "ed2dc77",
-   "libChanged": false
+   "commit": "836f185",
+   "libChanged": true
   }
  },
- "at": "2026-10-24T21:17:02.802Z",
+ "at": "2026-10-24T22:33:56.778Z",
  "cases": [
   {
    "id": "p01",
@@ -34,6 +34,7 @@
    "level": "danger",
    "notice": "CPSC 27-012",
    "headline": "Model 406198 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -83,7 +84,7 @@
     "completion": 1247
    },
    "usd": 0.00606,
-   "ms": 69,
+   "ms": 82,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -100,6 +101,7 @@
    "level": "danger",
    "notice": "CPSC 26-798",
    "headline": "LTD-SM23 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -150,7 +152,7 @@
     "completion": 2337
    },
    "usd": 0.01135,
-   "ms": 67,
+   "ms": 80,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -167,6 +169,7 @@
    "level": "danger",
    "notice": "CPSC 26-717",
    "headline": "CCB-5014 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -218,7 +221,7 @@
     "completion": 8282
    },
    "usd": 0.02996,
-   "ms": 66,
+   "ms": 78,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -235,6 +238,7 @@
    "level": "danger",
    "notice": "WEB CPSC newsroom",
    "headline": "SRTH is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -286,7 +290,7 @@
     "completion": 5751
    },
    "usd": 0.02191,
-   "ms": 64,
+   "ms": 77,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -303,6 +307,7 @@
    "level": "danger",
    "notice": "FDA D-0121-2026",
    "headline": "Lot EJA022 is listed in this recall.",
+   "basis": "record-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -352,7 +357,7 @@
     "completion": 1409
    },
    "usd": 0.00617,
-   "ms": 33,
+   "ms": 30,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -369,6 +374,7 @@
    "level": "danger",
    "notice": "FDA D-0492-2026",
    "headline": "Lot 4V15 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -420,7 +426,7 @@
     "completion": 3095
    },
    "usd": 0.01159,
-   "ms": 33,
+   "ms": 31,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -437,6 +443,7 @@
    "level": "danger",
    "notice": "FDA H-0767-2026",
    "headline": "Lot 260201MA is listed in this recall.",
+   "basis": "reader-list",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -486,7 +493,7 @@
     "completion": 1261
    },
    "usd": 0.00628,
-   "ms": 32,
+   "ms": 29,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -502,7 +509,9 @@
    "expect": "danger",
    "level": "danger",
    "notice": "FDA H-0856-2026",
-   "headline": "UPC 726191018548 is listed in this recall.",
+   "headline": "Do not eat if anyone in your home is allergic to milk; follow the recall's remedy below.",
+   "basis": "record-list",
+   "allergen": "milk",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -552,19 +561,15 @@
     "completion": 1015
    },
    "usd": 0.00564,
-   "ms": 442,
+   "ms": 29,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
    "tavilyExtract": 0,
    "tavilyCredits": 1,
    "truncated": 0,
-   "cacheMisses": 16,
-   "missed": [
-    "api.fda.gov /food/enforcement.json",
-    "api.fda.gov /drug/enforcement.json",
-    "api.fda.gov /device/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "n04",
@@ -623,7 +628,7 @@
     "completion": 1937
    },
    "usd": 0.00893,
-   "ms": 19,
+   "ms": 27,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 0,
@@ -689,7 +694,7 @@
     "completion": 1893
    },
    "usd": 0.00791,
-   "ms": 21,
+   "ms": 29,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -771,7 +776,7 @@
     "completion": 1252
    },
    "usd": 0.00889,
-   "ms": 37,
+   "ms": 45,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
@@ -853,7 +858,7 @@
     "completion": 1767
    },
    "usd": 0.00945,
-   "ms": 49,
+   "ms": 47,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
@@ -920,7 +925,7 @@
     "completion": 12323
    },
    "usd": 0.05772,
-   "ms": 46,
+   "ms": 51,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -986,7 +991,7 @@
     "completion": 8348
    },
    "usd": 0.02964,
-   "ms": 32,
+   "ms": 45,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1050,7 +1055,7 @@
     "completion": 603
    },
    "usd": 0.00351,
-   "ms": 18,
+   "ms": 39,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1132,7 +1137,7 @@
     "completion": 1227
    },
    "usd": 0.01028,
-   "ms": 29,
+   "ms": 57,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 1,
@@ -1208,7 +1213,7 @@
     "completion": 875
    },
    "usd": 0.00787,
-   "ms": 26,
+   "ms": 33,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1281,7 +1286,7 @@
     "completion": 2437
    },
    "usd": 0.01178,
-   "ms": 15,
+   "ms": 29,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,

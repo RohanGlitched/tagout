@@ -64,6 +64,25 @@ export function interval(k, n) {
   return [Number(lower.toFixed(3)), Number(upper.toFixed(3))];
 }
 
+/**
+ * What decided each red tag (run.ts `basis`, from lib/match.ts): the code was in a list Nemotron's notice reader
+ * read ("reader-list"), in the agency record's own list or its deterministic parse ("record-list"), or only in the
+ * notice's text, the matcher's fallback ("text"); matched exactly, inside a printed range or by a family code; and
+ * whether a made-date window was checked too. Rows recorded before Oct 25 have no basis; replay them to get it.
+ */
+function basisSplit(reds) {
+  const count = (f) => Object.fromEntries([...new Set(reds.map(f))].filter(Boolean).sort().map((k) => [k, reds.filter((x) => f(x) === k).length]));
+  const by = (x) => x.r.basis?.split(/[/+]/)[0] ?? "none";
+  const how = (x) => (x.r.basis ? (x.r.basis.match(/\/(range|family)/)?.[1] ?? "exact") : "none");
+  return {
+    n: reds.length,
+    by: count(by),
+    how: count(how),
+    window: reds.filter((x) => x.r.basis?.includes("+window")).length,
+    cases: Object.fromEntries(reds.map((x) => [x.c.id, x.r.basis ?? null])),
+  };
+}
+
 const ORDER = ["tagout", "fixed-plan", "fixed-plan-nano", "rules", "search-ultra", "alone-ultra", "super-readers", "nano-readers", "super-agent", "nano-agent"];
 const rank = (arm) => {
   const base = arm.replace(/-noweb$/, "");
@@ -145,6 +164,7 @@ for (const f of files) {
     ...(res.config?.offline ? { cacheMisses: got.filter((x) => x.r.cacheMisses).map((x) => x.c.id) } : {}),
     config: res.config ? { today: res.config.today, noWeb: res.config.noWeb ?? false, offline: res.config.offline ?? false, keyless: res.config.keyless ?? false, code: res.config.code } : undefined,
     levels: Object.fromEntries(got.map((x) => [x.c.id, lv(x)])),
+    ...(reds.some((x) => x.r.basis) ? { redBasis: basisSplit(reds) } : {}),
   });
 }
 arms.sort((a, b) => rank(a.arm) - rank(b.arm));

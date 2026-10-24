@@ -290,6 +290,9 @@ function photosOf(c: Case): string[] {
 
 async function pipeline(arm: Extract<Arm, { kind: "pipeline" }>, c: Case) {
   let level: string | undefined, notice: string | undefined, headline: string | undefined, engine: unknown, error: string | undefined;
+  // Red tags: what decided them (lib/types.ts Basis), as "reader-list", "record-list" or "text", plus "/range",
+  // "/family" and "+window"; and an allergy alert's allergen.
+  let basis: string | undefined, allergen: string | undefined;
   let planned: string | undefined;
   const steps: { tool: string; label: string; found: number; fresh?: number; error?: string }[] = [];
   let items: unknown;
@@ -300,11 +303,14 @@ async function pipeline(arm: Extract<Arm, { kind: "pipeline" }>, c: Case) {
       notice = e.verdict.notice ? `${e.verdict.notice.source.toUpperCase()} ${e.verdict.notice.id}` : undefined;
       headline = e.verdict.headline;
       planned = e.planned;
+      const b = e.verdict.basis;
+      basis = b ? `${b.by}${b.how === "exact" ? "" : `/${b.how}`}${b.window ? "+window" : ""}` : undefined;
+      allergen = e.verdict.allergen;
     } else if (e.t === "step") steps.push({ tool: e.step.tool, label: e.step.label, found: e.step.found, fresh: e.step.fresh, ...(e.step.error ? { error: e.step.error } : {}) });
     else if (e.t === "done") engine = e.engine;
     else if (e.t === "error") error = e.message;
   }
-  return { level: level ?? "error", notice, headline, planned, engine, error, items, steps };
+  return { level: level ?? "error", notice, headline, ...(basis ? { basis } : {}), ...(allergen ? { allergen } : {}), planned, engine, error, items, steps };
 }
 
 const name = args[0];

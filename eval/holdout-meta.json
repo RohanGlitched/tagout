@@ -1,5 +1,5 @@
 {
- "casesCommitted": { "commit": "d9dce10", "at": "2026-10-25T00:37:01+05:30", "file": "eval/cases-holdout.json" },
+ "casesCommitted": { "commit": "d9dce10", "at": "2026-10-25T00:37:01+05:30", "file": "eval/cases-holdout.json", "sha256": "3f6243656600030a76bdbd793e51ce151a81eb2f89f7b08e96836285a8e37bd0", "pushed": "2026-10-24T20:47:55Z, in one push together with every run's results (commit times are local and set by the author; the push time is GitHub's)" },
  "groundTruthCommitted": { "commit": "e2d6481", "at": "2026-10-25T00:37:05+05:30", "files": ["eval/verify-holdout.mjs", "eval/verified-holdout.json", "eval/notices-holdout/", "eval/photos/primark-tag-cpsc-27-028.png"], "verified": "39/39" },
  "codeMeasured": {
   "commit": "a1d8b21",

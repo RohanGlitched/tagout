@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "ed2dc77",
-   "libChanged": false
+   "commit": "836f185",
+   "libChanged": true
   }
  },
- "at": "2026-10-24T21:14:19.332Z",
+ "at": "2026-10-24T22:32:48.080Z",
  "cases": [
   {
    "id": "h01",
@@ -36,6 +36,7 @@
    "level": "danger",
    "notice": "CPSC 27-024",
    "headline": "TL1302Z is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -90,7 +91,7 @@
     "completion": 1005
    },
    "usd": 0.00242,
-   "ms": 70,
+   "ms": 74,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -109,6 +110,7 @@
    "level": "danger",
    "notice": "CPSC 27-024",
    "headline": "TL1302Z is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -163,7 +165,7 @@
     "completion": 922
    },
    "usd": 0.00217,
-   "ms": 66,
+   "ms": 69,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -235,7 +237,7 @@
     "completion": 892
    },
    "usd": 0.00208,
-   "ms": 65,
+   "ms": 68,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -254,6 +256,7 @@
    "level": "danger",
    "notice": "CPSC 27-027",
    "headline": "PAPA03001AI is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -308,7 +311,7 @@
     "completion": 1076
    },
    "usd": 0.00289,
-   "ms": 66,
+   "ms": 70,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -327,6 +330,7 @@
    "level": "danger",
    "notice": "CPSC 27-027",
    "headline": "PAPA03001AI is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -381,7 +385,7 @@
     "completion": 673
    },
    "usd": 0.00191,
-   "ms": 51,
+   "ms": 46,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -400,6 +404,7 @@
    "level": "danger",
    "notice": "CPSC 27-028",
    "headline": "Model 2595301 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -454,7 +459,7 @@
     "completion": 1622
    },
    "usd": 0.0029,
-   "ms": 61,
+   "ms": 56,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -528,7 +533,7 @@
     "completion": 164
    },
    "usd": 0.00028,
-   "ms": 28,
+   "ms": 17,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -594,7 +599,7 @@
     "completion": 597
    },
    "usd": 0.00151,
-   "ms": 46,
+   "ms": 39,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -613,6 +618,7 @@
    "level": "danger",
    "notice": "FDA D-0006-2027",
    "headline": "Lot LT25B01 is listed in this recall.",
+   "basis": "record-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -661,15 +667,17 @@
     "completion": 876
    },
    "usd": 0.00171,
-   "ms": 49,
+   "ms": 868,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 4,
+   "missed": [
+    "api.fda.gov /drug/enforcement.json"
+   ]
   },
   {
    "id": "h11",
@@ -680,6 +688,7 @@
    "level": "danger",
    "notice": "FDA D-0006-2027",
    "headline": "Lot LT25B01 is listed in this recall.",
+   "basis": "record-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -729,15 +738,17 @@
     "completion": 1092
    },
    "usd": 0.00236,
-   "ms": 47,
+   "ms": 852,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 4,
+   "missed": [
+    "api.fda.gov /drug/enforcement.json"
+   ]
   },
   {
    "id": "h12",
@@ -796,15 +807,17 @@
     "completion": 1002
    },
    "usd": 0.00209,
-   "ms": 46,
+   "ms": 859,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 4,
+   "missed": [
+    "api.fda.gov /drug/enforcement.json"
+   ]
   },
   {
    "id": "h15",
@@ -815,6 +828,7 @@
    "level": "danger",
    "notice": "FDA H-0009-2027",
    "headline": "Lot 091026 DL is listed in this recall.",
+   "basis": "record-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -865,7 +879,7 @@
     "completion": 8017
    },
    "usd": 0.00336,
-   "ms": 50,
+   "ms": 32,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -933,7 +947,7 @@
     "completion": 8011
    },
    "usd": 0.00334,
-   "ms": 41,
+   "ms": 9,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -952,6 +966,7 @@
    "level": "danger",
    "notice": "FDA H-0007-2027",
    "headline": "Lot 720106 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1000,15 +1015,17 @@
     "completion": 790
    },
    "usd": 0.00175,
-   "ms": 37,
+   "ms": 1716,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 16,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h19",
@@ -1019,6 +1036,7 @@
    "level": "danger",
    "notice": "FDA H-0014-2027",
    "headline": "Lot L6081A is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1069,15 +1087,17 @@
     "completion": 3317
    },
    "usd": 0.00246,
-   "ms": 43,
+   "ms": 1225,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 1,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 8,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h20",
@@ -1087,7 +1107,9 @@
    "expect": "flag",
    "level": "danger",
    "notice": "FDA H-0021-2027",
-   "headline": "UPC 666186277621 is listed in this recall.",
+   "headline": "Do not eat if anyone in your home is allergic to soy; Return it to the place of purchase, or ask your pharmacist or Saint Francis Apizza LLC about a replacement or refund.",
+   "basis": "record-list",
+   "allergen": "soy",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1136,15 +1158,17 @@
     "completion": 973
    },
    "usd": 0.00173,
-   "ms": 38,
+   "ms": 830,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 18,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h21",
@@ -1202,7 +1226,7 @@
     "completion": 822
    },
    "usd": 0.00149,
-   "ms": 40,
+   "ms": 7,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1270,7 +1294,7 @@
     "completion": 2966
    },
    "usd": 0.00217,
-   "ms": 38,
+   "ms": 7,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1337,7 +1361,7 @@
     "completion": 2405
    },
    "usd": 0.00231,
-   "ms": 43,
+   "ms": 11,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1409,7 +1433,7 @@
     "completion": 1615
    },
    "usd": 0.00204,
-   "ms": 38,
+   "ms": 10,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1428,6 +1452,7 @@
    "level": "danger",
    "notice": "CPSC 27-039",
    "headline": "VQQQ-A1 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1482,7 +1507,7 @@
     "completion": 580
    },
    "usd": 0.00181,
-   "ms": 30,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1501,6 +1526,7 @@
    "level": "danger",
    "notice": "CPSC 27-039",
    "headline": "VQQQ001 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1555,7 +1581,7 @@
     "completion": 498
    },
    "usd": 0.00156,
-   "ms": 32,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1627,7 +1653,7 @@
     "completion": 516
    },
    "usd": 0.00161,
-   "ms": 27,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1693,7 +1719,7 @@
     "completion": 1087
    },
    "usd": 0.00215,
-   "ms": 26,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1759,7 +1785,7 @@
     "completion": 334
    },
    "usd": 0.00109,
-   "ms": 25,
+   "ms": 5,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1825,7 +1851,7 @@
     "completion": 334
    },
    "usd": 0.0011,
-   "ms": 26,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1891,7 +1917,7 @@
     "completion": 1233
    },
    "usd": 0.00177,
-   "ms": 40,
+   "ms": 9,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1910,6 +1936,7 @@
    "level": "danger",
    "notice": "WEB FDA website",
    "headline": "Lot 26-196 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -1959,15 +1986,17 @@
     "completion": 2243
    },
    "usd": 0.00362,
-   "ms": 42,
+   "ms": 1644,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 10,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h33",
@@ -2027,15 +2056,17 @@
     "completion": 2339
    },
    "usd": 0.00391,
-   "ms": 44,
+   "ms": 1649,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 10,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h34",
@@ -2045,7 +2076,9 @@
    "expect": "flag",
    "level": "danger",
    "notice": "WEB FDA website",
-   "headline": "UPC 2-70552-00649-2 is listed in this recall.",
+   "headline": "Do not eat if anyone in your home is allergic to sesame; return them to their nearest WinCo Foods location for a refund.",
+   "basis": "reader-list",
+   "allergen": "sesame",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -2094,15 +2127,17 @@
     "completion": 1165
    },
    "usd": 0.0019,
-   "ms": 36,
+   "ms": 821,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 6,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h35",
@@ -2113,6 +2148,7 @@
    "level": "danger",
    "notice": "WEB FDA website",
    "headline": "Lot 085261 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -2161,15 +2197,17 @@
     "completion": 448
    },
    "usd": 0.00138,
-   "ms": 18,
+   "ms": 1241,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 8,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h36",
@@ -2227,15 +2265,17 @@
     "completion": 451
    },
    "usd": 0.00139,
-   "ms": 20,
+   "ms": 1649,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 10,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h37",
@@ -2294,15 +2334,17 @@
     "completion": 500
    },
    "usd": 0.00164,
-   "ms": 17,
+   "ms": 828,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 4,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h38",
@@ -2363,7 +2405,7 @@
     "completion": 1022
    },
    "usd": 0.0018,
-   "ms": 14,
+   "ms": 4,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2429,7 +2471,7 @@
     "completion": 667
    },
    "usd": 0.00144,
-   "ms": 30,
+   "ms": 8,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -2448,6 +2490,7 @@
    "level": "danger",
    "notice": "WEB FDA website",
    "headline": "Lot 26-196 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -2498,15 +2541,17 @@
     "completion": 1666
    },
    "usd": 0.00188,
-   "ms": 29,
+   "ms": 1647,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 10,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h41",
@@ -2517,6 +2562,7 @@
    "level": "danger",
    "notice": "WEB FDA website",
    "headline": "Lot 085261 is listed in this recall.",
+   "basis": "reader-list",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -2565,15 +2611,17 @@
     "completion": 448
    },
    "usd": 0.00138,
-   "ms": 28,
+   "ms": 1222,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 8,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h42",
@@ -2632,15 +2680,17 @@
     "completion": 390
    },
    "usd": 0.0013,
-   "ms": 26,
+   "ms": 819,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 0,
-   "missed": []
+   "cacheMisses": 4,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
   },
   {
    "id": "h43",
@@ -2696,7 +2746,7 @@
     "completion": 319
    },
    "usd": 0.00127,
-   "ms": 5,
+   "ms": 3,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,

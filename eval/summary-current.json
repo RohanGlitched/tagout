@@ -238,6 +238,70 @@
     "k07": "warning",
     "k08": "inspected",
     "k09": "inspected"
+   },
+   "redBasis": {
+    "n": 46,
+    "by": {
+     "reader-list": 31,
+     "record-list": 15
+    },
+    "how": {
+     "exact": 46
+    },
+    "window": 1,
+    "cases": {
+     "p01": "reader-list",
+     "p02": "reader-list",
+     "p03": "reader-list",
+     "p04": "reader-list",
+     "p05": "reader-list",
+     "p06": "reader-list",
+     "p07": "reader-list",
+     "p08": "reader-list",
+     "p09": "reader-list",
+     "p10": "reader-list",
+     "p11": "reader-list",
+     "p12": "reader-list",
+     "p13": "reader-list",
+     "p14": "reader-list",
+     "p15": "reader-list",
+     "p16": "reader-list",
+     "p17": "reader-list",
+     "p18": "reader-list",
+     "p19": "reader-list",
+     "p20": "reader-list",
+     "p21": "reader-list",
+     "p22": "reader-list",
+     "p23": "reader-list",
+     "p24": "reader-list+window",
+     "p25": "reader-list",
+     "p26": "reader-list",
+     "p27": "reader-list",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d03": "record-list",
+     "d04": "record-list",
+     "d05": "reader-list",
+     "d06": "reader-list",
+     "d07": "record-list",
+     "d08": "record-list",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f01": "reader-list",
+     "f02": "reader-list",
+     "f03": "record-list",
+     "f04": "record-list",
+     "f05": "record-list",
+     "f06": "record-list",
+     "f07": "record-list",
+     "f08": "record-list"
+    },
+    "from": "replay-summary.json",
+    "code": {
+     "commit": "836f185",
+     "libChanged": true
+    }
    }
   },
   {
@@ -425,6 +489,72 @@
     "k07": "warning",
     "k08": "inspected",
     "k09": "warning"
+   },
+   "redBasis": {
+    "n": 47,
+    "by": {
+     "reader-list": 31,
+     "record-list": 15,
+     "text": 1
+    },
+    "how": {
+     "exact": 47
+    },
+    "window": 0,
+    "cases": {
+     "p01": "reader-list",
+     "p02": "reader-list",
+     "p03": "reader-list",
+     "p04": "reader-list",
+     "p05": "reader-list",
+     "p06": "reader-list",
+     "p07": "reader-list",
+     "p08": "reader-list",
+     "p09": "reader-list",
+     "p10": "reader-list",
+     "p11": "text",
+     "p12": "reader-list",
+     "p13": "reader-list",
+     "p14": "reader-list",
+     "p15": "reader-list",
+     "p16": "reader-list",
+     "p17": "reader-list",
+     "p18": "reader-list",
+     "p19": "reader-list",
+     "p20": "reader-list",
+     "p21": "reader-list",
+     "p22": "reader-list",
+     "p23": "reader-list",
+     "p24": "reader-list",
+     "p25": "reader-list",
+     "p26": "reader-list",
+     "p27": "reader-list",
+     "d01": "record-list",
+     "d02": "record-list",
+     "d03": "record-list",
+     "d04": "record-list",
+     "d05": "reader-list",
+     "d06": "reader-list",
+     "d07": "record-list",
+     "d08": "record-list",
+     "d09": "record-list",
+     "d10": "record-list",
+     "d11": "record-list",
+     "f01": "reader-list",
+     "f02": "reader-list",
+     "f03": "record-list",
+     "f04": "record-list",
+     "f05": "record-list",
+     "f06": "record-list",
+     "f07": "record-list",
+     "f08": "record-list",
+     "n12": "reader-list"
+    },
+    "from": "replay-summary.json",
+    "code": {
+     "commit": "836f185",
+     "libChanged": true
+    }
    }
   },
   {
@@ -1627,5 +1757,6 @@
     "k04": "warning"
    }
   }
- ]
+ ],
+ "redBasisNote": "redBasis: what decided each red tag, from an offline replay of this arm at the current code (eval:replay), which gives the same tag as the recorded run on every case. by: reader-list = the code is in a model, lot or UPC list Nemotron's notice reader read; record-list = in the agency record's own field or its deterministic parse (openFDA code_info lots, UPCs and NDCs in the description); text = only in the notice's text (the matcher's fallback). how: exact, range (inside a printed range) or family (a family code). window: a made-date window was checked too. Every code a reader lists is also printed in the notice (lib/agent/verify-codes.ts), so reader-list says which path decided, not that only the reader could find it: the no-model arm (record-list and text only) is the comparison."
 }

@@ -4,7 +4,8 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 
 ## What was held out
 
-- **Committed first.** `cases-holdout.json` went in as commit `d9dce10` (Oct 25 00:37:01 IST) and its ground truth as `e2d6481` (00:37:05). Every arm ran after that, from a detached worktree at `a1d8b21`, so nobody's uncommitted work could leak in. The code under test is `lib/` as of Oct 15 20:28 IST, plus one change made earlier on Oct 25: Nemotron 3.5 Super VL reads label photos first.
+- **Committed first.** `cases-holdout.json` went in as commit `d9dce10` (Oct 25 00:37:01 IST) and its ground truth as `e2d6481` (00:37:05). Every arm ran after that, from a detached worktree at `a1d8b21`, so nobody's uncommitted work could leak in.
+- **What can be checked from outside.** The cases (`d9dce10`) and all runs were committed locally on Oct 25 and pushed together at 20:47 UTC (Oct 24 20:47:55 UTC, 02:17 IST on Oct 25); commit times are local, set by whoever commits, so GitHub alone can't show the cases came first. The file has not changed since: sha256 of `eval/cases-holdout.json` is `3f6243656600030a76bdbd793e51ce151a81eb2f89f7b08e96836285a8e37bd0` (also in `holdout-meta.json`). The next held-out set is pushed, and tagged, before anything runs on it (see "Held out #2"). The code under test is `lib/` as of Oct 15 20:28 IST, plus one change made earlier on Oct 25: Nemotron 3.5 Super VL reads label photos first.
 - **None of these recalls is in the tuned set.** `verify-holdout.mjs` checks this for every case.
 - **27 database cases.** These recalls were already in an API Tagout queries:
   - CPSC recalls posted Oct 15 and Oct 22;
@@ -52,7 +53,7 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 - **Count corrected on Oct 25.** `holdout-report.mjs` used to count only the reds on the 6 exact-code cases, so `tavilyAblation.*.lag.withTavily.red` said 2 and /proof printed "2 red". It now counts every red among the 10 lag-window recalls (`red`: 3 for Tagout, 2 for the lite tier) and keeps the narrower count as `redOnExactCode` (2 and 2). Only those fields of `holdout-summary.json` were regenerated; every other held-out number is unchanged.
 - **Net effect.** Turning Tavily off took Tagout from 31/39 to 27/39 right, and its wrongly cleared count from 4 to 12. The lite tier went from 30/39 to 26/39, and from 6 to 12 cleared.
 - **On the 27 database cases Tavily changed nothing:** 25/27 with it and without it.
-- **Tuned set.** Turning the web step off in the no-model arm (free, replayed from the cache) took it from 87/105 to 81/105, and its recalled units cleared green from 10 to 19 (`replay-summary.json`, arm `rules-noweb`).
+- **Tuned set.** Turning the web step off in the no-model arm (free, replayed from the cache) took it from 87/105 to 81/105 on the Oct 15 replay, and its recalled units cleared green from 10 to 19; at the current code it is 83/105 to 78/105 (`replay-summary.json`, arms `rules` and `rules-noweb`).
 - **Caveat.** On the database cases, Tavily also turned one green near miss orange (h12, still right). In the tuned set's no-model arm it caused one wrong red (n12) that the Tavily-off variant doesn't have.
 
 ## What went wrong on the held-out set (as run; fixed afterwards, see "After the fixes")
@@ -162,12 +163,34 @@ The `ed2dc77` Tavily column is billed credits (an extract is 1 credit per 5 URLs
 |---|---|---|---|---|---|---|
 | Cascade, first run (`a1d8b21`, held out) | 30/39 | 0/10 | 6/31 | 23/27 | 7/12 | 3.03¢ (14 of 39 escalated) |
 | Cascade, at `ed2dc77` (in-sample) | 35/39 | 0/10 | 1/31 | 26/27 | 9/12 | 3.20¢ (18 escalated) |
-| Rules only, offline replay at `ed2dc77` | 24/39 | 0/10 | 0/31 | 17/27 | 7/12 | 0.90¢ (Tavily only) |
+| Rules only, all 39 measured (`6149853`, filled Oct 25) | 24/39 | 0/10 | 0/31 | 17/27 | 7/12 | 1.09¢ (Tavily only, priced as if keyed) |
 
 - **On this set the agent never overturned a lite red**, so the cascade scores what the lite tier scores and costs about twice as much; what it buys is a confirmed red. On the 105 at `ed2dc77` it does overturn one: the lite tier's false red n12 becomes orange, giving 102/105 with 0/59 wrongly red and 0/67 cleared, at 2.95¢ an item with Tavily (the lite tier alone is 1.38¢, Tagout 4.38¢).
 - **Where the full agent and the lite tier differ, first run:** the agent was right on h07 (the brand-less photo), h24 and h43; the lite tier was right on h38 and h39 (Kayem, FSIS). At `ed2dc77` the agent is right on h07 and h43 and the lite tier on none.
-- **Rules only** is never green, because of the "never green without a model" guard: it clears nothing and gets the clean items wrong. 21 of its 39 cases need calls the cache doesn't have (the pattern reader reads different items from Ultra's, so 19 cases ask CPSC other searches and 9 ask Tavily other queries), and those fail here as an unreachable API would; on the 18 that replay exactly it is 14/18. Filling them would take free CPSC calls and about 9-12 Tavily credits.
+- **Rules only** is never green, because of the "never green without a model" guard: it clears nothing and gets the clean items wrong. Its pattern reader reads different items from Ultra's, so 21 of its 39 cases needed calls the cache didn't have (19 cases ask CPSC other searches, 9 ask Tavily other queries); the first table counted those as failures (24/39, 14/18 on the 18 that replayed exactly). **On Oct 25 they were filled with no model and no credits** (`eval/run.ts rules --keyless`: free CPSC, openFDA and NHTSA calls and 9 keyless Tavily searches), so all 39 are measured: **24/39, 0 wrongly red, 0 cleared**, 17/27 on the database cases and 7/12 in the lag window. The filled calls changed no tag; an offline replay of the arm now has no cache misses. This is the "no model at all" row: on unseen recalls, Nemotron takes the same pipeline from 24/39 to 31/39 as run once (37/39 after the fixes), and the lite tier's Nano reader alone to 30/39.
 - **Routing policy.** A first check runs the full agent: it is the most right (37/39 and 105/105 at this code, 31/39 held out) and clears nothing. A re-check runs as the daily sweep: each new recall is read once and matched by rules against every watched item, so it costs nothing per household until a recall names a watched brand or code. Resale screening runs the cascade: the lite price for every listing, and the full agent only to confirm a red before it costs a sale.
+
+### What decided each red tag (`redBasis`, free from the replay)
+
+Every eval row now records how its red tag was reached (`basis` in `eval/run.ts`, from the matcher in `lib/match.ts`): the code was in a model, lot or UPC list **Nemotron's notice reader** read, in the **agency record's own list** (an openFDA `code_info` lot parsed without a model, a UPC or NDC in the description), or only in the **notice's text** (the matcher's fallback); matched exactly, inside a printed **range**, or by a **family** code; and whether a made-date **window** was checked too. `node eval/basis-split.mjs` copies the split from the offline replays into `summary-current.json` and `holdout-after-fixes.json`, after checking that the replay gives the recorded tag on every case.
+
+| Set, arm (current code) | Red tags | Reader's list | Record's own list | Text fallback | Range or family | Window checked |
+|---|---|---|---|---|---|---|
+| 105, Tagout | 46 | 31 | 15 | 0 | 0 | 1 (p24) |
+| 105, lite tier | 47 | 31 | 15 | 1 | 0 | 0 |
+| 105, no model | 39 | 0 | 9 | 30 | 0 | 0 |
+| 39, Tagout | 19 | 15 | 4 | 0 | 0 | 0 |
+| 39, lite tier | 18 | 14 | 4 | 0 | 0 | 0 |
+
+- **Nemotron's reading decided 31 of the 46 red tags on the 105 and 15 of the 19 on the 39**; the rest came from lists the agency record already prints. With no model, the text fallback decides 30 of 39 reds and the arm is right on 83 of 105, against 105 with the reader.
+- **The limit the critics named holds.** Every code a reader lists must also be printed in the notice (that is the guard below), so "reader's list" says which path decided, not that only a model could have found the code. And no red tag in either set came from a printed range or a family code: those paths are unit-tested (`test/match.test.ts`) but not yet measured on a recalled unit. The second held-out set is built to measure them.
+
+### The code guard, as its own module (`lib/agent/verify-codes.ts`)
+
+The step that strikes invented codes used to test `norm(text).includes(norm(code))`, a substring test with no word edges, and it skipped the "not included" sentence check that the matcher's text fallback applies. It is now `verifyCodes()`: a code must be spelled by whole words of the notice (`SS1MODEL` out of `NS-RGFGSS1. Model` is struck, so are `RGFG` and `GSS`), and a code printed only in a sentence that says some units are not included is struck. Eight fixture tests in `test/verify-codes.test.ts` cover a cross-word fake, an excluded model, a range with one end missing, prose and paths, a UPC printed in groups, a two-part lot and its neighbour, product names with accents, plurals and symbols, and a wildcard family code.
+
+- **Re-replayed after the change (free): 105/105 and 37/39 still hold**, every case matches the committed replays (`npm run eval:replay`, `npm run eval:replay -- --holdout`, both exit 0).
+- **What the stricter test would have struck, measured.** Run over every notice the Tagout and lite arms read on both sets, the first version struck only product names the reader had put in its model list, or pieces of one (a name longer than eight words, a plural, an accent, a "™", a "*05/27" date mark); the shipped version accepts those and strikes nothing the old test kept on these arms. No code that decided a tag was affected.
 
 ## Replaying (`npm run eval:replay`)
 
