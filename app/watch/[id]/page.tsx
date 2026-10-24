@@ -5,6 +5,7 @@ import WatchRoom from "@/components/watch/WatchRoom";
 import { publicCheck } from "@/lib/checks";
 import { loadCheck } from "@/lib/store";
 import { loadWatch } from "@/lib/watches";
+import { watchFeed } from "@/lib/sweep/view";
 
 export const dynamic = "force-dynamic";
 
@@ -17,13 +18,15 @@ export default async function WatchPage({ params }: { params: Promise<{ id: stri
   const w = await loadWatch((await params).id);
   if (!w) notFound();
   // The checks this watch has run, newest last; the page compares the newest finished one with the one before.
-  const recs = (await Promise.all(w.checks.slice(-6).map((c) => loadCheck(c.id).catch(() => null)))).filter((r) => r !== null);
+  const [recs, feed] = await Promise.all([
+    Promise.all(w.checks.slice(-6).map((c) => loadCheck(c.id).catch(() => null))).then((rs) => rs.filter((r) => r !== null)),
+    watchFeed(w),
+  ]);
   return (
     <>
       <Header />
-      {/* Opening a watch never starts a check: the daily sweep does the looking (lib/sweep), and "check again now"
-          is the page's own button (POST /api/watches/<id>/recheck). due={false} keeps the old auto-run off. */}
-      <WatchRoom watch={w} checks={recs.map(publicCheck)} due={false} />
+      {/* Opening a watch runs nothing: the daily sweep does the looking (lib/sweep), and "Check again now" is the page's own button. */}
+      <WatchRoom watch={w} checks={recs.map(publicCheck)} feed={feed} />
       <Footer />
     </>
   );

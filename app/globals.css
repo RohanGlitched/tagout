@@ -52,6 +52,9 @@ a {
 }
 body > main {
   flex: 1 0 auto;
+  /* A flex item would otherwise grow to its widest child (the proof tables) on a phone. */
+  min-width: 0;
+  width: 100%;
 }
 html {
   scroll-padding-top: 128px;

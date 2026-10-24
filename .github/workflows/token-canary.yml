@@ -21,8 +21,8 @@ jobs:
           NEBIUS_API_KEY: ${{ secrets.NEBIUS_API_KEY }}
         run: |
           if [ -z "$NEBIUS_API_KEY" ]; then
-            echo "::error::The NEBIUS_API_KEY repository secret is not set."
-            exit 1
+            echo "::warning::The NEBIUS_API_KEY repository secret is not set; skipping."
+            exit 0
           fi
           code=$(curl -sS -o body.json -w '%{http_code}' --max-time 60 \
             https://api.tokenfactory.nebius.com/v1/chat/completions \

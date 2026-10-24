@@ -225,8 +225,7 @@ function WatchOffer({ checkId, photos }: { checkId: string; photos: number }) {
       <div>
         <h2 id="watch-h">Watch these things</h2>
         <p>
-          Recalls keep coming: CPSC announces new ones every week. Save this list as a watch and keep its link. Each time you open it, Tagout checks the list again (at most once a
-          day) and shows what&apos;s new since the last check.{photos ? " Photos aren't kept, so only the typed lines are watched." : ""}
+          Recalls keep coming: CPSC announces new ones every week. Save this list as a watch: every day Tagout compares each new recall with it, and anything that names one of your things shows up on the watch page and in its feed.{photos ? " Photos aren't kept, so only the typed lines are watched." : ""}
         </p>
         {error ? (
           <p className={s.watchError} role="alert">
@@ -267,28 +266,63 @@ function Reading({ text, photos }: { text: string; photos: number }) {
 function Engine({ rec }: { rec: Pub }) {
   const e = rec.engine;
   if (!e) return null;
+  const tk = e.tokens;
+  // Tavily credits: one per search, one per page extracted (as Tavily bills them).
+  const web = (rec.log ?? []).filter((x) => x.t === "step" && (x.step.tool === "search_web" || x.step.tool === "read_page")).length;
+  // Tokens priced like Ultra when an older check carries no cost of its own.
+  const usd = tk ? (tk.usd ?? (tk.prompt * 1 + tk.completion * 3) / 1e6) : 0;
+  const roles: [string, string | undefined][] =
+    e.mode === "lite" || e.planned === "fixed"
+      ? [
+          ["Read your list", e.reader],
+          ["Read label photos", e.vision],
+          ["Planned the searches", "A fixed search plan (no model)"],
+          ["Read each notice", e.mode === "lite" ? (e.noticeReader ?? "Nemotron 3 Nano") : e.noticeReader],
+        ]
+      : [
+          ["Read your list", e.reader],
+          ["Read label photos", e.vision],
+          ["Planned the searches", e.agent],
+          ["Read each notice", e.noticeReader ?? e.agent],
+        ];
+  const extras = [
+    e.readsReused ? `${plural(e.readsReused, "notice")} already read by an earlier check, reused` : "",
+    e.lateLite ? `${plural(e.lateLite, "item")} ran on the lite tier after the time limit` : "",
+    e.modelUnavailable ? `${plural(e.modelUnavailable, "item")} held at orange because no model answered` : "",
+  ].filter(Boolean);
   return (
     <section className={s.engine} aria-label="How this check ran">
       <h2>How this check ran</h2>
-      {e.mode === "lite" ? (
-        <p>
-          Today&apos;s Nemotron 3 Ultra budget for the demo was spent, so this check ran the lighter way:{e.reader ? ` ${e.reader} read your list,` : ""} a fixed search plan
-          ran the same agency and Tavily searches, and {e.noticeReader ?? "Nemotron 3 Nano"} read the notices
-          {e.tokens?.calls ? ` (${plural(e.tokens.calls, "call")}, ${((e.tokens.prompt + e.tokens.completion) / 1000).toFixed(0)}k tokens on Nebius Token Factory)` : ""}. In the eval this
-          way got 98 of 105 cases right and cleared no recalled unit, against 104 for the full agent. Whether a tag is red was decided by the same rules.
-        </p>
-      ) : e.planned === "fixed" ? (
-        <p>The model was unavailable or today&apos;s demo budget was spent, so this check used Tagout&apos;s fixed search plan. The matcher works the same way.</p>
-      ) : (
-        <p>
-          {e.reader ? `${e.reader} read your list. ` : ""}
-          {e.vision ? `${e.vision} read your label photos. ` : ""}
-          {e.agent ? `${e.agent} planned the searches and chose the relevant recalls. ` : ""}
-          All of it ran on Nebius Token Factory
-          {e.tokens?.calls ? `: ${plural(e.tokens.calls, "call")}, ${((e.tokens.prompt + e.tokens.completion) / 1000).toFixed(0)}k tokens` : ""}. Tavily searched the web. Whether a tag is red was
-          decided by comparing your codes with each recall&apos;s list, not by a model.
-        </p>
-      )}
+      <dl className={s.roles}>
+        {roles
+          .filter(([, m]) => m)
+          .map(([role, m]) => (
+            <div key={role}>
+              <dt>{role}</dt>
+              <dd>{m}</dd>
+            </div>
+          ))}
+        <div>
+          <dt>Decided the tag</dt>
+          <dd>Rules: your codes against each recall&apos;s list, not a model</dd>
+        </div>
+      </dl>
+      <p className={s.cost}>
+        {tk?.calls ? (
+          <>
+            <b>{plural(tk.calls, "call")}</b> to Nebius Token Factory, {((tk.prompt + tk.completion) / 1000).toFixed(0)}k tokens (about {(usd * 100).toFixed(1)}¢ at list price)
+          </>
+        ) : (
+          "No model calls"
+        )}
+        {web ? (
+          <>
+            ; <b>{plural(web, "Tavily credit")}</b> (about {(web * 0.8).toFixed(0)}¢)
+          </>
+        ) : null}
+        .{e.mode === "lite" ? " Today's full-agent budget was spent, so this ran on the lite tier: 98 of 105 right in the eval, none cleared." : ""}
+      </p>
+      {extras.length ? <p className={s.cost}>{extras.join("; ")}.</p> : null}
     </section>
   );
 }

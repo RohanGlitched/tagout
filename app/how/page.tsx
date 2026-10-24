@@ -138,7 +138,7 @@ export default function How() {
               When the demo&apos;s daily Nemotron 3 Ultra budget is spent, checks run a fixed search plan with Nemotron 3 Nano reading the notices (98 of 105 right in the eval, against
               104 for the full agent). Past that budget too, or if Token Factory is down, the fixed plan runs with no model. Each check says which way it ran.
             </li>
-            <li>A watched list is checked again only when its link is opened, at most once a day. Nothing runs in the background and nothing is emailed yet.</li>
+            <li>A watched list is compared with every new recall once a day, by a sweep that reads each recall once and matches it by rules. Alerts go to the watch page and its feed; there is no email or phone notification yet.</li>
           </ul>
           <p className={s.more}>
             How well it works, measured on 105 real cases: <Link href="/proof">the eval</Link>. The code is open source: <a href={REPO_URL}>{REPO_URL.replace("https://", "")}</a>.{" "}
