@@ -17,8 +17,6 @@ const tagout = summary.arms.find((a) => a.arm === "tagout")!;
 export default function Business() {
   const full = perItem("full");
   const lite = perItem("lite");
-  // A unit with eight appliances, checked once in full and then re-checked monthly on the lite tier.
-  const unitYear = 8 * full + 11 * 8 * lite;
   return (
     <>
       <Header />
@@ -46,7 +44,8 @@ export default function Business() {
                   <b>Price:</b> $1 per unit per month. A 200-unit building pays $200 a month.
                 </li>
                 <li>
-                  <b>Our cost:</b> about {money(unitYear / 12)} per unit per month for eight appliances, from measured costs below.
+                  <b>Our cost:</b> about {money(8 * full)} once to check a unit&apos;s eight appliances, then a share of one daily sweep that reads each new recall once: at most
+                  about 3¢ a day across every watched list, so well under a cent per unit per month.
                 </li>
                 <li>
                   <b>Channel:</b> property-management software marketplaces, then warranty claims systems.
