@@ -171,5 +171,8 @@ export function noticeFacts(text: string, title: string): NoticeFacts {
 /** "return them to their nearest WinCo Foods location for a refund": the action part of a remedy, for a tag. */
 export function remedyAction(remedy: string | undefined): string | undefined {
   const m = remedy?.match(/\b((?:immediately\s+)?(?:discard|return|throw (?:it|them) away|bring)\b[^.;]*)/i) ?? remedy?.match(/\b(thrown away or returned\b[^.;]*)/i);
-  return m ? m[1].replace(/\s*\([^)]*\)\s*$/, "").replace(/[,\s]+$/, "") : undefined;
+  if (!m) return undefined;
+  // The action alone: "Return it to the place of purchase, or ask … about a refund" is "return it to the place of purchase".
+  const a = m[1].split(/,?\s+or\s+(?:ask|contact|call)\b|\s*\(/i)[0].replace(/[,\s]+$/, "");
+  return a.charAt(0).toLowerCase() + a.slice(1);
 }

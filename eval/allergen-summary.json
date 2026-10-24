@@ -1,0 +1,97 @@
+{
+ "at": "2026-10-24T22:39:40.373Z",
+ "firstRun": null,
+ "cases": 4,
+ "groups": {
+  "positive": 3,
+  "near-miss": 1
+ },
+ "arms": [
+  {
+   "arm": "tagout",
+   "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+   "n": 4,
+   "right": 4,
+   "rightInterval": [
+    0.398,
+    1
+   ],
+   "redPrecision": 1,
+   "redRecall": 1,
+   "redRecallInterval": [
+    0.292,
+    1
+   ],
+   "reds": 3,
+   "truePositives": 3,
+   "positives": 3,
+   "falseRed": [],
+   "falseRedOf": 1,
+   "falseRedInterval": [
+    0,
+    0.975
+   ],
+   "falseClear": [],
+   "falseClearOf": 3,
+   "falseClearInterval": [
+    0,
+    0.708
+   ],
+   "errors": [],
+   "byGroup": {
+    "positive": {
+     "n": 3,
+     "right": 3
+    },
+    "near-miss": {
+     "n": 1,
+     "right": 1
+    }
+   },
+   "usdPerItem": 0.0180275,
+   "usdTotal": 0.07211,
+   "tavilyPerItem": 1.75,
+   "tavilyUsdPerItem": 0.014,
+   "usdPerItemWithTavily": 0.0320275,
+   "medianMs": null,
+   "webOnlyReds": [],
+   "webCited": [
+    "a02"
+   ],
+   "fellBack": [],
+   "config": {
+    "today": "2026-10-25",
+    "noWeb": false,
+    "offline": false,
+    "keyless": true,
+    "code": {
+     "commit": "3b8f869",
+     "libChanged": true
+    }
+   },
+   "levels": {
+    "a01": "danger",
+    "a02": "warning",
+    "a03": "danger",
+    "a04": "danger"
+   },
+   "redBasis": {
+    "n": 3,
+    "by": {
+     "reader-list": 1,
+     "record-list": 1,
+     "text": 1
+    },
+    "how": {
+     "exact": 3
+    },
+    "window": 0,
+    "cases": {
+     "a01": "record-list",
+     "a03": "reader-list",
+     "a04": "text"
+    }
+   }
+  }
+ ]
+}

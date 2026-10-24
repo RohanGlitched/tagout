@@ -1,0 +1,45 @@
+{
+ "about": "Undeclared-allergen recalls from openFDA's food enforcement reports (reported Oct 7 and Oct 14 2026), written Oct 25 to test allergy alerts: a red tag should say who must not eat the product (lib/agent/verdict.ts) and name the allergen read from the record (lib/notice-facts.ts allergenOnly). None of these recalls is in cases.json or cases-holdout.json. Ground truth is checked against openFDA by eval/verify-allergen.mjs without any Tagout code. Scored like the other sets (eval/score.mjs --cases cases-allergen.json --verified verified-allergen.json); `allergen` is the expected allergen chip.",
+ "expect": {
+  "danger": "Red: the unit's lot is printed in the recall, and the tag is an allergy alert for `allergen`.",
+  "not-danger": "Orange or green: a neighbouring lot the recall doesn't print."
+ },
+ "cases": [
+  {
+   "id": "a01",
+   "group": "positive",
+   "text": "Donutful chocolate dipped vanilla cake donuts, lot 26078",
+   "expect": "danger",
+   "recall": ["FDA H-0011-2027"],
+   "allergen": "milk",
+   "published": "2026-10-14"
+  },
+  {
+   "id": "a02",
+   "group": "near-miss",
+   "text": "Donutful chocolate dipped vanilla cake donuts, lot 26079",
+   "expect": "not-danger",
+   "near": "FDA H-0011-2027",
+   "brand": "Donutful",
+   "published": "2026-10-14"
+  },
+  {
+   "id": "a03",
+   "group": "positive",
+   "text": "Cloud Cafe collagen milk, strawberry, lot OB25001",
+   "expect": "danger",
+   "recall": ["FDA H-1400-2026"],
+   "allergen": "fish",
+   "published": "2026-10-07"
+  },
+  {
+   "id": "a04",
+   "group": "positive",
+   "text": "Organiccs Absolutely Pure collagen peptides capsules, lot 25009CP",
+   "expect": "danger",
+   "recall": ["FDA H-1401-2026"],
+   "allergen": "shellfish",
+   "published": "2026-10-07"
+  }
+ ]
+}

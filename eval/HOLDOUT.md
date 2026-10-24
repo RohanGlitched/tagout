@@ -192,6 +192,13 @@ The step that strikes invented codes used to test `norm(text).includes(norm(code
 - **Re-replayed after the change (free): 105/105 and 37/39 still hold**, every case matches the committed replays (`npm run eval:replay`, `npm run eval:replay -- --holdout`, both exit 0).
 - **What the stricter test would have struck, measured.** Run over every notice the Tagout and lite arms read on both sets, the first version struck only product names the reader had put in its model list, or pieces of one (a name longer than eight words, a plural, an accent, a "™", a "*05/27" date mark); the shipped version accepts those and strikes nothing the old test kept on these arms. No code that decided a tag was affected.
 
+### Allergy alerts (`cases-allergen.json`, Oct 25)
+
+An undeclared-allergen recall is a danger only to someone allergic, so its red tag now says so: "Do not eat if anyone in your home is allergic to milk; return it to the place of purchase", with an allergen chip. The allergen is read from the notice without a model (`lib/notice-facts.ts`: "undeclared X" in openFDA's reason or the announcement's own sentence, and only when no other hazard such as Listeria or foreign matter is named). On openFDA, 295 of the 1,049 food enforcement reports of 2026 give "undeclared" in the reason (28%; `api.fda.gov/food/enforcement.json?search=report_date:[20260101+TO+20261231]+AND+reason_for_recall:undeclared`, Oct 25), mostly allergens, plus undeclared dyes and drug ingredients.
+
+- **Four new cases**, none in the other sets: three recalled lots (Donutful donuts, undeclared milk, H-0011-2027; Cloud Cafe collagen milk, fish, H-1400-2026; Organiccs collagen capsules, shellfish, H-1401-2026) and one neighbouring lot (Donutful `26079`). `node eval/verify-allergen.mjs` checks them against openFDA with no Tagout code: 4/4.
+- **Tagout, run once (`results-allergen/`, `allergen-summary.json`): 4/4**, three red allergy alerts naming milk, fish and shellfish, and the near miss orange. $0.076 of Token Factory; Tavily in keyless mode, no credits.
+
 ## Replaying (`npm run eval:replay`)
 
 - **What it does.** It re-runs every recorded arm offline from `eval/.cache` against the checked-out code: no network, no keys, no spend. Then it re-scores into `replay-summary.json` and compares with the recorded tags and with the committed replay. It exits 1 if any tag moved since the committed replay.

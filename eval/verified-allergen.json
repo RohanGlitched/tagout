@@ -1,0 +1,43 @@
+{
+ "at": "2026-10-24T22:38:16.935Z",
+ "results": [
+  {
+   "id": "a01",
+   "group": "positive",
+   "lot": "26078",
+   "ok": true,
+   "notes": [],
+   "report_date": "20261014",
+   "reason": "Undeclared Milk."
+  },
+  {
+   "id": "a02",
+   "group": "near-miss",
+   "lot": "26079",
+   "ok": true,
+   "notes": [
+    "no openFDA food record from Donutful prints 26079"
+   ],
+   "report_date": "20261014",
+   "reason": "Undeclared Milk."
+  },
+  {
+   "id": "a03",
+   "group": "positive",
+   "lot": "OB25001",
+   "ok": true,
+   "notes": [],
+   "report_date": "20261007",
+   "reason": "Undeclared allergen ingredient (fish)"
+  },
+  {
+   "id": "a04",
+   "group": "positive",
+   "lot": "25009CP",
+   "ok": true,
+   "notes": [],
+   "report_date": "20261007",
+   "reason": "Undeclared shellfish (crab shell): source of ingredient Glucosamine sulfate"
+  }
+ ]
+}

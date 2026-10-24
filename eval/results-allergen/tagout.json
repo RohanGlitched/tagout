@@ -1,0 +1,318 @@
+{
+ "arm": "tagout",
+ "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "useAgent": true,
+  "useModel": true,
+  "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+  "cases": "cases-allergen.json",
+  "today": "2026-10-25",
+  "noWeb": false,
+  "offline": false,
+  "keyless": true,
+  "code": {
+   "commit": "3b8f869",
+   "libChanged": true
+  }
+ },
+ "at": "2026-10-24T22:39:40.214Z",
+ "cases": [
+  {
+   "id": "a01",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0011-2027",
+   "headline": "Do not eat if anyone in your home is allergic to milk; return it to the place of purchase.",
+   "basis": "record-list",
+   "allergen": "milk",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 12303,
+     "completion": 3084,
+     "usd": 0.021555000000000005
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Donutful",
+     "product": "chocolate dipped vanilla cake donuts",
+     "lot": "26078",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 26078, brand “Donutful”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Donutful chocolate dipped vanilla cake donuts recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “The Better Bakehouse Snack Company is Recalling Certain Lots of Donu…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 7,
+   "liveCalls": 2,
+   "tokens": {
+    "prompt": 12303,
+    "completion": 3084
+   },
+   "usd": 0.02156,
+   "ms": 3640,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0
+  },
+  {
+   "id": "a02",
+   "group": "near-miss",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "allergen": "milk",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 9,
+     "prompt": 19178,
+     "completion": 3103,
+     "usd": 0.028487
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 2,
+     "extractUrls": 2,
+     "credits": 3
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Donutful",
+     "product": "chocolate dipped vanilla cake donuts",
+     "lot": "26079",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 26079, brand “Donutful”, “chocolate dipped vanilla cake donuts”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Donutful Chocolate Dipped Vanilla Cake Donuts - 7.05oz/10ct.Case Con…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 26079, brand “Donutful”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Donutful chocolate dipped vanilla cake donuts recall”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “The Better Bakehouse Snack Company is Recalling Certain Lots of Donu…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 19178,
+    "completion": 3103
+   },
+   "usd": 0.02849,
+   "ms": 79,
+   "msFresh": false,
+   "tavily": 3,
+   "tavilySearch": 1,
+   "tavilyExtract": 2,
+   "tavilyCredits": 3,
+   "truncated": 0
+  },
+  {
+   "id": "a03",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-1400-2026",
+   "headline": "Do not eat if anyone in your home is allergic to fish; return it to the place of purchase.",
+   "basis": "reader-list",
+   "allergen": "fish",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 6935,
+     "completion": 1368,
+     "usd": 0.011039
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Cloud Cafe",
+     "product": "collagen milk, strawberry",
+     "lot": "OB25001",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot OB25001, brand “Cloud Cafe”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Cloud Cafe collagen milk recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 6935,
+    "completion": 1368
+   },
+   "usd": 0.01104,
+   "ms": 44,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
+  },
+  {
+   "id": "a04",
+   "group": "positive",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-1401-2026",
+   "headline": "Do not eat if anyone in your home is allergic to shellfish; return it to the place of purchase.",
+   "basis": "text",
+   "allergen": "shellfish",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7013,
+     "completion": 1337,
+     "usd": 0.011024
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Organiccs",
+     "product": "Absolutely Pure collagen peptides capsules",
+     "lot": "25009CP",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 25009CP, brand “Organiccs”, “collagen peptides capsules”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Organiccs Absolutely Pure collagen peptides capsules recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 7013,
+    "completion": 1337
+   },
+   "usd": 0.01102,
+   "ms": 35,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0
+  }
+ ]
+}
