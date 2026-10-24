@@ -130,6 +130,9 @@ export async function readItems(text: string, photos: string[], useModel: boolea
           name: "items",
           schema: SCHEMA,
           messages: [{ role: "user", content: [{ type: "text", text: VISION }, { type: "image_url", image_url: { url } }] }] as Msg[],
+          // Nemotron 3.5 Super VL reasons before it answers: on a real price-tag photo it spent the default 2,500
+          // tokens reasoning and returned nothing; with 8,000 it read the tag in about 3,000 (eval/HOLDOUT.md).
+          maxTokens: 6000,
           timeoutMs: 40_000,
         }).catch(() => null),
       ),
