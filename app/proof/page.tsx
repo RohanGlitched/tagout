@@ -132,7 +132,7 @@ export default function Proof() {
       <Header />
       <main className={s.main}>
         <header className={s.top}>
-          <h1 className={s.h1}>{summary.cases} real cases, measured against the model alone.</h1>
+          <h1 className={s.h1}>Measured on {summary.cases} real cases, then on {holdout.cases} it had never seen.</h1>
           <p className={s.lede}>
             We built a test set from 2025–26 recall records: units whose code is printed in a CPSC, FDA or NHTSA notice, the same products with a neighbouring lot or model, recalled
             lines with no code, cars, and things no recall lists. Every answer was checked against the agency&apos;s own record, not against Tagout. Then the same cases ran through
@@ -231,7 +231,7 @@ export default function Proof() {
                   <th scope="col">Right</th>
                   <th scope="col">Wrongly red</th>
                   <th scope="col">Recalled, cleared</th>
-                  <th scope="col">Not in a database yet</th>
+                  <th scope="col">Not in a database yet: exact tag</th>
                   <th scope="col">Cost per item, Tavily included</th>
                 </tr>
               </thead>
@@ -257,6 +257,10 @@ export default function Proof() {
               </tbody>
             </table>
           </div>
+          <p className={s.sub}>
+            Right means the exact expected tag. &ldquo;Not in a database yet&rdquo; counts all 12 such cases (10 recalled units and 2 that aren&apos;t); &ldquo;flagged&rdquo; below means a recalled unit got red or
+            orange instead of being cleared. Wrongly red is out of the 10 cases where red would be wrong.
+          </p>
           <ul className={s.claims}>
             <li>
               <b>Tavily earns its place.</b> Of the {heldTav?.lagRecalled ?? 10} recalls no database listed yet, Tagout without the web search cleared every one green; with it, Tagout flagged{" "}

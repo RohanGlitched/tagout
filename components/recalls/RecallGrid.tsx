@@ -93,7 +93,7 @@ export default function RecallGrid({ cards }: { cards: Card[] }) {
               <div className={s.rx} aria-hidden="true">
                 <span className={s.rxKind}>{n.category === "Drugs" ? "Rx / OTC" : n.category}</span>
                 <span className={s.rxName}>{n.title}</span>
-                <span className={s.rxNo}>{n.id}</span>
+                {/^(n\/?a|)$/i.test(n.id.trim()) ? null : <span className={s.rxNo}>{n.id}</span>}
               </div>
             ) : null}
             <div className={s.body}>
@@ -101,7 +101,7 @@ export default function RecallGrid({ cards }: { cards: Card[] }) {
                 {n.source === "fda" ? (n.hazard ?? n.title).replace(/\s*\(Class [I]+\)$/, "") : n.title}
               </a>
               <p className={s.meta}>
-                {n.source === "fda" ? `${n.firm ?? "FDA"}. ${n.id}` : [n.id.includes("-") && n.id.length < 8 ? `CPSC ${n.id}` : "CPSC", fmtUnits(n.units)].filter(Boolean).join(". ")}
+                {n.source === "fda" ? [n.firm ?? "FDA", /^(n\/?a|)$/i.test(n.id.trim()) ? "" : n.id].filter(Boolean).join(". ") : [n.id.includes("-") && n.id.length < 8 ? `CPSC ${n.id}` : "CPSC", fmtUnits(n.units)].filter(Boolean).join(". ")}
               </p>
               <Link className={s.own} href={`/?own=${encodeURIComponent(n.own)}#check`}>
                 Check if yours is affected

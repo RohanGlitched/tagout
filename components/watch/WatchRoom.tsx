@@ -1,13 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import type { CheckRecord } from "@/lib/checks";
 import { diffChecks, type WatchChange, type WatchRecord } from "@/lib/watch";
 import type { WatchEvent } from "@/lib/sweep/events";
 import type { WatchFeed } from "@/lib/sweep/view";
 import { fmtDate, plural } from "@/lib/format";
 import { TAG_WORDS } from "@/components/tag/Tag";
-import CheckRoom, { rememberWatch } from "@/components/check/CheckRoom";
+import CheckRoom from "@/components/check/CheckRoom";
 import s from "./watch.module.css";
 
 type Pub = Omit<CheckRecord, "photos">;
@@ -39,8 +39,6 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
   const [checks, setChecks] = useState<Pub[]>(initial);
   const [again, setAgain] = useState<{ state: "idle" | "starting" | "error" | "later"; nextAt?: string | null }>({ state: "idle" });
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => rememberWatch(watch.id), [watch.id]);
 
   const finished = useCallback((rec: Pub) => setChecks((cs) => cs.map((c) => (c.id === rec.id ? rec : c))), []);
 
@@ -75,7 +73,11 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
   const latest = checks.at(-1);
   const done = checks.filter((c) => c.status === "done");
   const [prev, last] = [done.at(-2), done.at(-1)];
-  const changes = prev && last ? diffChecks(prev, last, { all: true }) : null;
+  const allChanges = prev && last ? diffChecks(prev, last, { all: true }) : null;
+  // A different recall cited for the same tag is bookkeeping, not news: it is listed quietly under the real changes.
+  const quiet = (c: WatchChange) => (c.kind === "cited-changed" || c.kind === "recall-dropped") && c.from === c.to;
+  const changes = allChanges ? allChanges.filter((c) => !quiet(c)) : null;
+  const citations = allChanges ? allChanges.filter(quiet) : [];
   const running = latest && latest.status !== "done" && latest.status !== "failed";
   const lines = watch.text.split("\n").filter((l) => l.trim()).length;
   const sweep = feed.lastSweep;
@@ -100,9 +102,11 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
           <button type="button" className={s.ghost} onClick={copy} aria-live="polite">
             {copied ? "Link copied" : "Copy link"}
           </button>
-          <button type="button" className={s.ghost} onClick={checkAgain} disabled={again.state === "starting" || Boolean(running)}>
-            {again.state === "starting" || running ? "Checking…" : "Check again now"}
-          </button>
+          {feed.recheck.tier === "lite" ? null : (
+            <button type="button" className={s.ghost} onClick={checkAgain} disabled={again.state === "starting" || Boolean(running)}>
+              {again.state === "starting" || running ? "Checking…" : "Check again now"}
+            </button>
+          )}
         </div>
       </header>
 
@@ -137,8 +141,10 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
           </ol>
         ) : (
           <p className={s.empty}>
-            No new recall has touched this list{sweep ? ` as of ${time(sweep.at)}` : " yet"}. When one names a brand or a code on it, it is read, matched by the same rules as a
-            check, and listed here and in the feed.
+            {sweep
+              ? `No new recall has touched this list. The last sweep, ${time(sweep.at)}, read ${sweep.recallsChecked.toLocaleString("en-US")} recalls published in the last 30 days and none named a brand or a code on it.`
+              : "No new recall has touched this list yet."}{" "}
+            When one does, it is read once, matched by the same rules as a check, and listed here and in the feed.
           </p>
         )}
         {again.state === "error" ? (
@@ -187,8 +193,17 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
               ))}
             </ul>
           ) : (
-            <p className={s.empty}>Nothing changed: the same {plural(last!.verdicts?.length ?? 0, "tag")}, citing the same recalls.</p>
+            <p className={s.empty}>No tag changed: the same {plural(last!.verdicts?.length ?? 0, "tag")}.</p>
           )}
+          {citations.length ? (
+            <p className={s.note}>
+              Citations updated, tags unchanged:{" "}
+              {citations
+                .map((c) => `${c.said}${c.notices[0] ? ` now cites ${c.notices[0].ref}` : ""}${c.before ? ` (was ${c.before.ref})` : c.dropped.length ? ` (no longer cites ${c.dropped.map((d) => d.ref).join(", ")})` : ""}`)
+                .join("; ")}
+              .
+            </p>
+          ) : null}
         </section>
       ) : null}
 

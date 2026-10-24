@@ -119,7 +119,7 @@ export default function HeroReplay({ replay }: { replay: Replay }) {
         })}
       </ol>
       <p className={s.foot}>
-        The order is the agent&apos;s own; the clock is sped up. <Link href={`/check/${replay.id}`}>Open the whole check</Link>
+        The agent&apos;s own order, condensed (repeated empty searches left out); the clock is sped up. <Link href={`/check/${replay.id}`}>Open the whole check</Link>
       </p>
     </div>
   );

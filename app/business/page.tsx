@@ -37,7 +37,7 @@ export default function Business() {
               </h2>
               <p>
                 They keep each unit&apos;s appliances (brand, model, serial) for service calls and inspections. Tagout watches that list, and a recall that names one of those
-                models becomes a work order with the agency&apos;s own sentence attached as proof.
+                models shows up as an alert on that unit&apos;s watch and feed, with the agency&apos;s own sentence attached as proof, ready to become a work order.
               </p>
               <ul className={s.points}>
                 <li>
@@ -53,9 +53,9 @@ export default function Business() {
               </ul>
             </div>
             <div className={s.tagCol} aria-hidden="true">
-              <Tag level="danger" rest={-3} foot="Unit 4B, kitchen">
-                <b>Model WRF555SDFZ is on the recall&apos;s list.</b>
-                <span className={s.dim}>Work order opened with the remedy and the maker&apos;s number.</span>
+              <Tag level="danger" rest={-3} foot="Unit 4B, kitchen. CPSC recall 26-606">
+                <b>Model NS-RGFGSS1 is on the recall&apos;s list.</b>
+                <span className={s.dim}>Alert posted to this unit&apos;s watch and feed, with the remedy and the maker&apos;s number.</span>
               </Tag>
             </div>
           </div>
@@ -77,7 +77,7 @@ export default function Business() {
             What a check costs us
           </h2>
           <p className={s.body}>
-            Measured on the {summary.cases}-case eval: Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
+            Measured on the {summary.cases}-case eval (the Oct 15 run; on the 39 held-out cases it was 4.9¢ and 1.7¢ all in): Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
             free.
           </p>
           <div className={s.tableWrap}>
@@ -130,7 +130,10 @@ export default function Business() {
           <pre className={s.code}>
             <code>{`curl -X POST ${SITE_URL}/api/checks \\
   -H 'content-type: application/json' \\
-  -d '{"text": "Whirlpool refrigerator, model WRF555SDFZ\\nVornado heater, TYPE SRTH"}'
+  -d '{"text": "Insignia gas range, model NS-RGFGSS1\\nGalanz retro refrigerator, model GLR12TRDEFR"}'
+
+# The Insignia comes back Do not use (CPSC recall 26-606 lists it). The Galanz does not:
+# Galanz recall 26-649 lists other retro models, not this one.
 
 # → {"id": "…"}  then open ${SITE_URL}/check/<id>
 # or read the result as JSON:  GET ${SITE_URL}/api/checks/<id>`}</code>
