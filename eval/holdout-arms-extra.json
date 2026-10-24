@@ -1,0 +1,459 @@
+{
+ "at": "2026-10-24T21:13:51.835Z",
+ "note": "No new model or Tavily calls: the rules arm is an offline replay from eval/.cache, the cascade is combined from recorded rows. The first-run cascade is the held-out measurement; the current-code one is in-sample (these cases were read while fixing).",
+ "rules": {
+  "label": "No model at all: fixed plan, pattern reader, rules (and never green without a model)",
+  "commit": "ed2dc77",
+  "replay": "offline from the eval cache; a call the cache doesn't have fails as an unreachable API would",
+  "n": 39,
+  "right": 24,
+  "rightInterval": [
+   0.446,
+   0.766
+  ],
+  "falseRed": [],
+  "falseRedOf": 10,
+  "falseClear": [],
+  "falseClearOf": 31,
+  "database": "17/27",
+  "lag": "7/12",
+  "wrong": [
+   "h02 warning (want danger)",
+   "h05 warning (want danger)",
+   "h07 error (want danger)",
+   "h11 warning (want danger)",
+   "h15 warning (want danger)",
+   "h18 warning (want danger)",
+   "h19 warning (want danger)",
+   "h23 warning (want inspected)",
+   "h24 warning (want inspected)",
+   "h26 warning (want danger)",
+   "h32 warning (want danger)",
+   "h37 warning (want danger)",
+   "h40 warning (want danger)",
+   "h41 warning (want danger)",
+   "h42 warning (want danger)"
+  ],
+  "usdPerItem": 0,
+  "tavilyPerItem": 1.13,
+  "usdPerItemWithTavily": 0.00903,
+  "casesWithMisses": [
+   "h02",
+   "h05",
+   "h08",
+   "h11",
+   "h15",
+   "h16",
+   "h18",
+   "h19",
+   "h20",
+   "h26",
+   "h30",
+   "h31",
+   "h32",
+   "h33",
+   "h34",
+   "h35",
+   "h36",
+   "h40",
+   "h41",
+   "h42",
+   "h43"
+  ],
+  "missedCalls": [
+   "www.saferproducts.gov /RestWebServices/Recall",
+   "api.tavily.com /search"
+  ],
+  "onExactReplays": {
+   "cases": 18,
+   "n": 18,
+   "right": 14,
+   "rightInterval": [
+    0.524,
+    0.936
+   ],
+   "falseRed": [],
+   "falseRedOf": 7,
+   "falseClear": [],
+   "falseClearOf": 13,
+   "database": "12/15",
+   "lag": "2/3",
+   "wrong": [
+    "h07 error (want danger)",
+    "h23 warning (want inspected)",
+    "h24 warning (want inspected)",
+    "h37 warning (want danger)"
+   ],
+   "usdPerItem": 0,
+   "tavilyPerItem": 1.44,
+   "usdPerItemWithTavily": 0.01156
+  }
+ },
+ "cascade": {
+  "label": "Lite tier first; an item the lite tier tags red is run on the full agent (Ultra) and takes its tag",
+  "firstRun": {
+   "from": {
+    "lite": "results-holdout/fixed-plan-nano.json",
+    "full": "results-holdout/tagout.json",
+    "commit": "a1d8b21"
+   },
+   "n": 39,
+   "right": 30,
+   "rightInterval": [
+    0.607,
+    0.889
+   ],
+   "falseRed": [],
+   "falseRedOf": 10,
+   "falseClear": [
+    "h07",
+    "h08",
+    "h15",
+    "h32",
+    "h40",
+    "h43"
+   ],
+   "falseClearOf": 31,
+   "database": "23/27",
+   "lag": "7/12",
+   "wrong": [
+    "h07 inspected (want danger)",
+    "h08 inspected (want flag)",
+    "h15 inspected (want danger)",
+    "h24 warning (want inspected)",
+    "h32 inspected (want danger)",
+    "h37 warning (want danger)",
+    "h40 inspected (want danger)",
+    "h42 warning (want danger)",
+    "h43 inspected (want flag)"
+   ],
+   "usdPerItem": 0.01064,
+   "tavilyPerItem": 2.46,
+   "usdPerItemWithTavily": 0.03033,
+   "escalated": [
+    "h01 danger→danger",
+    "h02 danger→danger",
+    "h04 danger→danger",
+    "h05 danger→danger",
+    "h06 danger→danger",
+    "h10 danger→danger",
+    "h11 danger→danger",
+    "h18 danger→danger",
+    "h19 danger→danger",
+    "h20 danger→danger",
+    "h25 danger→danger",
+    "h26 danger→danger",
+    "h35 danger→danger",
+    "h41 danger→danger"
+   ],
+   "lite": {
+    "n": 39,
+    "right": 30,
+    "rightInterval": [
+     0.607,
+     0.889
+    ],
+    "falseRed": [],
+    "falseRedOf": 10,
+    "falseClear": [
+     "h07",
+     "h08",
+     "h15",
+     "h32",
+     "h40",
+     "h43"
+    ],
+    "falseClearOf": 31,
+    "database": "23/27",
+    "lag": "7/12",
+    "wrong": [
+     "h07 inspected (want danger)",
+     "h08 inspected (want flag)",
+     "h15 inspected (want danger)",
+     "h24 warning (want inspected)",
+     "h32 inspected (want danger)",
+     "h37 warning (want danger)",
+     "h40 inspected (want danger)",
+     "h42 warning (want danger)",
+     "h43 inspected (want flag)"
+    ],
+    "usdPerItem": 0.00285,
+    "tavilyPerItem": 1.72,
+    "usdPerItemWithTavily": 0.01659
+   },
+   "full": {
+    "n": 39,
+    "right": 31,
+    "rightInterval": [
+     0.635,
+     0.907
+    ],
+    "falseRed": [],
+    "falseRedOf": 10,
+    "falseClear": [
+     "h08",
+     "h15",
+     "h38",
+     "h39"
+    ],
+    "falseClearOf": 31,
+    "database": "25/27",
+    "lag": "6/12",
+    "wrong": [
+     "h08 inspected (want flag)",
+     "h15 inspected (want danger)",
+     "h32 warning (want danger)",
+     "h37 warning (want danger)",
+     "h38 inspected (want flag)",
+     "h39 inspected (want flag)",
+     "h40 warning (want danger)",
+     "h42 warning (want danger)"
+    ],
+    "usdPerItem": 0.02655,
+    "tavilyPerItem": 2.77,
+    "usdPerItemWithTavily": 0.0487
+   },
+   "agentVsLite": {
+    "agentRight": [
+     "h07 danger (lite inspected)",
+     "h24 inspected (lite warning)",
+     "h43 warning (lite inspected)"
+    ],
+    "liteRight": [
+     "h38 warning (agent inspected)",
+     "h39 warning (agent inspected)"
+    ]
+   }
+  },
+  "current": {
+   "from": {
+    "lite": "results-holdout-after/fixed-plan-nano.json",
+    "full": "results-holdout-after/tagout.json",
+    "commit": "ed2dc77"
+   },
+   "n": 39,
+   "right": 35,
+   "rightInterval": [
+    0.758,
+    0.971
+   ],
+   "falseRed": [],
+   "falseRedOf": 10,
+   "falseClear": [
+    "h43"
+   ],
+   "falseClearOf": 31,
+   "database": "26/27",
+   "lag": "9/12",
+   "wrong": [
+    "h07 warning (want danger)",
+    "h37 warning (want danger)",
+    "h42 warning (want danger)",
+    "h43 inspected (want flag)"
+   ],
+   "usdPerItem": 0.01312,
+   "tavilyPerItem": 2.36,
+   "usdPerItemWithTavily": 0.03199,
+   "escalated": [
+    "h01 danger→danger",
+    "h02 danger→danger",
+    "h04 danger→danger",
+    "h05 danger→danger",
+    "h06 danger→danger",
+    "h10 danger→danger",
+    "h11 danger→danger",
+    "h15 danger→danger",
+    "h18 danger→danger",
+    "h19 danger→danger",
+    "h20 danger→danger",
+    "h25 danger→danger",
+    "h26 danger→danger",
+    "h32 danger→danger",
+    "h34 danger→danger",
+    "h35 danger→danger",
+    "h40 danger→danger",
+    "h41 danger→danger"
+   ],
+   "lite": {
+    "n": 39,
+    "right": 35,
+    "rightInterval": [
+     0.758,
+     0.971
+    ],
+    "falseRed": [],
+    "falseRedOf": 10,
+    "falseClear": [
+     "h43"
+    ],
+    "falseClearOf": 31,
+    "database": "26/27",
+    "lag": "9/12",
+    "wrong": [
+     "h07 warning (want danger)",
+     "h37 warning (want danger)",
+     "h42 warning (want danger)",
+     "h43 inspected (want flag)"
+    ],
+    "usdPerItem": 0.00193,
+    "tavilyPerItem": 1.56,
+    "usdPerItemWithTavily": 0.01444
+   },
+   "full": {
+    "n": 39,
+    "right": 37,
+    "rightInterval": [
+     0.827,
+     0.994
+    ],
+    "falseRed": [],
+    "falseRedOf": 10,
+    "falseClear": [],
+    "falseClearOf": 31,
+    "database": "27/27",
+    "lag": "10/12",
+    "wrong": [
+     "h37 warning (want danger)",
+     "h42 warning (want danger)"
+    ],
+    "usdPerItem": 0.02812,
+    "tavilyPerItem": 2.21,
+    "usdPerItemWithTavily": 0.04576
+   },
+   "agentVsLite": {
+    "agentRight": [
+     "h07 danger (lite warning)",
+     "h43 warning (lite inspected)"
+    ],
+    "liteRight": []
+   }
+  },
+  "tuned105": {
+   "from": {
+    "lite": "results-after/fixed-plan-nano.json",
+    "full": "results-after/tagout.json",
+    "commit": "ed2dc77"
+   },
+   "n": 105,
+   "right": 102,
+   "rightInterval": [
+    0.919,
+    0.994
+   ],
+   "falseRed": [],
+   "falseRedOf": 59,
+   "falseClear": [],
+   "falseClearOf": 67,
+   "wrong": [
+    "k04 warning (want inspected)",
+    "k06 warning (want inspected)",
+    "k09 warning (want inspected)"
+   ],
+   "usdPerItem": 0.01161,
+   "tavilyPerItem": 2.24,
+   "usdPerItemWithTavily": 0.02952,
+   "escalated": [
+    "p01 danger→danger",
+    "p02 danger→danger",
+    "p03 danger→danger",
+    "p04 danger→danger",
+    "p05 danger→danger",
+    "p06 danger→danger",
+    "p07 danger→danger",
+    "p08 danger→danger",
+    "p09 danger→danger",
+    "p10 danger→danger",
+    "p11 danger→danger",
+    "p12 danger→danger",
+    "p13 danger→danger",
+    "p14 danger→danger",
+    "p15 danger→danger",
+    "p16 danger→danger",
+    "p17 danger→danger",
+    "p18 danger→danger",
+    "p19 danger→danger",
+    "p20 danger→danger",
+    "p21 danger→danger",
+    "p22 danger→danger",
+    "p23 danger→danger",
+    "p24 danger→danger",
+    "p25 danger→danger",
+    "p26 danger→danger",
+    "p27 danger→danger",
+    "d01 danger→danger",
+    "d02 danger→danger",
+    "d03 danger→danger",
+    "d04 danger→danger",
+    "d05 danger→danger",
+    "d06 danger→danger",
+    "d07 danger→danger",
+    "d08 danger→danger",
+    "d09 danger→danger",
+    "d10 danger→danger",
+    "d11 danger→danger",
+    "f01 danger→danger",
+    "f02 danger→danger",
+    "f03 danger→danger",
+    "f04 danger→danger",
+    "f05 danger→danger",
+    "f06 danger→danger",
+    "f07 danger→danger",
+    "f08 danger→danger",
+    "n12 danger→warning"
+   ],
+   "lite": {
+    "n": 105,
+    "right": 101,
+    "rightInterval": [
+     0.905,
+     0.99
+    ],
+    "falseRed": [
+     "n12"
+    ],
+    "falseRedOf": 59,
+    "falseClear": [],
+    "falseClearOf": 67,
+    "wrong": [
+     "n12 danger (want not-danger)",
+     "k04 warning (want inspected)",
+     "k06 warning (want inspected)",
+     "k09 warning (want inspected)"
+    ],
+    "usdPerItem": 0.00228,
+    "tavilyPerItem": 1.44,
+    "usdPerItemWithTavily": 0.01379
+   },
+   "full": {
+    "n": 105,
+    "right": 105,
+    "rightInterval": [
+     0.965,
+     1
+    ],
+    "falseRed": [],
+    "falseRedOf": 59,
+    "falseClear": [],
+    "falseClearOf": 67,
+    "wrong": [],
+    "usdPerItem": 0.02645,
+    "tavilyPerItem": 2.16,
+    "usdPerItemWithTavily": 0.04375
+   },
+   "agentVsLite": {
+    "agentRight": [
+     "n12 warning (lite danger)",
+     "k04 inspected (lite warning)",
+     "k06 inspected (lite warning)",
+     "k09 inspected (lite warning)"
+    ],
+    "liteRight": []
+   }
+  }
+ },
+ "routing": {
+  "firstCheck": "Full agent (Ultra): the most right and none cleared; a first check is when an unknown item is most likely to hide a recall.",
+  "recheck": "The daily sweep: each new recall is read once and matched by rules against every watched item, so a re-check costs nothing per household until a recall names a watched brand or code.",
+  "resale": "Cascade: lite tier for every listing, the full agent only on red, so a red tag on a listing is confirmed by the agent before it costs a sale; greens and oranges cost the lite price."
+ }
+}

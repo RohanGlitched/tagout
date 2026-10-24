@@ -37,7 +37,7 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 - **Forms (Tagout).** Clean lines 24/30, messy lines 6/8, photo 1/1. All 5 messy database lines were right. Two of the 3 messy lag-window lines came out orange, not red.
 - **Model cost** is Token Factory list price for every call a case made. **Tavily** is priced at the pay-as-you-go $0.008 per credit (docs.tavily.com, API credits page, checked Oct 25):
   - a basic search is 1 credit;
-  - a basic extract is 1 credit per 5 successful URLs, and Tagout sends one URL per extract, so each extract is counted as a credit (an upper bound).
+  - a basic extract is 1 credit per 5 successful URLs, and Tagout sends one URL per extract, so each extract is counted as a credit (an upper bound). Rows recorded from Oct 25 (`ed2dc77`) carry `tavilyCredits`, billed exactly that way from each response, and the app's own tally (`engine.tavily`) does the same.
 
   At that rate Tavily costs Tagout about 2.2¢ an item, close to the 2.65¢ of Nemotron.
 - **Median time.** 17.5 s for Tagout, over the 13 cases that ran with no cached call. The other arms reused cached calls, so their times aren't meaningful.
@@ -46,9 +46,10 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 
 - **Without Tavily, Tagout cleared all 10 lag-window recalls as green.** These are the cases that should be orange or red: recalled lots, an all-lots allergen recall, an FSIS recall and a veterinary recall.
 - **With Tavily it flagged 8 of the 10:**
-  - 3 red: Gelatelli lot 085261 in both the clean and the messy line, and the WinCo hoagie-roll UPC;
+  - 3 red: Gelatelli lot 085261 in both the clean and the messy line, and the WinCo hoagie-roll UPC (2 of the 3 on cases that want red on an exact code; the messy Gelatelli line, h34, accepts orange or red);
   - 5 orange, each citing the FDA notice;
   - the 2 Kayem (FSIS) lines stayed green.
+- **Count corrected on Oct 25.** `holdout-report.mjs` used to count only the reds on the 6 exact-code cases, so `tavilyAblation.*.lag.withTavily.red` said 2 and /proof printed "2 red". It now counts every red among the 10 lag-window recalls (`red`: 3 for Tagout, 2 for the lite tier) and keeps the narrower count as `redOnExactCode` (2 and 2). Only those fields of `holdout-summary.json` were regenerated; every other held-out number is unchanged.
 - **Net effect.** Turning Tavily off took Tagout from 31/39 to 27/39 right, and its wrongly cleared count from 4 to 12. The lite tier went from 30/39 to 26/39, and from 6 to 12 cleared.
 - **On the 27 database cases Tavily changed nothing:** 25/27 with it and without it.
 - **Tuned set.** Turning the web step off in the no-model arm (free, replayed from the cache) took it from 87/105 to 81/105, and its recalled units cleared green from 10 to 19 (`replay-summary.json`, arm `rules-noweb`).
@@ -111,27 +112,31 @@ What each miss was, and what changed:
 - **Found while tracing, in the fixed plan.** Notices were cut to the eight newest, with undated web pages sorted last. So a brand's eight old FDA records pushed out the week's company announcement (the lite tier cleared the mung beans this way). Undated pages now get the room the dated ones leave, and at least three.
 - **Label photos.** The vision call now has 6,000 output tokens. On the Primark tag (h07), Super VL answered with about 3,900 tokens, and the Tagout arm tagged it red.
 
-Results at `a9a0f8f` (`holdout-after-fixes.json`, `results-holdout-after/`). Live calls ran only where the eval cache had no answer, and an offline replay of both arms gives the same 39 tags:
+Results at `a9a0f8f`, and again at `ed2dc77` after the reasoning-budget change below (`holdout-after-fixes.json`, `results-holdout-after/`; the `a9a0f8f` rows are kept in it as `afterA9a0f8f`). Live calls ran only where the eval cache had no answer, and an offline replay of both arms gives the same 39 tags:
 
 | Arm | Right | Wrongly red | Wrongly cleared | Database | Lag window | Model cost per item | Tavily credits per item |
 |---|---|---|---|---|---|---|---|
 | Tagout, first run (headline, `a1d8b21`) | 31/39 | 0/10 | 4/31 | 25/27 | 6/12 | 2.65¢ | 2.77 |
-| **Tagout, after the fixes** | **37/39** | **0/10** | **0/31** | 27/27 | 10/12 | 2.72¢ | 2.26 |
+| Tagout, after the fixes (`a9a0f8f`) | 37/39 | 0/10 | 0/31 | 27/27 | 10/12 | 2.72¢ | 2.26 |
+| **Tagout, after the reasoning change (`ed2dc77`)** | **37/39** | **0/10** | **0/31** | 27/27 | 10/12 | 2.81¢ | 2.21 |
 | Lite tier, first run (`a1d8b21`) | 30/39 | 0/10 | 6/31 | 23/27 | 7/12 | 0.28¢ | 1.72 |
-| **Lite tier, after the fixes** | **33/39** | **0/10** | **1/31** | 24/27 | 9/12 | 0.29¢ | 1.56 |
+| Lite tier, after the fixes (`a9a0f8f`) | 33/39 | 0/10 | 1/31 | 24/27 | 9/12 | 0.29¢ | 1.56 |
+| **Lite tier, after the reasoning change (`ed2dc77`)** | **35/39** | **0/10** | **1/31** | 26/27 | 9/12 | 0.19¢ | 1.56 |
+
+The `ed2dc77` Tavily column is billed credits (an extract is 1 credit per 5 URLs read); the earlier rows count each call as a credit.
 
 - **Still wrong, Tagout:** h37 and h42, orange where red is right (see above).
-- **Still wrong, lite tier:**
+- **Still wrong, lite tier (`ed2dc77`):**
   - h37 and h42, the same as Tagout;
   - h43 green: the single web search didn't return the Wedgewood announcement;
   - h07 orange, held by the "never green without a model" guard: the fixed plan searches CPSC by brand, and the photo has none;
-  - h23 and h24 orange where green is right. h23 is held by the same guard after a Nano read failed. h24 was orange in the first run too.
-- **The 105 tuned cases at `a9a0f8f`** (`summary-current.json`, `results-after/`; `summary.json` is unchanged):
-  - **Tagout: 105/105**, 0/59 wrongly red, 0/67 cleared;
-  - **lite tier: 95/105**, 1/59 wrongly red (n12, as before), 0/67 cleared.
+  - h23 and h24, orange at `a9a0f8f`, are now green and right: with reasoning off, Nano's notice reads answer instead of failing.
+- **The 105 tuned cases** (`summary-current.json`, `results-after/`; `summary.json` is unchanged; only the Tagout and lite arms were re-run at `ed2dc77`, the other arms in `results-after/` are still `a9a0f8f`):
+  - **Tagout: 105/105**, 0/59 wrongly red, 0/67 cleared, at `a9a0f8f` and at `ed2dc77`;
+  - **lite tier: 101/105 at `ed2dc77`** (95/105 at `a9a0f8f`, 98/105 on Oct 15), 1/59 wrongly red (n12, as before), 0/67 cleared. v10-v12 are green again. Still wrong: n12 red, and k04, k06 and k09 orange where green is right.
 
-  The fixes in this section changed no tag on the 105. An offline replay of the code just before them (`665dd4e`, whose `lib/` differs from `2965b11` by one line in `lib/wall.ts`), on the same cache, gives the same tags for both arms. The lite tier's three lost cases (v10-v12, clean cars now orange) come from the earlier "never green without a model" change: Nano fails to read NHTSA's PDF pages within 1,500 tokens.
-- **Replay.** `npm run eval:replay` now replays every 105 arm with no model or Tavily cache misses at `a9a0f8f`, and `replay-summary.json` is rewritten. `holdout-replay-summary.json` is untouched and still describes `a1d8b21`.
+  The fixes in this section changed no tag on the 105. An offline replay of the code just before them (`665dd4e`, whose `lib/` differs from `2965b11` by one line in `lib/wall.ts`), on the same cache, gives the same tags for both arms. The lite tier's three lost cases at `a9a0f8f` (v10-v12, clean cars orange) came from the earlier "never green without a model" change: Nano failed to read NHTSA's PDF pages within 1,500 tokens. The reasoning change brought them back.
+- **Replay.** `npm run eval:replay` replays the 105 at `ed2dc77` with no Tagout model or Tavily cache misses (the lite arm misses two Nano calls that timed out live, d10 and v09, with the same tags), and `replay-summary.json` is rewritten; a second run exits 0. `holdout-replay-summary.json` is refreshed from `ed2dc77` too, so `npm run eval:replay -- --holdout` exits 0 at this code (Tagout 37/39 and the lite tier 35/39 replay exactly; the fixed plan with Ultra readers and Tagout with Tavily off need live calls for 7 and 2 cases).
 - **Spend.** $0.36 of Token Factory through the harness (ledger $4.9448 → $5.3000):
 
   | Run | Spend |
@@ -143,11 +148,31 @@ Results at `a9a0f8f` (`holdout-after-fixes.json`, `results-holdout-after/`). Liv
   | Every other 105 arm | $0.09 |
 
   Tavily: 55 credits (53 keyed calls, plus 2 for the advanced-extract probe), and 15 keyless calls.
+- **Spend for the reasoning-budget pass (`c3cdc1a`..`ed2dc77`).** About $0.21 of Token Factory: the harness ledger went from $5.2999 to $5.5046, and `eval/spend.mjs` (the cache at list prices, now including Super VL, Qwen and Gemma) from $6.7595 to $6.9467; the switch probes and the three sample photos on Super VL (about $0.004) ran outside the cache. Tavily: 1 keyed credit (ledger 456 to 457), no keyless calls.
+
+### Reasoning control, tested
+
+**Token Factory honours Nemotron's chat-template switch `chat_template_kwargs: {"enable_thinking": false}`; a `/no_think` line in the system prompt does nothing.** On one small extraction call each (two lots and a UPC), the switch took Nano from 116 to 56 completion tokens, Ultra from 314 (270 reasoning) to 43 (0 reasoning) and Super VL from 457 (413 reasoning) to 44 (0), all with the same answer; `/no_think` left 173, 306 and 237. On the eval cases: with reasoning off, the Nano reader got v11 and v12 right, but on v10 it padded its JSON with whitespace up to the cap, at 1,500 and again at 3,750 tokens, a decoding runaway rather than reasoning; with reasoning on and a 2.5x retry, v10 was right and v11 and v12 were cut off again at 3,750. The rule that shipped (`c3cdc1a`) is reasoning off for the Nano reader, plus one retry of any reply cut off with nothing usable, with 2.5x the cap and reasoning back on: v10, v11 and v12 all came out green, which is right, and the lite arm's output on the 105 fell from 547k to 217k tokens (0.30¢ to 0.23¢ an item), with 42 Nano replies cut off in 22 cases, each followed by a retry that finished. With reasoning off, the Ultra reader read h15's lot list in 350 tokens, where with reasoning on it had used up 1,500, and h15 was red. Super VL with reasoning off read every expected code on all three sample photos in 101-131 output tokens and 1.1-2.2 s (it had used 1.3k to 3.9k tokens and 5-7 s), and h07 was red. **So reasoning is off for the Nano notice reader and Super VL.** The Ultra notice reader keeps reasoning on, with the retry (h15 is red that way too): switching it off would change every Ultra read in the eval, and re-measuring those costs about $1-2, more than this pass's budget. `NEBIUS_READER_NO_THINK` and `NEBIUS_VISION_NO_THINK` set the model lists. The check's usage now counts `truncated` and `retried` calls, and eval rows count `truncated`.
+
+### Two more arms, free from the cache (`holdout-arms-extra.json`)
+
+`node eval/holdout-arms-extra.mjs` needs no model or Tavily calls. **Cascade ("lite first, Ultra only on red")**: every item runs on the lite tier, and an item the lite tier tags red is run again on the full agent and takes its tag.
+
+| Arm (39 cases) | Right | Wrongly red | Wrongly cleared | Database | Lag window | Cost per item with Tavily |
+|---|---|---|---|---|---|---|
+| Cascade, first run (`a1d8b21`, held out) | 30/39 | 0/10 | 6/31 | 23/27 | 7/12 | 3.03¢ (14 of 39 escalated) |
+| Cascade, at `ed2dc77` (in-sample) | 35/39 | 0/10 | 1/31 | 26/27 | 9/12 | 3.20¢ (18 escalated) |
+| Rules only, offline replay at `ed2dc77` | 24/39 | 0/10 | 0/31 | 17/27 | 7/12 | 0.90¢ (Tavily only) |
+
+- **On this set the agent never overturned a lite red**, so the cascade scores what the lite tier scores and costs about twice as much; what it buys is a confirmed red. On the 105 at `ed2dc77` it does overturn one: the lite tier's false red n12 becomes orange, giving 102/105 with 0/59 wrongly red and 0/67 cleared, at 2.95¢ an item with Tavily (the lite tier alone is 1.38¢, Tagout 4.38¢).
+- **Where the full agent and the lite tier differ, first run:** the agent was right on h07 (the brand-less photo), h24 and h43; the lite tier was right on h38 and h39 (Kayem, FSIS). At `ed2dc77` the agent is right on h07 and h43 and the lite tier on none.
+- **Rules only** is never green, because of the "never green without a model" guard: it clears nothing and gets the clean items wrong. 21 of its 39 cases need calls the cache doesn't have (the pattern reader reads different items from Ultra's, so 19 cases ask CPSC other searches and 9 ask Tavily other queries), and those fail here as an unreachable API would; on the 18 that replay exactly it is 14/18. Filling them would take free CPSC calls and about 9-12 Tavily credits.
+- **Routing policy.** A first check runs the full agent: it is the most right (37/39 and 105/105 at this code, 31/39 held out) and clears nothing. A re-check runs as the daily sweep: each new recall is read once and matched by rules against every watched item, so it costs nothing per household until a recall names a watched brand or code. Resale screening runs the cascade: the lite price for every listing, and the full agent only to confirm a red before it costs a sale.
 
 ## Replaying (`npm run eval:replay`)
 
 - **What it does.** It re-runs every recorded arm offline from `eval/.cache` against the checked-out code: no network, no keys, no spend. Then it re-scores into `replay-summary.json` and compares with the recorded tags and with the committed replay. It exits 1 if any tag moved since the committed replay.
-- **Held-out set.** `npm run eval:replay -- --holdout` does the same for this set. All 5 arms replay with no cache misses.
+- **Held-out set.** `npm run eval:replay -- --holdout` does the same for this set. At `a1d8b21` all 5 arms replayed with no cache misses; at `ed2dc77` (the committed `holdout-replay-summary.json`) Tagout, the lite tier and the lite tier with Tavily off replay exactly, and the run exits 0.
 - **Determinism.** Two offline replays in a row gave identical tags.
 - **Tagout on the 105 at `a1d8b21`: 105/105, every call from the cache.**
   - Against the code that shipped after Oct 15, 11 tuned cases made model calls the cache didn't have. The code changed under them: listing pages filtered out of web results, and the struck-code cleanup.
@@ -157,10 +182,12 @@ Results at `a9a0f8f` (`holdout-after-fixes.json`, `results-holdout-after/`). Liv
   - `search-ultra`: 5 cases (p03 p24 n02 n12 c10). The web results it is shown changed with the listing filter.
   - `super-readers` p04, `super-agent` c08, `nano-agent` v08.
   - The fixed plan with Ultra readers on the 105: 69 cases need Ultra notice reads that were never cached (about $0.4, more than this pass's budget). It is measured on the held-out set above instead.
+  - Since `c3cdc1a`, the arms that were not re-run: `nano-readers` (Nano reads now go out with reasoning off) replays 58 of 105 exactly, and `nano-agent`, `super-agent`, `super-readers` and the held-out fixed plan with Ultra readers miss a few of the new cut-off retries. The committed replays record those misses; re-measuring `nano-readers` would cost about $0.05.
 - **Agency misses that don't matter.** The openFDA "has this firm reported lately" check (added after Oct 15) misses the cache on old runs. It fails as an unreachable API would, and it only adds an "ahead of the database" badge, never a tag.
-- **Getting the cache.** The cache (`eval/.cache`, about 3,300 files and 22 MB) is not in git. Ask the team for `eval-cache.tgz` and unpack it to `eval/.cache`, or point `EVAL_CACHE` at a copy.
+- **Getting the cache.** The cache (`eval/.cache`, about 4,700 files and 32 MB) is not in git. `eval-cache.tgz` (5.2 MB, scrubbed) holds it as `eval/.cache/...`: from the repo root, `tar -xzf eval-cache.tgz`, then `npm run eval:replay` and `npm run eval:replay -- --holdout` need no keys and cost nothing. Or point `EVAL_CACHE` at a copy.
   - Before sharing it, run `node scripts/cache-scrub.mjs --fix <out-dir>`. It checks every file against the real key values in `.env.local` and `../.env.keys` and against key-shaped patterns, and writes a redacted copy.
-  - On Oct 25 it found no matches. An earlier review reported two files with key-like strings; this pass could not reproduce that, so scrub anyway.
+  - On Oct 25, run on the cache after the reasoning-budget re-run, it found no matches in 4,697 files (6 key values, 10 patterns). An earlier review reported two files with key-like strings; this pass could not reproduce that, so scrub anyway.
+  - The Oct 25 archive was built from that scrubbed copy (sha256 `9d5c1d281a7db875a13b6774fff5e1abed76a9e295640da90bfde348ba68b909`); a spot check, an offline Tagout replay of h07, h15 and h32 from the unpacked archive, gave the same tags with no cache misses. It is not attached to a release yet.
 
 ## Caveats to state with these numbers
 
@@ -207,7 +234,8 @@ Results at `a9a0f8f` (`holdout-after-fixes.json`, `results-holdout-after/`). Liv
 | `results-holdout-replay/`, `holdout-replay-summary.json` | Offline replay of this set |
 | `results-current/` | The 11 refilled tuned cases |
 | `results-holdout-after/`, `holdout-after-fixes.json` | This set after the fixes (no longer held out) |
-| `results-after/`, `summary-current.json` | Every arm of the 105 at `a9a0f8f` |
+| `results-after/`, `summary-current.json` | Every arm of the 105 at `a9a0f8f`; Tagout and the lite tier again at `ed2dc77` |
+| `results-holdout-extra/`, `holdout-arms-extra.mjs`, `holdout-arms-extra.json` | Rules-only replay and the cascade on this set (and the cascade on the 105) |
 
 Commands:
 

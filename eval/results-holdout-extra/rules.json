@@ -1,0 +1,2310 @@
+{
+ "arm": "rules",
+ "label": "No model at all: fixed plan, pattern reader, rules",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "useAgent": false,
+  "useModel": false,
+  "label": "No model at all: fixed plan, pattern reader, rules",
+  "cases": "cases-holdout.json",
+  "today": "2026-10-25",
+  "noWeb": false,
+  "offline": true,
+  "keyless": false,
+  "code": {
+   "commit": "ed2dc77",
+   "libChanged": false
+  }
+ },
+ "at": "2026-10-24T21:12:22.840Z",
+ "cases": [
+  {
+   "id": "h01",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-024",
+   "headline": "TL1302Z is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Scotch",
+     "product": "thermal laminator",
+     "model": "TL1302Z",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Scotch”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “TL1302Z”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Scotch thermal laminator recall”",
+     "found": 6,
+     "fresh": 2
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 45,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h02",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "product": "scotch laminator TL1302Z",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “scotch laminator TL1302Z”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&ProductName=scotch+laminator+TL1302Z&_=1792876340709"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “scotch laminator TL1302Z recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 418,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 3,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall",
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h03",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 27-024",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Scotch",
+     "product": "thermal laminator",
+     "model": "TL1306",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Scotch”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “TL1306”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Scotch thermal laminator recall”",
+     "found": 6,
+     "fresh": 2
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 42,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h04",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-027",
+   "headline": "PAPA03001AI is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Papablic",
+     "product": "convertible bedside sleeper",
+     "model": "PAPA03001AI",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Papablic”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “PAPA03001AI”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Papablic convertible bedside sleeper recall”",
+     "found": 6,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 43,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h05",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Papablik",
+     "product": "bassinet PAPA03001AI",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Papablik”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Papablik bassinet PAPA03001AI recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 6,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h06",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-028",
+   "headline": "Model 2595301 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Primark",
+     "product": "101 Dalmatians coin purse",
+     "model": "2595301",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Primark”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “2595301”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Primark 101 Dalmatians coin purse recall”",
+     "found": 6,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 21,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h07",
+   "group": "positive",
+   "set": "database",
+   "form": "photo",
+   "expect": "danger",
+   "level": "error",
+   "error": "Nothing in that list looks like a product. Try one thing per line, like “2019 Honda CR-V” or “Graco car seat, model 2074735”.",
+   "steps": [],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 1,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 0,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h08",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Hatsan Blitz",
+     "product": "air rifle",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Hatsan Blitz”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Hatsan+Blitz&_=1792876340750"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hatsan Blitz air rifle recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 407,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h10",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA D-0006-2027",
+   "headline": "Lot LT25B01 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "Leader",
+     "product": "dry eye relief lubricant eye drops",
+     "lot": "LT25B01",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot LT25B01, brand “Leader”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Leader dry eye relief lubricant eye drops recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 15,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h11",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "product": "leader dry eye drops LT25B01 EXP 02/2027",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, ",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “leader dry eye drops LT25B01 EXP 02/2027 recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 5,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h12",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "Leader",
+     "product": "dry eye relief lubricant eye drops",
+     "lot": "LT25B03",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot LT25B03, brand “Leader”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Leader dry eye relief lubricant eye drops recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 9,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h15",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Gatorade Lemon Lime",
+     "product": "28 oz",
+     "lot": "091026",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gatorade Lemon Lime”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Gatorade+Lemon+Lime&_=1792876340774"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gatorade Lemon Lime 28 oz recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 412,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h16",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Gatorade Lemon Lime",
+     "product": "28 oz",
+     "lot": "091226",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gatorade Lemon Lime”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Gatorade+Lemon+Lime&_=1792876340777"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gatorade Lemon Lime 28 oz recall”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 408,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h18",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Mezzetta",
+     "product": "golden greek peperoncini 32 oz",
+     "lot": "720106",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Mezzetta”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Mezzetta&_=1792876341121"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Mezzetta golden greek peperoncini 32 oz recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 405,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 3,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall",
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h19",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "product": "bettergoods lemon alfredo fettuccine L6081A",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “bettergoods lemon alfredo fettuccine L6081A”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&ProductName=bettergoods+lemon+alfredo+fettuccine+L6081A"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “bettergoods lemon alfredo fettuccine L6081A recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 405,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h20",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 3,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Saint Francis Apizza",
+     "product": "frozen pepperoni pizza",
+     "upc": "666186277621",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Saint Francis Apizza”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Saint+Francis+Apizza&_=1792876341185"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Saint Francis Apizza frozen pepperoni pizza recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 410,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h21",
+   "group": "car",
+   "set": "database",
+   "form": "clean",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V685000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "vehicle",
+     "brand": "Subaru",
+     "product": "Crosstrek",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2026 Subaru Crosstrek",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Subaru Crosstrek recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 3,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h22",
+   "group": "car",
+   "set": "database",
+   "form": "clean",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V693000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 5,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "vehicle",
+     "brand": "Hyundai",
+     "product": "Venue",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2026 Hyundai Venue",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Hyundai Venue recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 2,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h23",
+   "group": "car",
+   "set": "database",
+   "form": "clean",
+   "expect": "inspected",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1,
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 2,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "vehicle",
+     "brand": "Mazda",
+     "product": "CX-70",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2026 Mazda CX-70",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Mazda CX-70 recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 4,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h24",
+   "group": "clean",
+   "set": "database",
+   "form": "clean",
+   "expect": "inspected",
+   "level": "warning",
+   "notice": "CPSC 24-158",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Honeywell",
+     "product": "tower fan",
+     "model": "HYF290B",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Honeywell”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “HYF290B”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Honeywell tower fan recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 6,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h25",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-039",
+   "headline": "VQQQ-A1 is listed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "VQQQ",
+     "product": "natural gas patio heater",
+     "model": "VQQQ-A1",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “VQQQ”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “VQQQ-A1”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “VQQQ natural gas patio heater recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 6,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h26",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "product": "vqqq patio heater VQQQ001",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “vqqq patio heater VQQQ001”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&ProductName=vqqq+patio+heater+VQQQ001&_=1792876341207"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “vqqq patio heater VQQQ001 recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 415,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 3,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall",
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h27",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 27-039",
+   "headline": "This recall doesn't print model numbers. Compare the product photo and description.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "VQQQ",
+     "product": "natural gas patio heater",
+     "model": "VQQQ-A2",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “VQQQ”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “VQQQ-A2”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “VQQQ natural gas patio heater recall”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 6,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h28",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-040",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Costway",
+     "product": "convertible high chair",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Costway”",
+     "found": 5,
+     "fresh": 5
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Costway convertible high chair recall”",
+     "found": 6,
+     "fresh": 3
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 4,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h29",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-038",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "CIYTI",
+     "product": "light-up princess costume",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “CIYTI”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “CIYTI light-up princess costume recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 4,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h30",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-042",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Bamamon LED",
+     "product": "finger lights",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Bamamon LED”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Bamamon+LED&_=1792876341541"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Bamamon LED finger lights recall”",
+     "found": 5,
+     "fresh": 5
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 405,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h31",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "CPSC 27-041",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Lithonia RSX",
+     "product": "area light on an AASP tilt arm mount",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia RSX”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Lithonia+RSX&_=1792876341561"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lithonia RSX area light on an AASP tilt arm mount recall”",
+     "found": 1,
+     "fresh": 1
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 414,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h32",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Natural Grocers",
+     "product": "organic mung beans 2 lb",
+     "upc": "000080112600",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Natural Grocers”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Natural+Grocers&_=1792876341595"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Natural Grocers organic mung beans 2 lb recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 415,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h33",
+   "group": "near-miss",
+   "set": "lag",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Natural Grocers",
+     "product": "organic mung beans 2 lb",
+     "upc": "000080112600",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Natural Grocers”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Natural+Grocers&_=1792876341622"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Natural Grocers organic mung beans 2 lb recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 404,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h34",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "WinCo",
+     "product": "hoagie rolls 16 oz",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “WinCo”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=WinCo&_=1792876341946"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “WinCo hoagie rolls 16 oz recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 413,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h35",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Lot 085261 is printed in this recall.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Gelatelli",
+     "product": "coffee & vanilla gelato",
+     "lot": "085261",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gelatelli”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Gelatelli&_=1792876341975"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gelatelli coffee & vanilla gelato recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 418,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h36",
+   "group": "near-miss",
+   "set": "lag",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Gelatelli",
+     "product": "coffee & vanilla gelato",
+     "lot": "085216",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Gelatelli”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Gelatelli&_=1792876342010"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Gelatelli coffee & vanilla gelato recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 415,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall"
+   ]
+  },
+  {
+   "id": "h37",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Starfish Seafood",
+     "product": "cold smoked salmon 8 oz",
+     "lot": "D080-148",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot D080-148, brand “Starfish Seafood”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Starfish Seafood cold smoked salmon 8 oz recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 4,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h38",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB USDA FSIS",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Kayem",
+     "product": "natural casing hot dogs",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Kayem”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kayem natural casing hot dogs recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 1,
+   "msFresh": true,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h39",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB USDA FSIS",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 4,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Kayem",
+     "product": "hot dogs",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Kayem”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kayem hot dogs recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 3,
+   "msFresh": true,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "h40",
+   "group": "positive",
+   "set": "lag",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "NATURAL GROCERS ORGANIC MUNG BEANS",
+     "product": "2 LB 26-196",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “NATURAL GROCERS ORGANIC MUNG BEANS”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=NATURAL+GROCERS+ORGANIC+MUNG+BEANS&_=179287"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “NATURAL GROCERS ORGANIC MUNG BEANS 2 LB 26-196 recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 404,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 3,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall",
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h41",
+   "group": "positive",
+   "set": "lag",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "product": "gelatelli coffee vanilla gelato 085261",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “gelatelli coffee vanilla gelato 085261”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&ProductName=gelatelli+coffee+vanilla+gelato+085261&_=17"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “gelatelli coffee vanilla gelato 085261 recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 413,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 3,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall",
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h42",
+   "group": "positive",
+   "set": "lag",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "product": "starfish smoked salmon D080148",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “starfish smoked salmon D080148”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&ProductName=starfish+smoked+salmon+D080148&_=1792876342"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “starfish smoked salmon D080148 recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 412,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 3,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall",
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "h43",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "modelUnavailable": 1
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Wedgewood Pharmacy",
+     "product": "compounded methimazole for my cat",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Wedgewood Pharmacy”",
+     "found": 0,
+     "error": "not cached: https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Wedgewood+Pharmacy&_=1792876342425"
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Wedgewood Pharmacy compounded methimazole for my cat recall”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    }
+   ],
+   "calls": 0,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 0,
+    "completion": 0
+   },
+   "usd": 0,
+   "ms": 414,
+   "msFresh": true,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 3,
+   "missed": [
+    "www.saferproducts.gov /RestWebServices/Recall",
+    "api.tavily.com /search"
+   ]
+  }
+ ]
+}
