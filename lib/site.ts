@@ -1,6 +1,6 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tagout-recalls.vercel.app";
 export const REPO_URL = "https://github.com/RohanGlitched/tagout";
-export const VIDEO_URL = "https://youtu.be/kqVtw3pK6nw";
+export const VIDEO_URL = "https://youtu.be/_nQDZehK33w";
 export const DEVPOST_URL = "https://devpost.com/software/tagout";
 
 /** Saved checks the site links to as worked examples. */
