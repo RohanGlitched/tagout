@@ -11,7 +11,7 @@
 [![Sources](https://img.shields.io/badge/recalls-NHTSA%20%C2%B7%20CPSC%20%C2%B7%20openFDA%20%C2%B7%20FSIS-c8102e)](#data-sources)
 [![License: MIT](https://img.shields.io/badge/license-MIT-15191e)](LICENSE)
 
-**[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/kj6iutme8c)** · **[The eval](https://tagout-recalls.vercel.app/proof)** · **[Held out](https://tagout-recalls.vercel.app/proof#held-h)** · **[A watched household](https://tagout-recalls.vercel.app/watch/5ehharz7sr)** · **[Caught on the web](https://tagout-recalls.vercel.app/check/u6jkua8xia)** · **[How it works](https://tagout-recalls.vercel.app/how)**
+**[Try it live](https://tagout-recalls.vercel.app)** · **[A finished check](https://tagout-recalls.vercel.app/check/kj6iutme8c)** · **[The eval](https://tagout-recalls.vercel.app/proof)** · **[Held out](https://tagout-recalls.vercel.app/proof#held-h)** · **[A watched household](https://tagout-recalls.vercel.app/watch/5ehharz7sr)** · **[Alerts, replayed](https://tagout-recalls.vercel.app/watch/replay1013)** · **[Caught on the web](https://tagout-recalls.vercel.app/check/vbywum2ru4)** · **[How it works](https://tagout-recalls.vercel.app/how)**
 
 **Demo video:** https://youtu.be/kqVtw3pK6nw (2:45)
 
@@ -31,7 +31,7 @@ Tagout checks what a household owns against live U.S. recalls. List what you own
 4. Try a car (`2019 Honda CR-V`) or a car seat with no model number (`Evenflo car seat`): both are **Check the label**, and the tag says exactly what to look up.
 5. At the bottom of a finished check, **Watch these things** saves the list. [This watch](https://tagout-recalls.vercel.app/watch/5ehharz7sr) started from the Oct 8 showcase; the daily sweep checks it against every new recall, and [its feed](https://tagout-recalls.vercel.app/watch/5ehharz7sr/feed.xml) works in any feed reader.
 6. The [eval](https://tagout-recalls.vercel.app/proof) shows every case and every answer, including the ones that were wrong.
-7. [This check](https://tagout-recalls.vercel.app/check/u6jkua8xia) shows two recalls only the web search could find, each marked on its tag.
+7. [This check](https://tagout-recalls.vercel.app/check/vbywum2ru4) shows two recalls only the web search could find, each marked on its tag.
 
 Every check gets its own link, so you can send it to someone.
 
@@ -141,7 +141,7 @@ Across the 105-case eval a full check averaged **2.6¢ of Nemotron an item** (pl
 - A `cpsc.gov` page that CPSC's database also has is swapped for the database record, so tags cite recall numbers. The log says so: "Tavily web search … 6 found, 2 new" means four pages confirmed recalls already found and two added new ones.
 - A recall that only Tavily found carries a badge on the tag: **Ahead of the database** when the agency database had no record of that recall on the day of the check (decided per recall: for openFDA, no report matching the lot, UPC or product, e.g. "openFDA had no report of this recall on 25 Oct (lot 085261: 0 results)"), **Found by Tavily** otherwise (with the USDA note for FSIS recalls). Web notices get the hazard, remedy and contact from their own sentences, and undeclared-allergen recalls read as allergy alerts.
 - **Measured:** with Tavily off, Tagout cleared all 10 held-out recalled units that no database listed yet; with it on, it flagged 8 (see [Held out](#held-out-39-new-cases-run-once)).
-- [This check](https://tagout-recalls.vercel.app/check/u6jkua8xia) (Oct 25) has three recalls only Tavily could find: a Lidl Gelatelli gelato lot and a WinCo hoagie-roll UPC from FDA company announcements that openFDA had no report for (both **Do not use**), and a USDA FSIS Kayem hot-dog recall limited to production dates (**Check the label**). [An earlier one](https://tagout-recalls.vercel.app/check/vk9vuyk3zi) (Oct 15) caught Gardeners Basics sprouting seeds and a Ukrop's FSIS recall.
+- [This check](https://tagout-recalls.vercel.app/check/vbywum2ru4) (Oct 25, re-run on the final code) has three recalls only Tavily could find: a Lidl Gelatelli gelato lot (**Do not use**, Listeria) and a WinCo hoagie-roll UPC (a sesame **allergy alert**), both from FDA company announcements openFDA had no report of (each tag says so), and a USDA FSIS Kayem hot-dog recall limited to production dates (**Check the label**). [An earlier one](https://tagout-recalls.vercel.app/check/vk9vuyk3zi) (Oct 15) caught Gardeners Basics sprouting seeds and a Ukrop's FSIS recall.
 - In the eval, the Vornado heater's red tag came from the CPSC newsroom page Tavily found, after the database record's own text failed to give up the code.
 
 ## Watch mode

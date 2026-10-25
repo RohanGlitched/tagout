@@ -32,6 +32,7 @@ export default function Footer() {
           <Link href={`/check/${SHOWCASE.household}`}>A real household check</Link>
           <Link href={`/check/${SHOWCASE.webcatch}`}>Caught on the web first</Link>
           <Link href={`/watch/${SHOWCASE.watch}`}>A watched household</Link>
+          <Link href={`/watch/${SHOWCASE.replay}`}>Alerts, replayed</Link>
           <a href={VIDEO_URL}>Demo video</a>
         </nav>
         <nav className={s.footCol} aria-label="Project">

@@ -8,7 +8,9 @@ export const SHOWCASE = {
   /** A five-item household check: two red, two orange, one green. */
   household: "kj6iutme8c",
   /** Recalls found only on the web, before the agency databases listed them (Oct 25: two red, one orange). */
-  webcatch: "u6jkua8xia",
+  webcatch: "vbywum2ru4",
   /** The household above, saved as a watch. */
   watch: "5ehharz7sr",
+  /** A list dated Oct 13 and the alerts the daily sweep would have sent it (clearly labelled as a replay). */
+  replay: "replay1013",
 };
