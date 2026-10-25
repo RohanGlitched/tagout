@@ -208,7 +208,7 @@ Nineteen new cases (`cases-holdout2.json`, commit `45dc3a1`, sha256 `34907813bf7
 - **Plus** 3 listed codes (one with its dash dropped, one model with a sale window), a car and a clean item.
 - **Dates.** On Oct 25 no database had a record dated Oct 23 or later (CPSC's newest batch is Oct 22, openFDA's newest report Oct 14), so the database cases are the freshest records in no other case file (CPSC Sep 3 - Oct 8, openFDA Oct 14). Nothing in `lib/` was changed with these cases in view.
 - **Ground truth** (`verify-holdout2.mjs`, `verified-holdout2.json`, commit `9ecb544`): 19/19, checked with no Tagout code. For a range, family or window it parses the printed bounds and compares; a gap's neighbours must be printed and the value printed in no CPSC or FDA record of the brand. Re-run it right before the run: NHTSA can add a campaign.
-- **To run once, after pushing the cases with the tag `prereg-2026-10-27` and checking the tag shows on GitHub:**
+- **Pre-registered:** the cases were pushed with the tag `prereg-2026-10-25` (commit 45dc3a1) on Oct 25, before any run. **To run once:**
 
   ```bash
   node eval/verify-holdout2.mjs
