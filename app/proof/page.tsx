@@ -474,7 +474,9 @@ export default function Proof() {
             </li>
             <li>
               Each arm ran each case once, on {fmtRun(summary.at)}. Model answers vary between runs; this is one sample, not an average. Every HTTP response was cached, so all arms read
-              the same agency data and the whole run can be replayed for free.
+              the same agency data and the whole run can be replayed for free: download the scrubbed{" "}
+              <a href={`${REPO_URL}/releases/download/eval-2026-10-25/eval-cache.tgz`}>cache archive</a> (5.2 MB), unpack it in the repo and run{" "}
+              <span className="code">npm run eval:replay</span>.
             </li>
             <li>
               Two changes made after this run are not in its numbers: an agency&apos;s page listing many recalls no longer stands in for one notice, and an FDA company

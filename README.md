@@ -71,7 +71,7 @@ The 105 cases shaped the fixes above, so on Oct 25 we wrote 39 new cases from re
 - **Tavily, measured.** With Tavily off, Tagout cleared all 10 recalled units that no database listed yet; with it, it flagged 8. On the 27 database cases Tavily changed nothing.
 - **The misses.** Four recalled units were cleared: a two-part lot code (`091026 DL`), a whole-line air-rifle recall dropped before the tag, and two USDA FSIS lines. Each was traced and fixed afterwards (commits `9677671`..`a9a0f8f`, tests in `test/holdout-fixes.test.ts`). Re-run after the fixes, Tagout gets **37/39 with none cleared and none wrongly red**, and 105/105 on the tuned set; that re-run is no longer held out, so the table above stays the headline (`eval/holdout-after-fixes.json`).
 
-Reproduce it. Every HTTP response is cached: with the scrubbed archive `eval-cache.tgz` (5.2 MB, unpacks as `eval/.cache/` in the repo root; to be attached to a GitHub release), `npm run eval:replay` reads the same data and costs nothing. Without the archive:
+Reproduce it. Every HTTP response is cached: with the scrubbed archive [`eval-cache.tgz`](https://github.com/RohanGlitched/tagout/releases/download/eval-2026-10-25/eval-cache.tgz) (5.2 MB, release `eval-2026-10-25`; unpacks as `eval/.cache/` in the repo root), `npm run eval:replay` reads the same data and costs nothing. Without the archive:
 
 ```bash
 node eval/verify.mjs                                          # ground truth against the agencies
