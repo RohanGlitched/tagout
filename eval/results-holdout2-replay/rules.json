@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a5dff84",
+   "commit": "9b1b60f",
    "libChanged": true
   }
  },
- "at": "2026-10-29T21:19:36.377Z",
+ "at": "2026-10-29T22:01:31.582Z",
  "cases": [
   {
    "id": "g01",
@@ -133,7 +133,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 27,
+   "ms": 29,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -191,7 +191,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 27,
+   "ms": 28,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -315,7 +315,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 58,
+   "ms": 56,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -372,7 +372,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 36,
+   "ms": 35,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -432,7 +432,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 53,
+   "ms": 52,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -491,7 +491,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 60,
+   "ms": 58,
    "msFresh": true,
    "tavily": 2,
    "tavilySearch": 1,
@@ -549,7 +549,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 39,
+   "ms": 36,
    "msFresh": true,
    "tavily": 2,
    "tavilySearch": 1,
@@ -608,7 +608,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 18,
+   "ms": 17,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -665,7 +665,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 18,
+   "ms": 15,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -724,7 +724,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 17,
+   "ms": 16,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -840,7 +840,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 14,
+   "ms": 15,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -898,7 +898,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 12,
+   "ms": 13,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -957,7 +957,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 13,
+   "ms": 11,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1016,7 +1016,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 12,
+   "ms": 14,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1074,7 +1074,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 14,
+   "ms": 17,
    "msFresh": true,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1139,7 +1139,7 @@
     "completion": 0
    },
    "usd": 0,
-   "ms": 12,
+   "ms": 15,
    "msFresh": true,
    "tavily": 1,
    "tavilySearch": 1,

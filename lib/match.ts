@@ -175,6 +175,10 @@ export type Match = {
   window?: { from: string; to: string };
   /** Red: how the deciding code matched (reader's list, the record's own list or the text; exact, range, family). */
   basis?: Basis;
+  /** Red on a bare product code: no lot, UPC, serial or date of the item's was compared. */
+  bare?: boolean;
+  /** The record bounds this product's serials and the item's serial is outside them. */
+  serialOutside?: boolean;
 };
 
 /** A USDA establishment number as typed ("EST. 7839", "EST. M/P 7839", "P-20935A"): printed inside the USDA mark
@@ -267,6 +271,19 @@ export function matchItem(item: Item, notice: Notice): Match {
   const inList = (c: string) => listRows.some((row) => printedIn(c, row) && (!item.upc || printedIn(item.upc, row)));
   const inText = (c: string | undefined) => Boolean(c && (ownBrand || distinctive(c)) && (printedIn(c, ownText) || inList(c)));
   const lotInText = !strongLot && inText(item.lot);
+
+  // A serial the record bounds for the item's own product ("Product Code: 3121001 ... Intervals: 8400054-8450499 and
+  // 9000000-9000999") decides for that record (held-out set #3, j5 and j6). Outside the bounds, this recall doesn't
+  // cover the item, and decide() won't let a bare product-code match elsewhere tag it red.
+  const sb = serialBoundsFor(item, ownText);
+  if (sb.length) {
+    const sn = norm(item.serial!);
+    const inside = sb.some((b) => sn >= b.lo && sn <= b.hi);
+    const theirs = `serials ${sb.map((b) => `${b.lo} to ${b.hi}`).join(" or ")}`;
+    proof.push({ field: "lot", yours: item.serial!, theirs, matched: inside });
+    if (!inside) return { level: null, proof, why: `Serial ${item.serial} is outside the ${theirs} this recall covers.`, serialOutside: true };
+    return { level: "danger", proof, why: `Serial ${item.serial} is inside the ${theirs} this recall lists.`, basis: { by: "text", how: "range" } };
+  }
 
   // When a notice lists lots, the lot decides. A model match alone isn't enough for a lot-limited recall.
   if (lots.length && item.lot) {
@@ -376,6 +393,23 @@ export function matchItem(item: Item, notice: Notice): Match {
       proof.push({ field: "made", yours: item.made!, theirs: `made ${span}`, matched: inside });
       if (!inside) return { level: null, proof, why: `${what} is listed, but only ${food ? "products" : "units"} made ${span} are recalled, and yours was made ${item.made}.` };
     }
+    // No reader read a made-date window, but the notice's own text prints one or more ("Only units manufactured from
+    // April 2025 through January 2026"): the same rule, without a model (held-out set #3, j2).
+    const textWindows = !window && !byDate ? madeWindowsIn(ownText) : [];
+    if (textWindows.length) {
+      const made = parseMade(item.made);
+      const span = textWindows.map(windowText).join(" or ");
+      if (!made)
+        return {
+          level: "warning",
+          proof,
+          why: `${what} is listed, but only ${food ? "products" : "units"} made ${span}. Check the date of manufacture on the label.`,
+          window: textWindows[0],
+        };
+      const inside = textWindows.some((x) => made.end >= x.from && made.start <= x.to);
+      proof.push({ field: "made", yours: item.made!, theirs: `made ${span}`, matched: inside });
+      if (!inside) return { level: null, proof, why: `${what} is listed, but only ${food ? "products" : "units"} made ${span} are recalled, and yours was made ${item.made}.` };
+    }
     // The notice limits the recall to certain lots or date codes, but the list it was read into has none: the
     // notice's own text decides. A lot or date code on the label that the notice doesn't print can't be red.
     const limited = !lots.length && /\b(lot|batch|date code|serial number)s?\b/i.test(notice.text ?? "");
@@ -385,9 +419,10 @@ export function matchItem(item: Item, notice: Notice): Match {
       proof.push({ field: "lot", yours: unlisted, theirs: "not printed in the notice", matched: false });
       return { level: "warning", proof, why: `${what} is listed, but this recall names particular lot or date codes and ${unlisted} isn't one the notice prints. Compare the code on yours with the notice.` };
     }
-    const w = Boolean(window);
+    const w = Boolean(window) || textWindows.length > 0;
     const basis: Basis = strongModel ? (byText || !m ? textBasis(w) : listBasis(m, w)) : { by: byReader.has(u!) ? "reader-list" : "record-list", how: "exact", ...(w ? { window: w } : {}) };
-    return { level: "danger", proof, why: `${what} is listed in this recall${m?.how === "range" ? " range" : ""}.`, basis };
+    const bare = strongModel && !u && !w && !byDate && !item.lot;
+    return { level: "danger", proof, why: `${what} is listed in this recall${m?.how === "range" ? " range" : ""}.`, basis, ...(bare ? { bare } : {}) };
   }
   if (m?.how === "variant") {
     return { level: "warning", proof, why: `The recall lists ${m.theirs}, which is close to your ${item.model}. Compare the full model number on the label.` };
@@ -551,6 +586,78 @@ export function dateWindowIn(text: string | undefined): { from: string; to: stri
   return found.length === 1 ? found[0] : null;
 }
 
+/** A month or a day as notices print them ("April 2025", "Jan. 4, 2021", "04JAN2021", "2025/04", "4/2025", "1/4/2021"):
+ *  the first day of a month for a start, the last day for an end. */
+function monthOrDay(s: string, last: boolean): string | null {
+  const t = s.trim().replace(/\.$/, "");
+  const lastDay = (y: number, m: number) => new Date(Date.UTC(y, m, 0)).getUTCDate();
+  const ym = (y: number, m: number) => (m >= 1 && m <= 12 && y > 1990 && y < 2100 ? `${y}-${String(m).padStart(2, "0")}-${String(last ? lastDay(y, m) : 1).padStart(2, "0")}` : null);
+  let m = t.match(/^(\d{1,2})([A-Za-z]{3})(\d{4})$/);
+  if (m) return looseDate(`${m[2]} ${m[1]}, ${m[3]}`);
+  const day = looseDate(t);
+  if (day) return day;
+  m = t.match(/^([A-Za-z]{3})[a-z]*\.? (\d{4})$/i);
+  if (m && MONTHS.includes(m[1].toLowerCase())) return ym(+m[2], MONTHS.indexOf(m[1].toLowerCase()) + 1);
+  m = t.match(/^(\d{4})\/(\d{1,2})$/);
+  if (m) return ym(+m[1], +m[2]);
+  m = t.match(/^(\d{1,2})\/(\d{4})$/);
+  return m ? ym(+m[2], +m[1]) : null;
+}
+
+/**
+ * The made-date windows a notice prints in its own text ("Only units manufactured from April 2025 through January
+ * 2026", "manufactured between August 2019 to July 2020 and August 2024 to April 2026"), read without a model.
+ * Held-out set #3 (j2): a heater made outside the window was tagged red because no reader read the window.
+ */
+export function madeWindowsIn(text: string | undefined): { from: string; to: string }[] {
+  if (!text) return [];
+  const D = String.raw`([A-Za-z]{3,9}\.? \d{1,2},? \d{4}|[A-Za-z]{3,9}\.? \d{4}|\d{1,2}[A-Za-z]{3}\d{4}|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}\/\d{1,2}|\d{1,2}\/\d{4})`;
+  const PAIR = String.raw`${D}\s*(?:through|thru|to|and|-|–)\s*${D}`;
+  const out: { from: string; to: string }[] = [];
+  const flat = flatText(text);
+  for (const m of flat.matchAll(new RegExp(String.raw`\b(?:manufactured|made|produced)\s+(?:from|between|during)\s+${PAIR}((?:\s*(?:,|and)\s*(?:from\s+|between\s+)?${PAIR})*)`, "gi"))) {
+    const pairs = [[m[1], m[2]], ...[...(m[3] ?? "").matchAll(new RegExp(PAIR, "gi"))].map((p) => [p[1], p[2]])];
+    for (const [a, b] of pairs) {
+      const from = monthOrDay(a, false);
+      const to = monthOrDay(b, true);
+      if (from && to && from <= to && !out.some((w) => w.from === from && w.to === to)) out.push({ from, to });
+    }
+  }
+  return out;
+}
+
+/**
+ * Serial-number intervals a record prints for the item's own product ("Product Code: 3121001 ... Lot/Serial
+ * Number: Intervals: 8400054-8450499 and 9000000-9000999"), read without a model. Scoped to the stretch after the
+ * item's product code when the record prints one, so another product's intervals never count. Empty when the item
+ * has no numeric serial or the record bounds none.
+ */
+export function serialBoundsFor(item: Item, text: string | undefined): { lo: string; hi: string }[] {
+  const sn = item.serial ? norm(item.serial) : "";
+  if (!text || !/^\d{5,}$/.test(sn)) return [];
+  const flat = flatText(text);
+  const code = [item.model, ...(item.codes ?? [])]
+    .filter((c): c is string => Boolean(c))
+    .map((c) => c.replace(/^(?:product code|model|code)\s*[:#]?\s*/i, "").trim())
+    .find((c) => c.length >= 4 && new RegExp(String.raw`\b${c.replace(/[.*+?^${}()|[\]\\]/g, "\\/** Where a product list appended to a page")}\b`).test(flat));
+  // Every stretch that starts at the item's product code (a record can name it in a product list first and give
+  // its serials further on).
+  const esc = (c: string) => c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // Only a record that prints the item's own product code: another product's serial intervals prove nothing.
+  if (!code) return [];
+  const segs = code
+    ? [...flat.matchAll(new RegExp(String.raw`\b${esc(code)}\b`, "g"))].map((x) => {
+        const i = x.index!;
+        const next = flat.slice(i + code.length).search(/\bProduct Code\b/i);
+        return flat.slice(i, next < 0 ? i + 500 : i + code.length + next);
+      })
+    : [flat];
+  const SERIALS = /\b(?:lot\/serial|serial)(?: numbers?)?\b[^.]{0,30}?(?:intervals?|ranges?)?:?\s*((?:\d{5,}\s*[-–]\s*\d{5,}(?:\s*(?:,|and)\s*)?)+)/i;
+  const m = segs.map((x) => x.match(SERIALS)).find(Boolean);
+  if (!m) return [];
+  return [...m[1].matchAll(/(\d{5,})\s*[-–]\s*(\d{5,})/g)].map((p) => ({ lo: p[1], hi: p[2] })).filter((b) => b.lo.length === b.hi.length && b.lo < b.hi && b.lo.length === sn.length);
+}
+
 /** Where a product list appended to a page's text starts (lib/sources/web.ts writes it). */
 export const PRODUCT_LIST_MARK = "\n\nProduct list (PDF linked from the recall page): ";
 
@@ -684,8 +791,16 @@ export function yearsText(years: number[]): string {
 
 /** Combine per-notice matches into the item's tag: any red wins, then orange, else green. */
 export function decide(results: { notice: Notice; match: Match }[]): { level: TagLevel; top?: { notice: Notice; match: Match }; related: Notice[] } {
-  const reds = results.filter((r) => r.match.level === "danger");
-  const oranges = results.filter((r) => r.match.level === "warning");
+  // A record that bounds this product's serials and puts the item's outside them outranks a bare product-code match
+  // in another record (held-out set #3, j6: an older recall listed the lift's product code; the newer one's serial
+  // intervals exclude this lift). That match is held at orange, not red.
+  const outside = results.some((r) => r.match.serialOutside);
+  const demote = (r: { match: Match }) => outside && r.match.level === "danger" && r.match.bare;
+  const held = results
+    .filter(demote)
+    .map((r) => ({ ...r, match: { ...r.match, level: "warning" as const, why: `${r.match.why} But another recall bounds this product's serial numbers and yours is outside them: check with the maker.` } }));
+  const reds = results.filter((r) => r.match.level === "danger" && !demote(r));
+  const oranges = [...results.filter((r) => r.match.level === "warning"), ...held];
   const pick = (rs: typeof results) => [...rs].sort(leadOrder)[0];
   if (reds.length) {
     const top = pick(reds);

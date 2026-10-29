@@ -1,0 +1,705 @@
+{
+ "arm": "tagout",
+ "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "useAgent": true,
+  "useModel": true,
+  "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+  "cases": "cases-holdout3.json",
+  "today": "2026-10-30",
+  "noWeb": false,
+  "offline": true,
+  "keyless": false,
+  "code": {
+   "commit": "9b1b60f",
+   "libChanged": true
+  }
+ },
+ "at": "2026-10-29T22:02:03.918Z",
+ "cases": [
+  {
+   "id": "j1",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-054",
+   "headline": "DR-HSH015 is listed in this recall.",
+   "basis": "reader-list+window",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 7314,
+     "completion": 1395,
+     "usd": 0.011499
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "DREO",
+     "product": "space heater",
+     "model": "DR-HSH015",
+     "made": "2025/08",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “DREO”, product “space heater”, text “DR-HSH015”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “DREO space heater recall DR-HSH015”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 7314,
+    "completion": 1395
+   },
+   "usd": 0.0115,
+   "ms": 81,
+   "msFresh": false,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "j2",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 4,
+     "prompt": 5005,
+     "completion": 1342,
+     "usd": 0.009031
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "DREO",
+     "product": "space heater",
+     "model": "DR-HSH015",
+     "made": "2026/03",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “DREO”, product “space heater”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “DREO space heater recall”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 5005,
+    "completion": 1342
+   },
+   "usd": 0.00903,
+   "ms": 66,
+   "msFresh": false,
+   "tavily": 0,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 0,
+   "truncated": 0,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "j3",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "CPSC 27-041",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 5,
+     "prompt": 11191,
+     "completion": 2341,
+     "usd": 0.018214
+    },
+    "tavily": {
+     "searches": 0,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Lithonia",
+     "product": "RSX luminaire with AASP adjustable tilt arm",
+     "codes": [
+      "AASP"
+     ],
+     "made": "2025/06",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia”, product “luminaire”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia”, product “lighting”",
+     "found": 4,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia”, text “AASP”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lithonia RSX luminaire recall”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Lithonia Lighting Recalls RSX Luminaires with Adjustable Tilt Arm Mo…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 11191,
+    "completion": 2341
+   },
+   "usd": 0.01821,
+   "ms": 78,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "j4",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 27-041",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 6,
+     "prompt": 13871,
+     "completion": 3429,
+     "usd": 0.024158
+    },
+    "tavily": {
+     "searches": 0,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Lithonia",
+     "product": "RSX luminaire with AASP adjustable tilt arm",
+     "made": "2022/05",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia”, product “luminaire”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia”, product “lighting”",
+     "found": 4,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lithonia”, product “fixture”",
+     "found": 9,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lithonia RSX luminaire recall”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Lithonia Lighting Recalls RSX Luminaires with Adjustable Tilt Arm Mo…”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 6,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 13871,
+    "completion": 3429
+   },
+   "usd": 0.02416,
+   "ms": 79,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 1,
+   "missed": [
+    "api.tavily.com /search"
+   ]
+  },
+  {
+   "id": "j5",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA Z-0151-2027",
+   "headline": "Serial 8412345 is inside the serials 8400054 to 8450499 or 9000000 to 9000999 this recall lists.",
+   "basis": "text/range",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "pagesSkipped": 1,
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 16,
+     "prompt": 40180,
+     "completion": 13279,
+     "usd": 0.080017,
+     "truncated": 3,
+     "retried": 3
+    }
+   },
+   "items": [
+    {
+     "kind": "device",
+     "brand": "Liko",
+     "product": "Likorall 200 overhead lift",
+     "model": "3121001",
+     "serial": "8412345",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Liko”, “Likorall 200 overhead lift”",
+     "found": 8,
+     "fresh": 8
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Liko Likorall 200 overhead lift recall”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “(1)Traverse Rail Carrier E-System, wide\t31017XX\t component to Liko o…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Liko”, “Likorall”",
+     "found": 10,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Likorall Overhead Lifts    Product Code: 3121001  Product Descriptio…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Liko Likorall 200 overhead lift recall 2026”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    }
+   ],
+   "calls": 16,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 40180,
+    "completion": 13279
+   },
+   "usd": 0.08002,
+   "ms": 95,
+   "msFresh": false,
+   "tavily": 0,
+   "tavilySearch": 2,
+   "tavilyExtract": 2,
+   "tavilyCredits": 0,
+   "truncated": 3,
+   "cacheMisses": 5,
+   "missed": [
+    "api.tavily.com /search",
+    "api.tavily.com /extract",
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
+  },
+  {
+   "id": "j6",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "FDA Z-0783-2022",
+   "headline": "Model 3121001 is listed in this recall. But another recall bounds this product's serial numbers and yours is outside them: check with the maker.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 17,
+     "prompt": 42769,
+     "completion": 13714,
+     "usd": 0.08391099999999999,
+     "truncated": 3,
+     "retried": 3
+    }
+   },
+   "items": [
+    {
+     "kind": "device",
+     "brand": "Liko",
+     "product": "Likorall 200 overhead lift",
+     "serial": "8455120",
+     "codes": [
+      "3121001"
+     ],
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Liko”, “overhead lift”",
+     "found": 9,
+     "fresh": 9
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Liko”, “Likorall 200”",
+     "found": 10,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Liko Likorall 200 overhead lift recall”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Likorall Overhead Lifts    Product Code: 3121001  Product Descriptio…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Liko Likorall 200 recall 3121001”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Liko”, “3121001”",
+     "found": 9,
+     "fresh": 0
+    }
+   ],
+   "calls": 17,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 42769,
+    "completion": 13714
+   },
+   "usd": 0.08391,
+   "ms": 87,
+   "msFresh": false,
+   "tavily": 0,
+   "tavilySearch": 2,
+   "tavilyExtract": 1,
+   "tavilyCredits": 0,
+   "truncated": 3,
+   "cacheMisses": 4,
+   "missed": [
+    "api.tavily.com /search",
+    "api.tavily.com /extract",
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
+  },
+  {
+   "id": "j7",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "FDA Z-0137-2027",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "pagesSkipped": 2,
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 15,
+     "prompt": 47244,
+     "completion": 14697,
+     "usd": 0.091335,
+     "truncated": 5,
+     "retried": 3
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "device",
+     "brand": "Grafton",
+     "product": "DBM bone graft",
+     "serial": "A62881-020",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Grafton”, “DBM bone graft”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Grafton\" DBM and Grafton Plus\" DBM contain demineralized human bone…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Grafton DBM (Flex), Model Numbers: T42100, Demineralized Bone Matrix”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Grafton DBM bone graft recall”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Grafton”",
+     "found": 10,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Grafton DBM bone graft recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 15,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 47244,
+    "completion": 14697
+   },
+   "usd": 0.09133,
+   "ms": 2829,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 2,
+   "tavilyExtract": 2,
+   "tavilyCredits": 2,
+   "truncated": 5,
+   "cacheMisses": 6,
+   "missed": [
+    "api.tavily.com /extract",
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
+   ]
+  },
+  {
+   "id": "j8",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "FDA Z-0137-2027",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 13,
+     "prompt": 36176,
+     "completion": 14371,
+     "usd": 0.079289,
+     "truncated": 5,
+     "retried": 3
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "device",
+     "brand": "Grafton",
+     "product": "DBM bone graft",
+     "serial": "A62881-013",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Grafton”, “DBM bone graft”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, brand “Grafton”",
+     "found": 10,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Grafton DBM bone graft recall”",
+     "found": 1,
+     "fresh": 1
+    }
+   ],
+   "calls": 13,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 36176,
+    "completion": 14371
+   },
+   "usd": 0.07929,
+   "ms": 3211,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 1,
+   "truncated": 5,
+   "cacheMisses": 5,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b",
+    "api.tavily.com /extract"
+   ]
+  }
+ ]
+}

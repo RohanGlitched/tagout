@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "a5dff84",
+   "commit": "9b1b60f",
    "libChanged": true
   }
  },
- "at": "2026-10-29T21:19:33.632Z",
+ "at": "2026-10-29T22:01:29.062Z",
  "cases": [
   {
    "id": "g01",
@@ -59,6 +59,7 @@
      "kind": "product",
      "brand": "Giant",
      "product": "SureLock Flex Key Coil 15 bike lock",
+     "serial": "00010 2450",
      "readFrom": "typed"
     }
    ],
@@ -83,7 +84,7 @@
     "completion": 442
    },
    "usd": 0.00165,
-   "ms": 1817,
+   "ms": 2044,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -126,6 +127,7 @@
      "kind": "product",
      "brand": "Giant",
      "product": "SureLock Flex Key Coil 15 bike lock",
+     "serial": "00010 2650",
      "readFrom": "typed"
     }
    ],
@@ -150,7 +152,7 @@
     "completion": 671
    },
    "usd": 0.00233,
-   "ms": 1985,
+   "ms": 1956,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -225,7 +227,7 @@
     "completion": 4309
    },
    "usd": 0.00536,
-   "ms": 55,
+   "ms": 52,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -293,7 +295,7 @@
     "completion": 3653
    },
    "usd": 0.00339,
-   "ms": 55,
+   "ms": 52,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -366,7 +368,7 @@
     "completion": 542
    },
    "usd": 0.00196,
-   "ms": 1707,
+   "ms": 1919,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -434,7 +436,7 @@
     "completion": 904
    },
    "usd": 0.00304,
-   "ms": 13,
+   "ms": 12,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -503,7 +505,7 @@
     "completion": 943
    },
    "usd": 0.00209,
-   "ms": 19,
+   "ms": 18,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -572,7 +574,7 @@
     "completion": 1844
    },
    "usd": 0.00393,
-   "ms": 831,
+   "ms": 824,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -641,7 +643,7 @@
     "completion": 1727
    },
    "usd": 0.00221,
-   "ms": 20,
+   "ms": 17,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -711,7 +713,7 @@
     "completion": 20146
    },
    "usd": 0.00861,
-   "ms": 99,
+   "ms": 88,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -777,7 +779,7 @@
     "completion": 401
    },
    "usd": 0.00152,
-   "ms": 1820,
+   "ms": 1975,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -845,7 +847,7 @@
     "completion": 440
    },
    "usd": 0.00165,
-   "ms": 1869,
+   "ms": 1866,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -924,7 +926,7 @@
     "completion": 1157
    },
    "usd": 0.00352,
-   "ms": 13,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1001,7 +1003,7 @@
     "completion": 1259
    },
    "usd": 0.00382,
-   "ms": 9,
+   "ms": 7,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1066,7 +1068,7 @@
     "completion": 349
    },
    "usd": 0.00136,
-   "ms": 1968,
+   "ms": 1934,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1138,7 +1140,7 @@
     "completion": 1079
    },
    "usd": 0.00319,
-   "ms": 1304,
+   "ms": 1797,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1272,7 +1274,7 @@
     "completion": 384
    },
    "usd": 0.00146,
-   "ms": 1975,
+   "ms": 1904,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1346,7 +1348,7 @@
     "completion": 901
    },
    "usd": 0.00281,
-   "ms": 8,
+   "ms": 10,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,

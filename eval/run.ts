@@ -156,6 +156,9 @@ globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
     const host = new URL(url).hostname;
     ctx?.misses.push(tf ? `${host} ${model}` : `${host} ${new URL(url).pathname}`);
     if (process.env.EVAL_DEBUG) console.error(`[miss] ${method} ${url.slice(0, 300)}`);
+    // --tavily-miss-429: a Tavily call the cache lacks answers as the keyless cap answered it live (only successful
+    // responses are cached), so a run made under --tavily-wait replays along the same path.
+    if (tv && args.includes("--tavily-miss-429")) return new Response(JSON.stringify({ error: { code: "hourly_cap_reached" } }), { status: 429, headers: { "content-type": "application/json" } });
     throw new Error(`not cached: ${url.slice(0, 120)}`);
   }
   if (tf && ledger.total - startSpend >= CAP) throw new Error(`run budget of $${CAP} reached`);
@@ -303,7 +306,7 @@ async function pipeline(arm: Extract<Arm, { kind: "pipeline" }>, c: Case) {
   const steps: { tool: string; label: string; found: number; fresh?: number; error?: string }[] = [];
   let items: unknown;
   for await (const e of runCheck({ text: c.text, photos: photosOf(c) }, arm.useModel, { agent: arm.useAgent })) {
-    if (e.t === "items") items = e.items.map((it) => ({ kind: it.kind, brand: it.brand, product: it.product, model: it.model, lot: it.lot, upc: it.upc, codes: it.codes, made: it.made, readFrom: it.readFrom }));
+    if (e.t === "items") items = e.items.map((it) => ({ kind: it.kind, brand: it.brand, product: it.product, model: it.model, lot: it.lot, upc: it.upc, serial: it.serial, codes: it.codes, made: it.made, readFrom: it.readFrom }));
     else if (e.t === "verdict") {
       level = e.verdict.level;
       notice = e.verdict.notice ? `${e.verdict.notice.source.toUpperCase()} ${e.verdict.notice.id}` : undefined;
