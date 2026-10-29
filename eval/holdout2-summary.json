@@ -1,5 +1,5 @@
 {
- "at": "2026-10-29T19:21:32.391Z",
+ "at": "2026-10-29T19:35:26.079Z",
  "firstRun": null,
  "cases": 19,
  "groups": {
@@ -328,6 +328,152 @@
      "g13": "text",
      "g14": "reader-list",
      "g16": "text"
+    }
+   }
+  },
+  {
+   "arm": "rules",
+   "label": "No model at all: fixed plan, pattern reader, rules",
+   "n": 19,
+   "right": 10,
+   "rightInterval": [
+    0.289,
+    0.756
+   ],
+   "redPrecision": 0.5,
+   "redRecall": 0.125,
+   "redRecallInterval": [
+    0.003,
+    0.527
+   ],
+   "reds": 2,
+   "truePositives": 1,
+   "positives": 8,
+   "falseRed": [
+    "g07"
+   ],
+   "falseRedOf": 9,
+   "falseRedInterval": [
+    0.003,
+    0.482
+   ],
+   "falseClear": [],
+   "falseClearOf": 11,
+   "falseClearInterval": [
+    0,
+    0.285
+   ],
+   "errors": [],
+   "byGroup": {
+    "positive": {
+     "n": 8,
+     "right": 1
+    },
+    "near-miss": {
+     "n": 7,
+     "right": 6
+    },
+    "no-code": {
+     "n": 2,
+     "right": 2
+    },
+    "car": {
+     "n": 1,
+     "right": 1
+    },
+    "clean": {
+     "n": 1,
+     "right": 0
+    }
+   },
+   "bySet": {
+    "database": {
+     "n": 16,
+     "right": 8,
+     "falseRed": [
+      "g07"
+     ],
+     "falseClear": []
+    },
+    "lag": {
+     "n": 3,
+     "right": 2,
+     "falseRed": [],
+     "falseClear": []
+    }
+   },
+   "byForm": {
+    "clean": {
+     "n": 17,
+     "right": 10,
+     "falseRed": [
+      "g07"
+     ],
+     "falseClear": []
+    },
+    "messy": {
+     "n": 2,
+     "right": 0,
+     "falseRed": [],
+     "falseClear": []
+    }
+   },
+   "usdPerItem": 0,
+   "usdTotal": 0,
+   "tavilyPerItem": 1.1578947368421053,
+   "tavilyUsdPerItem": 0.009263157894736843,
+   "usdPerItemWithTavily": 0.009263157894736843,
+   "medianMs": null,
+   "webOnlyReds": [],
+   "webCited": [
+    "g09",
+    "g15"
+   ],
+   "fellBack": [],
+   "config": {
+    "today": "2026-10-29",
+    "noWeb": false,
+    "offline": false,
+    "keyless": true,
+    "code": {
+     "commit": "22fa07a",
+     "libChanged": false
+    }
+   },
+   "levels": {
+    "g01": "warning",
+    "g02": "warning",
+    "g03": "warning",
+    "g04": "warning",
+    "g05": "danger",
+    "g06": "warning",
+    "g07": "danger",
+    "g08": "warning",
+    "g09": "warning",
+    "g10": "warning",
+    "g11": "warning",
+    "g12": "warning",
+    "g13": "warning",
+    "g14": "warning",
+    "g15": "warning",
+    "g16": "warning",
+    "g17": "warning",
+    "g18": "warning",
+    "g19": "warning"
+   },
+   "redBasis": {
+    "n": 2,
+    "by": {
+     "record-list": 1,
+     "text": 1
+    },
+    "how": {
+     "exact": 2
+    },
+    "window": 0,
+    "cases": {
+     "g05": "text",
+     "g07": "record-list"
     }
    }
   }

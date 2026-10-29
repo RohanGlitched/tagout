@@ -1,0 +1,38 @@
+[eval] Tavily 429, waiting 53s
+g01  warning   want danger      $0.0000 3544ms  
+[eval] Tavily 429, waiting 53s
+g02  warning   want not-danger  $0.0000 4524ms  
+g05  danger    want danger     CPSC 27-010 $0.0000 17ms  
+[eval] Tavily 429, waiting 52s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+g03  warning   want danger     CPSC 26-741 $0.0000 59291ms  
+g07  danger    want not-danger FDA H-0022-2027 $0.0000 2091ms  
+g08  warning   want danger     CPSC 26-602 $0.0000 2436ms  
+[eval] Tavily 429, waiting 112s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+g09  warning   want flag       WEB FDA website $0.0000 114046ms  
+g10  warning   want not-danger CPSC 24-248 $0.0000 2511ms  
+[eval] Tavily 429, waiting 116s
+[eval] Tavily 429, waiting 120s
+[eval] Tavily 429, waiting 119s
+g06  warning   want danger      $0.0000 293825ms  
+[eval] Tavily 429, waiting 118s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+g11  warning   want danger      $0.0000 239529ms  
+g13  warning   want danger      $0.0000 2691ms  
+g14  warning   want not-danger  $0.0000 5ms  
+[eval] Tavily 429, waiting 110s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+g15  warning   want flag       WEB FDA website $0.0000 116108ms  
+g16  warning   want danger      $0.0000 1627ms  
+g17  warning   want not-danger  $0.0000 3ms  
+g18  warning   want warning    NHTSA 26V689000 $0.0000 8ms  
+g19  warning   want inspected   $0.0000 1634ms  
+[eval] Tavily 429, waiting 119s
+g12  warning   want not-danger  $0.0000 361481ms  
+g04  warning   want not-danger CPSC 26-741 $0.0000 774887ms  
+spent this run $0.0000; eval total $6.0937 over 2751 live calls; Tavily live calls 601 (457 on the key)

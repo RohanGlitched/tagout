@@ -1,0 +1,158 @@
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 9ms 320+442 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5ms 320+671 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 328+1425 tokens
+[eval] Tavily 429, waiting 88s
+[eval] Tavily 429, waiting 88s
+[eval] Tavily 429, waiting 88s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 9848ms 502+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 8641ms 502+1384 tokens
+g03  warning   want danger     CPSC 26-741 $0.0054 110261ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 328+769 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2ms 502+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1ms 502+1384 tokens
+g04  warning   want not-danger CPSC 26-741 $0.0034 10ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 333+542 tokens
+[eval] Tavily 429, waiting 97s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g02  warning   want not-danger CPSC 27-015 $0.0023 211694ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 325+904 tokens
+[eval] Tavily 429, waiting 117s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+g06  inspected want danger      $0.0030 120248ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 336+533 tokens
+[eval] Tavily 429, waiting 117s
+[eval] Tavily 429, waiting 120s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g01  warning   want danger     CPSC 27-015 $0.0016 450635ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 337+1094 tokens
+[eval] Tavily 429, waiting 118s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 4ms 349+132 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3ms 289+132 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2ms 437+371 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1ms 1059+115 tokens
+g08  danger    want danger     FDA H-0008-2027 $0.0039 125443ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 320+460 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1768ms 237+102 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1857ms 869+114 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1991ms 245+134 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2068ms 226+143 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 6720ms 1811+774 tokens
+g09  warning   want flag       WEB FDA website $0.0022 8762ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 331+427 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3043ms 259+133 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3106ms 263+140 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3121ms 259+143 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 4873ms 1993+405 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 11299ms 7332+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 12707ms 779+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 12713ms 2191+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 12720ms 7222+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 10451ms 779+1648 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 23509ms 7332+3750 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 23701ms 2191+3750 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 23720ms 7222+3750 tokens (cut off at the cap)
+g10  warning   want not-danger  $0.0086 36543ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 316+401 tokens
+[eval] Tavily 429, waiting 67s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g07  danger    want not-danger FDA H-0022-2027 $0.0019 358234ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 329+440 tokens
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 116s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g05  danger    want danger     CPSC 27-010 $0.0020 823706ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 319+1027 tokens
+[eval] Tavily 429, waiting 115s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g11  warning   want danger     WEB CPSC newsroom $0.0015 428209ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 319+1129 tokens
+[eval] Tavily 429, waiting 120s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 112s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1290ms 1404+130 tokens
+g14  danger    want not-danger CPSC 27-017 $0.0038 122933ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 308+349 tokens
+[eval] Tavily 429, waiting 116s
+[eval] Tavily 429, waiting 120s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g13  danger    want danger     CPSC 27-017 $0.0034 356615ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 332+912 tokens
+[eval] Tavily 429, waiting 118s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 118s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g12  warning   want not-danger  $0.0016 841425ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 332+1130 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1824ms 1404+167 tokens
+g17  inspected want not-danger  $0.0039 4223ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 306+384 tokens
+[eval] Tavily 429, waiting 113s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g16  danger    want danger     WEB FDA website $0.0031 359043ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 309+818 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3ms 378+83 tokens
+g19  inspected want inspected   $0.0028 15ms  
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 119s
+[eval] Tavily 429, waiting 120s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g15  warning   want flag       WEB FDA website $0.0014 598245ms  
+[eval] Tavily 429, waiting 116s
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B failed: the check's deadline has passed
+g18  warning   want warning    NHTSA 26V689000 $0.0015 473812ms  
+spent this run $0.0085; eval total $6.0937 over 2751 live calls; Tavily live calls 594 (457 on the key)
