@@ -1,0 +1,77 @@
+{
+ "at": "2026-10-29T21:36:40.462Z",
+ "results": [
+  {
+   "id": "j1",
+   "group": "positive",
+   "probe": "window",
+   "ok": true,
+   "notes": [
+    "2025-08 inside 2025-04..2026-01"
+   ]
+  },
+  {
+   "id": "j2",
+   "group": "near-miss",
+   "probe": "window",
+   "ok": true,
+   "notes": [
+    "2026-03 outside 2025-04..2026-01"
+   ]
+  },
+  {
+   "id": "j3",
+   "group": "positive",
+   "probe": "window",
+   "ok": true,
+   "notes": [
+    "2025-06 inside 2019-08..2020-07 and 2024-08..2026-04"
+   ]
+  },
+  {
+   "id": "j4",
+   "group": "near-miss",
+   "probe": "gap",
+   "ok": true,
+   "notes": [
+    "2022-05 outside 2019-08..2020-07 and 2024-08..2026-04"
+   ]
+  },
+  {
+   "id": "j5",
+   "group": "positive",
+   "probe": "range",
+   "ok": true,
+   "notes": [
+    "8412345 inside 8400054-8450499 and 9000000-9000999"
+   ]
+  },
+  {
+   "id": "j6",
+   "group": "near-miss",
+   "probe": "range",
+   "ok": true,
+   "notes": [
+    "8455120 outside 8400054-8450499 and 9000000-9000999"
+   ]
+  },
+  {
+   "id": "j7",
+   "group": "positive",
+   "probe": "listed",
+   "ok": true,
+   "notes": [
+    "A62881-020 printed in Z-0138-2027"
+   ]
+  },
+  {
+   "id": "j8",
+   "group": "near-miss",
+   "probe": "gap",
+   "ok": true,
+   "notes": [
+    "A62881-013 printed in none of 2 openFDA records that print A62881"
+   ]
+  }
+ ]
+}

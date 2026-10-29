@@ -273,6 +273,21 @@ Nineteen new cases (`cases-holdout2.json`, commit `45dc3a1`, sha256 `34907813bf7
 
   Expected spend: about $0.55 of Token Factory for Tagout and $0.05 for the lite tier (19 cases at the measured 2.8¢ and 0.2¢), and about 40 + 30 Tavily credits keyed (add `--keyless` to spend none).
 
+## Held out #3: pre-registered Oct 30
+
+Eight new cases (`cases-holdout3.json`, sha256 `e51b6ea54ac7f563373800dcab409f35598249d85f988af7935fe742322641c9`), pushed with the git tag `prereg-2026-10-30` before any run: four recalls posted Oct 15-29 that bound their codes or dates instead of listing them, each with one unit inside the bound and one neighbour outside it (a made-date window, two made-date windows with a gap, a serial-number interval, a serial run printed as "X through Y"). Ground truth: `verify-holdout3.mjs` (8/8, no Tagout code). Caveat stated before the run: the bound and window rules were written on Oct 30 after held out #2, and `scripts/bound-coverage.mts` ran them over every 2026 notice, these four included; the regexes were widened only for FDA food best-by phrasings, none of which is here.
+
+**To run once** (at the tagged code, Tavily keyless with a 30-second wait cap, at most $0.35 of Token Factory in all):
+
+```bash
+node eval/verify-holdout3.mjs
+npx tsx --conditions=react-server eval/run.ts tagout --cases cases-holdout3.json --results results-holdout3 --today 2026-10-30 --cap 0.30 --keyless --tavily-wait 30
+npx tsx --conditions=react-server eval/run.ts fixed-plan-nano --cases cases-holdout3.json --results results-holdout3 --today 2026-10-30 --cap 0.05 --keyless --tavily-wait 30
+node eval/score.mjs --cases cases-holdout3.json --verified verified-holdout3.json --results results-holdout3 --out holdout3-summary.json --first none
+```
+
+The result is published as it comes out, misses included.
+
 ## Replaying (`npm run eval:replay`)
 
 - **What it does.** It re-runs every recorded arm offline from `eval/.cache` against the checked-out code: no network, no keys, no spend. Then it re-scores into `replay-summary.json` and compares with the recorded tags and with the committed replay. It exits 1 if any tag moved since the committed replay.
