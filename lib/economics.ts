@@ -1,15 +1,19 @@
-import summary from "@/eval/summary.json";
+import current from "@/eval/summary-current.json";
 
 /**
- * Unit costs, all measured: Nemotron tokens at Token Factory list price from the eval (eval/summary.json), Tavily
- * credits per item counted in the eval's cached runs, priced at Tavily's pay-as-you-go rate.
+ * Unit costs, all measured on the 105-case eval at today's code (eval/summary-current.json: Tagout and the lite
+ * tier re-run at ed2dc77 on Oct 25): Nemotron tokens at Token Factory list price, and Tavily credits per item as
+ * billed (a basic search is 1 credit, a basic extract 1 per 5 URLs read), priced at Tavily's pay-as-you-go rate.
  */
 export const TAVILY_USD_PER_CREDIT = 0.008;
 
-const arm = (id: string) => summary.arms.find((a) => a.arm === id)!;
+/** The date the numbers below were measured, for any page that prints them. */
+export const COST_MEASURED = "Oct 25 2026, 105 cases";
 
-/** Tavily credits an item used on average in the 105-case eval (search + extract), per tier. */
-export const TAVILY_CREDITS_PER_ITEM = { full: 2.48, lite: 1.44 };
+const arm = (id: string) => current.arms.find((a) => a.arm === id)!;
+
+/** Tavily credits an item used on average in the 105-case eval (search + extract, as billed), per tier. */
+export const TAVILY_CREDITS_PER_ITEM = { full: arm("tagout").tavilyPerItem, lite: arm("fixed-plan-nano").tavilyPerItem };
 
 export const COST = {
   full: { model: arm("tagout").usdPerItem, tavily: TAVILY_CREDITS_PER_ITEM.full * TAVILY_USD_PER_CREDIT },
@@ -18,7 +22,7 @@ export const COST = {
 
 export const perItem = (tier: keyof typeof COST) => COST[tier].model + COST[tier].tavily;
 
-/** "4.6¢" for amounts under a dollar, "$1.20" above. */
+/** "4.4¢" for amounts under a dollar, "$1.20" above. */
 export function money(usd: number): string {
   return usd < 1 ? `${(usd * 100).toFixed(usd < 0.1 ? 1 : 0)}¢` : `$${usd.toFixed(2)}`;
 }

@@ -71,3 +71,40 @@
     stroke-dashoffset: 0;
   }
 }
+
+/* Phones: the tag hangs from the label's bottom edge on a short string, so it never covers the brand or codes. */
+@media (max-width: 520px) {
+  .tagged[data-drop] .hang {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    margin-top: -6px;
+  }
+  .tagged[data-drop] .tagSlot {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+  .tagged[data-drop] .string {
+    display: none;
+  }
+  .tagged[data-drop] .tie {
+    left: calc(50% - 5px);
+    top: -5px;
+  }
+  .tagged[data-drop] .hang::before {
+    content: "";
+    position: absolute;
+    left: calc(50% - 0.8px);
+    top: 0;
+    width: 1.6px;
+    height: calc(30px + var(--gy, 23.5px));
+    background: #2b3036;
+    z-index: 3;
+  }
+}

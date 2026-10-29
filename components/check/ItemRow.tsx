@@ -41,7 +41,7 @@ export default function ItemRow({ item, verdict, log, running, swing }: { item: 
           {item.readFrom === "photo" ? <span className={s.from}>read from your photo</span> : item.readFrom === "vin" ? <span className={s.from}>decoded from the VIN</span> : null}
         </p>
         <div className={s.tagWrap}>
-          <Tagged item={item} level={verdict?.level} marks={marks} hits={verdict?.proof.filter((p) => p.matched).map((p) => p.yours)} swing={swing} size="md" dx={64} dy={44} rest={verdict?.level === "danger" ? -4 : verdict?.level === "warning" ? 3 : -2} foot={verdict ? `Checked ${fmtDate(verdict.checkedAt)}` : undefined}>
+          <Tagged item={item} level={verdict?.level} marks={marks} hits={verdict?.proof.filter((p) => p.matched).map((p) => p.yours)} swing={swing} size="md" dx={64} dy={44} drop rest={verdict?.level === "danger" ? -4 : verdict?.level === "warning" ? 3 : -2} foot={verdict ? `Checked ${fmtDate(verdict.checkedAt)}` : undefined}>
             {verdict ? (
               <>
                 <b className={s.tagHead}>{verdict.headline}</b>

@@ -18,7 +18,9 @@ import { yearWall } from "@/lib/wall";
 import { AGENCY, fmtDate, noticeRef, plural } from "@/lib/format";
 import type { Proof } from "@/lib/types";
 import summary from "@/eval/summary.json";
+import current from "@/eval/summary-current.json";
 import holdout from "@/eval/holdout-summary.json";
+import held2 from "@/eval/holdout2-summary.json";
 import s from "./home.module.css";
 
 export const revalidate = 600;
@@ -67,6 +69,9 @@ export default async function Home() {
   const lastWeek = newest ? distinct.filter((n) => (n.date ?? "") > weekAgo).length : 0;
 
   const held = holdout.arms.find((a) => a.arm === "tagout");
+  const t2 = held2.arms.find((a) => a.arm === "tagout");
+  const rb = current.arms.find((a) => a.arm === "tagout")?.redBasis;
+  const basis = rb ? { reader: rb.by["reader-list"] ?? 0, n: rb.n } : null;
   const months = wall ? wall.months.length : 0;
   const red = demo?.items?.find((i) => demo.verdicts?.find((v) => v.itemId === i.id)?.level === "danger");
   const monthWords = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
@@ -148,22 +153,27 @@ export default async function Home() {
         <section className={s.band} aria-labelledby="proof-h">
           <div className={s.bandHead}>
             <h2 id="proof-h" className={s.h2}>
-              Measured on {summary.cases} real recall cases.
+              Measured on cases it had never seen.
             </h2>
             <p className={s.sub}>
-              Each line answered the same cases, checked against the agencies&apos; own records. The rules are what keep a recalled unit from being cleared.{" "}
+              Two held-out sets, each run once, then the {summary.cases} cases Tagout was tuned on, where each line below answered the same cases. Every answer is checked against the
+              agencies&apos; own records.{" "}
               <Link href="/proof" className={s.more}>
                 Every case and every miss
               </Link>
             </p>
           </div>
-          <Ladder />
-          {held ? (
+          {held && t2 ? (
             <p className={s.held}>
-              <b>On {holdout.cases} new cases it had never seen</b>, committed before a single run: {held.right} of {held.n} right, none wrongly tagged do not use, and{" "}
-              {held.falseClear.length} recalled units cleared. Each was traced and fixed; re-run after the fixes, none is cleared. <Link href="/proof#held-h">The held-out results</Link>
+              <b>
+                On {holdout.cases + held2.cases} cases it had never seen, each set run once: {held.right + t2.right} right, {held.falseRed.length + t2.falseRed.length} wrongly tagged do
+                not use.
+              </b>{" "}
+              The first {holdout.cases} cleared {held.falseClear.length} recalled units, each traced and fixed; the second {held2.cases}, published with a git tag before they ran, cleared
+              none and gave one wrong red: a pizza whose best-by date is outside the recall&apos;s window. <Link href="/proof#held-h">Both held-out sets</Link>
             </p>
           ) : null}
+          <Ladder />
         </section>
 
         {wall ? (
@@ -186,7 +196,10 @@ export default async function Home() {
             <h2 id="spec-h" className={s.h2}>
               Anatomy of a red tag
             </h2>
-            <p className={s.sub}>NVIDIA Nemotron on Nebius Token Factory does the reading and the searching. The final call is a comparison you can check yourself.</p>
+            <p className={s.sub}>
+              NVIDIA Nemotron on Nebius Token Factory does what rules can&apos;t: it finds the recall and reads the code out of the agency&apos;s prose. Rules make it provable: the final
+              call is a comparison you can check yourself.{basis ? ` In the eval, Nemotron's reading decided ${basis.reader} of the ${basis.n} red tags; the rest came from lists the agency record already prints.` : ""}
+            </p>
           </div>
           <Specimen />
         </section>

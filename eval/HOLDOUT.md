@@ -5,7 +5,7 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
 ## What was held out
 
 - **Committed first.** `cases-holdout.json` went in as commit `d9dce10` (Oct 25 00:37:01 IST) and its ground truth as `e2d6481` (00:37:05). Every arm ran after that, from a detached worktree at `a1d8b21`, so nobody's uncommitted work could leak in.
-- **What can be checked from outside.** The cases (`d9dce10`) and all runs were committed locally on Oct 25 and pushed together at 20:47 UTC (Oct 24 20:47:55 UTC, 02:17 IST on Oct 25); commit times are local, set by whoever commits, so GitHub alone can't show the cases came first. The file has not changed since: sha256 of `eval/cases-holdout.json` is `3f6243656600030a76bdbd793e51ce151a81eb2f89f7b08e96836285a8e37bd0` (also in `holdout-meta.json`). The next held-out set is pushed, and tagged, before anything runs on it (see "Held out #2"). The code under test is `lib/` as of Oct 15 20:28 IST, plus one change made earlier on Oct 25: Nemotron 3.5 Super VL reads label photos first.
+- **What can be checked from outside.** The cases (`d9dce10`) and all runs were committed locally on Oct 25 and pushed together on Oct 24 at 20:47:55 UTC (02:17 IST on Oct 25); commit times are local, set by whoever commits, so GitHub alone can't show the cases came first. The file has not changed since: sha256 of `eval/cases-holdout.json` is `3f6243656600030a76bdbd793e51ce151a81eb2f89f7b08e96836285a8e37bd0` (also in `holdout-meta.json`). The next held-out set is pushed, and tagged, before anything runs on it (see "Held out #2"). The code under test is `lib/` as of Oct 15 20:28 IST, plus one change made earlier on Oct 25: Nemotron 3.5 Super VL reads label photos first.
 - **None of these recalls is in the tuned set.** `verify-holdout.mjs` checks this for every case.
 - **27 database cases.** These recalls were already in an API Tagout queries:
   - CPSC recalls posted Oct 15 and Oct 22;
@@ -183,7 +183,7 @@ Every eval row now records how its red tag was reached (`basis` in `eval/run.ts`
 | 39, lite tier | 18 | 14 | 4 | 0 | 0 | 0 |
 
 - **Nemotron's reading decided 31 of the 46 red tags on the 105 and 15 of the 19 on the 39**; the rest came from lists the agency record already prints. With no model, the text fallback decides 30 of 39 reds and the arm is right on 83 of 105, against 105 with the reader.
-- **The limit the critics named holds.** Every code a reader lists must also be printed in the notice (that is the guard below), so "reader's list" says which path decided, not that only a model could have found the code. And no red tag in either set came from a printed range or a family code: those paths are unit-tested (`test/match.test.ts`) but not yet measured on a recalled unit. The second held-out set is built to measure them.
+- **The limit the critics named holds.** Every code a reader lists must also be printed in the notice (that is the guard below), so "reader's list" says which path decided, not that only a model could have found the code. And no red tag in either set came from a printed range or a family code: those paths are unit-tested (`test/match.test.ts`) but were not measured on a recalled unit here. Held out #2 measured them on Oct 30: its 7 Tagout reds were all exact too, and both range and family units came out orange (see "Held out #2").
 
 ### The code guard, as its own module (`lib/agent/verify-codes.ts`)
 
@@ -199,7 +199,44 @@ An undeclared-allergen recall is a danger only to someone allergic, so its red t
 - **Four new cases**, none in the other sets: three recalled lots (Donutful donuts, undeclared milk, H-0011-2027; Cloud Cafe collagen milk, fish, H-1400-2026; Organiccs collagen capsules, shellfish, H-1401-2026) and one neighbouring lot (Donutful `26079`). `node eval/verify-allergen.mjs` checks them against openFDA with no Tagout code: 4/4.
 - **Tagout, run once (`results-allergen/`, `allergen-summary.json`): 4/4**, three red allergy alerts naming milk, fish and shellfish, and the near miss orange. $0.076 of Token Factory; Tavily in keyless mode, no credits.
 
-## Held out #2: pre-registered in public (prepared Oct 25, not yet run)
+## Held out #2: pre-registered in public
+
+**Run once on Oct 30 2026 (00:00-00:45 IST; Oct 29 18:30-19:15 UTC) at `889b9b0`, exactly as laid out below; results committed unedited in `22fa07a`** (`results-holdout2/`, `holdout2-summary.json`, both run logs). `lib/` was untouched between the tag and the run (`git diff prereg-2026-10-25 889b9b0 -- lib` changes only `lib/site.ts`: the video link and showcase ids), and both result files record `libChanged: false`.
+
+| Arm (19 cases, run once; 95% exact intervals) | Right | Red tags right | Recalled units red | Wrongly red | Wrongly cleared | Database | Lag window | Model cost per item | Tavily credits per item | Cost per item with Tavily |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **Tagout** (Ultra agent and readers) | **15/19** (54-94%) | 6/7 | 6/8 | **1/9** (g07) | **0/11** | 12/16 | 3/3 | 2.84¢ | 2.26 | 4.65¢ |
+| Lite tier (fixed plan, Nano reader) | 13/19 (43-87%) | 4/6 | 4/8 | 2/9 (g07, g14) | 1/11 (g06) | 10/16 | 3/3 | 0.30¢ | 1.37 | 1.40¢ |
+
+**What the set was built to measure, case by case (Tagout):**
+
+- **Printed serial range (g01, g02):** the unit inside the range came out orange, not red (wrong); the one outside, orange (right). The list reader kept no code from `serial 00010 2450`, so nothing was compared with the range.
+- **Prefix family (g03, g04):** both orange. The notice prints `PR01` followed by a number from 25091 to 26168; the matcher found `PR01` listed but has no rule for a prefix plus a number range, so the recalled unit (g03) was orange (wrong) and the one outside it (g04) orange (right).
+- **Best-by and use-by windows (g06-g09):** g06, g08 red and g09 orange are right, but g06 and g08 are red only because the UPC is in openFDA's own record. **g07 is the one wrong red:** the same pizza UPC with a best-by date of 06/20/2027, outside "all dates through 3/30/2027". The matcher checks a made-date window for codes a reader lists, not for a UPC taken from the record's own list.
+- **Gaps in a listed run of codes (g10, g12, g14, g17): 4/4 right.** No gap was read as inside a range.
+- **Listed codes (g05, g11, g13, g16): 4/4 red**, one with its dash dropped (g11) and one from a page only Tavily reached (g16, Pan Pepin, a sesame allergy alert).
+- **Lag window (g15-g17): 3/3 right**, all from FDA pages no database lists: the Haifa sprats advisory orange (every lot), Pan Pepin lot `3B1 280` red, and its gap `3B1 279` green.
+- **Car (g18) right. Clean item (g19) wrong:** Tavily's keyless hourly cap made the check wait about five minutes for its web searches, past its 150-second soft deadline and its 200-second hard one, so CPSC's 2014 Dyson recall was never read and an unread brand recall holds the tag at orange.
+
+**What decided each red** (`redBasis` in `holdout2-summary.json`, recorded by the run itself): Tagout's 7 reds came 2 from the reader's list, 3 from the record's own list and 2 from the notice text; **all 7 exact, none from a range or a family, and none with a made-date window checked.** So on the first recalled units built for them, the range and family paths did not fire (both orange, the safe miss), and the missing window check on record-list UPCs produced the first wrong red on a held-out set.
+
+**Lite tier misses:** g01 and g03 orange (as Tagout); g06 **cleared green** (the list reader kept the brand as "St Francis" and the single openFDA query, UPC and brand together, found nothing; the agent searched again); g07 wrong red (as Tagout); **g14 wrong red** (the reader kept the product name "GRVL AF GRX" as a code, and `GRVL` is printed in the recall); g11 orange (its notice reads never ran: the check was past its deadline).
+
+**The agent against the fixed plan:** 15 against 13 here, with 1 wrongly red against 2 and none cleared against 1. Only the agent got g06 (it searched openFDA again) and g14.
+
+**Caveats, as run:**
+
+- **Tavily was keyless for both arms.** The key's October plan was spent (1,021 of 1,000 credits on Oct 30), so every call went out in keyless mode (`--keyless`, which the steps below allow), 43 calls for Tagout and 26 for the lite tier: **0 credits**. The credit columns count what those calls would have billed. Keyless mode has an hourly cap; the harness waits out each 429. That pushed g19 (Tagout) and 10 of the 19 lite-tier cases past the check's 150-second soft deadline; in the lite tier g10 and g12 were held at orange because no model answered (both still right) and g11's notice reads never ran.
+- **The run date.** `--today 2026-10-29` as written below; the run started at 00:00 IST on Oct 30 (18:30 UTC on Oct 29). `verify-holdout2.mjs` was re-run right before: 19/19 (`verified-holdout2.json` updated in the same commit).
+- **Run once, no restart.** Neither arm was stopped or re-run. The lite tier reused calls the Tagout arm had cached (the Ultra list reader is shared), so its own spend is small.
+- **Spend: $0.5127 of Token Factory** (ledger `eval/.cache/spend.json`, $5.5810 → $6.0937: Tagout $0.5042, lite tier $0.0085), inside the run's $0.70 and $0.10 caps. Tavily: 0 credits.
+- **Small:** 19 cases, so 15/19 is 54-94% and 1/9 wrongly red bounds the false-red rate only below 48%.
+
+These 19 cases are now read. Any fix made from them is in-sample, like the 105, and is reported as such below them, never in place of this table.
+
+**Added afterwards, not pre-registered: no model at all.** The rules-only arm (`eval/run.ts rules`, no Token Factory call, keyless Tavily) ran on the same 19 cases after the two arms above, at the same code, to say what Nemotron adds on unseen cases at one commit: **10/19 right, 1/9 wrongly red (the same g07), 0/11 cleared** (it is never green without a model, so its misses are oranges), against Tagout's 15/19. Its row is in `holdout2-summary.json` as `rules`, its log in `results-holdout2/rules.log`.
+
+### How it was built (Oct 25)
 
 Nineteen new cases (`cases-holdout2.json`, commit `45dc3a1`, sha256 `34907813bf703a3dafc877c60cfdf0a7f775a9e57a8cab9ac23432fcc2014cbd`), built for what the first sets never tested on a recalled unit:
 
@@ -237,7 +274,7 @@ Nineteen new cases (`cases-holdout2.json`, commit `45dc3a1`, sha256 `34907813bf7
 - **Getting the cache.** The cache (`eval/.cache`, about 4,700 files and 32 MB) is not in git. `eval-cache.tgz` (5.2 MB, scrubbed) holds it as `eval/.cache/...`: from the repo root, `tar -xzf eval-cache.tgz`, then `npm run eval:replay` and `npm run eval:replay -- --holdout` need no keys and cost nothing. Or point `EVAL_CACHE` at a copy.
   - Before sharing it, run `node scripts/cache-scrub.mjs --fix <out-dir>`. It checks every file against the real key values in `.env.local` and `../.env.keys` and against key-shaped patterns, and writes a redacted copy.
   - On Oct 25, run on the cache after the reasoning-budget re-run, it found no matches in 4,697 files (6 key values, 10 patterns). An earlier review reported two files with key-like strings; this pass could not reproduce that, so scrub anyway.
-  - The Oct 25 archive was built from that scrubbed copy (sha256 `9d5c1d281a7db875a13b6774fff5e1abed76a9e295640da90bfde348ba68b909`); a spot check, an offline Tagout replay of h07, h15 and h32 from the unpacked archive, gave the same tags with no cache misses. It is not attached to a release yet.
+  - The Oct 25 archive was built from that scrubbed copy (sha256 `9d5c1d281a7db875a13b6774fff5e1abed76a9e295640da90bfde348ba68b909`); a spot check, an offline Tagout replay of h07, h15 and h32 from the unpacked archive, gave the same tags with no cache misses. It is attached to the GitHub release `eval-2026-10-25`.
 
 ## Caveats to state with these numbers
 
@@ -288,7 +325,8 @@ Nineteen new cases (`cases-holdout2.json`, commit `45dc3a1`, sha256 `34907813bf7
 | `results-holdout-extra/`, `holdout-arms-extra.mjs`, `holdout-arms-extra.json` | Rules-only arm on all 39 and the cascade on this set (and the cascade on the 105) |
 | `basis-split.mjs` | What decided each red tag, copied from the replays into `summary-current.json` and `holdout-after-fixes.json` |
 | `cases-allergen.json`, `verify-allergen.mjs`, `verified-allergen.json`, `results-allergen/`, `allergen-summary.json` | The allergy-alert cases and their one run |
-| `cases-holdout2.json`, `verify-holdout2.mjs`, `verified-holdout2.json`, `notices-holdout2/` | Held out #2, pre-registered, not yet run |
+| `cases-holdout2.json`, `verify-holdout2.mjs`, `verified-holdout2.json`, `notices-holdout2/` | Held out #2, pre-registered (tag `prereg-2026-10-25`) |
+| `results-holdout2/`, `holdout2-summary.json` | Held out #2, run once on Oct 30 (both arms, their logs, and the rules-only arm added afterwards) |
 
 Commands:
 

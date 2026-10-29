@@ -188,12 +188,12 @@
 }
 
 .held {
-  margin-top: 22px;
-  max-width: 52em;
-  padding: 14px 18px;
-  border-left: 4px solid var(--ink);
+  margin: 4px 0 28px;
+  max-width: 56em;
+  padding: 16px 20px;
+  border-left: 4px solid var(--danger);
   background: var(--stock);
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.55;
   color: #2f363d;
 }

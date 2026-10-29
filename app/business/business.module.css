@@ -142,3 +142,108 @@
   background: var(--stock);
   font-size: 16px !important;
 }
+
+/* Full desktop width: text keeps its measure, tables and the example panels use the rest. */
+.section {
+  max-width: none;
+}
+.split {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 400px);
+  gap: 56px;
+}
+.mock {
+  margin: 8px 0 0;
+  padding: 0;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--ink);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.mockHead {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #f6f7f9;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.mockDim {
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+.mockRows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mockRows li {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 2px 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 14.5px;
+}
+.mockRows b {
+  grid-row: span 2;
+  align-self: start;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 12.5px;
+  text-align: center;
+  color: #fff;
+  background: var(--danger);
+}
+.mockRows li[data-level="warning"] b {
+  background: var(--warning, #f26b0f);
+  color: #1b1300;
+}
+.mockRows li[data-level="inspected"] b {
+  background: var(--inspected, #1d7a46);
+}
+.mockRows small {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.mockNote {
+  margin: 0;
+  padding: 10px 14px 12px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.worked {
+  margin: 20px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.worked div {
+  padding: 14px 16px;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--ink);
+  border-radius: 3px;
+}
+.worked dt {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.worked dd {
+  margin: 4px 0 0;
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  font-variation-settings: "wdth" 112;
+}
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .worked {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

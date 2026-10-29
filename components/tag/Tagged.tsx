@@ -21,6 +21,7 @@ export default function Tagged({
   dy = 58,
   children,
   foot,
+  drop = false,
   className = "",
 }: {
   item: Item;
@@ -36,12 +37,14 @@ export default function Tagged({
   dy?: number;
   children?: React.ReactNode;
   foot?: React.ReactNode;
+  /** On a phone, hang the tag below the label instead of over its corner (it would cover the brand and codes). */
+  drop?: boolean;
   className?: string;
 }) {
   // Drop the string with a little slack: a quadratic curve that sags below the straight line.
   const sag = `M0 0 Q ${dx * 0.35} ${dy * 0.85} ${dx} ${dy}`;
   return (
-    <div className={`${s.tagged} ${className}`} data-size={size}>
+    <div className={`${s.tagged} ${className}`} data-size={size} data-drop={drop || undefined}>
       <Label item={item} marks={marks} hits={hits} variant={variant} />
       {level ? (
         <div className={s.hang} style={{ "--dx": `${dx}px`, "--dy": `${dy}px` } as React.CSSProperties}>

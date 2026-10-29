@@ -90,10 +90,13 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
         <aside className={s.replay} role="note" aria-label="Replayed example">
           <b className={s.replayBadge}>Replayed</b>
           <div>
-            <p className={s.replayHead}>What this watch would have received.</p>
-            <p>
-              This list is dated {fmtDate(replay.asOf)}. Nobody was watching it then: the alerts below were made afterwards, by the daily sweep&apos;s own matcher run over the recalls published since. {replay.note}
-            </p>
+            <p className={s.replayHead}>A replay: the alerts a list dated {fmtDate(replay.asOf)} would have received from the daily sweep.</p>
+            <details className={s.replayMore}>
+              <summary>How this replay was made</summary>
+              <p>
+                Nobody was watching this list then: the alerts below were made afterwards, by the daily sweep&apos;s own matcher run over the recalls published since. {replay.note}
+              </p>
+            </details>
           </div>
         </aside>
       ) : null}
@@ -112,11 +115,11 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
           </p>
         </div>
         <div className={s.actions}>
-          <a className={s.feedBtn} href={feed.feedUrl}>
+          <a className={replay ? s.ghost : s.feedBtn} href={feed.feedUrl}>
             <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true">
               <path d="M2.5 13.5a1 1 0 1 0 0-.01M2.5 7.5a6 6 0 0 1 6 6M2.5 2.5a11 11 0 0 1 11 11" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
-            Subscribe to alerts
+            {replay ? "Feed of this replay" : "Subscribe to alerts"}
           </a>
           <button type="button" className={s.ghost} onClick={copy} aria-live="polite">
             {copied ? "Link copied" : "Copy link"}
@@ -178,6 +181,49 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
           </p>
         ) : null}
       </section>
+
+      {!replay && feed.history?.length ? (
+        <section className={s.block} aria-labelledby="runs-h">
+          <h2 id="runs-h" className={s.h2}>
+            Every sweep, day by day
+          </h2>
+          <p className={s.sub}>
+            The daily sweep&apos;s own run log: how many recalls it read, how many were new since the run before, how many touched this list, and what the run cost for every watched
+            list together. Also as JSON: <a href={`/api/watches/${watch.id}/events`}>/api/watches/{watch.id}/events</a>.
+          </p>
+          <ol className={s.runs}>
+            {feed.history.map((r) => (
+              <li key={r.at} className={s.run} data-hit={r.alertsHere ? "" : undefined}>
+                <time dateTime={r.at}>{time(r.at)}</time>
+                <dl>
+                  <div>
+                    <dt>Recalls read</dt>
+                    <dd>{r.recallsChecked.toLocaleString("en-US")}</dd>
+                  </div>
+                  <div>
+                    <dt>New since the run before</dt>
+                    <dd>{r.newRecalls}</dd>
+                  </div>
+                  <div>
+                    <dt>Touched this list</dt>
+                    <dd>{r.alertsHere}</dd>
+                  </div>
+                  <div>
+                    <dt>Cost, all lists</dt>
+                    <dd>
+                      {r.modelCalls ? `${r.cents.toFixed(2)}¢` : "0¢"}
+                      <small>
+                        {" "}
+                        {plural(r.modelCalls, "model call")}, {plural(r.tavilyCredits, "Tavily credit")}
+                      </small>
+                    </dd>
+                  </div>
+                </dl>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
 
       {changes ? (
         <section className={s.block} aria-labelledby="since-h" aria-live="polite">

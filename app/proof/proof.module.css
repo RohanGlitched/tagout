@@ -427,3 +427,157 @@
     min-width: 150px;
   }
 }
+
+/* Held-out first: the short answer's held-out claims carry a red rule, the in-sample ones the ink rule. */
+.claims li[data-kind="held"] {
+  border-top-color: var(--danger);
+}
+.claimKick {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.claims a {
+  color: var(--focus);
+}
+.table tr[data-us] th,
+.table tr[data-us] td {
+  background: #fbf3f4;
+}
+.later tr:first-child th,
+.later tr:first-child td {
+  border-top: 2px solid var(--ink);
+}
+.later th,
+.later td {
+  color: #39414a;
+}
+.cases2 {
+  width: 100%;
+  margin-top: 18px;
+  border-collapse: collapse;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  font-size: 14.5px;
+}
+.cases2 thead th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 13px;
+  color: var(--ink-soft);
+  background: #f6f7f8;
+}
+.cases2 tbody th,
+.cases2 td {
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid var(--rule-soft);
+}
+.cases2 tbody th {
+  font-weight: 400;
+  min-width: 260px;
+}
+.cases2 tbody th .code {
+  color: var(--ink-faint);
+  margin-right: 4px;
+}
+.cases2 td small {
+  color: var(--ink-soft);
+}
+.cell {
+  white-space: nowrap;
+}
+.cell i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  vertical-align: -1px;
+  position: relative;
+}
+.miss {
+  color: var(--danger);
+  font-size: 13px;
+}
+.facts {
+  margin: 18px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.facts div {
+  padding: 16px 18px;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-top: 4px solid #2b6cb0;
+  border-radius: 3px;
+}
+.facts dt {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+.facts dd {
+  margin: 6px 0 4px;
+  font-size: 34px;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  font-variant-numeric: tabular-nums;
+}
+.facts p {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: #39414a;
+}
+@media (max-width: 1000px) {
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cases2 tbody th {
+    min-width: 200px;
+  }
+}
+@media (max-width: 620px) {
+  .cases2 thead {
+    display: none;
+  }
+  .cases2 tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding: 10px 12px;
+    border-top: 1px solid var(--rule);
+    gap: 6px 12px;
+  }
+  .cases2 tbody th {
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    font-weight: 600;
+  }
+  .cases2 td {
+    padding: 0;
+    border: 0;
+    font-size: 13.5px;
+  }
+  .cases2 td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11.5px;
+    font-weight: 650;
+    color: var(--ink-soft);
+  }
+  .cell {
+    white-space: normal;
+  }
+}

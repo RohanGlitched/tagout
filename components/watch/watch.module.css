@@ -279,3 +279,73 @@
     gap: 8px;
   }
 }
+.replayMore {
+  margin-top: 4px;
+}
+.replayMore summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 650;
+  color: #7a3e00;
+}
+.replayMore p {
+  margin-top: 6px;
+}
+.sub {
+  margin: 12px 0 14px;
+  max-width: 52em;
+  font-size: 15.5px;
+  color: var(--ink-soft);
+}
+.sub a {
+  color: var(--focus);
+}
+.runs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 10px;
+}
+.run {
+  padding: 12px 14px;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--inspected);
+  border-radius: 3px;
+  font-size: 14px;
+}
+.run[data-hit] {
+  border-top-color: var(--danger);
+}
+.run time {
+  display: block;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.run dl {
+  margin: 8px 0 0;
+  display: grid;
+  gap: 4px;
+}
+.run dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.run dt {
+  color: var(--ink-soft);
+}
+.run dd {
+  margin: 0;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.run dd small {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--ink-soft);
+}

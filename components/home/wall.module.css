@@ -217,3 +217,76 @@
     gap: 2px;
   }
 }
+
+/* Phones: one stacked bar per month instead of the wall (the wall alone ran to about 2,500px at 390). */
+.bars {
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 16px 14px 12px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--steel-2), var(--steel));
+  color: #e6eaee;
+}
+.bar {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
+  align-items: center;
+  gap: 10px;
+  min-height: 30px;
+}
+.bar + .bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.barMonth {
+  font-size: 13px;
+  font-weight: 700;
+  font-variation-settings: "wdth" 112;
+}
+.barTrack {
+  display: block;
+  height: 12px;
+}
+.barFill {
+  display: flex;
+  height: 100%;
+  min-width: 6px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+}
+.barFill i {
+  display: block;
+  flex-basis: 0;
+  background: var(--c);
+  transition: opacity 0.2s;
+}
+.barFill i + i {
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.35);
+}
+.bars[data-pick="fire"] i:not([data-h="fire"]),
+.bars[data-pick="breath"] i:not([data-h="breath"]),
+.bars[data-pick="ingest"] i:not([data-h="ingest"]),
+.bars[data-pick="injury"] i:not([data-h="injury"]),
+.bars[data-pick="shock"] i:not([data-h="shock"]),
+.bars[data-pick="other"] i:not([data-h="other"]) {
+  opacity: 0.15;
+}
+.barN {
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #c3cad1;
+}
+@media (max-width: 599px) {
+  .wall {
+    display: none;
+  }
+  .bars {
+    display: block;
+  }
+  .legend {
+    margin-bottom: 16px;
+  }
+}

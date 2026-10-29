@@ -4,7 +4,9 @@ import Footer from "@/components/chrome/Footer";
 import Tag from "@/components/tag/Tag";
 import { COST, TAVILY_USD_PER_CREDIT, money, perItem } from "@/lib/economics";
 import { REPO_URL, SHOWCASE, SITE_URL } from "@/lib/site";
-import summary from "@/eval/summary.json";
+import summary from "@/eval/summary-current.json";
+import holdout from "@/eval/holdout-summary.json";
+import held2 from "@/eval/holdout2-summary.json";
 import s from "./business.module.css";
 
 export const metadata = {
@@ -70,14 +72,44 @@ export default function Business() {
         </section>
 
         <section className={s.section} aria-labelledby="sell-h">
-          <h2 id="sell-h" className={s.h2}>
-            Second: checking resale listings before they go live
-          </h2>
-          <p className={s.body}>
-            Selling a recalled consumer product is unlawful in the U.S. (15 U.S.C. 2068). A seller photographs the label; Tagout tags the listing red only when the item&apos;s own
-            code is printed in a recall. On {summary.cases} test cases it wrongly tagged nothing as do-not-use, so honest sellers aren&apos;t blocked. Buyers: resale marketplaces, kids&apos;
-            resale and thrift chains, pawn shops. Priced per listing checked (10–25¢), against about 1.4¢ of cost on the lite tier, with the full agent only to confirm a red.
-          </p>
+          <div className={s.split}>
+            <div>
+              <h2 id="sell-h" className={s.h2}>
+                Second: checking resale listings before they go live
+              </h2>
+              <p className={s.body}>
+                Selling a recalled consumer product is unlawful in the U.S. (15 U.S.C. 2068). A seller photographs the label; Tagout tags the listing red only when the item&apos;s own
+                code is printed in a recall. On {summary.cases} test cases and {holdout.cases} held-out ones it wrongly tagged nothing as do-not-use, and on a second,
+                pre-registered held-out set of {held2.cases} it wrongly tagged one (a best-by date outside the recall&apos;s window), so honest sellers are rarely blocked, and the
+                misses are published. Buyers: resale marketplaces, kids&apos; resale and thrift chains, pawn shops. Priced per listing checked (10–25¢), against about {money(lite)} of cost on the
+                lite tier, with the full agent only to confirm a red.
+              </p>
+            </div>
+            <figure className={s.mock} aria-label="Example: a resale listing screened before it goes live">
+              <figcaption className={s.mockHead}>
+                <span>Listing screen</span>
+                <span className={s.mockDim}>example</span>
+              </figcaption>
+              <ul className={s.mockRows}>
+                <li data-level="danger">
+                  <b>Do not list</b>
+                  <span>Vornado space heater, TYPE SRTH on the label</span>
+                  <small>CPSC 26-532 lists TYPE SRTH</small>
+                </li>
+                <li data-level="warning">
+                  <b>Check the label</b>
+                  <span>Evenflo car seat, no model given</span>
+                  <small>Ask the seller for the model and date</small>
+                </li>
+                <li data-level="inspected">
+                  <b>Clear to list</b>
+                  <span>Lasko ceramic tower heater, model CT22425</span>
+                  <small>No Lasko recall lists this model</small>
+                </li>
+              </ul>
+              <p className={s.mockNote}>Three eval cases (p18, c05, n14) and the tags Tagout gave them at today&apos;s code.</p>
+            </figure>
+          </div>
         </section>
 
         <section className={s.section} aria-labelledby="alt-h">
@@ -97,7 +129,7 @@ export default function Business() {
                 <tr>
                   <th scope="row">Recall-alert apps (e.g. RecallSentry)</th>
                   <td>Free alerts from FDA, CPSC, NHTSA and USDA, matched on UPC, model, lot or VIN you enter</td>
-                  <td>A published error rate on 144 cases, 39 of them held out; the agency&apos;s own sentence beside every red tag</td>
+                  <td>A published error rate on {summary.cases + holdout.cases + held2.cases} cases, {holdout.cases + held2.cases} of them held out; the agency&apos;s own sentence beside every red tag</td>
                 </tr>
                 <tr>
                   <th scope="row">Agency sites and email lists (recalls.gov, CPSC, SaferCar)</th>
@@ -122,7 +154,7 @@ export default function Business() {
             What a check costs us
           </h2>
           <p className={s.body}>
-            Measured on the {summary.cases}-case eval (the Oct 15 run; on the 39 held-out cases it was 4.9¢ and 1.7¢ all in): Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
+            Measured on the {summary.cases}-case eval at today&apos;s code (Oct 25; on held-out set #1 it was 4.9¢ and 1.7¢ all in, on set #2 4.7¢ and 1.4¢): Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
             free.
           </p>
           <div className={s.tableWrap}>
@@ -158,6 +190,24 @@ export default function Business() {
               </tbody>
             </table>
           </div>
+          <dl className={s.worked} aria-label="A 200-unit building, worked through">
+            <div>
+              <dt>A 200-unit building, 8 appliances each</dt>
+              <dd>1,600 items</dd>
+            </div>
+            <div>
+              <dt>First check, full tier, once</dt>
+              <dd>{money(1600 * full)}</dd>
+            </div>
+            <div>
+              <dt>Daily sweep, every list together</dt>
+              <dd>under 10¢ a day</dd>
+            </div>
+            <div>
+              <dt>Revenue at $1 a unit</dt>
+              <dd>$200 a month</dd>
+            </div>
+          </dl>
           <p className={s.note}>
             A watched list doesn&apos;t re-run the agent for every household: each new recall is read once a day and matched against every watched list by rules, so the cost grows with the
             number of recalls, not the number of households.

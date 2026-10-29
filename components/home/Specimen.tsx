@@ -82,7 +82,7 @@ export default function Specimen() {
           <li>
             <Num n={4} />
             <p>
-              <b>The tag.</b> No model decides this part. SRTH on your plate equals SRTH in the notice, so the tag is red, with the remedy and Vornado&apos;s number.
+              <b>The tag.</b> Nemotron found the recall and read the code; a rule makes it provable. SRTH on your plate equals SRTH in the notice, so the tag is red, with the remedy and Vornado&apos;s number.
             </p>
           </li>
         </ol>

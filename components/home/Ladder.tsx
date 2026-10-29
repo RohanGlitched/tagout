@@ -11,9 +11,9 @@ const RUNGS: { arm: string; name: string; note: string }[] = [
   { arm: "tagout", name: "Tagout", note: "Nemotron Ultra agent and readers, rules decide." },
 ];
 
-/** The same case at today's code, from eval/summary-current.json. */
-const now = (id: string) => {
-  const a = current.arms.find((x) => x.arm === id);
+/** The same setup in the Oct 15 run, from eval/summary.json. */
+const then = (id: string) => {
+  const a = summary.arms.find((x) => x.arm === id);
   return a ? `${a.right}/${a.n}` : "";
 };
 
@@ -22,7 +22,7 @@ const now = (id: string) => {
  * orange ticks are things wrongly tagged do not use, pale ticks are other misses.
  */
 export default function Ladder() {
-  const rows = RUNGS.map((r) => ({ ...r, a: summary.arms.find((x) => x.arm === r.arm) })).filter((r) => r.a);
+  const rows = RUNGS.map((r) => ({ ...r, a: current.arms.find((x) => x.arm === r.arm) })).filter((r) => r.a);
   return (
     <div className={s.ladder}>
       <ol className={s.rungs}>
@@ -70,8 +70,8 @@ export default function Ladder() {
         })}
       </ol>
       <p className={s.now}>
-        The Oct 15 run. At today&apos;s code the same cases give Tagout {now("tagout")}, the lite tier {now("fixed-plan-nano")} and rules alone {now("rules")}, and none of the
-        three clears a recalled unit.
+        At today&apos;s code (Oct 25), and in-sample: these cases shaped the fixes. The Oct 15 run gave Tagout {then("tagout")}, the lite tier {then("fixed-plan-nano")} and rules
+        alone {then("rules")}; rules fell once a tag could no longer be green without a model, which also turned seven clean things orange.
       </p>
       <p className={s.key}>
         <span>

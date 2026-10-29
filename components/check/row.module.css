@@ -310,8 +310,6 @@
   }
   .tagWrap {
     zoom: 0.8;
-    padding-right: 174px;
-    min-height: 330px;
   }
   .row[data-level="pending"] .tagWrap {
     min-height: 0;

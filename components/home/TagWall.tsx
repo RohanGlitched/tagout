@@ -98,9 +98,32 @@ export default function TagWall({ wall }: { wall: Wall }) {
           <span />
         </div>
       </div>
+
+      {/* On a phone the wall would be a strip thousands of pixels long: the same counts as one bar per month. */}
+      <ol className={s.bars} data-pick={pick ?? undefined} aria-label={`${wall.total} CPSC recalls in ${wall.year}, by month and hazard`}>
+        {wall.months.map((m) => {
+          const by = ORDER.map((h) => ({ h, n: m.tags.filter((t) => t.h === h).length })).filter((x) => x.n);
+          return (
+            <li key={m.key} className={s.bar}>
+              <span className={s.barMonth}>{MONTHS[Number(m.key.slice(5, 7)) - 1]}</span>
+              <span className={s.barTrack} aria-hidden="true">
+                <span className={s.barFill} style={{ width: `${(m.tags.length / maxMonth(wall)) * 100}%` }}>
+                  {by.map((x) => (
+                    <i key={x.h} data-h={x.h} style={{ flexGrow: x.n }} />
+                  ))}
+                </span>
+              </span>
+              <b className={s.barN}>{m.tags.length}</b>
+              <span className="sr-only">{by.map((x) => `${x.n} ${NAMES[x.h].toLowerCase()}`).join(", ")}</span>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }
+
+const maxMonth = (wall: Wall) => Math.max(1, ...wall.months.map((m) => m.tags.length));
 
 function fmt(iso: string) {
   const [y, m, d] = iso.split("-");

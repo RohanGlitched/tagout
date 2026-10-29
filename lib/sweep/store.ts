@@ -1,6 +1,9 @@
 import "server-only";
 import { CHECK_ID } from "../checks";
 import { docKey, readDoc, updateDoc, writeDoc } from "../docs";
+import { storage } from "../storage";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { mergeEvents, type EventLog, type WatchEvent } from "./events";
 import type { SweepReport } from "./run";
 
@@ -92,4 +95,23 @@ export async function saveReport(r: SweepReport): Promise<void> {
 
 export async function loadLatestSweep(): Promise<SweepReport | null> {
   return (await readDoc<SweepReport>(LATEST()).catch(() => null))?.value ?? null;
+}
+
+/**
+ * The newest daily runs, newest first (sweep/runs/<time>.json), for the watch page's history strip. Read-only: it
+ * lists and reads the run reports the sweep already wrote; trial runs (dry, or under a prefix) are left out.
+ */
+export async function loadSweepHistory(limit = 14): Promise<SweepReport[]> {
+  const prefix = docKey("sweep/runs/");
+  let keys: string[] = [];
+  const s = storage();
+  try {
+    if (s) keys = await s.list(prefix, 500);
+    else keys = (await fs.readdir(path.join(process.cwd(), ".data", ...prefix.split("/").filter(Boolean)))).map((f) => `${prefix}${f}`);
+  } catch {
+    return [];
+  }
+  const newest = keys.filter((k) => k.endsWith(".json")).sort().reverse().slice(0, limit * 2);
+  const runs = await Promise.all(newest.map((k) => readDoc<SweepReport>(k).then((r) => r?.value ?? null).catch(() => null)));
+  return runs.filter((r): r is SweepReport => Boolean(r && !r.skipped && !r.options?.dryRun)).slice(0, limit);
 }
