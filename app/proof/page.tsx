@@ -79,6 +79,8 @@ const lagAbl = holdout.tavilyAblation.tagout.lag;
 const t2 = held2.arms.find((a) => a.arm === "tagout")!;
 const lite2 = held2.arms.find((a) => a.arm === "fixed-plan-nano")!;
 const rules2 = held2.arms.find((a) => a.arm === "rules");
+const noweb2 = held2.arms.find((a) => a.arm === "tagout-noweb");
+const CODE_NOW = "019d39e";
 const after = heldAfter.arms.find((a) => a.arm === "tagout")!;
 const cents = (x: number) => (x < 0.0005 ? "0¢" : `${(x * 100).toFixed(x < 0.01 ? 2 : 1)}¢`);
 const secs = (ms: number | null) => (ms == null ? "–" : `${(ms / 1000).toFixed(0)} s`);
@@ -241,7 +243,9 @@ export default function Proof() {
           </ul>
           <p className={s.sub}>
             Cost, all in: about {cents(t.usdPerItemWithTavily)} an item on the {summary.cases} at today&apos;s code ({cents(t.usdPerItem)} of Nemotron, {cents(t.tavilyUsdPerItem)} of
-            Tavily), {cents(held.usdPerItemWithTavily)} on held-out set #1 and {cents(t2.usdPerItemWithTavily)} on set #2. Median time {secs(oct15Tagout.medianMs)} an item over the Oct 15 cases that ran live.
+            Tavily), {cents(held.usdPerItemWithTavily)} on held-out set #1 and {cents(t2.usdPerItemWithTavily)} on set #2 (Tavily priced at $0.008 a credit; set #2 ran in Tavily&apos;s
+            keyless mode, so it spent no credits, and $0.51 of Token Factory). The lite tier: 0.23¢ of Nemotron, 1.4¢ all in. Median time {secs(oct15Tagout.medianMs)} an item over the
+            Oct 15 cases that ran live.
           </p>
         </section>
 
@@ -364,8 +368,9 @@ export default function Proof() {
             <a href={`${REPO_URL}/releases/tag/${PREREG.tag}`}>
               <span className="code">{PREREG.tag}</span>
             </a>{" "}
-            (commit <a href={`${REPO_URL}/commit/${PREREG.commit}`}>{PREREG.commit}</a>, sha256 <span className="code">{PREREG.sha256.slice(0, 16)}…</span>) before any run. Nothing in{" "}
-            <span className="code">lib/</span> changed between the tag and the run; both arms ran once on Oct 30 (IST) at <span className="code">{t2.config?.code?.commit}</span>, exactly as{" "}
+            (commit <a href={`${REPO_URL}/commit/${PREREG.commit}`}>{PREREG.commit}</a>, sha256 <span className="code">{PREREG.sha256.slice(0, 16)}…</span>) before any run. Both arms ran once on Oct 30 (IST) at <span className="code">{t2.config?.code?.commit}</span>; the
+            only <span className="code">lib/</span> change since the tag is <span className="code">lib/site.ts</span> (the video link and showcase ids, no logic: see{" "}
+            <span className="code">git diff prereg-2026-10-25 889b9b0 -- lib</span>). They ran exactly as{" "}
             <a href={`${REPO_URL}/blob/main/eval/HOLDOUT.md#held-out-2-pre-registered-in-public`}>eval/HOLDOUT.md</a> laid out, misses included.
           </p>
           <div className={s.tableWrap}>
@@ -381,11 +386,17 @@ export default function Proof() {
                 </tr>
               </thead>
               <tbody>
-                {[t2, lite2, ...(rules2 ? [rules2] : [])].map((a) => (
+                {[t2, lite2, ...(rules2 ? [rules2] : []), ...(noweb2 ? [noweb2] : [])].map((a) => (
                   <tr key={a.arm} data-us={a.arm === "tagout" || undefined}>
                     <th scope="row">
                       {HELD_NAME[a.arm] ?? a.label}
-                      <small>{a.arm === "rules" ? "added after the two pre-registered arms; no model, no spend" : "pre-registered arm, run once"}</small>
+                      <small>
+                        {a.arm === "rules"
+                          ? "added afterwards, not pre-registered; no model, no spend"
+                          : a.arm === "tagout-noweb"
+                            ? "added afterwards, not pre-registered; same code (889b9b0, in a worktree), Tavily off"
+                            : "pre-registered arm, run once"}
+                      </small>
                     </th>
                     <td>
                       <b>{a.right}</b>/{a.n}
@@ -449,9 +460,11 @@ export default function Proof() {
             </table>
           </div>
           <p className={s.sub}>
-            Fixed since, in-sample and so not in the table: a best-by or use-by window printed in the record&apos;s own text is now compared with the date on your line
-            (g07 replays orange in every arm, and nothing else on the three sets moves), and USDA FSIS product lists, which are PDFs, are read through Tavily Extract so a UPC and
-            its lot can be matched row by row. The range (g01) and the code family (g03) are still orange.
+            Fixed since, in-sample and so not in the table: a best-by or use-by window printed in the record&apos;s own text is compared with the date on your line (g07),
+            and a code the notice bounds instead of listing is read from its text: a two-group serial inside a printed from-to pair (g01) and a prefix followed by a number in a
+            printed range (g03). Replayed offline, g01 and g03 turn red, g04 green and g07 orange, and nothing moves on the 105 or held out #1. g19 was a harness wait, not a
+            matching error: the app never waits on Tavily&apos;s keyless limit, the harness now caps its wait at 30 s, and g19 re-run that way is Checked. USDA FSIS product lists
+            (PDFs) are read through Tavily Extract so a UPC and its lot match row by row.
           </p>
           <ul className={s.wrong}>
             {wrong2.map((c) => (
@@ -496,7 +509,10 @@ export default function Proof() {
               <dd>
                 {cases2.filter((c) => c.set === "lag" && right(c, lv2(t2, c.id) ?? "")).length}/{cases2.filter((c) => c.set === "lag").length}
               </dd>
-              <p>right, from pages only Tavily reached: the Pan Pepin allergy recall red on its exact lot, the sprats advisory orange, the next lot green.</p>
+              <p>
+                right with Tavily, from pages only Tavily reached: the Pan Pepin allergy recall red on its exact lot, the sprats advisory orange, the next lot green.
+                {noweb2 ? ` With Tavily off (added afterwards, same code) ${cases2.filter((c) => c.set === "lag" && right(c, (noweb2.levels as Record<string, string>)[c.id] ?? "")).length} of 3: both recalls were cleared green.` : ""}
+              </p>
             </div>
             <div>
               <dt>Credits an item, as billed</dt>
@@ -521,6 +537,12 @@ export default function Proof() {
               found carries <b>Ahead of the database</b> when the agency had no record of it that day, checked per recall.
             </li>
             <li>
+              <b>PDF product lists:</b> FSIS names a recall&apos;s products (SKU, UPC, lot, dates, establishment) only in a linked PDF. Extract reads it and the rows are appended
+              to the page, so a UPC and its lot match on the same row (an in-sample probe on Kayem: UPC 030771010182 with its own lot is Do not use, with another product&apos;s
+              lot it isn&apos;t). <b>Why basic depth:</b> advanced search with <span className="code">chunks_per_source</span> and <span className="code">include_raw_content</span>{" "}
+              was measured on an FDA lot table (h37, h42) and returned no lot either.
+            </li>
+            <li>
               <b>When credits run out</b> (HTTP 429, 432 or 433) the same call is retried in Tavily&apos;s keyless mode, then the check goes on with the databases only and says so. Held
               out #2 ran entirely in keyless mode.
             </li>
@@ -543,7 +565,7 @@ export default function Proof() {
           <ul className={s.claims}>
             <li>
               <span className={s.claimKick}>Held out #1</span>
-              The agent got <b>{held.right}</b>, the lite tier <b>{heldLite.right}</b> and the fixed plan with Ultra readers 29. Only the agent got h07 (a brand-less price-tag photo) and
+              The agent got <b>{held.right}</b>, the lite tier <b>{heldLite.right}</b> and the fixed plan with Ultra readers 29. Only the agent got h07 (a brand-less price-tag photo, read by the Qwen3.8 27B fallback after Super VL ran out of its token budget) and
               h43 (the Wedgewood veterinary recall); it was better on the database cases ({held.bySet.database.right}/27 against {heldLite.bySet.database.right}/27) and worse on the
               two USDA lines, which the lite tier&apos;s single web search flagged.
             </li>
@@ -572,7 +594,8 @@ export default function Proof() {
             The {summary.cases} tuned cases, five ways
           </h2>
           <p className={s.sub}>
-            At today&apos;s code (Tagout and the lite tier at <span className="code">ed2dc77</span>, the other setups at <span className="code">a9a0f8f</span>, Oct 25). The model alone
+            At today&apos;s code ({CODE_NOW}, Oct 30), confirmed by an offline replay of every recorded arm (<span className="code">eval/replay-summary.json</span>); the live arms
+            ran Oct 24-25 (Tagout and the lite tier at <span className="code">ed2dc77</span>, the others at <span className="code">a9a0f8f</span>). The model alone
             answers from memory. With Tavily it reads the official recall pages a web search finds, but decides on its own. The fixed plan runs set searches instead of the agent, with
             Nemotron 3 Nano reading the notices and the same rules deciding: that is Tagout&apos;s lite tier. The last uses no model at all. On Oct 15 the same cases gave Tagout{" "}
             {oct15Tagout.right}/{oct15.cases}, the lite tier {oct15.arms.find((a) => a.arm === "fixed-plan-nano")!.right} and rules alone{" "}
@@ -705,7 +728,13 @@ export default function Proof() {
             Tagout has three model jobs: reading the list, running the search agent, and reading each notice&apos;s codes. The track asks for Ultra where the reasoning is hard and
             smaller models for the everyday calls, so every size ran in every role on Oct 15: all 105 cases as the notice reader and the list reader, and an 18-case sample as the
             search agent. Nemotron&apos;s reading decided {(t as { redBasis?: { by?: Record<string, number> } }).redBasis?.by?.["reader-list"] ?? 31} of the {t.truePositives} red
-            tags on the {summary.cases} at today&apos;s code; the rest came from lists the agency record already prints. Nemotron 3.5 Super VL reads label photos.
+            tags on the {summary.cases} (in-sample); on unseen data, held out #2&apos;s seven Tagout reds came{" "}
+            {Object.entries((t2 as { redBasis?: { by?: Record<string, number> } }).redBasis?.by ?? {})
+              .map(([k, v]) => `${v} from ${k === "reader-list" ? "the reader's list" : k === "record-list" ? "the record's own list" : "the notice text"}`)
+              .join(", ")}
+            . The same code with no model got {rules2?.right ?? "–"}/19 there, against Tagout&apos;s {t2.right}/19. Nemotron 3.5 Super VL reads label photos: 7 of 7 codes on two
+            made-up sample labels; on CPSC&apos;s real price-tag photo (h07) it ran out of its 2,500-token budget and the Qwen3.8 27B fallback read it (with 6,000 tokens it reads
+            it, in-sample).
           </p>
           <div className={s.tableWrap}>
             <table className={s.table}>

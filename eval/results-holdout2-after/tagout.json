@@ -1,0 +1,331 @@
+{
+ "arm": "tagout",
+ "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "useAgent": true,
+  "useModel": true,
+  "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+  "cases": "cases-holdout2.json",
+  "today": "2026-10-29",
+  "noWeb": false,
+  "offline": false,
+  "keyless": true,
+  "code": {
+   "commit": "019d39e",
+   "libChanged": false
+  }
+ },
+ "at": "2026-10-29T20:44:31.408Z",
+ "cases": [
+  {
+   "id": "g01",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-015",
+   "headline": "00010 2450 is inside the serial range 00010 2303 to 00010 2607 this recall lists.",
+   "basis": "text/range",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 9,
+     "prompt": 23011,
+     "completion": 4164,
+     "usd": 0.035503,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Giant",
+     "product": "SureLock Flex Key Coil 15 bike lock",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Giant”, product “bike lock”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Giant Bicycle Recalls LED-Light Keys Included with SureLock Bike Loc…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Giant SureLock bike lock recall”",
+     "found": 6,
+     "fresh": 5
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “bike lock”, text “SureLock Flex Key Coil 15”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Giant”, product “lock”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 23011,
+    "completion": 4164
+   },
+   "usd": 0.0355,
+   "ms": 181,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 1
+  },
+  {
+   "id": "g03",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 26-741",
+   "headline": "PR01 25230 is inside the codes PR01 25091 to PR01 26168 this recall lists.",
+   "basis": "text/family",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 9,
+     "prompt": 32141,
+     "completion": 4832,
+     "usd": 0.046637,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 2,
+     "extractUrls": 2,
+     "credits": 4
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Lestoil",
+     "product": "Heavy Duty Multi-Purpose Cleaner, Fuerza de Lavanda Tropical",
+     "codes": [
+      "date code PR01 25230"
+     ],
+     "made": "PR01 25230",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “cleaner”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Clorox Puerto Rico Recalls 6 Million Scented Mistolin and Lestoil Mu…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lestoil Heavy Duty Multi-Purpose Cleaner recall PR01 25230 date code”",
+     "found": 6,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Clorox Puerto Rico Recalls 6 Million Scented Mistolin and Lestoil Mu…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Clorox Puerto Rico Lestoil Heavy Duty Multi-Purpose Cleaner recall date code lot number”",
+     "found": 6,
+     "fresh": 5
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 32141,
+    "completion": 4832
+   },
+   "usd": 0.04664,
+   "ms": 175,
+   "msFresh": false,
+   "tavily": 4,
+   "tavilySearch": 2,
+   "tavilyExtract": 2,
+   "tavilyCredits": 4,
+   "truncated": 1
+  },
+  {
+   "id": "g19",
+   "group": "clean",
+   "set": "database",
+   "form": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "No recall found for Dyson model SV47.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 7,
+     "prompt": 46118,
+     "completion": 2022,
+     "usd": 0.052184
+    },
+    "tavily": {
+     "searches": 3,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 3
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Dyson",
+     "product": "V15 Detect cordless vacuum",
+     "model": "SV47",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “cordless vacuum”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “vacuum”",
+     "found": 13,
+     "fresh": 11
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, text “SV47”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson V15 Detect cordless vacuum recall”",
+     "found": 5,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, product “vacuum”, maker “Dyson”",
+     "found": 12,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson SV47 recall”",
+     "found": 3,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson cordless vacuum recall”",
+     "found": 4,
+     "fresh": 3
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “cordless”",
+     "found": 13,
+     "fresh": 8
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson V15 Detect recall SV47”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “stick vacuum”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson cordless stick vacuum recall 2024 2025 2026”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson vacuum recall 2024 2025 2026”",
+     "found": 0,
+     "error": "Tavily search failed (HTTP 429)."
+    }
+   ],
+   "calls": 7,
+   "liveCalls": 4,
+   "tokens": {
+    "prompt": 46118,
+    "completion": 2022
+   },
+   "usd": 0.05218,
+   "ms": 25384,
+   "msFresh": false,
+   "tavily": 6,
+   "tavilySearch": 6,
+   "tavilyExtract": 0,
+   "tavilyCredits": 3,
+   "truncated": 0
+  }
+ ]
+}

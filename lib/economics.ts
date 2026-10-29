@@ -8,7 +8,7 @@ import current from "@/eval/summary-current.json";
 export const TAVILY_USD_PER_CREDIT = 0.008;
 
 /** The date the numbers below were measured, for any page that prints them. */
-export const COST_MEASURED = "Oct 25 2026, 105 cases";
+export const COST_MEASURED = "105 cases; live runs Oct 24-25 2026, confirmed by offline replay at 019d39e";
 
 const arm = (id: string) => current.arms.find((a) => a.arm === id)!;
 
@@ -24,5 +24,5 @@ export const perItem = (tier: keyof typeof COST) => COST[tier].model + COST[tier
 
 /** "4.4¢" for amounts under a dollar, "$1.20" above. */
 export function money(usd: number): string {
-  return usd < 1 ? `${(usd * 100).toFixed(usd < 0.1 ? 1 : 0)}¢` : `$${usd.toFixed(2)}`;
+  return usd < 1 ? `${(usd * 100).toFixed(usd < 0.01 ? 2 : usd < 0.1 ? 1 : 0)}¢` : `$${usd.toFixed(2)}`;
 }

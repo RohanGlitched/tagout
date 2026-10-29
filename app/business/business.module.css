@@ -23,7 +23,7 @@
 }
 .h1 {
   max-width: 17em;
-  font-size: clamp(36px, 4.6vw, 60px);
+  font-size: clamp(30px, 3.4vw, 46px);
   font-variation-settings: "wdth" 120;
   font-weight: 850;
   letter-spacing: -0.03em;

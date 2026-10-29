@@ -173,6 +173,7 @@ export default async function Home() {
               none and gave one wrong red: a pizza whose best-by date is outside the recall&apos;s window. <Link href="/proof#held-h">Both held-out sets</Link>
             </p>
           ) : null}
+          <h3 className={s.ladderHead}>The {summary.cases} tuned cases (in-sample)</h3>
           <Ladder />
         </section>
 
@@ -180,7 +181,7 @@ export default async function Home() {
           <section className={s.band} aria-labelledby="wall-h">
             <div className={s.bandHead}>
               <h2 id="wall-h" className={s.h2}>
-                {wall.total} recalls in {monthWords[months] ?? months} months.
+                {wall.total} recalls in {monthWords[months] ?? months} months, as of {fmtDate(new Date().toISOString())}.
               </h2>
               <p className={s.sub}>
                 Every Consumer Product Safety Commission recall of {wall.year} so far, one tag each, hung by month and coloured by hazard{wall.units >= 1e6 ? `: about ${(wall.units / 1e6).toFixed(0)} million units, by CPSC's own count` : ""}. Point at a tag to read it; pick a hazard to see how often it comes

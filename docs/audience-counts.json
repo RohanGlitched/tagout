@@ -1,0 +1,21 @@
+{
+ "at": "2026-10-29",
+ "sources": {
+  "cpsc": "https://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallDateStart=2026-01-01&RecallDateEnd=2026-10-29",
+  "openFdaUndeclared": "https://api.fda.gov/food/enforcement.json?search=report_date:[20260101+TO+20261029]+AND+reason_for_recall:undeclared&limit=1",
+  "openFdaAll": "https://api.fda.gov/food/enforcement.json?search=report_date:[20260101+TO+20261029]&limit=1"
+ },
+ "cpscRecalls": 498,
+ "childrensProducts": 187,
+ "stovesOvensFridges": 5,
+ "kitchenExamples": [
+  "26756 Dual Fuel Ranges Recalled Due to Risk of Serious Injury or Death from Fire or Explosion Hazards; Manufactured by AGA Rangemaster",
+  "26649 Galanz Americas Recalls Retro Refrigerators Due to Risk of Serious Injury or Death from Fire and Burn Hazards; One Death Reported",
+  "26606 Best Buy Recalls Insignia® Gas Ranges Due to Risk of Serious Injury from a Fire Hazard",
+  "26419 Free-Standing Professional Gas Ranges Recalled Due to Risk of Burn Hazard; Manufactured by Fisher & Paykel",
+  "26333 Electrolux Group Recalls Frigidaire Gas Ranges Due to Burn Hazard"
+ ],
+ "foodReports": 1056,
+ "undeclaredIngredient": 299,
+ "note": "Children's products and kitchen appliances are matched on each recall's title and product names (regular expressions in this script), so the counts are approximate; a recall can be in both groups."
+}

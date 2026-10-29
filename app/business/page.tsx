@@ -7,6 +7,7 @@ import { REPO_URL, SHOWCASE, SITE_URL } from "@/lib/site";
 import summary from "@/eval/summary-current.json";
 import holdout from "@/eval/holdout-summary.json";
 import held2 from "@/eval/holdout2-summary.json";
+import reach from "@/docs/audience-counts.json";
 import s from "./business.module.css";
 
 export const metadata = {
@@ -30,6 +31,35 @@ export default function Business() {
             hold the list of what people own can be that direct notice. Tagout does the matching.
           </p>
         </header>
+
+        <section className={s.section} aria-labelledby="reach-h">
+          <h2 id="reach-h" className={s.h2}>
+            Who it reaches
+          </h2>
+          <p className={s.body}>Counted from the agencies&apos; own public data on {fmtDay(reach.at)}, with no model (scripts/audience-counts.mjs):</p>
+          <dl className={s.worked} aria-label="Who the year's recalls reach">
+            <div>
+              <dt>CPSC recalls of {reach.at.slice(0, 4)} naming a child&apos;s product (cribs, car seats, toys, high chairs)</dt>
+              <dd>
+                {reach.childrensProducts} of {reach.cpscRecalls}
+              </dd>
+            </div>
+            <div>
+              <dt>openFDA food recall reports of {reach.at.slice(0, 4)} for an undeclared ingredient, mostly allergens</dt>
+              <dd>
+                {reach.undeclaredIngredient} of {reach.foodReports.toLocaleString("en-US")}
+              </dd>
+            </div>
+            <div>
+              <dt>CPSC recalls of {reach.at.slice(0, 4)} of gas ranges and refrigerators, the appliances AB 628 makes a landlord fix within 30 days</dt>
+              <dd>{reach.stovesOvensFridges}</dd>
+            </div>
+            <div>
+              <dt>Owners who act on a recall sent straight to them, against 6% for a press release (CPSC)</dt>
+              <dd>50%</dd>
+            </div>
+          </dl>
+        </section>
 
         <section className={s.section} aria-labelledby="first-h">
           <div className={s.split}>
@@ -154,7 +184,7 @@ export default function Business() {
             What a check costs us
           </h2>
           <p className={s.body}>
-            Measured on the {summary.cases}-case eval at today&apos;s code (Oct 25; on held-out set #1 it was 4.9¢ and 1.7¢ all in, on set #2 4.7¢ and 1.4¢): Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
+            Measured on the {summary.cases}-case eval at today&apos;s code (019d39e, Oct 30, confirmed by an offline replay; the live runs were Oct 24-25). On held-out set #1 it was 4.9¢ and 1.7¢ all in, on set #2 4.7¢ and 1.4¢: Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
             free.
           </p>
           <div className={s.tableWrap}>
@@ -251,4 +281,9 @@ export default function Business() {
       <Footer />
     </>
   );
+}
+
+function fmtDay(iso: string): string {
+  const [y, m, d] = iso.split("-").map(Number);
+  return `${d} ${["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][m - 1]} ${y}`;
 }
