@@ -641,3 +641,23 @@
     content: "Cost an item";
   }
 }
+
+/* Long per-case tables: open on desktop, collapsed on phones (two copies; one shows per width). */
+.phoneOnly {
+  display: none;
+}
+details.wideOpen > summary,
+details.phoneOnly > summary {
+  cursor: pointer;
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 650;
+}
+@media (max-width: 600px) {
+  .wideOpen {
+    display: none;
+  }
+  .phoneOnly {
+    display: block;
+  }
+}

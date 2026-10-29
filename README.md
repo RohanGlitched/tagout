@@ -165,7 +165,7 @@ Written after the fixes that set #2 led to, to test them on recalls they had nev
 | **Tagout** | **4/8** | **2/4** | 0/4 |
 | Lite tier | 5/8 | 2/4 | 0/4 |
 
-Both false alarms come from a code or a date that never reached the matcher: a made-date window in CPSC's prose that wasn't read (j2), and a serial the list reader dropped, so the product code matched an older recall (j6). Nothing has been fixed since; details in [`eval/HOLDOUT.md`](eval/HOLDOUT.md#held-out-3-pre-registered-oct-30). Across the three held-out sets: **50 of 66 right, 3 false alarms, 42 of 46 recalled items flagged**.
+Both false alarms come from a code or a date that never reached the matcher: a made-date window in CPSC's prose that wasn't read (j2), and a serial the list reader dropped, so the product code matched an older recall (j6). Fixed after set #3, in-sample: a made-date window printed in the notice's own text is now read the way a best-by window is (j2 replays Checked), and serial intervals are read for the item's own product code, so a bare product-code match in another recall is held at orange when they exclude the serial (j6 replays Check the label). Offline replays: the 105 and every arm of sets #1 and #2 unchanged; on set #3 only j2 and j6 move (and j2 in the lite tier). Details in [`eval/HOLDOUT.md`](eval/HOLDOUT.md#held-out-3-pre-registered-oct-30). Across the three held-out sets: **50 of 66 right, 3 false alarms, 42 of 46 recalled items flagged**.
 
 ## What Tavily does here
 

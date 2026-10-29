@@ -445,6 +445,8 @@ export default function Proof() {
             &ldquo;Recalled items&rdquo; are all {t2.falseClearOf} cases whose right answer is Do not use or Check the label (8 recalled units with a code, 2 recalls with no
             code, and a car); &ldquo;flagged&rdquo; means either tag. &ldquo;Coded recalled units&rdquo; are the 8 that must be Do not use.
           </p>
+          <details className={s.wideOpen} open>
+            <summary>Every case: what it tests and how each arm tagged it</summary>
           <div className={s.gridWrap}>
             <table className={s.cases2}>
               <thead>
@@ -488,6 +490,53 @@ export default function Proof() {
               </tbody>
             </table>
           </div>
+          </details>
+          <details className={s.phoneOnly}>
+            <summary>Every case: what it tests and how each arm tagged it</summary>
+          <div className={s.gridWrap}>
+            <table className={s.cases2}>
+              <thead>
+                <tr>
+                  <th scope="col">What was typed</th>
+                  <th scope="col">What it tests</th>
+                  <th scope="col">Right answer</th>
+                  <th scope="col">Tagout</th>
+                  <th scope="col">Lite tier</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cases2.map((c) => (
+                  <tr key={c.id}>
+                    <th scope="row">
+                      <span className="code">{c.id}</span> {c.text}
+                    </th>
+                    <td data-label="Tests">
+                      {PROBE[c.probe] ?? c.probe}
+                      {c.set === "lag" ? <small> · in no database yet</small> : null}
+                    </td>
+                    <td data-label="Right answer">{EXPECT[c.expect] ?? c.expect}</td>
+                    {[t2, lite2].map((a) => {
+                      const lv = lv2(a, c.id);
+                      const ok = lv ? right(c, lv) : false;
+                      return (
+                        <td key={a.arm} data-label={a.arm === "tagout" ? "Tagout" : "Lite tier"}>
+                          {lv ? (
+                            <span className={s.cell}>
+                              <i data-level={lv} data-wrong={ok ? undefined : ""} aria-hidden="true" /> {TAG_WORDS[lv] ?? lv}
+                              {ok ? "" : <b className={s.miss}> wrong</b>}
+                            </span>
+                          ) : (
+                            <span className={s.na}>·</span>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          </details>
           <p className={s.sub}>
             Fixed since, in-sample and so not in the table: a best-by or use-by window printed in the record&apos;s own text is compared with the date on your line (g07),
             and a code the notice bounds instead of listing is read from its text: a two-group serial inside a printed from-to pair (g01) and a prefix followed by a number in a
@@ -573,7 +622,7 @@ export default function Proof() {
           </ul>
           <p className={s.sub}>
             Both false alarms come from a code or a date that never reached the matcher: a made-date window in CPSC&apos;s prose that wasn&apos;t read, and a serial the list reader
-            dropped. Nothing has been fixed since; these are the next things to fix and to test on a fourth set.
+            dropped. Fixed since, in-sample: the notice's own made-date windows are read (j2 replays Checked), and serial intervals for the item's own product code hold a bare product-code match in another recall at orange (j6 replays Check the label). The 105 and sets #1 and #2 replay unchanged. j3 and j7 stay orange; a fourth set is the test.
           </p>
         </section>
 
@@ -731,7 +780,53 @@ export default function Proof() {
           {Object.keys(GROUP_NAME).map((g) => {
             const rows = cases.filter((c) => c.group === g);
             return (
-              <details key={g} className={s.group} open={g === "positive" || g === "near-miss"}>
+              <details key={g} className={`${s.group} ${s.wideOpen}`} open={g === "positive" || g === "near-miss"}>
+                <summary>
+                  <b>{GROUP_NAME[g]}</b> <span>{rows.length} cases. {GROUP_RIGHT[g]}</span>
+                </summary>
+                <div className={s.gridWrap}>
+                  <table className={s.grid}>
+                    <thead>
+                      <tr>
+                        <th scope="col">What was typed</th>
+                        {matrix.map((a) => (
+                          <th key={a.arm} scope="col" title={a.label} data-extra={MAIN.includes(a.arm) ? undefined : ""}>
+                            <span>{SHORT[a.arm] ?? a.arm}</span>
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.map((c) => (
+                        <tr key={c.id}>
+                          <th scope="row" title={c.why ?? c.recall?.join(", ") ?? c.near}>
+                            <span className="code">{c.id}</span> {c.text}
+                          </th>
+                          {matrix.map((a) => {
+                            const lv = a.levels[c.id as keyof typeof a.levels] as string | undefined;
+                            const ok = lv ? right(c, lv) : true;
+                            return (
+                              <td key={a.arm} data-extra={MAIN.includes(a.arm) ? undefined : ""}>
+                                {lv ? (
+                                  <i data-level={lv} data-wrong={ok ? undefined : ""} aria-label={`${SHORT[a.arm] ?? a.arm}: ${TAG_WORDS[lv as TagLevel] ?? lv}${ok ? "" : ", wrong"}`} />
+                                ) : (
+                                  <span className={s.na}>·</span>
+                                )}
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            );
+          })}
+          {Object.keys(GROUP_NAME).map((g) => {
+            const rows = cases.filter((c) => c.group === g);
+            return (
+              <details key={`p-${g}`} className={`${s.group} ${s.phoneOnly}`}>
                 <summary>
                   <b>{GROUP_NAME[g]}</b> <span>{rows.length} cases. {GROUP_RIGHT[g]}</span>
                 </summary>
