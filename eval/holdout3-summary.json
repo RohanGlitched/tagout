@@ -1,0 +1,240 @@
+{
+ "at": "2026-10-29T21:40:33.378Z",
+ "firstRun": null,
+ "cases": 8,
+ "groups": {
+  "positive": 4,
+  "near-miss": 4
+ },
+ "arms": [
+  {
+   "arm": "tagout",
+   "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+   "n": 8,
+   "right": 4,
+   "rightInterval": [
+    0.157,
+    0.843
+   ],
+   "redPrecision": 0.5,
+   "redRecall": 0.5,
+   "redRecallInterval": [
+    0.068,
+    0.932
+   ],
+   "reds": 4,
+   "truePositives": 2,
+   "positives": 4,
+   "falseRed": [
+    "j2",
+    "j6"
+   ],
+   "falseRedOf": 4,
+   "falseRedInterval": [
+    0.068,
+    0.932
+   ],
+   "falseClear": [],
+   "falseClearOf": 4,
+   "falseClearInterval": [
+    0,
+    0.602
+   ],
+   "errors": [],
+   "byGroup": {
+    "positive": {
+     "n": 4,
+     "right": 2
+    },
+    "near-miss": {
+     "n": 4,
+     "right": 2
+    }
+   },
+   "bySet": {
+    "database": {
+     "n": 8,
+     "right": 4,
+     "falseRed": [
+      "j2",
+      "j6"
+     ],
+     "falseClear": []
+    }
+   },
+   "byForm": {
+    "clean": {
+     "n": 8,
+     "right": 4,
+     "falseRed": [
+      "j2",
+      "j6"
+     ],
+     "falseClear": []
+    }
+   },
+   "usdPerItem": 0.05170875,
+   "usdTotal": 0.41367,
+   "tavilyPerItem": 0.375,
+   "tavilyUsdPerItem": 0.003,
+   "usdPerItemWithTavily": 0.05470875,
+   "medianMs": 75190,
+   "webOnlyReds": [],
+   "webCited": [],
+   "fellBack": [
+    "j8"
+   ],
+   "config": {
+    "today": "2026-10-30",
+    "noWeb": false,
+    "offline": false,
+    "keyless": true,
+    "code": {
+     "commit": "aa53b04",
+     "libChanged": false
+    }
+   },
+   "levels": {
+    "j1": "danger",
+    "j2": "danger",
+    "j3": "warning",
+    "j4": "warning",
+    "j5": "danger",
+    "j6": "danger",
+    "j7": "warning",
+    "j8": "warning"
+   },
+   "redBasis": {
+    "n": 4,
+    "by": {
+     "reader-list": 3,
+     "text": 1
+    },
+    "how": {
+     "exact": 4
+    },
+    "window": 0,
+    "cases": {
+     "j1": "reader-list",
+     "j2": "reader-list",
+     "j5": "reader-list",
+     "j6": "text"
+    }
+   }
+  },
+  {
+   "arm": "fixed-plan-nano",
+   "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
+   "n": 8,
+   "right": 5,
+   "rightInterval": [
+    0.245,
+    0.915
+   ],
+   "redPrecision": 0.6,
+   "redRecall": 0.75,
+   "redRecallInterval": [
+    0.194,
+    0.994
+   ],
+   "reds": 5,
+   "truePositives": 3,
+   "positives": 4,
+   "falseRed": [
+    "j2",
+    "j6"
+   ],
+   "falseRedOf": 4,
+   "falseRedInterval": [
+    0.068,
+    0.932
+   ],
+   "falseClear": [],
+   "falseClearOf": 4,
+   "falseClearInterval": [
+    0,
+    0.602
+   ],
+   "errors": [],
+   "byGroup": {
+    "positive": {
+     "n": 4,
+     "right": 3
+    },
+    "near-miss": {
+     "n": 4,
+     "right": 2
+    }
+   },
+   "bySet": {
+    "database": {
+     "n": 8,
+     "right": 5,
+     "falseRed": [
+      "j2",
+      "j6"
+     ],
+     "falseClear": []
+    }
+   },
+   "byForm": {
+    "clean": {
+     "n": 8,
+     "right": 5,
+     "falseRed": [
+      "j2",
+      "j6"
+     ],
+     "falseClear": []
+    }
+   },
+   "usdPerItem": 0.0032575,
+   "usdTotal": 0.02606,
+   "tavilyPerItem": 0.25,
+   "tavilyUsdPerItem": 0.002,
+   "usdPerItemWithTavily": 0.0052575,
+   "medianMs": null,
+   "webOnlyReds": [],
+   "webCited": [],
+   "fellBack": [],
+   "config": {
+    "today": "2026-10-30",
+    "noWeb": false,
+    "offline": false,
+    "keyless": true,
+    "code": {
+     "commit": "aa53b04",
+     "libChanged": false
+    }
+   },
+   "levels": {
+    "j1": "danger",
+    "j2": "danger",
+    "j3": "warning",
+    "j4": "warning",
+    "j5": "danger",
+    "j6": "danger",
+    "j7": "danger",
+    "j8": "warning"
+   },
+   "redBasis": {
+    "n": 5,
+    "by": {
+     "reader-list": 3,
+     "text": 2
+    },
+    "how": {
+     "exact": 5
+    },
+    "window": 0,
+    "cases": {
+     "j1": "reader-list",
+     "j2": "reader-list",
+     "j5": "text",
+     "j6": "text",
+     "j7": "reader-list"
+    }
+   }
+  }
+ ]
+}

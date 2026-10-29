@@ -1,0 +1,81 @@
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 8ms 322+495 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5ms 322+394 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 317+907 tokens
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 11ms 448+246 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 8ms 302+77 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 7ms 429+83 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 6ms 414+103 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 6ms 328+104 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 5ms 366+85 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3ms 289+91 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3ms 230+81 tokens
+j3   warning   want danger     CPSC 27-041 $0.0034 811ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 317+868 tokens
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 7ms 448+246 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 6ms 302+77 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 5ms 429+83 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 5ms 414+103 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 4ms 328+104 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 4ms 366+85 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3ms 289+91 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2ms 230+81 tokens
+j4   warning   want not-danger CPSC 27-041 $0.0033 677ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 327+937 tokens
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1665ms 375+92 tokens
+j1   danger    want danger     CPSC 27-054 $0.0019 3179ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 327+933 tokens
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1557ms 259+82 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1572ms 1267+83 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1798ms 375+96 tokens
+j2   danger    want not-danger CPSC 27-054 $0.0015 3854ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 314+362 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1669ms 287+99 tokens
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2438ms 254+128 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2468ms 286+133 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3365ms 725+180 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3630ms 1063+192 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2697ms 259+87 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2071ms 248+70 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3973ms 2515+206 tokens
+j5   danger    want danger     FDA Z-0783-2022 $0.0038 4700ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 314+357 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2778ms 254+128 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2791ms 287+99 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2898ms 286+113 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2963ms 1267+121 tokens
+[eval] Tavily HTTP 429: {"error":{"code":"daily_cap_reached","message":"You reached the daily keyless Tavily limit. To continue immediately, pay via x402 agentic payment (https://docs.
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1ms 248+70 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2404ms 4434+132 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2431ms 3394+123 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2543ms 359+139 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2717ms 6737+149 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3731ms 725+200 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3056ms 5110+179 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3788ms 1063+208 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3828ms 2515+211 tokens
+j6   danger    want not-danger FDA Z-0783-2022 $0.0038 4082ms  
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1444ms 1072+100 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1785ms 4434+126 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 1788ms 3394+126 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2047ms 359+139 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2125ms 6737+152 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 4519ms 613+324 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 2298ms 5110+179 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 4814ms 624+377 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 3684ms 624+381 tokens
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 11537ms 1072+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 10322ms 613+1500 tokens (cut off at the cap)
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 9875ms 613+1881 tokens
+j8   warning   want not-danger FDA Z-0137-2027 $0.0039 20453ms  
+[nebius] nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B 19933ms 1072+3750 tokens (cut off at the cap)
+j7   danger    want danger     FDA Z-0138-2027 $0.0044 31726ms  
+spent this run $0.0069; eval total $6.8393 over 2932 live calls; Tavily live calls 639 (457 on the key)
