@@ -70,7 +70,7 @@ export default function Ladder() {
         })}
       </ol>
       <p className={s.now}>
-        At today&apos;s code (019d39e, Oct 30), confirmed by an offline replay of every recorded arm; the live arms ran Oct 24-25. In-sample: these cases shaped the fixes. The Oct 15 run gave Tagout {then("tagout")}, the lite tier {then("fixed-plan-nano")} and rules
+        At today&apos;s code (acc0639, Oct 30), confirmed by an offline replay of every recorded arm; the live arms ran Oct 24-25. In-sample: these cases shaped the fixes. The Oct 15 run gave Tagout {then("tagout")}, the lite tier {then("fixed-plan-nano")} and rules
         alone {then("rules")}; rules fell once a tag could no longer be green without a model, which also turned seven clean things orange.
       </p>
       <p className={s.key}>

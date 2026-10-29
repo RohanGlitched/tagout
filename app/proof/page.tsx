@@ -83,7 +83,7 @@ const t2 = held2.arms.find((a) => a.arm === "tagout")!;
 const lite2 = held2.arms.find((a) => a.arm === "fixed-plan-nano")!;
 const rules2 = held2.arms.find((a) => a.arm === "rules");
 const noweb2 = held2.arms.find((a) => a.arm === "tagout-noweb");
-const CODE_NOW = "019d39e";
+const CODE_NOW = "acc0639";
 const h3t = held3.arms.find((a) => a.arm === "tagout")!;
 const cases3 = cases3File.cases as { id: string; text: string }[];
 const after = heldAfter.arms.find((a) => a.arm === "tagout")!;

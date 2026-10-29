@@ -194,7 +194,7 @@ export default function Business() {
             What a check costs us
           </h2>
           <p className={s.body}>
-            Measured on the {summary.cases}-case eval at today&apos;s code (019d39e, Oct 30, confirmed by an offline replay; the live runs were Oct 24-25). On held-out set #1 it was 4.9¢ and 1.7¢ all in, on set #2 4.7¢ and 1.4¢: Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
+            Measured on the {summary.cases}-case eval at today&apos;s code (acc0639, Oct 30, confirmed by an offline replay; the live runs were Oct 24-25). On held-out set #1 it was 4.9¢ and 1.7¢ all in, on set #2 4.7¢ and 1.4¢: Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
             free.
           </p>
           <div className={s.tableWrap}>

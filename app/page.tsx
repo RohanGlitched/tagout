@@ -198,7 +198,7 @@ export default async function Home() {
               ) : null}
               <p className={s.heldBand}>
                 <span>Tavily off → on</span> Set 1: <b>0/10 → 8/10</b> recalls not yet in a database flagged · Set 2: <b>0/2 → 2/2</b>{" "}
-                <Link href="/proof#held-h">Both held-out sets, every case</Link>
+                <Link href="/proof#held-h">All three held-out sets, every case</Link>
               </p>
             </div>
           ) : null}

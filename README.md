@@ -88,7 +88,7 @@ Built on Oct 25 to measure what the first sets never had on a recalled unit: a s
 
 Cases come from 2025–26 CPSC recalls, openFDA enforcement reports and NHTSA's recall API: 46 units whose code is printed in a recall, 27 near misses (a neighbouring lot or model, a date outside the window), 12 recalled product lines with no code given, 12 cars and 8 things no recall lists. [`eval/verify.mjs`](eval/verify.mjs) checks every expected answer against the agency's own record without any Tagout code. All 105 verify.
 
-At today's code (`019d39e`, Oct 30), confirmed by an offline replay of every recorded arm (`eval/replay-summary.json`); the live arms ran Oct 24-25 (Tagout and the lite tier at `ed2dc77`, the others at `a9a0f8f`; `eval/summary-current.json`). These cases shaped the fixes, so they are in-sample; the held-out sets above are the fairer estimate.
+At today's code (`acc0639`, Oct 30), confirmed by an offline replay of every recorded arm (`eval/replay-summary.json`); the live arms ran Oct 24-25 (Tagout and the lite tier at `ed2dc77`, the others at `a9a0f8f`; `eval/summary-current.json`). These cases shaped the fixes, so they are in-sample; the held-out sets above are the fairer estimate.
 
 | Arm | Right | Wrongly told to stop using | Recalled, but cleared | Red tags right | Recalled units caught | Cost per item, Nemotron | With Tavily |
 |---|---|---|---|---|---|---|---|
