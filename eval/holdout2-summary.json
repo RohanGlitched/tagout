@@ -1,5 +1,5 @@
 {
- "at": "2026-10-29T19:35:26.079Z",
+ "at": "2026-10-29T20:41:09.649Z",
  "firstRun": null,
  "cases": 19,
  "groups": {
@@ -164,6 +164,163 @@
      "g11": "reader-list",
      "g13": "text",
      "g16": "text"
+    }
+   }
+  },
+  {
+   "arm": "tagout-noweb",
+   "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide (Tavily off)",
+   "n": 19,
+   "right": 14,
+   "rightInterval": [
+    0.488,
+    0.909
+   ],
+   "redPrecision": 0.8333333333333334,
+   "redRecall": 0.625,
+   "redRecallInterval": [
+    0.245,
+    0.915
+   ],
+   "reds": 6,
+   "truePositives": 5,
+   "positives": 8,
+   "falseRed": [
+    "g07"
+   ],
+   "falseRedOf": 9,
+   "falseRedInterval": [
+    0.003,
+    0.482
+   ],
+   "falseClear": [
+    "g15",
+    "g16"
+   ],
+   "falseClearOf": 11,
+   "falseClearInterval": [
+    0.023,
+    0.518
+   ],
+   "errors": [],
+   "byGroup": {
+    "positive": {
+     "n": 8,
+     "right": 5
+    },
+    "near-miss": {
+     "n": 7,
+     "right": 6
+    },
+    "no-code": {
+     "n": 2,
+     "right": 1
+    },
+    "car": {
+     "n": 1,
+     "right": 1
+    },
+    "clean": {
+     "n": 1,
+     "right": 1
+    }
+   },
+   "bySet": {
+    "database": {
+     "n": 16,
+     "right": 13,
+     "falseRed": [
+      "g07"
+     ],
+     "falseClear": []
+    },
+    "lag": {
+     "n": 3,
+     "right": 1,
+     "falseRed": [],
+     "falseClear": [
+      "g15",
+      "g16"
+     ]
+    }
+   },
+   "byForm": {
+    "clean": {
+     "n": 17,
+     "right": 12,
+     "falseRed": [
+      "g07"
+     ],
+     "falseClear": [
+      "g15",
+      "g16"
+     ]
+    },
+    "messy": {
+     "n": 2,
+     "right": 2,
+     "falseRed": [],
+     "falseClear": []
+    }
+   },
+   "usdPerItem": 0.02252473684210526,
+   "usdTotal": 0.42796999999999996,
+   "tavilyPerItem": 0,
+   "tavilyUsdPerItem": 0,
+   "usdPerItemWithTavily": 0.02252473684210526,
+   "medianMs": null,
+   "webOnlyReds": [],
+   "webCited": [],
+   "fellBack": [],
+   "config": {
+    "today": "2026-10-29",
+    "noWeb": true,
+    "offline": false,
+    "keyless": false,
+    "code": {
+     "commit": "889b9b0",
+     "libChanged": false
+    }
+   },
+   "levels": {
+    "g01": "warning",
+    "g02": "warning",
+    "g03": "warning",
+    "g04": "warning",
+    "g05": "danger",
+    "g06": "danger",
+    "g07": "danger",
+    "g08": "danger",
+    "g09": "warning",
+    "g10": "inspected",
+    "g11": "danger",
+    "g12": "inspected",
+    "g13": "danger",
+    "g14": "inspected",
+    "g15": "inspected",
+    "g16": "inspected",
+    "g17": "inspected",
+    "g18": "warning",
+    "g19": "inspected"
+   },
+   "redBasis": {
+    "n": 6,
+    "by": {
+     "reader-list": 2,
+     "record-list": 3,
+     "text": 1
+    },
+    "how": {
+     "exact": 6
+    },
+    "window": 0,
+    "cases": {
+     "g05": "reader-list",
+     "g06": "record-list",
+     "g07": "record-list",
+     "g08": "record-list",
+     "g11": "reader-list",
+     "g13": "text"
     }
    }
   },

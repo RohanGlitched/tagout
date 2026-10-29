@@ -1,0 +1,140 @@
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 15ms 320+442 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 9ms 320+671 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 7ms 328+1425 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 8ms 2002+153 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5ms 2002+153 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 2027+169 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 7ms 2238+82 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5ms 2238+146 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 4037+133 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2799ms 2291+70 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2801ms 4090+82 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2990ms 2294+130 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2956ms 4159+66 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5458ms 2354+182 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2725ms 4227+111 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3796ms 4009+184 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4664ms 4069+139 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1163ms 4062+63 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3745ms 4119+230 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 432+500 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 6663ms 4471+485 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4991ms 4602+410 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 432+500 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 8146ms 693+885 tokens
+g02  warning   want not-danger CPSC 27-015 $0.0290 24929ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 328+769 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 2011+169 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 4021+105 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 10073ms 502+1394 tokens
+g03  warning   want danger     CPSC 26-741 $0.0354 27209ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 333+542 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 2016+151 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 2279+217 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2289ms 4074+69 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3239ms 4139+72 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3624ms 2334+179 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 634+663 tokens
+g05  danger    want danger     CPSC 27-010 $0.0129 3645ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 325+904 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 2017+166 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 2101+113 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 14083ms 693+1500 tokens (cut off at the cap)
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1696ms 4209+55 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1910ms 3636+123 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3511ms 4269+312 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 502+1394 tokens
+g04  warning   want not-danger CPSC 26-741 $0.0324 10764ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 336+533 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 2031+229 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3609ms 3689+328 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 245+467 tokens
+g06  danger    want danger     FDA H-0022-2027 $0.0183 5560ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4ms 337+1094 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 2031+170 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 4953+114 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3897ms 5011+227 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 349+1500 tokens (cut off at the cap)
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 349+795 tokens
+g08  danger    want danger     FDA H-0008-2027 $0.0247 3921ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 320+460 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 1995+163 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 3426+175 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5592ms 2744+654 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 245+467 tokens
+g07  danger    want not-danger FDA H-0022-2027 $0.0110 5621ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 331+427 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 2019+440 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5319ms 3522+311 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5013ms 6833+179 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4090ms 230+437 tokens
+g09  warning   want flag       FDA H-0012-2027 $0.0141 9419ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 316+401 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 1997+221 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 4582+290 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2954ms 4666+259 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 766+1138 tokens
+g11  danger    want danger     FDA D-0036-2027 $0.0192 2968ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 329+440 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 2021+281 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3757ms 7216+223 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3613ms 2935+321 tokens
+g01  warning   want danger     CPSC 27-015 $0.0294 57082ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 319+1027 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 2008+271 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4664ms 2933+368 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 5433ms 2988+523 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 766+1138 tokens
+g12  inspected want not-danger  $0.0171 9060ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 319+1129 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 2009+229 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 3922+106 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1646ms 3975+105 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1846ms 2986+342 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2599ms 9320+139 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2836ms 4036+372 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 6279ms 1404+854 tokens
+g13  danger    want danger     CPSC 27-017 $0.0182 12801ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 308+349 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1ms 1974+150 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3ms 2196+311 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4188ms 2255+212 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 8915ms 1404+1500 tokens (cut off at the cap)
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b cut off at 1500 tokens with nothing usable; once more with 3750
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4024ms 9684+433 tokens
+g10  inspected want not-danger  $0.0409 33996ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 332+912 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 2025+208 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 2144+70 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1309ms 2463+181 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2098ms 2695+119 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2995ms 2212+118 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2903ms 2337+105 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1565ms 2442+262 tokens
+g16  inspected want danger      $0.0165 7482ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 332+1130 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 2024+341 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 7632ms 1404+890 tokens
+g14  inspected want not-danger  $0.0301 21062ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 306+384 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 1973+173 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 3287+103 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3493ms 4366+181 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 251+360 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1265ms 209+253 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1547ms 3347+328 tokens
+g18  warning   want warning    NHTSA 26V689000 $0.0119 1557ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 309+818 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2ms 1979+253 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3585ms 2257+176 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 2197ms 4682+254 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4098ms 207+277 tokens
+g15  inspected want flag        $0.0241 17261ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 1986ms 2452+365 tokens
+g17  inspected want not-danger  $0.0131 7577ms  
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 4455ms 7183+217 tokens
+[nebius] nvidia/Nemotron-3-Ultra-550b-a55b 3285ms 9398+408 tokens
+g19  inspected want inspected   $0.0294 20825ms  
+spent this run $0.2508; eval total $6.4615 over 2823 live calls; Tavily live calls 613 (457 on the key)
