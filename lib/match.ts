@@ -424,6 +424,38 @@ export const EXCLUDED = /\bnot\b[^.]{0,40}\b(included|affected|part of|subject|r
  * says some units are not included? Codes shorter than four characters, or without a digit, are too easy to find
  * by accident and never count.
  */
+/** A notice's text on one line, quotes dropped, for the bound patterns below. */
+export const flatText = (text: string) => text.replace(/[“”"'‘’]/g, "").replace(/\s+/g, " ");
+
+export type Bounds = {
+  /** "00010 2303 ... 00010 2607": a serial in two groups, the first naming the line, the second counting within it. */
+  pairs: { head: string; lo: string; hi: string }[];
+  /** "prefix PR01 followed by a five-digit number between 25091 and 26168". */
+  families: { prefix: string; lo: string; hi: string }[];
+};
+
+/**
+ * The codes a notice bounds instead of listing, read from its own text without a model: two-group serial ranges and
+ * prefix-plus-number families. Both ends must have the same number of digits and the low end must come first.
+ */
+export function noticeBounds(text: string | undefined): Bounds {
+  const out: Bounds = { pairs: [], families: [] };
+  if (!text) return out;
+  const flat = flatText(text);
+  // Only where the notice talks about serial numbers: UPCs printed in groups ("0 78742 37235 8; ... 0 78742 37236 5")
+  // would otherwise look like a from-to pair.
+  if (/\bserial/i.test(flat)) for (const m of flat.matchAll(/\b(\d{3,6}) (\d{3,6}) (?:to |through |thru |- |– )?\1 (\d{3,6})\b/g)) {
+    if (m[2].length === m[3].length && m[2] < m[3]) out.pairs.push({ head: m[1], lo: m[2], hi: m[3] });
+  }
+  // The code itself is in capitals ("PR01"); the words around it can be any case.
+  const FAM =
+    /\b(?:[Pp]refix(?:es)?|[Bb]egin(?:ning|s)? with|[Ss]tart(?:ing|s)? with)\s+(?:the\s+)?(?:(?:prefix|letters?|code)\s+)?([A-Z]{1,4}\d{0,4})\b[^.]{0,60}?(?:followed by|and then)\s+(?:an?\s+|the\s+)?(?:[a-z-]+\s+)?(?:numbers?|digits?)\s+(?:between|from|ranging from|in the range(?: of)?)\s+(\d{3,8})\s*(?:and|to|through|thru|-|–)\s*(\d{3,8})\b/g;
+  for (const m of flat.matchAll(FAM)) {
+    if (m[2].length === m[3].length && m[2] < m[3]) out.families.push({ prefix: m[1].toUpperCase(), lo: m[2], hi: m[3] });
+  }
+  return out;
+}
+
 /**
  * A code of the item's that the notice bounds rather than lists: a serial printed in two groups inside a from-to
  * pair with the same first group, or a prefix followed by a number inside a printed number range. Null when the
@@ -431,23 +463,23 @@ export const EXCLUDED = /\bnot\b[^.]{0,40}\b(included|affected|part of|subject|r
  */
 export function boundedCode(item: Item, text: string | undefined): { yours: string; theirs: string; inside: boolean; how: "range" | "family" } | null {
   if (!text) return null;
-  const flat = text.replace(/[“”"']/g, "").replace(/\s+/g, " ");
+  const { pairs, families } = noticeBounds(text);
+  if (!pairs.length && !families.length) return null;
   const codes = [item.serial, item.lot, item.model, item.made, ...(item.codes ?? [])].filter((c): c is string => Boolean(c));
   for (const raw of codes) {
     const c = raw.replace(/^(?:serial(?: number| no\.?)?|date code|lot|model)\s*[:#]?\s*/i, "").trim();
-    // Two digit groups: the first names the line, the second counts within it.
     const two = c.match(/^(\d{3,})[\s-]+(\d{3,})$/);
     if (two) {
       const [, head, n] = two;
-      const pair = flat.match(new RegExp(String.raw`\b${head} (\d{${n.length}}) ${head} (\d{${n.length}})\b`));
-      if (pair && pair[1] < pair[2]) return { yours: `${head} ${n}`, theirs: `serial range ${head} ${pair[1]} to ${head} ${pair[2]}`, inside: n >= pair[1] && n <= pair[2], how: "range" };
+      const p = pairs.find((x) => x.head === head && x.lo.length === n.length);
+      if (p) return { yours: `${head} ${n}`, theirs: `serial range ${head} ${p.lo} to ${head} ${p.hi}`, inside: n >= p.lo && n <= p.hi, how: "range" };
     }
-    // A prefix and a number: "PR01 25230" against "prefix PR01 and followed by a five-digit number between 25091 and 26168".
     const fam = c.match(/^([A-Z]{1,4}\d{0,4})[\s-]*(\d{3,8})$/i);
     if (fam) {
-      const [, pre, n] = fam;
-      const rule = flat.match(new RegExp(String.raw`prefix ${pre}\b[^.]{0,40}?followed by an? (?:[a-z-]+ )?number (?:between|from) (\d{${n.length}}) (?:and|to|through) (\d{${n.length}})\b`, "i"));
-      if (rule && rule[1] < rule[2]) return { yours: `${pre.toUpperCase()} ${n}`, theirs: `codes ${pre.toUpperCase()} ${rule[1]} to ${pre.toUpperCase()} ${rule[2]}`, inside: n >= rule[1] && n <= rule[2], how: "family" };
+      const pre = fam[1].toUpperCase();
+      const n = fam[2];
+      const f = families.find((x) => x.prefix === pre && x.lo.length === n.length);
+      if (f) return { yours: `${pre} ${n}`, theirs: `codes ${pre} ${f.lo} to ${pre} ${f.hi}`, inside: n >= f.lo && n <= f.hi, how: "family" };
     }
   }
   return null;
@@ -479,13 +511,42 @@ export function looseDate(s: string | undefined): string | null {
  */
 export function dateWindowIn(text: string | undefined): { from: string; to: string } | null {
   if (!text) return null;
-  const DATE = String.raw`(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}-\d{1,2}-\d{1,2}|[A-Za-z]{3,9}\.? \d{1,2}(?:st|nd|rd|th)?,? \d{4})`;
+  // A full date, a month and year ("05/2027": the whole month), or a compact MMDDYY code ("063026").
+  const DATE = String.raw`(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}-\d{1,2}-\d{1,2}|[A-Za-z]{3,9}\.? \d{1,2}(?:st|nd|rd|th)?,? \d{4}|\d{1,2}\/\d{4}|\d{6})`;
+  const KEY = String.raw`(?:(?:best|use|sell)[- ]?by(?: date)?:?\s*)?`;
+  const end = (s: string, last: boolean): string | null => {
+    const full = looseDate(s);
+    if (full) return full;
+    const my = s.match(/^(\d{1,2})\/(\d{4})$/);
+    if (my && +my[1] >= 1 && +my[1] <= 12) {
+      const d = last ? new Date(Date.UTC(+my[2], +my[1], 0)).getUTCDate() : 1;
+      return `${my[2]}-${my[1].padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    }
+    const c = s.match(/^(\d{2})(\d{2})(\d{2})$/);
+    return c ? looseDate(`${c[1]}/${c[2]}/20${c[3]}`) : null;
+  };
   const found: { from: string; to: string }[] = [];
-  for (const seg of text.match(/\b(?:best[- ]?(?:by|if used by|before)|use[- ]?by|sell[- ]?by)\b[^.;\n]{0,90}/gi) ?? []) {
-    const span = seg.match(new RegExp(String.raw`(?:from\s+)?${DATE}\s*(?:to|through|thru|-|–)\s*${DATE}`, "i"));
-    const upto = seg.match(new RegExp(String.raw`(?:through|thru|until|up to)\s+${DATE}`, "i"));
-    const w = span ? { from: looseDate(span[1]), to: looseDate(span[2]) } : upto ? { from: "1900-01-01", to: looseDate(upto[1]) } : null;
-    if (w?.from && w.to && w.from <= w.to && !found.some((f) => f.from === w.from && f.to === w.to)) found.push({ from: w.from, to: w.to });
+  // One segment from each best-by keyword (segments may overlap, so a second keyword inside a first one's reach
+  // still starts its own).
+  for (const k of text.matchAll(/\b(?:best[- ]?(?:by|if used by|before)|use[- ]?by|sell[- ]?by)\b/gi)) {
+    const seg = text.slice(k.index).match(/^[^.;\n]{0,110}/)![0];
+    // "Between July 20 - August 17, 2026": the year printed once, at the end.
+    const md = seg.match(/\b([A-Za-z]{3,9})\.? (\d{1,2})\s*(?:-|–|to|through)\s*([A-Za-z]{3,9})\.? (\d{1,2}),? (\d{4})\b/);
+    let span = seg.match(new RegExp(String.raw`(?:from\s+)?${DATE}\s*(?:to|through|thru|-|–)\s*${KEY}${DATE}`, "i"));
+    // A six-digit code counts as a date only where the record calls it one ("Sell by dates 061226 through 062126").
+    if (span && (/^\d{6}$/.test(span[1]) || /^\d{6}$/.test(span[2])) && !/\b(?:dates?|codes?)\b/i.test(seg.slice(0, span.index))) span = null;
+    // Dates something was sold on are not best-by dates.
+    if (/\bsold\b/i.test(seg)) continue;
+    // Every "up to" in the segment counts: two different ones (a case and a package) make the record ambiguous.
+    const uptos = [...seg.matchAll(new RegExp(String.raw`(?:through|thru|until|up to(?: and including)?)\s+${DATE}`, "gi"))].filter(
+      (u) => !/^\d{6}$/.test(u[1]) || /\b(?:dates?|codes?)\b/i.test(seg.slice(0, u.index)),
+    );
+    const ws = md
+      ? [{ from: looseDate(`${md[1]} ${md[2]}, ${md[5]}`), to: looseDate(`${md[3]} ${md[4]}, ${md[5]}`) }]
+      : span
+        ? [{ from: end(span[1], false), to: end(span[2], true) }]
+        : uptos.map((u) => ({ from: "1900-01-01" as string | null, to: end(u[1], true) }));
+    for (const w of ws) if (w.from && w.to && w.from <= w.to && !found.some((f) => f.from === w.from && f.to === w.to)) found.push({ from: w.from, to: w.to });
   }
   return found.length === 1 ? found[0] : null;
 }

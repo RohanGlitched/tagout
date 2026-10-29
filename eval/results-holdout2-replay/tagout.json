@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "671107b",
+   "commit": "a5dff84",
    "libChanged": true
   }
  },
- "at": "2026-10-29T20:43:20.166Z",
+ "at": "2026-10-29T21:19:26.566Z",
  "cases": [
   {
    "id": "g01",
@@ -105,7 +105,7 @@
     "completion": 4164
    },
    "usd": 0.0355,
-   "ms": 192,
+   "ms": 158,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -185,7 +185,7 @@
     "completion": 2970
    },
    "usd": 0.01459,
-   "ms": 3648,
+   "ms": 3347,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 2,
@@ -280,7 +280,7 @@
     "completion": 4832
    },
    "usd": 0.04664,
-   "ms": 193,
+   "ms": 158,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
@@ -367,7 +367,7 @@
     "completion": 4929
    },
    "usd": 0.05374,
-   "ms": 195,
+   "ms": 160,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
@@ -436,7 +436,7 @@
     "completion": 1847
    },
    "usd": 0.01405,
-   "ms": 73,
+   "ms": 66,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -525,7 +525,7 @@
     "completion": 2776
    },
    "usd": 0.02264,
-   "ms": 89,
+   "ms": 84,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -594,7 +594,7 @@
     "completion": 2247
    },
    "usd": 0.01306,
-   "ms": 79,
+   "ms": 74,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -678,7 +678,7 @@
     "completion": 4923
    },
    "usd": 0.04527,
-   "ms": 998,
+   "ms": 947,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -760,7 +760,7 @@
     "completion": 2368
    },
    "usd": 0.02234,
-   "ms": 163,
+   "ms": 132,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
@@ -848,7 +848,7 @@
     "completion": 2445
    },
    "usd": 0.04897,
-   "ms": 157,
+   "ms": 127,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1004,7 +1004,7 @@
     "completion": 5905
    },
    "usd": 0.03438,
-   "ms": 53,
+   "ms": 50,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1094,7 +1094,7 @@
     "completion": 2817
    },
    "usd": 0.0228,
-   "ms": 74,
+   "ms": 59,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1170,7 +1170,7 @@
     "completion": 3538
    },
    "usd": 0.03052,
-   "ms": 79,
+   "ms": 61,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1255,7 +1255,7 @@
     "completion": 2154
    },
    "usd": 0.02305,
-   "ms": 77,
+   "ms": 50,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1332,7 +1332,7 @@
     "completion": 2677
    },
    "usd": 0.02117,
-   "ms": 70,
+   "ms": 41,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1424,7 +1424,7 @@
     "completion": 3279
    },
    "usd": 0.02094,
-   "ms": 52,
+   "ms": 36,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1490,7 +1490,7 @@
     "completion": 1156
    },
    "usd": 0.01336,
-   "ms": 29,
+   "ms": 21,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1514,10 +1514,10 @@
     "planned": "fixed",
     "reader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 3,
-     "prompt": 7137,
-     "completion": 1363,
-     "usd": 0.011226
+     "calls": 4,
+     "prompt": 15107,
+     "completion": 1591,
+     "usd": 0.019880000000000002
     },
     "tavily": {
      "searches": 4,
@@ -1580,6 +1580,18 @@
     },
     {
      "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”, product “cordless”",
+     "found": 13,
+     "fresh": 8
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson V15 Detect recall SV47”",
+     "found": 0,
+     "error": "not cached: https://api.tavily.com/search"
+    },
+    {
+     "tool": "search_cpsc",
      "label": "CPSC recalls, title “Dyson”",
      "found": 1,
      "fresh": 0
@@ -1597,22 +1609,23 @@
      "fresh": 0
     }
    ],
-   "calls": 3,
+   "calls": 4,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 7137,
-    "completion": 1363
+    "prompt": 15107,
+    "completion": 1591
    },
-   "usd": 0.01123,
-   "ms": 3828,
+   "usd": 0.01988,
+   "ms": 3871,
    "msFresh": false,
    "tavily": 5,
-   "tavilySearch": 4,
+   "tavilySearch": 5,
    "tavilyExtract": 1,
    "tavilyCredits": 5,
    "truncated": 0,
-   "cacheMisses": 8,
+   "cacheMisses": 9,
    "missed": [
+    "api.tavily.com /search",
     "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b"
    ]
   }

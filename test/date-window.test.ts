@@ -41,3 +41,24 @@ test("a listed UPC is red inside the best-by window and not red outside it", () 
   // No date given: the UPC alone still decides, as before.
   assert.equal(matchItem(pizza("Pizzeria pizza UPC 012345678905"), n).level, "danger");
 });
+
+// Real phrasings from 2026 openFDA enforcement reports (scripts/bound-coverage.mts), each a different way of
+// printing one window, and three that must not read as one.
+test("best-by windows as the records print them", () => {
+  assert.deepEqual(dateWindowIn("Best By codes range: 063026 through 093026"), { from: "2026-06-30", to: "2026-09-30" });
+  assert.deepEqual(dateWindowIn("Best By 07/06/26 to Best By 08/03/26"), { from: "2026-07-06", to: "2026-08-03" });
+  assert.deepEqual(dateWindowIn("a Best By/Sell By date Between July 20 - August 17, 2026"), { from: "2026-07-20", to: "2026-08-17" });
+  assert.deepEqual(dateWindowIn("Best by dates: 12/2025 through 05/2027"), { from: "2025-12-01", to: "2027-05-31" });
+  assert.deepEqual(dateWindowIn("Use By Dates up to 6/14/26"), { from: "1900-01-01", to: "2026-06-14" });
+  assert.deepEqual(dateWindowIn("Sell by dates 061226 through 062126"), { from: "2026-06-12", to: "2026-06-21" });
+});
+
+test("two windows, sale dates and batch ranges are not one best-by window", () => {
+  assert.equal(
+    dateWindowIn("24 count case with BEST IF USED BY DATES up to and including March 15, 2028 12 count package BEST IF USED BY DATES up to and including October 7, 2027"),
+    null,
+  );
+  assert.equal(dateWindowIn("best by codes that were sold 8/7/2026 to 8/14/2026"), null);
+  assert.equal(dateWindowIn("Batch: 045832 through 045871, Lot: 0056, Best By: 01/05/2028"), null);
+  assert.equal(dateWindowIn("Best By: 12/22/2027 Batch: 061226 through 062126"), null);
+});

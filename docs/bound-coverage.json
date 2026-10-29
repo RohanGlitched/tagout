@@ -1,0 +1,41 @@
+{
+ "at": "2026-10-29",
+ "notices": 4735,
+ "sources": "CPSC recalls 2026 (498), openFDA food, drug and device enforcement reports 2026, eval/notices-holdout and notices-holdout2",
+ "rules": {
+  "pair": {
+   "printsOne": 1,
+   "parsed": 1,
+   "missedExamples": []
+  },
+  "family": {
+   "printsOne": 2,
+   "parsed": 1,
+   "missedExamples": [
+    {
+     "id": "CPSC 26565",
+     "text": "nents. Only devices with serial numbers beginning with the following prefixes are included in this recall: The model number C0001-NB 130-LCUS is on a barcode sticker on the packaginM3B1G5 M3F4G6 M35C43 M3PN54 M3SR42 M38G53 M3G576 M3C121 The"
+    }
+   ]
+  },
+  "window": {
+   "printsOne": 56,
+   "parsed": 48,
+   "missedExamples": [
+    {
+     "id": "FDA H-0908-2026",
+     "text": "0 and 045552 through 045570, Lot: 3565, Best By: 12/22/2027 Batch: 045832 through 045871, Lot: 0056, Best By: 01/05/2028 Batch: 046298 through 046337, Lot: 0196, Best By: 01/19/2028 Batch: 047031 through 047065, Lot: 0406, Best By: 02/09/20"
+    },
+    {
+     "id": "FDA H-1152-2026",
+     "text": " UPC 8 57858 00450 2 24 count case with BEST IF USED BY DATES up to and including March 15, 2028 12 count package BEST IF USED BY DATES up to and including October 7, 2027 "
+    },
+    {
+     "id": "FDA H-0907-2026",
+     "text": "atch: 045420 through 045424, Lot: 3495, Best By: 12/15/2027 Batch: 046194 through 046198, Lot: 0126, Best By: 01/12/2028 Batch: 047117 through 047120, Lot: 0406, Best By: 02/09/2028 Batch: 047950 through 047953, Lot: 0686, Best By: 03/09/20"
+    }
+   ]
+  }
+ },
+ "note": "In-sample: noticeBounds() and dateWindowIn() were written on Oct 30 after held-out set #2. 'printsOne' is a broad pattern for notices that look like they print that kind of bound; read the missed examples before reading the ratio."
+}
