@@ -21,7 +21,7 @@ import s from "./proof.module.css";
 export const metadata = {
   title: "Proof: the eval",
   description:
-    "Tagout measured on two held-out sets it had never seen (39 cases run once, and 19 pre-registered in public before any run), then on 105 real CPSC, FDA and NHTSA cases against Nemotron alone, Nemotron reading Tavily results, a fixed search plan and three Nemotron sizes.",
+    "Tagout measured on three held-out sets it had never seen (39 cases run once, then 19 and 8 pre-registered in public before any run), then on 105 real CPSC, FDA and NHTSA cases against Nemotron alone, Nemotron reading Tavily results, a fixed search plan and three Nemotron sizes.",
 };
 
 /** The 105 at today's code (eval/summary-current.json: Tagout and the lite tier at ed2dc77, the other arms at a9a0f8f). */
@@ -83,8 +83,12 @@ const t2 = held2.arms.find((a) => a.arm === "tagout")!;
 const lite2 = held2.arms.find((a) => a.arm === "fixed-plan-nano")!;
 const rules2 = held2.arms.find((a) => a.arm === "rules");
 const noweb2 = held2.arms.find((a) => a.arm === "tagout-noweb");
-const CODE_NOW = "acc0639";
+const CODE_NOW = "f227d2b";
 const h3t = held3.arms.find((a) => a.arm === "tagout")!;
+const lite3 = held3.arms.find((a) => a.arm === "fixed-plan-nano")!;
+/** The three held-out sets together, Tagout's arm as run once. */
+const heldAll = [held, t2, h3t];
+const sumOf = (f: (a: (typeof heldAll)[number]) => number) => heldAll.reduce((n, a) => n + f(a), 0);
 const cases3 = cases3File.cases as { id: string; text: string }[];
 const after = heldAfter.arms.find((a) => a.arm === "tagout")!;
 const cents = (x: number) => (x < 0.0005 ? "0¢" : `${(x * 100).toFixed(x < 0.01 ? 2 : 1)}¢`);
@@ -257,7 +261,7 @@ export default function Proof() {
               <b>
                 {t.right}/{t.n}
               </b>{" "}
-              right: <b>{t.truePositives}</b> of {t.positives} recalled units caught, <b>{t.falseRed.length}</b> wrongly red, <b>{t.falseClear.length}</b> cleared
+              right: <b>{t.truePositives}</b> of {t.positives} coded recalled units red, <b>{t.falseRed.length}</b> wrongly red, <b>{t.falseClear.length}</b> cleared
               {alone ? (
                 <>
                   ; Nemotron alone caught <b>{alone.truePositives}</b> and wrongly tagged <b>{alone.falseRed.length}</b> red
@@ -267,10 +271,17 @@ export default function Proof() {
             </li>
           </ul>
           <p className={s.sub}>
+            Across the three held-out sets: <b>{sumOf((a) => a.right)}</b> of {sumOf((a) => a.n)} right; <b>{sumOf((a) => a.falseRed.length)}</b> false alarms on{" "}
+            {sumOf((a) => a.falseRedOf)} clean items ({heldAll.map((a) => `${a.falseRed.length}/${a.falseRedOf}`).join(", ")}); <b>{sumOf((a) => a.falseClearOf - a.falseClear.length)}</b> of{" "}
+            {sumOf((a) => a.falseClearOf)} recalled items flagged. Since set 1&apos;s fixes, {t2.falseClear.length + h3t.falseClear.length} of {t2.falseClearOf + h3t.falseClearOf} recalled
+            items were cleared green across the {t2.n + h3t.n} pre-registered cases.
+          </p>
+          <p className={s.sub}>
             Cost, all in: about {cents(t.usdPerItemWithTavily)} an item on the {summary.cases} at today&apos;s code ({cents(t.usdPerItem)} of Nemotron, {cents(t.tavilyUsdPerItem)} of
-            Tavily), {cents(held.usdPerItemWithTavily)} on held-out set #1 and {cents(t2.usdPerItemWithTavily)} on set #2 (Tavily priced at $0.008 a credit; set #2 ran in Tavily&apos;s
-            keyless mode, so it spent no credits, and $0.51 of Token Factory). The lite tier: 0.23¢ of Nemotron, 1.4¢ all in. Median time {secs(oct15Tagout.medianMs)} an item over the
-            Oct 15 cases that ran live.
+            Tavily); {cents(held.usdPerItemWithTavily)}, {cents(t2.usdPerItemWithTavily)} and {cents(h3t.usdPerItemWithTavily)} on held-out sets #1, #2 and #3 (Tavily priced at $0.008
+            a credit; sets #2 and #3 ran in Tavily&apos;s keyless mode, so they spent no credits). The lite tier: 0.23¢ of Nemotron, 1.4¢ all in. Median time{" "}
+            {secs(oct15Tagout.medianMs)} an item over the Oct 15 cases that ran live, {secs(held.medianMs)} and {secs(t2.medianMs)} on held-out sets #1 and #2, and{" "}
+            {secs(h3t.medianMs)} on set #3, where Tavily&apos;s keyless cap refused most searches and the agent kept planning around them.
           </p>
         </section>
 
@@ -572,6 +583,10 @@ export default function Proof() {
             </a>{" "}
             before any run and run once at <span className="code">{h3t.config?.code?.commit}</span>. It came out worse than the first two sets, and it is published as it came out.
           </p>
+          <p className={s.sub}>
+            <b>Run conditions.</b> Tavily ran keyless, and its daily keyless cap refused 14 of the Tagout arm&apos;s calls (each 429 is in the run log), so this set measured the
+            database path: all four recalls were in a database. The median case took {secs(h3t.medianMs)}, because the agent kept planning around refused searches.
+          </p>
           <div className={s.tableWrap}>
             <table className={`${s.table} ${s.stack} ${s.stackB}`}>
               <thead>
@@ -621,8 +636,16 @@ export default function Proof() {
             ))}
           </ul>
           <p className={s.sub}>
-            Both false alarms come from a code or a date that never reached the matcher: a made-date window in CPSC&apos;s prose that wasn&apos;t read, and a serial the list reader
-            dropped. Fixed since, in-sample: the notice's own made-date windows are read (j2 replays Checked), and serial intervals for the item's own product code hold a bare product-code match in another recall at orange (j6 replays Check the label). The 105 and sets #1 and #2 replay unchanged. j3 and j7 stay orange; a fourth set is the test.
+            Both false alarms were in the matcher: a made-date window in CPSC&apos;s prose that wasn&apos;t read (j2), and a bare product-code match in an older recall accepted
+            without checking the serial intervals the new record prints for the same code (j6). j7 cited the sibling record that doesn&apos;t print its serial. The earlier write-up
+            blamed the reader; the eval log omitted serials. The serials did reach the items: the cached reader answers have them.
+          </p>
+          <p className={s.sub}>
+            <b>Fixed since, in-sample.</b> The notice&apos;s own made-date windows are read (j2 replays Checked); serial intervals for the item&apos;s own product code hold a bare
+            product-code match in another recall at orange (j6 replays Check the label); a serial printed in a record&apos;s own text decides like a printed lot, so of two sibling
+            records the one that prints it is the red one (j7 replays Do not use, from Z-0138-2027; j8 stays orange). Offline replays at <span className="code">{CODE_NOW}</span>: the
+            105 and every arm of sets #1 and #2 unchanged; set #3&apos;s Tagout arm replays 7 of 8 with no false alarm, j5-j8 approximately (some agent turns miss the cache). j3
+            stays orange: both of its windows are read, but its record names the parts by letter-only codes (AASP), which the matcher doesn&apos;t match. A fourth set is the test.
           </p>
         </section>
 
@@ -725,6 +748,11 @@ export default function Proof() {
               The agent got <b>{t2.right}</b>, the lite tier <b>{lite2.right}</b>. Wrongly red: {t2.falseRed.length} against {lite2.falseRed.length}; recalled units cleared:{" "}
               {t2.falseClear.length} against {lite2.falseClear.length}. Only the agent got g06 (when openFDA found nothing for the UPC with the brand as typed, it searched
               again by brand and product) and g14 (the lite tier&apos;s reader kept a product name as a model code).
+            </li>
+            <li>
+              <span className={s.claimKick}>Held out #3</span>
+              The fixed plan won: the lite tier got <b>{lite3.right}</b>, the agent <b>{h3t.right}</b>. The lite tier got j7 red from the right record while the agent cited its
+              sibling. Over the three sets the agent leads {held.right + t2.right + h3t.right} to {heldLite.right + lite2.right + lite3.right}.
             </li>
             <li>
               <span className={s.claimKick}>The cascade</span>

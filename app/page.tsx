@@ -158,7 +158,7 @@ export default async function Home() {
               Measured on cases it had never seen.
             </h2>
             <p className={s.sub}>
-              Two held-out sets, each run once, then the {summary.cases} cases Tagout was tuned on, where each line below answered the same cases. Every answer is checked against the
+              Three held-out sets, each run once, then the {summary.cases} cases Tagout was tuned on, where each line below answered the same cases. Every answer is checked against the
               agencies&apos; own records.{" "}
               <Link href="/proof" className={s.more}>
                 Every case and every miss
@@ -192,7 +192,7 @@ export default async function Home() {
                     {t3.right}/{t3.n}
                   </b>
                   <span>
-                    right · {t3.falseRed.length} false alarms (a date and a serial that never reached the matcher) · {t3.falseClear.length} of {t3.falseClearOf} recalled items cleared
+                    right · {t3.falseRed.length} false alarms (a made-date window not read, a serial not checked) · {t3.falseClear.length} of {t3.falseClearOf} recalled items cleared
                   </span>
                 </div>
               ) : null}

@@ -7,6 +7,7 @@ import { REPO_URL, SHOWCASE, SITE_URL } from "@/lib/site";
 import summary from "@/eval/summary-current.json";
 import holdout from "@/eval/holdout-summary.json";
 import held2 from "@/eval/holdout2-summary.json";
+import held3 from "@/eval/holdout3-summary.json";
 import reach from "@/docs/audience-counts.json";
 import s from "./business.module.css";
 
@@ -16,6 +17,8 @@ export const metadata = {
 };
 
 const tagout = summary.arms.find((a) => a.arm === "tagout")!;
+const t2 = held2.arms.find((a) => a.arm === "tagout")!;
+const t3 = held3.arms.find((a) => a.arm === "tagout")!;
 
 export default function Business() {
   const full = perItem("full");
@@ -119,9 +122,9 @@ export default function Business() {
               </h2>
               <p className={s.body}>
                 Selling a recalled consumer product is unlawful in the U.S. (15 U.S.C. 2068). A seller photographs the label; Tagout tags the listing red only when the item&apos;s own
-                code is printed in a recall. On {summary.cases} test cases and {holdout.cases} held-out ones it wrongly tagged nothing as do-not-use, and on a second,
-                pre-registered held-out set of {held2.cases} it wrongly tagged one (a best-by date outside the recall&apos;s window), so honest sellers are rarely blocked, and the
-                misses are published. Buyers: resale marketplaces, kids&apos; resale and thrift chains, pawn shops. Priced per listing checked (10–25¢), against about {money(lite)} of cost on the
+                code is printed in a recall. On {summary.cases} test cases and {holdout.cases} held-out ones it wrongly tagged nothing as do-not-use. On two pre-registered held-out
+                sets it wrongly tagged {t2.falseRed.length} of {t2.falseRedOf} and {t3.falseRed.length} of {t3.falseRedOf} clean items (a best-by date outside the window; a made-date
+                window not read; a serial not checked against the recall&apos;s interval), so honest sellers are sometimes blocked, and every false alarm is published with its cause. Buyers: resale marketplaces, kids&apos; resale and thrift chains, pawn shops. Priced per listing checked (10–25¢), against about {money(lite)} of cost on the
                 lite tier, with the full agent only to confirm a red.
               </p>
             </div>
@@ -169,7 +172,7 @@ export default function Business() {
                 <tr>
                   <th scope="row">Recall-alert apps (e.g. RecallSentry)</th>
                   <td>Free alerts from FDA, CPSC, NHTSA and USDA, matched on UPC, model, lot or VIN you enter</td>
-                  <td>A published error rate on {summary.cases + holdout.cases + held2.cases} cases, {holdout.cases + held2.cases} of them held out; the agency&apos;s own sentence beside every red tag</td>
+                  <td>A published error rate on {summary.cases + holdout.cases + held2.cases + held3.cases} cases, {holdout.cases + held2.cases + held3.cases} of them held out; the agency&apos;s own sentence beside every red tag</td>
                 </tr>
                 <tr>
                   <th scope="row">Agency sites and email lists (recalls.gov, CPSC, SaferCar)</th>
@@ -194,7 +197,7 @@ export default function Business() {
             What a check costs us
           </h2>
           <p className={s.body}>
-            Measured on the {summary.cases}-case eval at today&apos;s code (acc0639, Oct 30, confirmed by an offline replay; the live runs were Oct 24-25). On held-out set #1 it was 4.9¢ and 1.7¢ all in, on set #2 4.7¢ and 1.4¢: Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
+            Measured on the {summary.cases}-case eval at today&apos;s code (f227d2b, Oct 30, confirmed by an offline replay; the live runs were Oct 24-25). On held-out set #1 it was 4.9¢ and 1.7¢ all in, on set #2 4.7¢ and 1.4¢, on set #3 5.5¢ and 0.5¢ (Tavily&apos;s keyless cap refused most searches there): Nemotron tokens at Nebius Token Factory list price, plus Tavily credits at {money(TAVILY_USD_PER_CREDIT)} each. The agency APIs are
             free.
           </p>
           <div className={s.tableWrap}>
