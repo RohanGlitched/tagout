@@ -1,6 +1,6 @@
 # Held-out eval, Oct 25 2026
 
-The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them is an in-sample number. This is a fresh set that no fix has seen: 39 cases written on Oct 25, committed before any arm ran, and run once.
+The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them (105/105 at today's code) is an in-sample number. This is a fresh set that no fix has seen: 39 cases written on Oct 25, committed before any arm ran, and run once.
 
 ## What was held out
 
@@ -40,7 +40,7 @@ The 105 cases in `cases.json` were used while fixing Tagout, so 104/105 on them 
   - a basic search is 1 credit;
   - a basic extract is 1 credit per 5 successful URLs, and Tagout sends one URL per extract, so each extract is counted as a credit (an upper bound). Rows recorded from Oct 25 (`ed2dc77`) carry `tavilyCredits`, billed exactly that way from each response, and the app's own tally (`engine.tavily`) does the same.
 
-  At that rate Tavily costs Tagout about 2.2¢ an item, close to the 2.65¢ of Nemotron.
+  At that rate Tavily cost Tagout about 2.2¢ an item on this set, close to the 2.65¢ of Nemotron (1.7¢ as billed on the 105 at today's code).
 - **Median time.** 17.5 s for Tagout, over the 13 cases that ran with no cached call. The other arms reused cached calls, so their times aren't meaningful.
 
 ## What Tavily contributes (measured, same cases, same code)
