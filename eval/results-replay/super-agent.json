@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "6109b1b",
+   "commit": "671107b",
    "libChanged": true
   }
  },
- "at": "2026-10-29T20:09:11.244Z",
+ "at": "2026-10-29T20:42:18.344Z",
  "cases": [
   {
    "id": "p01",
@@ -84,7 +84,7 @@
     "completion": 1247
    },
    "usd": 0.00606,
-   "ms": 149,
+   "ms": 129,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -152,7 +152,7 @@
     "completion": 2337
    },
    "usd": 0.01135,
-   "ms": 149,
+   "ms": 130,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -221,7 +221,7 @@
     "completion": 8282
    },
    "usd": 0.02996,
-   "ms": 145,
+   "ms": 127,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -290,7 +290,7 @@
     "completion": 5751
    },
    "usd": 0.02191,
-   "ms": 142,
+   "ms": 124,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -357,7 +357,7 @@
     "completion": 1409
    },
    "usd": 0.00617,
-   "ms": 56,
+   "ms": 57,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -426,7 +426,7 @@
     "completion": 3095
    },
    "usd": 0.01159,
-   "ms": 56,
+   "ms": 57,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -493,7 +493,7 @@
     "completion": 1261
    },
    "usd": 0.00628,
-   "ms": 53,
+   "ms": 54,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -561,7 +561,7 @@
     "completion": 1015
    },
    "usd": 0.00564,
-   "ms": 53,
+   "ms": 54,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -628,7 +628,7 @@
     "completion": 1937
    },
    "usd": 0.00893,
-   "ms": 54,
+   "ms": 52,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 0,
@@ -694,7 +694,7 @@
     "completion": 1893
    },
    "usd": 0.00791,
-   "ms": 56,
+   "ms": 53,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -776,7 +776,7 @@
     "completion": 1252
    },
    "usd": 0.00889,
-   "ms": 96,
+   "ms": 88,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
@@ -858,7 +858,7 @@
     "completion": 1767
    },
    "usd": 0.00945,
-   "ms": 108,
+   "ms": 96,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
@@ -925,7 +925,7 @@
     "completion": 12323
    },
    "usd": 0.05772,
-   "ms": 115,
+   "ms": 104,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -991,7 +991,7 @@
     "completion": 8348
    },
    "usd": 0.02964,
-   "ms": 101,
+   "ms": 89,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1055,7 +1055,7 @@
     "completion": 603
    },
    "usd": 0.00351,
-   "ms": 89,
+   "ms": 81,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1137,7 +1137,7 @@
     "completion": 1227
    },
    "usd": 0.01028,
-   "ms": 108,
+   "ms": 103,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 1,
@@ -1213,7 +1213,7 @@
     "completion": 875
    },
    "usd": 0.00787,
-   "ms": 60,
+   "ms": 57,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1286,7 +1286,7 @@
     "completion": 2437
    },
    "usd": 0.01178,
-   "ms": 52,
+   "ms": 47,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,

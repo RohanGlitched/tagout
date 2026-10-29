@@ -60,7 +60,7 @@ const SUPER = "nvidia/nemotron-3-super-120b-a12b";
 const NANO = "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B";
 
 type Call = { model: string; prompt: number; completion: number; cached: boolean; ms: number };
-type Ctx = { calls: Call[]; tavily: number; cachedTavily: number; search: number; extract: number; credits: number; truncated: number; webBlocked: number; misses: string[] };
+type Ctx = { calls: Call[]; tavily: number; cachedTavily: number; search: number; extract: number; credits: number; truncated: number; webBlocked: number; misses: string[]; waited?: number };
 
 /** Tavily credits one call is billed: a basic search 1 (advanced 2); an extract 1 per 5 URLs it returned
  *  (basic; advanced 2 per 5), and nothing when no URL came back. */
@@ -88,6 +88,8 @@ const caseCtx = new AsyncLocalStorage<Ctx>();
 
 /** Dollars this run may spend on Token Factory (the ledger keeps the running total across runs). */
 const CAP = Number(flag("cap") ?? 1);
+/** --tavily-wait: the most a case waits out keyless 429s, in seconds (default: no limit, as the earlier runs did). */
+const TAVILY_WAIT_MS = flag("tavily-wait") ? Number(flag("tavily-wait")) * 1000 : null;
 type Ledger = { total: number; calls: number; byModel: Record<string, number>; tavilyLive: number; tavilyKeyed?: number };
 const ledger: Ledger = fs.existsSync(LEDGER) ? JSON.parse(fs.readFileSync(LEDGER, "utf8")) : { total: 0, calls: 0, byModel: {}, tavilyLive: 0 };
 const startSpend = ledger.total;
@@ -171,8 +173,12 @@ globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
     r = await realFetch(input, i === 0 ? init : { ...init, signal: AbortSignal.timeout(60_000) });
     if (!(tv && r.status === 429) && !(tf && r.status === 429)) break;
     if (tf && i >= 4) break;
-    // Keyless Tavily answers 429 with an hourly cap and a Retry-After: wait it out rather than record a failure.
+    // Keyless Tavily answers 429 with an hourly cap and a Retry-After. The app never waits (it carries on with the
+    // agency databases); the harness used to wait it out, which pushed held-out #2's g19 past its deadline. With
+    // --tavily-wait N (seconds, per case) it waits at most N in all, then hands the 429 on as the app would see it.
     const wait = tv ? Math.max(20, Number(r.headers.get("retry-after") ?? 0)) * 1000 : 2000 * 2 ** i;
+    if (tv && ctx && TAVILY_WAIT_MS !== null && (ctx.waited ?? 0) + wait > TAVILY_WAIT_MS) break;
+    if (tv && ctx) ctx.waited = (ctx.waited ?? 0) + wait;
     if (tv) console.error(`[eval] Tavily 429, waiting ${wait / 1000}s`);
     await new Promise((res) => setTimeout(res, wait));
   }

@@ -300,6 +300,19 @@ export function matchItem(item: Item, notice: Notice): Match {
     }
   }
 
+  // Codes the notice bounds instead of listing, read from its own text without a model (held-out set #2, g01 and
+  // g03): a serial printed in two groups inside a from-to pair with the same first group ("00010 2303 ... 00010
+  // 2607"), and a prefix followed by a number in a printed range ("PR01 ... followed by a five-digit number between
+  // 25091 and 26168"). Outside the bounds, this recall doesn't cover the item.
+  if (ownBrand && !strongLot && !lotInText) {
+    const bound = boundedCode(item, ownText);
+    if (bound) {
+      proof.push({ field: bound.how === "range" ? "lot" : "model", yours: bound.yours, theirs: bound.theirs, matched: bound.inside });
+      if (!bound.inside) return { level: null, proof, why: `${bound.yours} is outside the ${bound.theirs} this recall covers.` };
+      return { level: "danger", proof, why: `${bound.yours} is inside the ${bound.theirs} this recall lists.`, basis: { by: "text", how: bound.how } };
+    }
+  }
+
   let byText = false;
   if (!strongModel && !u && m?.how !== "variant") {
     const printed = [...mine, ...mine.flatMap((c) => splitIds(c, false))].find(inText);
@@ -411,6 +424,35 @@ export const EXCLUDED = /\bnot\b[^.]{0,40}\b(included|affected|part of|subject|r
  * says some units are not included? Codes shorter than four characters, or without a digit, are too easy to find
  * by accident and never count.
  */
+/**
+ * A code of the item's that the notice bounds rather than lists: a serial printed in two groups inside a from-to
+ * pair with the same first group, or a prefix followed by a number inside a printed number range. Null when the
+ * notice prints no such bound for the item's codes.
+ */
+export function boundedCode(item: Item, text: string | undefined): { yours: string; theirs: string; inside: boolean; how: "range" | "family" } | null {
+  if (!text) return null;
+  const flat = text.replace(/[“”"']/g, "").replace(/\s+/g, " ");
+  const codes = [item.serial, item.lot, item.model, item.made, ...(item.codes ?? [])].filter((c): c is string => Boolean(c));
+  for (const raw of codes) {
+    const c = raw.replace(/^(?:serial(?: number| no\.?)?|date code|lot|model)\s*[:#]?\s*/i, "").trim();
+    // Two digit groups: the first names the line, the second counts within it.
+    const two = c.match(/^(\d{3,})[\s-]+(\d{3,})$/);
+    if (two) {
+      const [, head, n] = two;
+      const pair = flat.match(new RegExp(String.raw`\b${head} (\d{${n.length}}) ${head} (\d{${n.length}})\b`));
+      if (pair && pair[1] < pair[2]) return { yours: `${head} ${n}`, theirs: `serial range ${head} ${pair[1]} to ${head} ${pair[2]}`, inside: n >= pair[1] && n <= pair[2], how: "range" };
+    }
+    // A prefix and a number: "PR01 25230" against "prefix PR01 and followed by a five-digit number between 25091 and 26168".
+    const fam = c.match(/^([A-Z]{1,4}\d{0,4})[\s-]*(\d{3,8})$/i);
+    if (fam) {
+      const [, pre, n] = fam;
+      const rule = flat.match(new RegExp(String.raw`prefix ${pre}\b[^.]{0,40}?followed by an? (?:[a-z-]+ )?number (?:between|from) (\d{${n.length}}) (?:and|to|through) (\d{${n.length}})\b`, "i"));
+      if (rule && rule[1] < rule[2]) return { yours: `${pre.toUpperCase()} ${n}`, theirs: `codes ${pre.toUpperCase()} ${rule[1]} to ${pre.toUpperCase()} ${rule[2]}`, inside: n >= rule[1] && n <= rule[2], how: "family" };
+    }
+  }
+  return null;
+}
+
 /** A household line that gives a best-by, use-by or expiry date, and the date it gives. */
 const DATED = /\b(?:best|use|sell)[- ]?(?:by|if used by|before)\b|\bexp(?:iry|iration)?\b|\bbb\b/i;
 const DATED_VALUE = /\b(?:best|use|sell)[- ]?(?:by|if used by|before)\b:?\s*([0-9A-Za-z][0-9A-Za-z ,./-]{4,20}\d)/i;

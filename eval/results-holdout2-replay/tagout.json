@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "6109b1b",
+   "commit": "671107b",
    "libChanged": true
   }
  },
- "at": "2026-10-29T20:10:11.803Z",
+ "at": "2026-10-29T20:43:20.166Z",
  "cases": [
   {
    "id": "g01",
@@ -33,9 +33,10 @@
    "set": "database",
    "form": "clean",
    "expect": "danger",
-   "level": "warning",
+   "level": "danger",
    "notice": "CPSC 27-015",
-   "headline": "This product line is recalled. Check the model number on yours.",
+   "headline": "00010 2450 is inside the serial range 00010 2303 to 00010 2607 this recall lists.",
+   "basis": "text/range",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -104,7 +105,7 @@
     "completion": 4164
    },
    "usd": 0.0355,
-   "ms": 212,
+   "ms": 192,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -121,7 +122,7 @@
    "form": "clean",
    "expect": "not-danger",
    "level": "warning",
-   "notice": "CPSC 27-015",
+   "notice": "CPSC 25-381",
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
@@ -129,10 +130,12 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 4,
-     "prompt": 4992,
-     "completion": 1470,
-     "usd": 0.009401999999999999
+     "calls": 5,
+     "prompt": 5685,
+     "completion": 2970,
+     "usd": 0.014594999999999999,
+     "truncated": 1,
+     "retried": 1
     },
     "tavily": {
      "searches": 2,
@@ -175,21 +178,21 @@
      "fresh": 0
     }
    ],
-   "calls": 4,
+   "calls": 5,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 4992,
-    "completion": 1470
+    "prompt": 5685,
+    "completion": 2970
    },
-   "usd": 0.0094,
-   "ms": 4005,
+   "usd": 0.01459,
+   "ms": 3648,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 2,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
-   "truncated": 0,
-   "cacheMisses": 17,
+   "truncated": 1,
+   "cacheMisses": 16,
    "missed": [
     "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b",
     "api.tavily.com /extract"
@@ -201,9 +204,10 @@
    "set": "database",
    "form": "clean",
    "expect": "danger",
-   "level": "warning",
+   "level": "danger",
    "notice": "CPSC 26-741",
-   "headline": "PR01 is listed, but this recall names particular lot or date codes and PR01 25230 isn't one the notice prints. Compare the code on yours with the notice.",
+   "headline": "PR01 25230 is inside the codes PR01 25091 to PR01 26168 this recall lists.",
+   "basis": "text/family",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -276,7 +280,7 @@
     "completion": 4832
    },
    "usd": 0.04664,
-   "ms": 215,
+   "ms": 193,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
@@ -292,9 +296,8 @@
    "set": "database",
    "form": "clean",
    "expect": "not-danger",
-   "level": "warning",
-   "notice": "CPSC 26-741",
-   "headline": "This product line is recalled. Check the model number on yours.",
+   "level": "inspected",
+   "headline": "No recall found for Lestoil Heavy Duty Multi-Purpose Cleaner, Fuerza de Lavanda Tropical, 64 oz, date code PR01 26200.",
    "planned": "model",
    "engine": {
     "planned": "model",
@@ -364,7 +367,7 @@
     "completion": 4929
    },
    "usd": 0.05374,
-   "ms": 217,
+   "ms": 195,
    "msFresh": false,
    "tavily": 4,
    "tavilySearch": 2,
@@ -433,7 +436,7 @@
     "completion": 1847
    },
    "usd": 0.01405,
-   "ms": 84,
+   "ms": 73,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -522,7 +525,7 @@
     "completion": 2776
    },
    "usd": 0.02264,
-   "ms": 104,
+   "ms": 89,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -591,7 +594,7 @@
     "completion": 2247
    },
    "usd": 0.01306,
-   "ms": 91,
+   "ms": 79,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -675,7 +678,7 @@
     "completion": 4923
    },
    "usd": 0.04527,
-   "ms": 985,
+   "ms": 998,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -757,7 +760,7 @@
     "completion": 2368
    },
    "usd": 0.02234,
-   "ms": 157,
+   "ms": 163,
    "msFresh": false,
    "tavily": 3,
    "tavilySearch": 1,
@@ -845,7 +848,7 @@
     "completion": 2445
    },
    "usd": 0.04897,
-   "ms": 148,
+   "ms": 157,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -914,7 +917,7 @@
     "completion": 2371
    },
    "usd": 0.0205,
-   "ms": 29,
+   "ms": 32,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1001,7 +1004,7 @@
     "completion": 5905
    },
    "usd": 0.03438,
-   "ms": 45,
+   "ms": 53,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1091,7 +1094,7 @@
     "completion": 2817
    },
    "usd": 0.0228,
-   "ms": 58,
+   "ms": 74,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1167,7 +1170,7 @@
     "completion": 3538
    },
    "usd": 0.03052,
-   "ms": 72,
+   "ms": 79,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1252,7 +1255,7 @@
     "completion": 2154
    },
    "usd": 0.02305,
-   "ms": 69,
+   "ms": 77,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1329,7 +1332,7 @@
     "completion": 2677
    },
    "usd": 0.02117,
-   "ms": 55,
+   "ms": 70,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1421,7 +1424,7 @@
     "completion": 3279
    },
    "usd": 0.02094,
-   "ms": 49,
+   "ms": 52,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1487,7 +1490,7 @@
     "completion": 1156
    },
    "usd": 0.01336,
-   "ms": 31,
+   "ms": 29,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1601,7 +1604,7 @@
     "completion": 1363
    },
    "usd": 0.01123,
-   "ms": 3818,
+   "ms": 3828,
    "msFresh": false,
    "tavily": 5,
    "tavilySearch": 4,

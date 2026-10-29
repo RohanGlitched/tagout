@@ -54,7 +54,10 @@ codes: other identifier codes only (a TYPE code, style or item number), each as 
 function keepTyped(raw: Raw, lines: string[]): Raw {
   const src = norm(lines[raw.line - 1] ?? lines.join(" "));
   const ok = (v: string | null) => (v && norm(v).length >= 2 && src.includes(norm(v)) ? v.trim() : null);
-  return { ...raw, model: ok(raw.model), lot: ok(raw.lot), vin: ok(raw.vin), upc: ok(raw.upc), ndc: ok(raw.ndc), serial: ok(raw.serial), codes: raw.codes.filter((c) => ok(c)) };
+  // A serial the person labelled as one ("serial 00010 2450") is kept even when the reader returned none: printed in
+  // two groups, it was dropped once and its printed range couldn't be checked (held-out set #2, g01).
+  const labelled = (lines[raw.line - 1] ?? "").match(/\bserial(?: number| no\.?| #)?\s*[:#]?\s*([A-Z0-9]+(?:[ -]\d+)*)/i)?.[1];
+  return { ...raw, model: ok(raw.model), lot: ok(raw.lot), vin: ok(raw.vin), upc: ok(raw.upc), ndc: ok(raw.ndc), serial: ok(raw.serial) ?? (labelled && /\d/.test(labelled) ? labelled.trim() : null), codes: raw.codes.filter((c) => ok(c)) };
 }
 
 function toItem(raw: Raw, idx: number, readFrom: Item["readFrom"]): Item {

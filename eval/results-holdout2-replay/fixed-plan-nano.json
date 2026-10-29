@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "6109b1b",
+   "commit": "671107b",
    "libChanged": true
   }
  },
- "at": "2026-10-29T20:10:19.147Z",
+ "at": "2026-10-29T20:43:28.913Z",
  "cases": [
   {
    "id": "g01",
@@ -33,9 +33,10 @@
    "set": "database",
    "form": "clean",
    "expect": "danger",
-   "level": "warning",
+   "level": "danger",
    "notice": "CPSC 27-015",
-   "headline": "This product line is recalled. Check the model number on yours.",
+   "headline": "00010 2450 is inside the serial range 00010 2303 to 00010 2607 this recall lists.",
+   "basis": "text/range",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -82,7 +83,7 @@
     "completion": 442
    },
    "usd": 0.00165,
-   "ms": 2025,
+   "ms": 1953,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -101,7 +102,7 @@
    "form": "clean",
    "expect": "not-danger",
    "level": "warning",
-   "notice": "CPSC 27-015",
+   "notice": "CPSC 25-381",
    "headline": "This product line is recalled. Check the model number on yours.",
    "planned": "fixed",
    "engine": {
@@ -149,7 +150,7 @@
     "completion": 671
    },
    "usd": 0.00233,
-   "ms": 2051,
+   "ms": 1914,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -167,9 +168,10 @@
    "set": "database",
    "form": "clean",
    "expect": "danger",
-   "level": "warning",
+   "level": "danger",
    "notice": "CPSC 26-741",
-   "headline": "PR01 is listed, but only units made between 1 Apr 2025 and 17 Jun 2026. Check the date of manufacture on the label.",
+   "headline": "PR01 25230 is inside the codes PR01 25091 to PR01 26168 this recall lists.",
+   "basis": "text/family",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -223,7 +225,7 @@
     "completion": 4309
    },
    "usd": 0.00536,
-   "ms": 62,
+   "ms": 63,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -239,9 +241,8 @@
    "set": "database",
    "form": "clean",
    "expect": "not-danger",
-   "level": "warning",
-   "notice": "CPSC 26-741",
-   "headline": "This product line is recalled. Check the model number on yours.",
+   "level": "inspected",
+   "headline": "No recall found for Lestoil Heavy Duty Multi-Purpose Cleaner, Fuerza de Lavanda Tropical, 64 oz, date code PR01 26200.",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -365,7 +366,7 @@
     "completion": 542
    },
    "usd": 0.00196,
-   "ms": 1360,
+   "ms": 1948,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -433,7 +434,7 @@
     "completion": 904
    },
    "usd": 0.00304,
-   "ms": 20,
+   "ms": 16,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -502,7 +503,7 @@
     "completion": 943
    },
    "usd": 0.00209,
-   "ms": 26,
+   "ms": 23,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -571,7 +572,7 @@
     "completion": 1844
    },
    "usd": 0.00393,
-   "ms": 848,
+   "ms": 845,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -640,7 +641,7 @@
     "completion": 1727
    },
    "usd": 0.00221,
-   "ms": 19,
+   "ms": 21,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -710,7 +711,7 @@
     "completion": 20146
    },
    "usd": 0.00861,
-   "ms": 123,
+   "ms": 106,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -776,7 +777,7 @@
     "completion": 401
    },
    "usd": 0.00152,
-   "ms": 1789,
+   "ms": 2003,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -844,7 +845,7 @@
     "completion": 440
    },
    "usd": 0.00165,
-   "ms": 1833,
+   "ms": 1997,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1000,7 +1001,7 @@
     "completion": 1259
    },
    "usd": 0.00382,
-   "ms": 11,
+   "ms": 9,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1065,7 +1066,7 @@
     "completion": 349
    },
    "usd": 0.00136,
-   "ms": 1566,
+   "ms": 1835,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1137,7 +1138,7 @@
     "completion": 1079
    },
    "usd": 0.00319,
-   "ms": 1545,
+   "ms": 1807,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1206,7 +1207,7 @@
     "completion": 1297
    },
    "usd": 0.00385,
-   "ms": 20,
+   "ms": 19,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1271,7 +1272,7 @@
     "completion": 384
    },
    "usd": 0.00146,
-   "ms": 1960,
+   "ms": 1814,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
