@@ -7,7 +7,7 @@
 [![CI](https://github.com/RohanGlitched/tagout/actions/workflows/ci.yml/badge.svg)](https://github.com/RohanGlitched/tagout/actions/workflows/ci.yml)
 [![Nemotron 3 Ultra on Nebius Token Factory](https://img.shields.io/badge/model-Nemotron%203%20Ultra%20on%20Nebius%20Token%20Factory-76b900)](#how-nemotron-and-nebius-token-factory-are-used)
 [![Tavily](https://img.shields.io/badge/web%20search-Tavily-2b6cb0)](#how-tavily-is-used)
-[![Eval](https://img.shields.io/badge/held%20out-31%2F39%20%C2%B7%2015%2F19%20pre--registered-15191e)](#held-out-39-new-cases-run-once)
+[![Eval](https://img.shields.io/badge/held%20out-31%2F39%20%C2%B7%2015%2F19%20%C2%B7%204%2F8%20pre--registered-15191e)](#held-out-39-new-cases-run-once)
 [![Sources](https://img.shields.io/badge/recalls-NHTSA%20%C2%B7%20CPSC%20%C2%B7%20openFDA%20%C2%B7%20FSIS-c8102e)](#data-sources)
 [![License: MIT](https://img.shields.io/badge/license-MIT-15191e)](LICENSE)
 
