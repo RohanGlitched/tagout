@@ -1,0 +1,335 @@
+{
+ "at": "2026-10-29T19:21:32.391Z",
+ "firstRun": null,
+ "cases": 19,
+ "groups": {
+  "positive": 8,
+  "near-miss": 7,
+  "no-code": 2,
+  "car": 1,
+  "clean": 1
+ },
+ "arms": [
+  {
+   "arm": "tagout",
+   "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+   "n": 19,
+   "right": 15,
+   "rightInterval": [
+    0.544,
+    0.939
+   ],
+   "redPrecision": 0.8571428571428571,
+   "redRecall": 0.75,
+   "redRecallInterval": [
+    0.349,
+    0.968
+   ],
+   "reds": 7,
+   "truePositives": 6,
+   "positives": 8,
+   "falseRed": [
+    "g07"
+   ],
+   "falseRedOf": 9,
+   "falseRedInterval": [
+    0.003,
+    0.482
+   ],
+   "falseClear": [],
+   "falseClearOf": 11,
+   "falseClearInterval": [
+    0,
+    0.285
+   ],
+   "errors": [],
+   "byGroup": {
+    "positive": {
+     "n": 8,
+     "right": 6
+    },
+    "near-miss": {
+     "n": 7,
+     "right": 6
+    },
+    "no-code": {
+     "n": 2,
+     "right": 2
+    },
+    "car": {
+     "n": 1,
+     "right": 1
+    },
+    "clean": {
+     "n": 1,
+     "right": 0
+    }
+   },
+   "bySet": {
+    "database": {
+     "n": 16,
+     "right": 12,
+     "falseRed": [
+      "g07"
+     ],
+     "falseClear": []
+    },
+    "lag": {
+     "n": 3,
+     "right": 3,
+     "falseRed": [],
+     "falseClear": []
+    }
+   },
+   "byForm": {
+    "clean": {
+     "n": 17,
+     "right": 13,
+     "falseRed": [
+      "g07"
+     ],
+     "falseClear": []
+    },
+    "messy": {
+     "n": 2,
+     "right": 2,
+     "falseRed": [],
+     "falseClear": []
+    }
+   },
+   "usdPerItem": 0.028412105263157895,
+   "usdTotal": 0.53983,
+   "tavilyPerItem": 2.263157894736842,
+   "tavilyUsdPerItem": 0.018105263157894735,
+   "usdPerItemWithTavily": 0.04651736842105263,
+   "medianMs": 23416,
+   "webOnlyReds": [
+    "g16"
+   ],
+   "webCited": [
+    "g10",
+    "g15",
+    "g16"
+   ],
+   "fellBack": [
+    "g19"
+   ],
+   "config": {
+    "today": "2026-10-29",
+    "noWeb": false,
+    "offline": false,
+    "keyless": true,
+    "code": {
+     "commit": "889b9b0",
+     "libChanged": false
+    }
+   },
+   "levels": {
+    "g01": "warning",
+    "g02": "warning",
+    "g03": "warning",
+    "g04": "warning",
+    "g05": "danger",
+    "g06": "danger",
+    "g07": "danger",
+    "g08": "danger",
+    "g09": "warning",
+    "g10": "warning",
+    "g11": "danger",
+    "g12": "inspected",
+    "g13": "danger",
+    "g14": "inspected",
+    "g15": "warning",
+    "g16": "danger",
+    "g17": "inspected",
+    "g18": "warning",
+    "g19": "warning"
+   },
+   "redBasis": {
+    "n": 7,
+    "by": {
+     "reader-list": 2,
+     "record-list": 3,
+     "text": 2
+    },
+    "how": {
+     "exact": 7
+    },
+    "window": 0,
+    "cases": {
+     "g05": "reader-list",
+     "g06": "record-list",
+     "g07": "record-list",
+     "g08": "record-list",
+     "g11": "reader-list",
+     "g13": "text",
+     "g16": "text"
+    }
+   }
+  },
+  {
+   "arm": "fixed-plan-nano",
+   "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
+   "n": 19,
+   "right": 13,
+   "rightInterval": [
+    0.434,
+    0.874
+   ],
+   "redPrecision": 0.6666666666666666,
+   "redRecall": 0.5,
+   "redRecallInterval": [
+    0.157,
+    0.843
+   ],
+   "reds": 6,
+   "truePositives": 4,
+   "positives": 8,
+   "falseRed": [
+    "g07",
+    "g14"
+   ],
+   "falseRedOf": 9,
+   "falseRedInterval": [
+    0.028,
+    0.6
+   ],
+   "falseClear": [
+    "g06"
+   ],
+   "falseClearOf": 11,
+   "falseClearInterval": [
+    0.002,
+    0.413
+   ],
+   "errors": [],
+   "byGroup": {
+    "positive": {
+     "n": 8,
+     "right": 4
+    },
+    "near-miss": {
+     "n": 7,
+     "right": 5
+    },
+    "no-code": {
+     "n": 2,
+     "right": 2
+    },
+    "car": {
+     "n": 1,
+     "right": 1
+    },
+    "clean": {
+     "n": 1,
+     "right": 1
+    }
+   },
+   "bySet": {
+    "database": {
+     "n": 16,
+     "right": 10,
+     "falseRed": [
+      "g07",
+      "g14"
+     ],
+     "falseClear": [
+      "g06"
+     ]
+    },
+    "lag": {
+     "n": 3,
+     "right": 3,
+     "falseRed": [],
+     "falseClear": []
+    }
+   },
+   "byForm": {
+    "clean": {
+     "n": 17,
+     "right": 13,
+     "falseRed": [
+      "g07",
+      "g14"
+     ],
+     "falseClear": []
+    },
+    "messy": {
+     "n": 2,
+     "right": 0,
+     "falseRed": [],
+     "falseClear": [
+      "g06"
+     ]
+    }
+   },
+   "usdPerItem": 0.003018947368421053,
+   "usdTotal": 0.05736000000000001,
+   "tavilyPerItem": 1.368421052631579,
+   "tavilyUsdPerItem": 0.010947368421052633,
+   "usdPerItemWithTavily": 0.013966315789473686,
+   "medianMs": null,
+   "webOnlyReds": [
+    "g16"
+   ],
+   "webCited": [
+    "g09",
+    "g11",
+    "g15",
+    "g16"
+   ],
+   "fellBack": [],
+   "config": {
+    "today": "2026-10-29",
+    "noWeb": false,
+    "offline": false,
+    "keyless": true,
+    "code": {
+     "commit": "889b9b0",
+     "libChanged": false
+    }
+   },
+   "levels": {
+    "g01": "warning",
+    "g02": "warning",
+    "g03": "warning",
+    "g04": "warning",
+    "g05": "danger",
+    "g06": "inspected",
+    "g07": "danger",
+    "g08": "danger",
+    "g09": "warning",
+    "g10": "warning",
+    "g11": "warning",
+    "g12": "warning",
+    "g13": "danger",
+    "g14": "danger",
+    "g15": "warning",
+    "g16": "danger",
+    "g17": "inspected",
+    "g18": "warning",
+    "g19": "inspected"
+   },
+   "redBasis": {
+    "n": 6,
+    "by": {
+     "reader-list": 1,
+     "record-list": 2,
+     "text": 3
+    },
+    "how": {
+     "exact": 6
+    },
+    "window": 0,
+    "cases": {
+     "g05": "text",
+     "g07": "record-list",
+     "g08": "record-list",
+     "g13": "text",
+     "g14": "reader-list",
+     "g16": "text"
+    }
+   }
+  }
+ ]
+}
