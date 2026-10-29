@@ -601,6 +601,8 @@ function monthOrDay(s: string, last: boolean): string | null {
   const ym = (y: number, m: number) => (m >= 1 && m <= 12 && y > 1990 && y < 2100 ? `${y}-${String(m).padStart(2, "0")}-${String(last ? lastDay(y, m) : 1).padStart(2, "0")}` : null);
   let m = t.match(/^(\d{1,2})([A-Za-z]{3})(\d{4})$/);
   if (m) return looseDate(`${m[2]} ${m[1]}, ${m[3]}`);
+  m = t.match(/^(\d{1,2}) ([A-Za-z]{3,9})\.? (\d{4})$/);
+  if (m) return looseDate(`${m[2]} ${m[1]}, ${m[3]}`);
   const day = looseDate(t);
   if (day) return day;
   m = t.match(/^([A-Za-z]{3})[a-z]*\.? (\d{4})$/i);
@@ -618,11 +620,14 @@ function monthOrDay(s: string, last: boolean): string | null {
  */
 export function madeWindowsIn(text: string | undefined): { from: string; to: string }[] {
   if (!text) return [];
-  const D = String.raw`([A-Za-z]{3,9}\.? \d{1,2},? \d{4}|[A-Za-z]{3,9}\.? \d{4}|\d{1,2}[A-Za-z]{3}\d{4}|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}\/\d{1,2}|\d{1,2}\/\d{4})`;
-  const PAIR = String.raw`${D}\s*(?:through|thru|to|and|-|–)\s*${D}`;
+  const D = String.raw`([A-Za-z]{3,9}\.? \d{1,2},? \d{4}|\d{1,2} [A-Za-z]{3,9}\.? \d{4}|[A-Za-z]{3,9}\.? \d{4}|\d{1,2}[A-Za-z]{3}\d{4}|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}\/\d{1,2}|\d{1,2}\/\d{4})`;
+  const PAIR = String.raw`${D},?\s*(?:through|thru|to|and|-|–)\s*${D}`;
   const out: { from: string; to: string }[] = [];
   const flat = flatText(text);
-  for (const m of flat.matchAll(new RegExp(String.raw`\b(?:manufactured|made|produced)\s+(?:from|between|during)\s+${PAIR}((?:\s*(?:,|and)\s*(?:from\s+|between\s+)?${PAIR})*)`, "gi"))) {
+  // "manufactured from", and "manufactured with Xenolite 800 attenuation material from": a few words may come between.
+  for (const m of flat.matchAll(new RegExp(String.raw`\b(?:manufactured|made|produced)\s+(?:[^.;:]{0,60}?\s)?(?:from|between|during)\s+${PAIR}((?:\s*(?:,|and)\s*(?:from\s+|between\s+)?${PAIR})*)`, "gi"))) {
+    // "Made in China and sold from January 2025 through March 2025" is a sale window, not a made-date window.
+    if (/\b(?:sold|distributed|shipped|purchased|bought|imported|available|offered)\b/i.test(m[0].slice(0, m[0].indexOf(m[1])))) continue;
     const pairs = [[m[1], m[2]], ...[...(m[3] ?? "").matchAll(new RegExp(PAIR, "gi"))].map((p) => [p[1], p[2]])];
     for (const [a, b] of pairs) {
       const from = monthOrDay(a, false);

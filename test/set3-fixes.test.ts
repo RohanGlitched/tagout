@@ -78,3 +78,19 @@ test("a product code with regex characters in it is read as text, not as a patte
   assert.deepEqual(serialBoundsFor(item, text), [{ lo: "8400054", hi: "8450499" }]);
   assert.deepEqual(serialBoundsFor(item, "Product Code: RX-2.65B Lot/Serial Number: Intervals: 8400054-8450499"), []);
 });
+
+// Made-date windows in the wordings the 2026 coverage run (scripts/bound-coverage.mts) found unread.
+test("made-date windows: a comma after the first date, day-month-year, and words between 'manufactured' and 'from'", () => {
+  assert.deepEqual(
+    madeWindowsIn("switches used in residential elevators produced from August 20, 2024, through November 6, 2025, with date codes 2431 through 2543."),
+    [{ from: "2024-08-20", to: "2025-11-06" }],
+  );
+  assert.deepEqual(madeWindowsIn("Lot numbers: 202512024, 202512014. Manufactured from 14 June 2024 to 12 January 2026."), [{ from: "2024-06-14", to: "2026-01-12" }]);
+  assert.deepEqual(
+    madeWindowsIn("All serial numbers are affected that were manufactured with Xenolite 800 attenuation material from 01/16/2025 to 01/21/2026. 1. Model Number: C8EURO"),
+    [{ from: "2025-01-16", to: "2026-01-21" }],
+  );
+  // A sale window is not a made-date window.
+  assert.deepEqual(madeWindowsIn("Made in China. Sold at stores from January 2025 through March 2025."), []);
+  assert.deepEqual(madeWindowsIn("Made in China and sold at stores from January 2025 through March 2025."), []);
+});

@@ -1,11 +1,13 @@
-// How general are the bound rules? Runs noticeBounds() (two-group serial ranges, prefix-plus-number families) and
-// dateWindowIn() (best-by and use-by windows) from lib/match.ts over every 2026 CPSC recall and openFDA enforcement
-// report, plus the saved held-out notices, and counts the notices that print each kind of bound against those the
-// rules parse. GET only, no model, no Tavily. In-sample: the rules were written after held-out set #2.
+// How general are the bound rules? Runs noticeBounds() (two-group serial ranges, prefix-plus-number families),
+// dateWindowIn() (best-by and use-by windows), madeWindowsIn() (made-date windows, several read as a union) and
+// serialBoundsFor() (numeric serial intervals for a product code) from lib/match.ts over every 2026 CPSC recall and
+// openFDA enforcement report, plus the saved held-out notices, and counts the notices that print each kind of bound
+// against those the rules parse. GET only, no model, no Tavily. In-sample: the first three rules were written after
+// held-out set #2, the last two after set #3.
 // Usage: npx tsx --conditions=react-server scripts/bound-coverage.mts [--show 8]  -> docs/bound-coverage.json
 import fs from "node:fs";
 import path from "node:path";
-import { dateWindowIn, flatText, noticeBounds } from "../lib/match.ts";
+import { dateWindowIn, flatText, madeWindowsIn, noticeBounds, serialBoundsFor } from "../lib/match.ts";
 
 const show = Number(process.argv[process.argv.indexOf("--show") + 1] || 6);
 const today = new Date().toISOString().slice(0, 10);
@@ -32,7 +34,7 @@ for (const kind of ["food", "drug", "device"]) {
 }
 
 const EVAL = path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1")), "..", "eval");
-for (const dir of ["notices-holdout", "notices-holdout2"]) {
+for (const dir of ["notices-holdout", "notices-holdout2", "notices-holdout3"].filter((d) => fs.existsSync(path.join(EVAL, d)))) {
   for (const f of fs.readdirSync(path.join(EVAL, dir))) docs.push({ id: `${dir}/${f}`, text: fs.readFileSync(path.join(EVAL, dir, f), "utf8") });
 }
 
@@ -41,6 +43,15 @@ const PRINTS = {
   pair: /\bserial.{0,200}?\b(\d{3,6}) \d{3,6}\b.{0,30}?\b\1 \d{3,6}\b/i,
   family: /\b(?:prefix(?:es)?|begin(?:ning|s)? with|start(?:ing|s)? with)\b.{0,80}?\b(?:number|digits?)\b.{0,30}?\d{3,}/i,
   window: /\b(?:best[- ]?(?:by|if used by|before)|use[- ]?by|sell[- ]?by)\b[^.;\n]{0,90}?\b(?:through|thru|until|to|from|between)\b[^.;\n]{0,40}?\d/i,
+  made: /\b(?:manufactured|made|produced)\b[^.;\n]{0,40}?\b(?:from|between|during)\b[^.;\n]{0,60}?\b(?:19|20)\d\d\b/i,
+  serial: /\bproduct code\b[\s\S]{0,400}?\bserial\b[^.;\n]{0,60}?\b\d{5,}\s*[-–]\s*\d{5,}\b/i,
+};
+// serialBoundsFor() reads intervals for one item: try it with the first product code the record prints and a
+// serial as long as the interval's ends.
+const serialParsed = (flat: string) => {
+  const code = flat.match(/\bProduct Code:?\s*([A-Z0-9][A-Z0-9-]{3,})/i)?.[1];
+  const lo = flat.match(/\b(\d{5,})\s*[-–]\s*\d{5,}\b/)?.[1];
+  return Boolean(code && lo && serialBoundsFor({ id: "cov", kind: "device", said: code, model: code, serial: lo }, flat).length);
 };
 
 const out: Record<string, { prints: number; parsed: number; missed: { id: string; text: string }[] }> = {};
@@ -48,7 +59,13 @@ for (const k of Object.keys(PRINTS) as (keyof typeof PRINTS)[]) out[k] = { print
 for (const d of docs) {
   const flat = flatText(d.text);
   const b = noticeBounds(d.text);
-  const parsed = { pair: b.pairs.length > 0, family: b.families.length > 0, window: Boolean(dateWindowIn(d.text)) };
+  const parsed = {
+    pair: b.pairs.length > 0,
+    family: b.families.length > 0,
+    window: Boolean(dateWindowIn(d.text)),
+    made: madeWindowsIn(d.text).length > 0,
+    serial: serialParsed(flat),
+  };
   for (const k of Object.keys(PRINTS) as (keyof typeof PRINTS)[]) {
     const m = flat.match(PRINTS[k]);
     if (!m && !parsed[k]) continue;
@@ -63,7 +80,7 @@ const summary = {
   notices: docs.length,
   sources: `CPSC recalls ${year} (${cpsc.length}), openFDA food, drug and device enforcement reports ${year}, eval/notices-holdout and notices-holdout2`,
   rules: Object.fromEntries(Object.entries(out).map(([k, v]) => [k, { printsOne: v.prints, parsed: v.parsed, missedExamples: v.missed.slice(0, show) }])),
-  note: "In-sample: noticeBounds() and dateWindowIn() were written on Oct 30 after held-out set #2. 'printsOne' is a broad pattern for notices that look like they print that kind of bound; read the missed examples before reading the ratio.",
+  note: "In-sample: noticeBounds() and dateWindowIn() were written on Oct 30 after held-out set #2, madeWindowsIn() and serialBoundsFor() after set #3. 'printsOne' is a broad pattern for notices that look like they print that kind of bound; read the missed examples before reading the ratio.",
 };
 fs.mkdirSync("docs", { recursive: true });
 fs.writeFileSync("docs/bound-coverage.json", JSON.stringify(summary, null, 1) + "\n");

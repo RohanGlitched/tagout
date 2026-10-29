@@ -33,9 +33,44 @@
     {
      "id": "FDA H-0907-2026",
      "text": "atch: 045420 through 045424, Lot: 3495, Best By: 12/15/2027 Batch: 046194 through 046198, Lot: 0126, Best By: 01/12/2028 Batch: 047117 through 047120, Lot: 0406, Best By: 02/09/2028 Batch: 047950 through 047953, Lot: 0686, Best By: 03/09/20"
+    },
+    {
+     "id": "FDA H-0909-2026",
+     "text": "atch: 046188 through 046193, Lot: 0126, Best By: 01/12/2028 Batch: 047290 through 047296, Lot: 0476, Best By: 02/16/2028 Batch: 048029 through 048034, Lot: 0686, Best By: 03/09/2028 Batch: 049089 through 049094, Lot: 1106, Best By: 04/20/20"
+    },
+    {
+     "id": "FDA H-1153-2026",
+     "text": " UPC 8 57858 00447 2 24 count case with BEST IF USED BY DATES up to and including April 14, 2028 12 count package BEST IF USED BY DATES up to and including February 19, 2028 "
+    },
+    {
+     "id": "FDA H-0910-2026",
+     "text": "atch: 046390 through 046393, Lot: 0196, Best By: 01/19/2028 Batch: 047107 through 047112, Lot: 0406, Best By: 02/09/2028 Batch: 048236 through 048239, Lot: 0756, Best By: 03/16/2028 Batch: 048762 through 048766, Lot: 0966, Best By: 04/06/20"
+    },
+    {
+     "id": "FDA H-0398-2026",
+     "text": "lle, Quebec J4B 1E6 ***In the US*** All Best By dates from 11 DEC 2025 and before 8 AUG 2027 S05-33 25218 20:05 S05-33 is the Plant Code, 25 is the Year, 218 is the Julian Date, 20:05 is the Time of fill. ***In Canada*** BB: 14 Feb 2026 BB:"
+    },
+    {
+     "id": "FDA H-1334-2026",
+     "text": "low Pixie Smores Collection, 4.47oz All best by codes that were sold 8/7/2026 to 8/14/2026 "
     }
    ]
+  },
+  "made": {
+   "printsOne": 111,
+   "parsed": 110,
+   "missedExamples": [
+    {
+     "id": "FDA Z-2321-2026",
+     "text": "456-G; UDI-DI: 00840861102945; All lots produced from January 13, 2025, through lot 26AG02019 on January 13, 2026 "
+    }
+   ]
+  },
+  "serial": {
+   "printsOne": 1,
+   "parsed": 1,
+   "missedExamples": []
   }
  },
- "note": "In-sample: noticeBounds() and dateWindowIn() were written on Oct 30 after held-out set #2. 'printsOne' is a broad pattern for notices that look like they print that kind of bound; read the missed examples before reading the ratio."
+ "note": "In-sample: noticeBounds() and dateWindowIn() were written on Oct 30 after held-out set #2, madeWindowsIn() and serialBoundsFor() after set #3. 'printsOne' is a broad pattern for notices that look like they print that kind of bound; read the missed examples before reading the ratio."
 }
