@@ -8,7 +8,7 @@ import current from "@/eval/summary-current.json";
 export const TAVILY_USD_PER_CREDIT = 0.008;
 
 /** The date the numbers below were measured, for any page that prints them. */
-export const COST_MEASURED = "105 cases; live runs Oct 24-25 2026, confirmed by offline replay at acc0639";
+export const COST_MEASURED = "105 cases; live runs Oct 24-25 2026, confirmed by offline replay (eval/replay-summary.json names the commit)";
 
 const arm = (id: string) => current.arms.find((a) => a.arm === id)!;
 
