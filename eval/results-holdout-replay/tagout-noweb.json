@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "9b1b60f",
-   "libChanged": true
+   "commit": "8e3d3d1",
+   "libChanged": false
   }
  },
- "at": "2026-10-29T22:01:07.879Z",
+ "at": "2026-10-29T22:25:58.107Z",
  "cases": [
   {
    "id": "h01",
@@ -92,7 +92,7 @@
     "completion": 2767
    },
    "usd": 0.01444,
-   "ms": 76,
+   "ms": 78,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -266,7 +266,7 @@
     "completion": 2987
    },
    "usd": 0.02178,
-   "ms": 98,
+   "ms": 97,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -348,7 +348,7 @@
     "completion": 1592
    },
    "usd": 0.01047,
-   "ms": 69,
+   "ms": 70,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -448,7 +448,7 @@
     "completion": 2190
    },
    "usd": 0.03021,
-   "ms": 66,
+   "ms": 67,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -518,7 +518,7 @@
     "completion": 1714
    },
    "usd": 0.01557,
-   "ms": 41,
+   "ms": 42,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -605,7 +605,7 @@
     "completion": 439
    },
    "usd": 0.00313,
-   "ms": 1525,
+   "ms": 1245,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -675,7 +675,7 @@
     "completion": 3182
    },
    "usd": 0.01512,
-   "ms": 24,
+   "ms": 26,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -747,7 +747,7 @@
     "completion": 4933
    },
    "usd": 0.02881,
-   "ms": 41,
+   "ms": 43,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -826,7 +826,7 @@
     "completion": 5227
    },
    "usd": 0.0345,
-   "ms": 46,
+   "ms": 48,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -932,7 +932,7 @@
     "completion": 6240
    },
    "usd": 0.05076,
-   "ms": 1607,
+   "ms": 1972,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1006,7 +1006,7 @@
     "completion": 4693
    },
    "usd": 0.02516,
-   "ms": 27,
+   "ms": 28,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1082,7 +1082,7 @@
     "completion": 5526
    },
    "usd": 0.03156,
-   "ms": 21,
+   "ms": 22,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1210,7 +1210,7 @@
     "completion": 2307
    },
    "usd": 0.01649,
-   "ms": 16,
+   "ms": 17,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1287,7 +1287,7 @@
     "completion": 2185
    },
    "usd": 0.01669,
-   "ms": 18,
+   "ms": 22,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1354,7 +1354,7 @@
     "completion": 611
    },
    "usd": 0.00859,
-   "ms": 10,
+   "ms": 14,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1421,7 +1421,7 @@
     "completion": 608
    },
    "usd": 0.00631,
-   "ms": 9,
+   "ms": 10,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1493,7 +1493,7 @@
     "completion": 834
    },
    "usd": 0.01111,
-   "ms": 26,
+   "ms": 23,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1584,7 +1584,7 @@
     "completion": 1552
    },
    "usd": 0.02632,
-   "ms": 27,
+   "ms": 25,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1654,7 +1654,7 @@
     "completion": 1178
    },
    "usd": 0.01068,
-   "ms": 12,
+   "ms": 11,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1730,7 +1730,7 @@
     "completion": 1126
    },
    "usd": 0.0083,
-   "ms": 10,
+   "ms": 9,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1816,7 +1816,7 @@
     "completion": 2085
    },
    "usd": 0.0178,
-   "ms": 26,
+   "ms": 29,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1890,7 +1890,7 @@
     "completion": 1535
    },
    "usd": 0.01172,
-   "ms": 20,
+   "ms": 23,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -1970,7 +1970,7 @@
     "completion": 1906
    },
    "usd": 0.01109,
-   "ms": 14,
+   "ms": 13,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2130,7 +2130,7 @@
     "completion": 5464
    },
    "usd": 0.03738,
-   "ms": 33,
+   "ms": 36,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2234,7 +2234,7 @@
     "completion": 2264
    },
    "usd": 0.03638,
-   "ms": 34,
+   "ms": 36,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2429,7 +2429,7 @@
     "completion": 1569
    },
    "usd": 0.05716,
-   "ms": 34,
+   "ms": 35,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2514,7 +2514,7 @@
     "completion": 941
    },
    "usd": 0.02276,
-   "ms": 26,
+   "ms": 27,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2684,7 +2684,7 @@
     "completion": 1095
    },
    "usd": 0.02157,
-   "ms": 17,
+   "ms": 18,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2777,7 +2777,7 @@
     "completion": 1097
    },
    "usd": 0.01219,
-   "ms": 15,
+   "ms": 16,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -2973,7 +2973,7 @@
     "completion": 6874
    },
    "usd": 0.04117,
-   "ms": 30,
+   "ms": 29,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3052,7 +3052,7 @@
     "completion": 883
    },
    "usd": 0.01357,
-   "ms": 22,
+   "ms": 23,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,
@@ -3137,7 +3137,7 @@
     "completion": 1082
    },
    "usd": 0.02422,
-   "ms": 19,
+   "ms": 20,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 0,

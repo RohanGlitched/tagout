@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "9b1b60f",
-   "libChanged": true
+   "commit": "8e3d3d1",
+   "libChanged": false
   }
  },
- "at": "2026-10-29T22:02:03.918Z",
+ "at": "2026-10-29T22:26:29.609Z",
  "cases": [
   {
    "id": "j1",
@@ -81,7 +81,7 @@
     "completion": 1395
    },
    "usd": 0.0115,
-   "ms": 81,
+   "ms": 88,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 1,
@@ -145,7 +145,7 @@
     "completion": 1342
    },
    "usd": 0.00903,
-   "ms": 66,
+   "ms": 72,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 1,
@@ -236,7 +236,7 @@
     "completion": 2341
    },
    "usd": 0.01821,
-   "ms": 78,
+   "ms": 85,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -324,7 +324,7 @@
     "completion": 3429
    },
    "usd": 0.02416,
-   "ms": 79,
+   "ms": 86,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -417,7 +417,7 @@
     "completion": 13279
    },
    "usd": 0.08002,
-   "ms": 95,
+   "ms": 101,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 2,
@@ -512,7 +512,7 @@
     "completion": 13714
    },
    "usd": 0.08391,
-   "ms": 87,
+   "ms": 92,
    "msFresh": false,
    "tavily": 0,
    "tavilySearch": 2,
@@ -532,9 +532,10 @@
    "set": "database",
    "form": "clean",
    "expect": "danger",
-   "level": "warning",
-   "notice": "FDA Z-0137-2027",
-   "headline": "This product line is recalled. Check the model number on yours.",
+   "level": "danger",
+   "notice": "FDA Z-0138-2027",
+   "headline": "Serial A62881-020 is printed in this recall.",
+   "basis": "text",
    "planned": "fixed",
    "engine": {
     "planned": "fixed",
@@ -610,7 +611,7 @@
     "completion": 14697
    },
    "usd": 0.09133,
-   "ms": 2829,
+   "ms": 2727,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 2,
@@ -688,7 +689,7 @@
     "completion": 14371
    },
    "usd": 0.07929,
-   "ms": 3211,
+   "ms": 3037,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,

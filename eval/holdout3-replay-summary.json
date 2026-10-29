@@ -1,5 +1,5 @@
 {
- "at": "2026-10-29T22:01:34.423Z",
+ "at": "2026-10-29T22:26:32.126Z",
  "firstRun": null,
  "cases": 8,
  "groups": {
@@ -11,19 +11,19 @@
    "arm": "tagout",
    "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
    "n": 8,
-   "right": 6,
+   "right": 7,
    "rightInterval": [
-    0.349,
-    0.968
+    0.473,
+    0.997
    ],
    "redPrecision": 1,
-   "redRecall": 0.5,
+   "redRecall": 0.75,
    "redRecallInterval": [
-    0.068,
-    0.932
+    0.194,
+    0.994
    ],
-   "reds": 2,
-   "truePositives": 2,
+   "reds": 3,
+   "truePositives": 3,
    "positives": 4,
    "falseRed": [],
    "falseRedOf": 4,
@@ -41,7 +41,7 @@
    "byGroup": {
     "positive": {
      "n": 4,
-     "right": 2
+     "right": 3
     },
     "near-miss": {
      "n": 4,
@@ -51,7 +51,7 @@
    "bySet": {
     "database": {
      "n": 8,
-     "right": 6,
+     "right": 7,
      "falseRed": [],
      "falseClear": []
     }
@@ -59,26 +59,20 @@
    "byForm": {
     "clean": {
      "n": 8,
-     "right": 6,
+     "right": 7,
      "falseRed": [],
      "falseClear": []
     }
    },
-   "usdPerItem": 0.03947375,
-   "usdTotal": 0.31579,
-   "tavilyPerItem": 0.375,
-   "tavilyUsdPerItem": 0.003,
-   "usdPerItemWithTavily": 0.042473750000000005,
+   "usdPerItem": 0.049681249999999996,
+   "usdTotal": 0.39744999999999997,
+   "tavilyPerItem": 0.625,
+   "tavilyUsdPerItem": 0.005,
+   "usdPerItemWithTavily": 0.054681249999999994,
    "medianMs": null,
    "webOnlyReds": [],
    "webCited": [],
    "fellBack": [
-    "j1",
-    "j2",
-    "j3",
-    "j4",
-    "j5",
-    "j6",
     "j7",
     "j8"
    ],
@@ -98,8 +92,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "9b1b60f",
-     "libChanged": true
+     "commit": "8e3d3d1",
+     "libChanged": false
     }
    },
    "levels": {
@@ -109,21 +103,24 @@
     "j4": "warning",
     "j5": "danger",
     "j6": "warning",
-    "j7": "warning",
+    "j7": "danger",
     "j8": "warning"
    },
    "redBasis": {
-    "n": 2,
+    "n": 3,
     "by": {
-     "reader-list": 2
+     "reader-list": 1,
+     "text": 2
     },
     "how": {
-     "exact": 2
+     "exact": 2,
+     "range": 1
     },
     "window": 1,
     "cases": {
      "j1": "reader-list+window",
-     "j5": "reader-list"
+     "j5": "text/range",
+     "j7": "text"
     }
    }
   },
@@ -215,8 +212,8 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "9b1b60f",
-     "libChanged": true
+     "commit": "8e3d3d1",
+     "libChanged": false
     }
    },
    "levels": {
