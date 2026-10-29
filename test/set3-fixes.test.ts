@@ -56,3 +56,25 @@ test("a bare product-code match in an older recall is held at orange when the ne
   const inside = { ...lift, serial: "8412345" };
   assert.equal(decide([newer, older].map((notice) => ({ notice, match: matchItem(inside, notice) }))).level, "danger");
 });
+
+// j7: of two sibling records of one product, the one that prints the household's serial goes red.
+const FDA_Z0138 =
+  "Grafton DBM UDI-DI: 00643169122932. Serial Numbers: A62881-014 through A62881-033, specifically: A62881-014, A62881-015, A62881-020, A62881-033";
+const FDA_Z0137 = "Grafton DBM UDI-DI: 00643169123021. Serial Numbers: A62881-034 through A62881-051, specifically: A62881-034, A62881-035, A62881-051";
+
+test("the sibling record that prints the serial is the red one; a serial printed in neither stays orange", () => {
+  const graft = (serial: string): Item => ({ id: "i1", kind: "device", said: "Grafton DBM", brand: "Grafton", product: "DBM bone graft", serial });
+  const recs = [fda("Z-0137-2027", FDA_Z0137), fda("Z-0138-2027", FDA_Z0138)].map((n) => ({ ...n, title: "Grafton DBM" }));
+  const run = (serial: string) => decide(recs.map((notice) => ({ notice, match: matchItem(graft(serial), notice) })));
+  const hit = run("A62881-020");
+  assert.equal(hit.level, "danger");
+  assert.equal(hit.top?.notice.id, "Z-0138-2027");
+  assert.notEqual(run("A62881-013").level, "danger");
+});
+
+test("a product code with regex characters in it is read as text, not as a pattern", () => {
+  const item: Item = { id: "i2", kind: "device", said: "pump", model: "RX-2.5B", serial: "8412345" };
+  const text = "Product Code: RX-2.5B Lot/Serial Number: Intervals: 8400054-8450499";
+  assert.deepEqual(serialBoundsFor(item, text), [{ lo: "8400054", hi: "8450499" }]);
+  assert.deepEqual(serialBoundsFor(item, "Product Code: RX-2.65B Lot/Serial Number: Intervals: 8400054-8450499"), []);
+});

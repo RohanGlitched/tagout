@@ -354,6 +354,13 @@ export function matchItem(item: Item, notice: Notice): Match {
       return { level: "danger", proof, why: `UPC ${item.upc} and code ${code} are printed in this recall.`, basis: textBasis() };
     }
   }
+  // A serial the household gave, printed whole in the record's own text ("Serial Numbers: A62881-014 through
+  // A62881-033, specifically: A62881-014, ..."), decides like a printed lot. Among sibling records of one product
+  // (Z-0137-2027 and Z-0138-2027), the one that prints the serial is the one that goes red (held-out set #3, j7).
+  if (!lots.length && !item.lot && !strongModel && !u && item.serial && norm(item.serial).length >= 5 && inText(item.serial)) {
+    proof.push({ field: "lot", yours: item.serial, theirs: `${item.serial} (in the notice's text)`, matched: true });
+    return { level: "danger", proof, why: `Serial ${item.serial} is printed in this recall.`, basis: textBasis() };
+  }
   if (!lots.length && lotInText && !strongModel && !u) {
     proof.push({ field: "lot", yours: item.lot!, theirs: `${item.lot} (in the notice's text)`, matched: true });
     return { level: "danger", proof, why: `Lot ${item.lot} is printed in this recall.`, basis: textBasis() };
@@ -636,13 +643,13 @@ export function serialBoundsFor(item: Item, text: string | undefined): { lo: str
   const sn = item.serial ? norm(item.serial) : "";
   if (!text || !/^\d{5,}$/.test(sn)) return [];
   const flat = flatText(text);
+  const esc = (c: string) => c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const code = [item.model, ...(item.codes ?? [])]
     .filter((c): c is string => Boolean(c))
     .map((c) => c.replace(/^(?:product code|model|code)\s*[:#]?\s*/i, "").trim())
-    .find((c) => c.length >= 4 && new RegExp(String.raw`\b${c.replace(/[.*+?^${}()|[\]\\]/g, "\\/** Where a product list appended to a page")}\b`).test(flat));
+    .find((c) => c.length >= 4 && new RegExp(String.raw`\b${esc(c)}\b`).test(flat));
   // Every stretch that starts at the item's product code (a record can name it in a product list first and give
   // its serials further on).
-  const esc = (c: string) => c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   // Only a record that prints the item's own product code: another product's serial intervals prove nothing.
   if (!code) return [];
   const segs = code
