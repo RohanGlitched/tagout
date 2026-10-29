@@ -201,7 +201,7 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
                     <dd>{r.recallsChecked.toLocaleString("en-US")}</dd>
                   </div>
                   <div>
-                    <dt>New since the run before</dt>
+                    <dt>New that day</dt>
                     <dd>{r.newRecalls}</dd>
                   </div>
                   <div>
@@ -209,16 +209,13 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
                     <dd>{r.alertsHere}</dd>
                   </div>
                   <div>
-                    <dt>Cost, all lists</dt>
-                    <dd>
-                      {r.modelCalls ? `${r.cents.toFixed(2)}¢` : "0¢"}
-                      <small>
-                        {" "}
-                        {plural(r.modelCalls, "model call")}, {plural(r.tavilyCredits, "Tavily credit")}
-                      </small>
-                    </dd>
+                    <dt>Cost</dt>
+                    <dd>{r.modelCalls ? `${r.cents.toFixed(2)}¢` : "0¢"}</dd>
                   </div>
                 </dl>
+                <p className={s.runFoot}>
+                  {plural(r.modelCalls, "model call")} · {plural(r.tavilyCredits, "Tavily credit")} · {plural(r.agencyCalls, "agency call")} · {(r.ms / 1000).toFixed(1)} s
+                </p>
               </li>
             ))}
           </ol>

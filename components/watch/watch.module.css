@@ -349,3 +349,10 @@
   font-size: 12px;
   color: var(--ink-soft);
 }
+.runFoot {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
