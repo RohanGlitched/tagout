@@ -8,6 +8,9 @@
  "cpscRecalls": 498,
  "childrensProducts": 187,
  "stovesOvensFridges": 5,
+ "childrensProductUnits": 5510842,
+ "stovesOvensFridgesUnits": 304725,
+ "allUnits": 56047284,
  "kitchenExamples": [
   "26756 Dual Fuel Ranges Recalled Due to Risk of Serious Injury or Death from Fire or Explosion Hazards; Manufactured by AGA Rangemaster",
   "26649 Galanz Americas Recalls Retro Refrigerators Due to Risk of Serious Injury or Death from Fire and Burn Hazards; One Death Reported",
@@ -17,5 +20,5 @@
  ],
  "foodReports": 1056,
  "undeclaredIngredient": 299,
- "note": "Children's products and kitchen appliances are matched on each recall's title and product names (regular expressions in this script), so the counts are approximate; a recall can be in both groups."
+ "note": "Approximate keyword counts: children's products and kitchen appliances are matched on each recall's title and product names (regular expressions in this script), and child-resistant packaging recalls are left out; a recall can be in both groups. Units are CPSC's own NumberOfUnits figures for the U.S."
 }

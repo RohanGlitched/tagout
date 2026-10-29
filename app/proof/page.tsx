@@ -13,6 +13,7 @@ import held2 from "@/eval/holdout2-summary.json";
 import cases2File from "@/eval/cases-holdout2.json";
 import caseFile from "@/eval/cases.json";
 import notes from "@/eval/notes.json";
+import coverage from "@/docs/bound-coverage.json";
 import s from "./proof.module.css";
 
 export const metadata = {
@@ -208,27 +209,39 @@ export default function Proof() {
           <ul className={s.claims}>
             <li data-kind="held">
               <span className={s.claimKick}>Held out #1 · {holdout.cases} new cases, run once on Oct 25</span>
+              <span className={s.claimBig}>
+                {held.right}/{held.n}
+              </span>
               <b>
                 {held.right}/{held.n}
               </b>{" "}
-              right, <b>{held.falseRed.length}</b> of {held.falseRedOf} wrongly tagged Do not use, and <b>{held.falseClear.length}</b> of {held.falseClearOf} recalled units cleared green,
-              the error that matters most. Each of the four was traced and fixed in code.
+              right, <b>{held.falseRed.length}</b> of {held.falseRedOf} false alarms (wrongly tagged Do not use), and <b>{held.falseClear.length}</b> of {held.falseClearOf} recalled
+              items cleared green, the error that matters most. Each of the four was traced and fixed in code.
             </li>
             <li data-kind="held">
               <span className={s.claimKick}>Held out #2 · {held2.cases} cases, pre-registered, run once on Oct 30 (IST)</span>
+              <span className={s.claimBig}>
+                {t2.right}/{t2.n}
+              </span>
               <b>
                 {t2.right}/{t2.n}
               </b>{" "}
-              right, <b>{t2.falseRed.length}</b> of {t2.falseRedOf} wrongly tagged Do not use, and <b>{t2.falseClear.length}</b> of {t2.falseClearOf} recalled units cleared. The set
+              right, <b>{t2.falseRed.length}</b> of {t2.falseRedOf} false alarms, and <b>{t2.falseClear.length}</b> of {t2.falseClearOf} recalled items cleared green. The set
               tests printed ranges, code families and date windows, which the first sets never did on a recalled unit; <a href="#held2-h">what it found</a>.
             </li>
             <li>
               <span className={s.claimKick}>Tavily, on and off, same cases</span>
+              <span className={s.claimBig}>
+                {lagAbl.withTavily.flagged} of {lagAbl.shouldFlag}
+              </span>
               Of {lagAbl.shouldFlag} held-out recalls no database listed yet, Tagout without Tavily cleared <b>all {lagAbl.shouldFlag}</b> green; with it, it flagged{" "}
               <b>{lagAbl.withTavily.flagged}</b> ({lagAbl.withTavily.red} red). <a href="#tavily-h">What Tavily does here</a>.
             </li>
             <li>
               <span className={s.claimKick}>The {summary.cases} tuned cases, at today&apos;s code (in-sample)</span>
+              <span className={s.claimBig}>
+                {t.right}/{t.n}
+              </span>
               <b>
                 {t.right}/{t.n}
               </b>{" "}
@@ -260,13 +273,13 @@ export default function Proof() {
             the agency databases didn&apos;t list yet: FDA company announcements and a USDA meat recall that only a web search can find.
           </p>
           <div className={s.tableWrap}>
-            <table className={s.table}>
+            <table className={`${s.table} ${s.stack}`}>
               <thead>
                 <tr>
                   <th scope="col">Setup</th>
                   <th scope="col">Right</th>
                   <th scope="col">Wrongly red</th>
-                  <th scope="col">Recalled, cleared</th>
+                  <th scope="col">Recalled items cleared green</th>
                   <th scope="col">Not in a database yet: exact tag</th>
                   <th scope="col">Cost per item, Tavily included</th>
                 </tr>
@@ -374,14 +387,14 @@ export default function Proof() {
             <a href={`${REPO_URL}/blob/main/eval/HOLDOUT.md#held-out-2-pre-registered-in-public`}>eval/HOLDOUT.md</a> laid out, misses included.
           </p>
           <div className={s.tableWrap}>
-            <table className={s.table}>
+            <table className={`${s.table} ${s.stack} ${s.stackB}`}>
               <thead>
                 <tr>
                   <th scope="col">Setup</th>
                   <th scope="col">Right</th>
                   <th scope="col">Wrongly red</th>
-                  <th scope="col">Recalled, cleared</th>
-                  <th scope="col">Recalled units caught red</th>
+                  <th scope="col">Recalled items cleared green</th>
+                  <th scope="col">Coded recalled units red</th>
                   <th scope="col">Cost per item, Tavily included</th>
                 </tr>
               </thead>
@@ -416,6 +429,10 @@ export default function Proof() {
               </tbody>
             </table>
           </div>
+          <p className={s.sub}>
+            &ldquo;Recalled items&rdquo; are all {t2.falseClearOf} cases whose right answer is Do not use or Check the label (8 recalled units with a code, 2 recalls with no
+            code, and a car); &ldquo;flagged&rdquo; means either tag. &ldquo;Coded recalled units&rdquo; are the 8 that must be Do not use.
+          </p>
           <div className={s.gridWrap}>
             <table className={s.cases2}>
               <thead>
@@ -464,7 +481,11 @@ export default function Proof() {
             and a code the notice bounds instead of listing is read from its text: a two-group serial inside a printed from-to pair (g01) and a prefix followed by a number in a
             printed range (g03). Replayed offline, g01 and g03 turn red, g04 green and g07 orange, and nothing moves on the 105 or held out #1. g19 was a harness wait, not a
             matching error: the app never waits on Tavily&apos;s keyless limit, the harness now caps its wait at 30 s, and g19 re-run that way is Checked. USDA FSIS product lists
-            (PDFs) are read through Tavily Extract so a UPC and its lot match row by row.
+            (PDFs) are read through Tavily Extract so a UPC and its lot match row by row. Run over all {coverage.notices.toLocaleString("en-US")} CPSC and openFDA notices of
+            2026 (in-sample, <a href={`${REPO_URL}/blob/main/scripts/bound-coverage.mts`}>scripts/bound-coverage.mts</a>): the window rule reads one window from{" "}
+            {coverage.rules.window.parsed} of the {coverage.rules.window.printsOne} that print a best-by window (the rest print several, which it leaves alone), the serial-range
+            rule {coverage.rules.pair.parsed} of {coverage.rules.pair.printsOne}, the family rule {coverage.rules.family.parsed} of {coverage.rules.family.printsOne} (it misses a
+            list of serial prefixes).
           </p>
           <ul className={s.wrong}>
             {wrong2.map((c) => (
@@ -505,13 +526,16 @@ export default function Proof() {
               </p>
             </div>
             <div>
-              <dt>Held out #2, recalls in no database</dt>
+              <dt>Held out #2, the 2 recalls no database had</dt>
               <dd>
-                {cases2.filter((c) => c.set === "lag" && right(c, lv2(t2, c.id) ?? "")).length}/{cases2.filter((c) => c.set === "lag").length}
+                2/2
               </dd>
               <p>
-                right with Tavily, from pages only Tavily reached: the Pan Pepin allergy recall red on its exact lot, the sprats advisory orange, the next lot green.
-                {noweb2 ? ` With Tavily off (added afterwards, same code) ${cases2.filter((c) => c.set === "lag" && right(c, (noweb2.levels as Record<string, string>)[c.id] ?? "")).length} of 3: both recalls were cleared green.` : ""}
+                flagged with Tavily, from pages only Tavily reached: the Pan Pepin allergy recall red on its exact lot and the sprats advisory orange (the next Pan Pepin lot,
+                not recalled, green).
+                {noweb2
+                  ? ` Tavily off (same code, added afterwards): the 2 recalls no database had went 2/2 flagged to 0/2, recalled items cleared green 0 of ${t2.falseClearOf} to ${noweb2.falseClear.length} of ${noweb2.falseClearOf}, and ${t2.right}/19 to ${noweb2.right}/19 overall (g19 was right only without the web, because the keyless waits that timed it out never happened).`
+                  : ""}
               </p>
             </div>
             <div>

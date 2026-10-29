@@ -358,3 +358,65 @@
   font-variation-settings: "wdth" 112;
   letter-spacing: -0.01em;
 }
+.heldCards {
+  margin: 4px 0 30px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.heldCard {
+  padding: 18px 20px;
+  background: var(--stock);
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--danger);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: #2f363d;
+}
+.heldKick {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.heldBig {
+  font-size: 48px;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.heldBand {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 12px 18px;
+  background: var(--steel);
+  color: #e6eaee;
+  border-radius: 3px;
+  font-size: 15.5px;
+}
+.heldBand span {
+  margin-right: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9fb7d6;
+}
+.heldBand a {
+  margin-left: 10px;
+  color: #fff;
+  font-weight: 650;
+  text-decoration: underline;
+}
+@media (max-width: 700px) {
+  .heldCards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

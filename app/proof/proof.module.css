@@ -581,3 +581,63 @@
     white-space: normal;
   }
 }
+
+/* A big figure on each short-answer card. */
+.claimBig {
+  display: block;
+  margin: 2px 0 8px;
+  font-size: 44px;
+  font-weight: 800;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+/* Phones: each row of a held-out table becomes its label over a row of small stats. */
+@media (max-width: 600px) {
+  .stack thead {
+    display: none;
+  }
+  .stack tbody tr {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px 10px;
+    padding: 12px 12px 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .stack tbody th {
+    grid-column: 1 / -1;
+    padding: 0;
+    border: 0;
+  }
+  .stack tbody td {
+    padding: 0;
+    border: 0;
+    white-space: normal;
+    font-size: 15px;
+  }
+  .stack tbody td::before {
+    display: block;
+    font-size: 11px;
+    font-weight: 650;
+    color: var(--ink-soft);
+  }
+  .stack tbody td:nth-of-type(1)::before {
+    content: "Right";
+  }
+  .stack tbody td:nth-of-type(2)::before {
+    content: "False alarms";
+  }
+  .stack tbody td:nth-of-type(3)::before {
+    content: "Recalled items cleared";
+  }
+  .stack tbody td:nth-of-type(4)::before {
+    content: "Not in a database: exact";
+  }
+  .stackB tbody td:nth-of-type(4)::before {
+    content: "Coded units red";
+  }
+  .stack tbody td:nth-of-type(5)::before {
+    content: "Cost an item";
+  }
+}

@@ -191,6 +191,12 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
             The daily sweep&apos;s own run log: how many recalls it read, how many were new since the run before, how many touched this list, and what the run cost for every watched
             list together. Also as JSON: <a href={`/api/watches/${watch.id}/events`}>/api/watches/{watch.id}/events</a>.
           </p>
+          <p className={s.sub}>
+            <b>Why it says 0 model calls:</b> the sweep calls Nemotron only for a new recall that names a brand or code on a watched list, and each reading is cached for
+            everyone. Over these {feed.history.length} runs it saw {feed.history.reduce((a, r) => a + r.newRecalls, 0).toLocaleString("en-US")} new recalls and made{" "}
+            {feed.history.reduce((a, r) => a + r.modelCalls, 0)} model calls: none touched a watched list. For what an alert looks like, see{" "}
+            <a href="/watch/replay1013">the labelled replay</a>. Alerts arrive on this page and its feed today; email and push are next.
+          </p>
           <ol className={s.runs}>
             {feed.history.map((r) => (
               <li key={r.at} className={s.run} data-hit={r.alertsHere ? "" : undefined}>

@@ -37,7 +37,7 @@ Every check gets its own link, so you can send it to someone.
 
 ## Why
 
-CPSC alone announced about 500 recalls in the first ten months of 2026 (502 on Oct 29), covering about 53 million units by its own count; the FDA, NHTSA and USDA add thousands more. Each sits in its own database, in its own words, and the deciding detail (a model number, a lot, a date window) is usually buried in a paragraph. CPSC's own staff measured what that costs: recalls announced only by press release got **6%** of consumers to act, while recalls sent straight to owners got **50%** ([CPSC Recall Effectiveness Workshop, recall data, closed cases FY2013–2016](https://www.slideshare.net/slideshow/cpsc-recall-effectiveness-workshop-recall-data/78744492)). Tagout takes the list of things a household actually owns, does the looking, and keeps looking.
+CPSC alone recalled 498 products in 2026 by Oct 29 (its database, by recall date; the home page wall also counts the newest newsroom postings), covering more than 50 million units by its own count; the FDA, NHTSA and USDA add thousands more. Each sits in its own database, in its own words, and the deciding detail (a model number, a lot, a date window) is usually buried in a paragraph. CPSC's own staff measured what that costs: recalls announced only by press release got **6%** of consumers to act, while recalls sent straight to owners got **50%** ([CPSC Recall Effectiveness Workshop, recall data, closed cases FY2013–2016](https://www.slideshare.net/slideshow/cpsc-recall-effectiveness-workshop-recall-data/78744492)). Tagout takes the list of things a household actually owns, does the looking, and keeps looking.
 
 ## Held out: 39 new cases, run once
 
@@ -80,7 +80,7 @@ Built on Oct 25 to measure what the first sets never had on a recalled unit: a s
 - **Ranges and families:** the unit inside the printed serial range and the one inside the code family both came out orange, not red: the safe miss. All 7 of Tagout's reds were exact matches.
 - **What Nemotron adds, held out and at the same code:** 15/19 against 10/19 for rules alone (+5); 6 recalled units red against 1.
 - **Gaps:** 4 of 4 right; no gap was read as inside a range. **Recalls in no database:** 3 of 3 right, all from pages only Tavily reached (the Pan Pepin lot red, its neighbouring lot green, the sprats advisory orange).
-- **Tavily off, same code (added afterwards):** both recalls no database had were cleared green (g15, g16), against 3 of 3 right with Tavily; 14/19 against 15/19 (g19 came out right without the web, because the keyless wait that timed it out never happened).
+- **Tavily off, same code (added afterwards):** the 2 recalls no database had went from 2/2 flagged to 0/2 (g15, g16 cleared green); recalled items cleared green 0 of 11 with Tavily, 2 of 11 without; 15/19 against 14/19 overall (g19 was right only without the web, because the keyless waits that timed it out never happened).
 - **Fixed since, in-sample:** a best-by or use-by window printed in the record's own text is compared with the date on the line (g07), and codes a notice bounds instead of listing are read from its text: a two-group serial inside a printed from-to pair (g01) and a prefix followed by a number in a printed range (g03). Replayed offline, g01 and g03 turn red, g04 green and g07 orange, and nothing moves on the 105 or held out #1. g19 was a harness artifact: the app never waits on Tavily's keyless limit (`test/tavily-429.test.ts`), the harness now caps its wait at 30 s, and g19 re-run that way is Checked. [Details](eval/HOLDOUT.md#after-held-out-2-oct-30-in-sample-written-after-reading-the-misses-above).
 - **As run:** Tavily was in keyless mode for both arms (the month's credits were spent: 0 credits used), and its hourly cap pushed one Tagout check, the clean item g19, past its deadline, so it was held orange. Token Factory spend: $0.51.
 
@@ -102,7 +102,7 @@ On Oct 15 the same cases gave Tagout 104/105, the lite tier 98/105 and rules alo
 
 - **Nemotron alone invents recalls.** All five of its wrong red tags cite a recall number and a reason, such as "CPSC 23-231, Model 53101-209 is explicitly listed" for a ZWILLING kettle that recall doesn't list. Tagout's rules can't do that: red needs your code printed in the notice.
 - **The first run was worse, and it says so.** The first full run got 98 of 105: 2 units wrongly red and 2 recalled units cleared. Each miss was traced and fixed in code with a unit test (a lot list cut short at its first group, a date code, a one-sided date window, an FDA page replacing a record's text, a brand field openFDA leaves empty, a trailing X read as a wildcard). One expected answer was wrong and was corrected: a Jan 2026 recall covers all lots of one distributor's Claritin. The numbers above are measured on cases that shaped those fixes; the first run is the fairer estimate for new ones. Both are on [/proof](https://tagout-recalls.vercel.app/proof).
-- **Where the agent earns its place.** With the same rules, the fixed search plan is nearly as safe on red tags but sends more needless "check the label" tags on things nobody recalled (5 of 8 right vs 8 of 8 at today's code), and costs about a tenth of the full check's Nemotron (0.23¢ against 2.6¢; 1.4¢ against 4.4¢ all in). So it became the fallback, not the default.
+- **Where the agent earns its place.** With the same rules, the fixed search plan is nearly as safe on red tags but sends more needless "check the label" tags on things nobody recalled (5 of 8 right vs 8 of 8 at today's code), and costs about a tenth of the full check's Nemotron (0.23¢ against 2.6¢) and about a third all in (1.4¢ against 4.4¢). So it became the fallback, not the default.
 - **Limits.** One run per arm, not an average. We picked the cases. Recalled units come from notices that print a code; a recall that prints none can only ever be orange.
 
 ## What happens in a check
@@ -147,7 +147,7 @@ All model calls go to **Nebius Token Factory**'s OpenAI-compatible API (`https:/
 |---|---|---|---|
 | Read the household's list | `nvidia/Nemotron-3-Ultra-550b-a55b` | Strict `json_schema`; every code verified against the input | Super filed 11 of 105 eye drops and foods as products (the wrong database); Nano dropped a car's year |
 | Search agent | `nvidia/Nemotron-3-Ultra-550b-a55b` | OpenAI-style `tools`, parallel tool calls, up to six model turns (the prompt asks for at most four rounds of searching), `finish` forced on the sixth | On 18 cases, Super was right on 17 at half the cost and Nano on 15: too few to move the agent |
-| Read each recall notice | `nvidia/Nemotron-3-Ultra-550b-a55b` | Strict `json_schema`; codes verified against the notice text | Super: 1 unit wrongly red; Nano: 2 |
+| Read each recall notice | `nvidia/Nemotron-3-Ultra-550b-a55b` | Strict `json_schema`; codes verified against the notice text | Oct 15 run: Super 1 unit wrongly red, Nano 2 |
 | Lite tier notice reader | `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`, reasoning off (`enable_thinking: false`), retried with reasoning on if a reply is cut off | With the fixed search plan, once the day's Ultra budget is spent | 101 of 105 at current code (98 on Oct 15) right, none cleared, 0.23¢ of Nemotron an item, 1.4¢ all in |
 | Fallback for every role | `nvidia/nemotron-3-super-120b-a12b` | Same calls; used when the first model errors or times out | |
 | Read label photos | `nvidia/Nemotron-3.5-Super-VL`, then `Qwen/Qwen3.8-27B`, then `google/gemma-3-27b-it` | Vision chat with `json_schema` | All three read 7 of 7 codes on two made-up sample labels; on the real Primark tag photo (h07) Super VL ran out of budget and Qwen read it |
@@ -164,7 +164,7 @@ The agency databases trail their own newsrooms by one to six weeks, and USDA's m
 |---|---|
 | Held out #1, Tavily **off** (same cases, same code) | All 10 recalls no database listed yet were **cleared green** |
 | Held out #1, Tavily **on** | **8 of 10 flagged**, 3 of them red; Tagout 27/39 → 31/39, cleared recalls 12 → 4 |
-| Held out #2, recalls in no database | 3 of 3 right with Tavily, from FDA pages only Tavily reached; Tavily off (same code, added afterwards): both recalls cleared green, 1 of 3 right |
+| Held out #2, the 2 recalls no database had | On: 2/2 flagged (Pan Pepin red on its lot, the sprats advisory orange), from FDA pages only Tavily reached. Off (same code, added afterwards): 0/2; recalled items cleared green 0/11 on, 2/11 off; 15/19 against 14/19 |
 | On the 27 database cases of held out #1 | No change (25/27 with and without) |
 | Credits per item, as billed | 2.16 on the 105 at today's code: 1.7¢ at $0.008, beside 2.6¢ of Nemotron |
 
@@ -188,6 +188,8 @@ The agency databases trail their own newsrooms by one to six weeks, and USDA's m
 - **Opening a watch runs nothing.** "Check again now" queues a full check of the list at most once an hour (every six hours, on the lite tier, for the showcase watch), under the same budget as any check; what it changed goes into the same log.
 
 Cost grows with recalls, not households. The live run of Oct 29, 06:02 UTC, read 493 recalls in the 30-day window (10 new since the day before) with 13 agency calls, 2 Tavily credits and 0 Token Factory calls, in 9.4 seconds: none touched a watched brand or code. Every run since Oct 24 is listed on [the showcase watch](https://tagout-recalls.vercel.app/watch/5ehharz7sr) and in [its JSON](https://tagout-recalls.vercel.app/api/watches/5ehharz7sr/events) (`history`). A recall that does touch a watch costs one Nemotron 3 Ultra reading, once (measured: 329 + 663 tokens, 0.23¢, for CPSC 27-040). Even if every one of the roughly 14 new recalls a day touched someone's list, that is about 3¢ a day for all households together; a watch itself adds two small storage reads a day. Every run writes its report, with its calls, tokens, cents and Tavily credits, to `sweep/runs/` in storage.
+
+**Why the showcase watch shows 0 model calls.** The sweep calls Nemotron only for a new recall that names a watched brand or code, and readings are cached; from Oct 24 to Oct 29 no new recall touched a watched list, so its runs made no model calls (each run is listed on the watch page). The alert demo is the labelled replay [/watch/replay1013](https://tagout-recalls.vercel.app/watch/replay1013). Alerts go to the watch page and its feed; email and push are next.
 
 **Scheduling.** [`vercel.json`](vercel.json) runs `GET /api/cron/sweep` once a day at 06:00 UTC (Vercel Hobby runs daily crons somewhere within that hour). Vercel sends `Authorization: Bearer $CRON_SECRET`; without `CRON_SECRET` set, the route refuses to run.
 

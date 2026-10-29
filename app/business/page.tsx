@@ -36,27 +36,37 @@ export default function Business() {
           <h2 id="reach-h" className={s.h2}>
             Who it reaches
           </h2>
-          <p className={s.body}>Counted from the agencies&apos; own public data on {fmtDay(reach.at)}, with no model (scripts/audience-counts.mjs):</p>
+          <p className={s.body}>
+            Counted from the agencies&apos; own public data on {fmtDay(reach.at)}, with no model (
+            <a href={`${REPO_URL}/blob/main/scripts/audience-counts.mjs`}>scripts/audience-counts.mjs</a>). The CPSC groups are approximate keyword counts on each
+            recall&apos;s title and product names; units are CPSC&apos;s own U.S. figures.
+          </p>
           <dl className={s.worked} aria-label="Who the year's recalls reach">
             <div>
               <dt>CPSC recalls of {reach.at.slice(0, 4)} naming a child&apos;s product (cribs, car seats, toys, high chairs)</dt>
               <dd>
                 {reach.childrensProducts} of {reach.cpscRecalls}
               </dd>
+              <dt>about {(reach.childrensProductUnits / 1e6).toFixed(1)} million units</dt>
             </div>
             <div>
               <dt>openFDA food recall reports of {reach.at.slice(0, 4)} for an undeclared ingredient, mostly allergens</dt>
               <dd>
                 {reach.undeclaredIngredient} of {reach.foodReports.toLocaleString("en-US")}
               </dd>
+              <dt>a danger only to someone allergic, so the tag says so</dt>
             </div>
             <div>
               <dt>CPSC recalls of {reach.at.slice(0, 4)} of gas ranges and refrigerators, the appliances AB 628 makes a landlord fix within 30 days</dt>
               <dd>{reach.stovesOvensFridges}</dd>
+              <dt>about {Math.round(reach.stovesOvensFridgesUnits / 1000)},000 units</dt>
             </div>
             <div>
-              <dt>Owners who act on a recall sent straight to them, against 6% for a press release (CPSC)</dt>
+              <dt>Owners who act on a recall sent straight to them, against 6% for a press release</dt>
               <dd>50%</dd>
+              <dt>
+                <a href="https://www.slideshare.net/slideshow/cpsc-recall-effectiveness-workshop-recall-data/78744492">CPSC Recall Effectiveness Workshop</a>, closed cases FY2013–2016
+              </dt>
             </div>
           </dl>
         </section>

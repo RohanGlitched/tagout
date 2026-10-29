@@ -164,14 +164,30 @@ export default async function Home() {
             </p>
           </div>
           {held && t2 ? (
-            <p className={s.held}>
-              <b>
-                On {holdout.cases + held2.cases} cases it had never seen, each set run once: {held.right + t2.right} right, {held.falseRed.length + t2.falseRed.length} wrongly tagged do
-                not use.
-              </b>{" "}
-              The first {holdout.cases} cleared {held.falseClear.length} recalled units, each traced and fixed; the second {held2.cases}, published with a git tag before they ran, cleared
-              none and gave one wrong red: a pizza whose best-by date is outside the recall&apos;s window. <Link href="/proof#held-h">Both held-out sets</Link>
-            </p>
+            <div className={s.heldCards}>
+              <div className={s.heldCard}>
+                <span className={s.heldKick}>Held out #1 · {holdout.cases} cases, run once</span>
+                <b className={s.heldBig}>
+                  {held.right}/{held.n}
+                </b>
+                <span>
+                  right · {held.falseRed.length} false alarms · {held.falseClear.length} of {held.falseClearOf} recalled items cleared, each traced and fixed
+                </span>
+              </div>
+              <div className={s.heldCard}>
+                <span className={s.heldKick}>Held out #2 · {held2.cases} cases, pre-registered with a git tag</span>
+                <b className={s.heldBig}>
+                  {t2.right}/{t2.n}
+                </b>
+                <span>
+                  right · {t2.falseRed.length} false alarm (a best-by date outside the window) · {t2.falseClear.length} of {t2.falseClearOf} recalled items cleared
+                </span>
+              </div>
+              <p className={s.heldBand}>
+                <span>Tavily off → on</span> Set 1: <b>0/10 → 8/10</b> recalls not yet in a database flagged · Set 2: <b>0/2 → 2/2</b>{" "}
+                <Link href="/proof#held-h">Both held-out sets, every case</Link>
+              </p>
+            </div>
           ) : null}
           <h3 className={s.ladderHead}>The {summary.cases} tuned cases (in-sample)</h3>
           <Ladder />
@@ -184,7 +200,7 @@ export default async function Home() {
                 {wall.total} recalls in {monthWords[months] ?? months} months, as of {fmtDate(new Date().toISOString())}.
               </h2>
               <p className={s.sub}>
-                Every Consumer Product Safety Commission recall of {wall.year} so far, one tag each, hung by month and coloured by hazard{wall.units >= 1e6 ? `: about ${(wall.units / 1e6).toFixed(0)} million units, by CPSC's own count` : ""}. Point at a tag to read it; pick a hazard to see how often it comes
+                Every Consumer Product Safety Commission recall of {wall.year} so far, one tag each, hung by month and coloured by hazard{wall.units >= 1e6 ? `: about ${(wall.units / 1e6).toFixed(0)} million units, by CPSC's own count` : ""}. Counted from CPSC's recall database by recall date, plus the newest postings in its newsroom feed. Point at a tag to read it; pick a hazard to see how often it comes
                 up.
               </p>
             </div>
