@@ -448,6 +448,11 @@ export default function Proof() {
               </tbody>
             </table>
           </div>
+          <p className={s.sub}>
+            Fixed since, in-sample and so not in the table: a best-by or use-by window printed in the record&apos;s own text is now compared with the date on your line
+            (g07 replays orange in every arm, and nothing else on the three sets moves), and USDA FSIS product lists, which are PDFs, are read through Tavily Extract so a UPC and
+            its lot can be matched row by row. The range (g01) and the code family (g03) are still orange.
+          </p>
           <ul className={s.wrong}>
             {wrong2.map((c) => (
               <li key={c.id}>

@@ -260,7 +260,12 @@ export function matchItem(item: Item, notice: Notice): Match {
   // A code of yours that the notice's own text prints, as a whole word and not in a "not included" sentence,
   // counts as listed: the text outranks the reader's list.
   const ownBrand = !item.brand || brandIn(item.brand, notice);
-  const inText = (c: string | undefined) => Boolean(c && (ownBrand || distinctive(c)) && printedIn(c, notice.text));
+  // A product list appended to the page (an FSIS PDF, one product per line) prints every product's lots: there a
+  // code counts only on a row that also prints the item's UPC, when the item has one.
+  const [ownText, listText] = splitProductList(notice.text);
+  const listRows = listText ? listText.split("\n") : [];
+  const inList = (c: string) => listRows.some((row) => printedIn(c, row) && (!item.upc || printedIn(item.upc, row)));
+  const inText = (c: string | undefined) => Boolean(c && (ownBrand || distinctive(c)) && (printedIn(c, ownText) || inList(c)));
   const lotInText = !strongLot && inText(item.lot);
 
   // When a notice lists lots, the lot decides. A model match alone isn't enough for a lot-limited recall.
@@ -308,8 +313,11 @@ export function matchItem(item: Item, notice: Notice): Match {
   }
   // No lot list was read (a company announcement whose reader failed): the item's UPC and its pack or date code
   // both printed in the notice's text pin it down. Either one alone doesn't.
-  if (!lots.length && !item.lot && !strongModel && !u && item.upc && printedIn(item.upc, notice.text)) {
-    const code = lotLike(item).find((c) => printedIn(c, notice.text));
+  // In a product list appended to the page (an FSIS PDF, one product per line), the UPC and the code must share a
+  // line: the list prints every product's lots, so a UPC from one row and a lot from another prove nothing.
+  const withUpc =(c: string) => (printedIn(item.upc, ownText) && printedIn(c, ownText)) || listRows.some((row) => printedIn(item.upc, row) && printedIn(c, row));
+  if (!lots.length && !item.lot && !strongModel && !u && item.upc && (printedIn(item.upc, ownText) || listRows.some((row) => printedIn(item.upc, row)))) {
+    const code = lotLike(item).find(withUpc);
     if (code) {
       proof.push({ field: "upc", yours: item.upc, theirs: `${item.upc} (in the notice's text)`, matched: true });
       proof.push({ field: "lot", yours: code, theirs: `${code} (in the notice's text)`, matched: true });
@@ -326,8 +334,21 @@ export function matchItem(item: Item, notice: Notice): Match {
     const est = strongModel ? establishmentOf(item, mYours!) : undefined;
     if (est && !byText) for (const p of proof) if (p.field === "model" && p.yours === mYours) Object.assign(p, { yours: est, label: "USDA establishment" });
     const what = est ? `USDA establishment ${est.trim()}` : strongModel ? `${/^\d/.test(mYours!) ? "Model " : ""}${mYours}` : `UPC ${item.upc}`;
-    const window = notice.madeRanges?.[0];
     const food = item.kind === "food";
+    // No made-date window was read, but the record's own text limits the recall by best-by or use-by date and the
+    // household gave one: compare those dates, without a model (held-out set #2, g07: a listed UPC whose best-by
+    // date was outside "all dates through 3/30/2027" was tagged red).
+    const byDate = !notice.madeRanges?.length && (food || item.kind === "drug") && DATED.test(`${item.said} ${item.made ?? ""}`) ? dateWindowIn(ownText) : null;
+    if (byDate) {
+      const theirs = byDate.from <= "1901" ? `best by ${fmtDate(byDate.to)} or earlier` : `best by ${fmtDate(byDate.from)} to ${fmtDate(byDate.to)}`;
+      const d = looseDate(item.made) ?? looseDate(item.said.match(DATED_VALUE)?.[1]);
+      if (d) {
+        const inside = d >= byDate.from && d <= byDate.to;
+        proof.push({ field: "made", yours: item.made ?? d, theirs, matched: inside });
+        if (!inside) return { level: null, proof, why: `${what} is listed, but only packages marked ${theirs} are recalled, and yours is marked ${fmtDate(d)}.` };
+      }
+    }
+    const window = notice.madeRanges?.[0];
     if (window) {
       const made = parseMade(item.made);
       const span = windowText(window);
@@ -390,6 +411,53 @@ export const EXCLUDED = /\bnot\b[^.]{0,40}\b(included|affected|part of|subject|r
  * says some units are not included? Codes shorter than four characters, or without a digit, are too easy to find
  * by accident and never count.
  */
+/** A household line that gives a best-by, use-by or expiry date, and the date it gives. */
+const DATED = /\b(?:best|use|sell)[- ]?(?:by|if used by|before)\b|\bexp(?:iry|iration)?\b|\bbb\b/i;
+const DATED_VALUE = /\b(?:best|use|sell)[- ]?(?:by|if used by|before)\b:?\s*([0-9A-Za-z][0-9A-Za-z ,./-]{4,20}\d)/i;
+const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+
+/** A date as YYYY-MM-DD from "06/20/2027", "2/14/27", "2027-03-30" or "August 14th, 2026"; null otherwise. */
+export function looseDate(s: string | undefined): string | null {
+  if (!s) return null;
+  const t = s.toLowerCase();
+  const iso = (y: number, mo: number, d: number) =>
+    mo >= 1 && mo <= 12 && d >= 1 && d <= 31 && y > 1990 && y < 2100 ? `${y}-${String(mo).padStart(2, "0")}-${String(d).padStart(2, "0")}` : null;
+  let m = t.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
+  if (m) return iso(+m[1], +m[2], +m[3]);
+  m = t.match(/\b(\d{1,2})\/(\d{1,2})\/(\d{4}|\d{2})\b/);
+  if (m) return iso(m[3].length === 2 ? 2000 + +m[3] : +m[3], +m[1], +m[2]);
+  m = t.match(/\b([a-z]{3})[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})\b/);
+  if (m && MONTHS.includes(m[1])) return iso(+m[3], MONTHS.indexOf(m[1]) + 1, +m[2]);
+  return null;
+}
+
+/**
+ * The one best-by or use-by window a record prints ("Best By: all dates through 3/30/2027", "Best If Used By Dates
+ * from August 14th, 2026 to September 25th, 2026"), read without a model. Null when there is none, or more than one.
+ */
+export function dateWindowIn(text: string | undefined): { from: string; to: string } | null {
+  if (!text) return null;
+  const DATE = String.raw`(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}-\d{1,2}-\d{1,2}|[A-Za-z]{3,9}\.? \d{1,2}(?:st|nd|rd|th)?,? \d{4})`;
+  const found: { from: string; to: string }[] = [];
+  for (const seg of text.match(/\b(?:best[- ]?(?:by|if used by|before)|use[- ]?by|sell[- ]?by)\b[^.;\n]{0,90}/gi) ?? []) {
+    const span = seg.match(new RegExp(String.raw`(?:from\s+)?${DATE}\s*(?:to|through|thru|-|–)\s*${DATE}`, "i"));
+    const upto = seg.match(new RegExp(String.raw`(?:through|thru|until|up to)\s+${DATE}`, "i"));
+    const w = span ? { from: looseDate(span[1]), to: looseDate(span[2]) } : upto ? { from: "1900-01-01", to: looseDate(upto[1]) } : null;
+    if (w?.from && w.to && w.from <= w.to && !found.some((f) => f.from === w.from && f.to === w.to)) found.push({ from: w.from, to: w.to });
+  }
+  return found.length === 1 ? found[0] : null;
+}
+
+/** Where a product list appended to a page's text starts (lib/sources/web.ts writes it). */
+export const PRODUCT_LIST_MARK = "\n\nProduct list (PDF linked from the recall page): ";
+
+/** A page's own text, and the product list appended to it, if any. */
+export function splitProductList(text: string | undefined): [string | undefined, string | undefined] {
+  if (!text) return [text, undefined];
+  const i = text.indexOf(PRODUCT_LIST_MARK);
+  return i < 0 ? [text, undefined] : [text.slice(0, i), text.slice(i + PRODUCT_LIST_MARK.length)];
+}
+
 export function printedIn(code: string | undefined, text: string | undefined): boolean {
   if (!code || !text) return false;
   const c = norm(code);

@@ -4,6 +4,7 @@ import type { Notice } from "../types";
 import { noteSpend, tavilyModeNow } from "../budget";
 import { clean } from "./http";
 import { isListing } from "./listing";
+import { PRODUCT_LIST_MARK } from "../match";
 
 /**
  * Tavily: the web half of the search. The agency APIs trail their own newsrooms by one to six weeks, and some
@@ -125,7 +126,41 @@ export async function webExtract(urls: string[]): Promise<Map<string, string>> {
   const j = (await r.json()) as { results: { url: string; raw_content: string }[] };
   count("/extract", body, (j.results ?? []).length, keyless);
   for (const x of j.results ?? []) out.set(x.url, mainText(clean(x.raw_content)));
+  // A USDA FSIS recall page names its products only in a linked PDF product list (SKU, UPC, lot, dates,
+  // establishment). Tavily Extract reads PDFs, so the list is read too and appended to the page's text.
+  await Promise.all(
+    [...out].map(async ([url, text]) => {
+      const list = await fsisProductList(url, text).catch(() => null);
+      if (list) out.set(url, `${text}${PRODUCT_LIST_MARK}${list.url}\n${list.rows}`);
+    }),
+  );
   return out;
+}
+
+/**
+ * The product list FSIS links from a recall page, as `Recall_<number>-productlist.pdf` under the site's documents
+ * folder, read with Tavily Extract. Its table comes back as one run of text, so it is cut into rows where a row
+ * starts (an item number followed by a 10-14 digit UPC): a UPC and a lot then count together only when they share
+ * a row (lib/match.ts). Capped at 12,000 characters. Null when the page isn't an FSIS recall or there is no list.
+ */
+export async function fsisProductList(pageUrl: string, pageText: string): Promise<{ url: string; rows: string } | null> {
+  if (!/^https?:\/\/(www\.)?fsis\.usda\.gov\/recalls-alerts\/[^?#]+$/i.test(pageUrl)) return null;
+  const id = pageText.match(/\bRecall_(\d{3}-\d{4})\b/)?.[1] ?? pageText.match(/^\s*(\d{3}-\d{4})\s+(?:HIGH|LOW|PUBLIC HEALTH)/im)?.[1];
+  if (!id) return null;
+  const url = `https://www.fsis.usda.gov/sites/default/files/media_file/documents/Recall_${id}-productlist.pdf`;
+  const body = { urls: [url], extract_depth: "basic", format: "text" };
+  const { r, keyless } = await tavily("/extract", body, 20_000);
+  if (!r.ok) return null;
+  const j = (await r.json()) as { results?: { url: string; raw_content: string }[] };
+  count("/extract", body, j.results?.length ?? 0, keyless);
+  const raw = j.results?.[0]?.raw_content;
+  if (!raw || !/\d{10,14}/.test(raw)) return null;
+  return { url, rows: productRows(clean(raw)).slice(0, 12_000) };
+}
+
+/** One line per product row: a new row starts at a 3-6 digit item number followed by a 10-14 digit UPC. */
+export function productRows(text: string): string {
+  return text.replace(/\s+(?=\b\d{3,6}\s+\d{10,14}\b)/g, "\n").trim();
 }
 
 /** Where a press release's own text starts: its dateline ("WASHINGTON, Oct. 17, 2026 –") or announcement header. */

@@ -21,11 +21,11 @@
   "offline": true,
   "keyless": false,
   "code": {
-   "commit": "836f185",
+   "commit": "6109b1b",
    "libChanged": true
   }
  },
- "at": "2026-10-24T22:32:55.494Z",
+ "at": "2026-10-29T20:10:42.444Z",
  "cases": [
   {
    "id": "h01",
@@ -91,7 +91,7 @@
     "completion": 2315
    },
    "usd": 0.00852,
-   "ms": 68,
+   "ms": 123,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -165,7 +165,7 @@
     "completion": 2232
    },
    "usd": 0.00827,
-   "ms": 64,
+   "ms": 117,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -237,7 +237,7 @@
     "completion": 2202
    },
    "usd": 0.00818,
-   "ms": 64,
+   "ms": 117,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -311,7 +311,7 @@
     "completion": 1758
    },
    "usd": 0.00758,
-   "ms": 65,
+   "ms": 119,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -385,7 +385,7 @@
     "completion": 1158
    },
    "usd": 0.00541,
-   "ms": 39,
+   "ms": 81,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -459,7 +459,7 @@
     "completion": 3520
    },
    "usd": 0.01357,
-   "ms": 2026,
+   "ms": 1676,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -535,7 +535,7 @@
     "completion": 164
    },
    "usd": 0.00028,
-   "ms": 17,
+   "ms": 34,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -601,7 +601,7 @@
     "completion": 2555
    },
    "usd": 0.00887,
-   "ms": 35,
+   "ms": 71,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -671,17 +671,15 @@
     "completion": 5756
    },
    "usd": 0.02198,
-   "ms": 847,
+   "ms": 97,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 1,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /drug/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "h11",
@@ -744,17 +742,15 @@
     "completion": 5972
    },
    "usd": 0.02263,
-   "ms": 851,
+   "ms": 71,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 1,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /drug/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "h12",
@@ -815,17 +811,15 @@
     "completion": 5882
    },
    "usd": 0.02235,
-   "ms": 856,
+   "ms": 69,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 1,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /drug/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "h15",
@@ -887,7 +881,7 @@
     "completion": 10371
    },
    "usd": 0.03417,
-   "ms": 8,
+   "ms": 47,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -955,7 +949,7 @@
     "completion": 10365
    },
    "usd": 0.03415,
-   "ms": 8,
+   "ms": 48,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1023,14 +1017,14 @@
     "completion": 1981
    },
    "usd": 0.00818,
-   "ms": 1642,
+   "ms": 863,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 16,
+   "cacheMisses": 8,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -1095,7 +1089,7 @@
     "completion": 4664
    },
    "usd": 0.01632,
-   "ms": 1645,
+   "ms": 1717,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1116,7 +1110,7 @@
    "expect": "flag",
    "level": "danger",
    "notice": "FDA H-0021-2027",
-   "headline": "Do not eat if anyone in your home is allergic to soy; Return it to the place of purchase, or ask your pharmacist or Saint Francis Apizza LLC about a replacement or refund.",
+   "headline": "Do not eat if anyone in your home is allergic to soy; return it to the place of purchase.",
    "basis": "record-list",
    "allergen": "soy",
    "planned": "fixed",
@@ -1167,17 +1161,15 @@
     "completion": 3748
    },
    "usd": 0.01458,
-   "ms": 836,
+   "ms": 32,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 18,
-   "missed": [
-    "api.fda.gov /food/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "h21",
@@ -1237,7 +1229,7 @@
     "completion": 5662
    },
    "usd": 0.02123,
-   "ms": 9,
+   "ms": 14,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1305,7 +1297,7 @@
     "completion": 3610
    },
    "usd": 0.01551,
-   "ms": 9,
+   "ms": 16,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1370,7 +1362,7 @@
     "completion": 2537
    },
    "usd": 0.01404,
-   "ms": 14,
+   "ms": 17,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
@@ -1445,7 +1437,7 @@
     "completion": 8013
    },
    "usd": 0.02792,
-   "ms": 12,
+   "ms": 17,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1521,7 +1513,7 @@
     "completion": 818
    },
    "usd": 0.00308,
-   "ms": 8,
+   "ms": 13,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1595,7 +1587,7 @@
     "completion": 736
    },
    "usd": 0.00283,
-   "ms": 8,
+   "ms": 11,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1667,7 +1659,7 @@
     "completion": 754
    },
    "usd": 0.00288,
-   "ms": 6,
+   "ms": 10,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1735,7 +1727,7 @@
     "completion": 4031
    },
    "usd": 0.01465,
-   "ms": 11,
+   "ms": 15,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1803,7 +1795,7 @@
     "completion": 1450
    },
    "usd": 0.005,
-   "ms": 6,
+   "ms": 9,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1869,7 +1861,7 @@
     "completion": 581
    },
    "usd": 0.00238,
-   "ms": 4,
+   "ms": 8,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -1935,7 +1927,7 @@
     "completion": 4569
    },
    "usd": 0.01682,
-   "ms": 9,
+   "ms": 15,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2004,14 +1996,14 @@
     "completion": 8005
    },
    "usd": 0.02761,
-   "ms": 1634,
+   "ms": 840,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 10,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -2074,14 +2066,14 @@
     "completion": 8101
    },
    "usd": 0.02789,
-   "ms": 1635,
+   "ms": 834,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 10,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -2103,10 +2095,10 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 5,
-     "prompt": 2206,
-     "completion": 4619,
-     "usd": 0.016063,
+     "calls": 6,
+     "prompt": 2555,
+     "completion": 5414,
+     "usd": 0.018797,
      "truncated": 2,
      "retried": 1
     },
@@ -2140,23 +2132,22 @@
      "fresh": 3
     }
    ],
-   "calls": 5,
+   "calls": 6,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 2206,
-    "completion": 4619
+    "prompt": 2555,
+    "completion": 5414
    },
-   "usd": 0.01606,
-   "ms": 820,
+   "usd": 0.0188,
+   "ms": 429,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 2,
-   "cacheMisses": 7,
+   "cacheMisses": 4,
    "missed": [
-    "api.tokenfactory.nebius.com nvidia/Nemotron-3-Ultra-550b-a55b",
     "api.fda.gov /food/enforcement.json"
    ]
   },
@@ -2218,14 +2209,14 @@
     "completion": 816
    },
    "usd": 0.00373,
-   "ms": 1228,
+   "ms": 417,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 8,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -2286,14 +2277,14 @@
     "completion": 819
    },
    "usd": 0.00374,
-   "ms": 1633,
+   "ms": 416,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 10,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -2355,17 +2346,15 @@
     "completion": 765
    },
    "usd": 0.00358,
-   "ms": 834,
+   "ms": 9,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 4,
-   "missed": [
-    "api.fda.gov /food/enforcement.json"
-   ]
+   "cacheMisses": 0,
+   "missed": []
   },
   {
    "id": "h38",
@@ -2427,7 +2416,7 @@
     "completion": 1927
    },
    "usd": 0.00727,
-   "ms": 4,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,
@@ -2454,16 +2443,18 @@
     "reader": "Nemotron 3 Ultra",
     "noticeReader": "Nemotron 3 Ultra",
     "tokens": {
-     "calls": 5,
-     "prompt": 5018,
-     "completion": 2929,
-     "usd": 0.013805
+     "calls": 6,
+     "prompt": 18900,
+     "completion": 7448,
+     "usd": 0.041244,
+     "truncated": 2,
+     "retried": 1
     },
     "tavily": {
      "searches": 1,
-     "extracts": 1,
-     "extractUrls": 4,
-     "credits": 2
+     "extracts": 5,
+     "extractUrls": 5,
+     "credits": 3
     }
    },
    "items": [
@@ -2488,20 +2479,20 @@
      "fresh": 4
     }
    ],
-   "calls": 5,
+   "calls": 6,
    "liveCalls": 0,
    "tokens": {
-    "prompt": 5018,
-    "completion": 2929
+    "prompt": 18900,
+    "completion": 7448
    },
-   "usd": 0.0138,
-   "ms": 9,
+   "usd": 0.04124,
+   "ms": 19,
    "msFresh": false,
-   "tavily": 2,
+   "tavily": 6,
    "tavilySearch": 1,
-   "tavilyExtract": 1,
-   "tavilyCredits": 2,
-   "truncated": 0,
+   "tavilyExtract": 5,
+   "tavilyCredits": 3,
+   "truncated": 2,
    "cacheMisses": 0,
    "missed": []
   },
@@ -2565,14 +2556,14 @@
     "completion": 7428
    },
    "usd": 0.02586,
-   "ms": 1654,
+   "ms": 838,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 10,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -2635,14 +2626,14 @@
     "completion": 816
    },
    "usd": 0.00373,
-   "ms": 1221,
+   "ms": 414,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 8,
+   "cacheMisses": 4,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -2704,14 +2695,14 @@
     "completion": 655
    },
    "usd": 0.00324,
-   "ms": 830,
+   "ms": 416,
    "msFresh": false,
    "tavily": 2,
    "tavilySearch": 1,
    "tavilyExtract": 1,
    "tavilyCredits": 2,
    "truncated": 0,
-   "cacheMisses": 4,
+   "cacheMisses": 2,
    "missed": [
     "api.fda.gov /food/enforcement.json"
    ]
@@ -2770,7 +2761,7 @@
     "completion": 319
    },
    "usd": 0.00127,
-   "ms": 2,
+   "ms": 6,
    "msFresh": false,
    "tavily": 1,
    "tavilySearch": 1,

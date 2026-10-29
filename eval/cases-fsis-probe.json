@@ -1,0 +1,7 @@
+{
+ "about": "In-sample probe written Oct 30 2026, after held-out set #2 ran, to show the FSIS product-list read (lib/sources/web.ts fsisProductList): USDA FSIS recall 026-2026 (Kayem Foods, Oct 17) prints its products only in a linked PDF. Ground truth is that PDF itself (https://www.fsis.usda.gov/sites/default/files/media_file/documents/Recall_026-2026-productlist.pdf, read Oct 30): UPC 030771010182 (KAYEM 8:1 LOWER SODIUM HOT DOG) appears on one row, with unit lot 26-225; lot 26-203 is printed only on other products' rows. Not held out: the code was written for this case.",
+ "cases": [
+  { "id": "k1", "set": "lag", "group": "positive", "form": "clean", "text": "Kayem 8:1 lower sodium hot dogs, UPC 030771010182, lot 26-225", "expect": "danger", "recall": ["FSIS 026-2026"] },
+  { "id": "k2", "set": "lag", "group": "near-miss", "form": "clean", "text": "Kayem 8:1 lower sodium hot dogs, UPC 030771010182, lot 26-203", "expect": "not-danger", "near": "FSIS 026-2026", "note": "26-203 is printed in the list only on other products' rows" }
+ ]
+}

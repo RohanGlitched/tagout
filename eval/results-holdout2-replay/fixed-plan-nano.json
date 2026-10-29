@@ -1,0 +1,1359 @@
+{
+ "arm": "fixed-plan-nano",
+ "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+  ],
+  "useAgent": false,
+  "useModel": true,
+  "label": "Fixed search plan instead of the agent; Ultra list reader, Nano notice reader; rules decide",
+  "cases": "cases-holdout2.json",
+  "today": "2026-10-29",
+  "noWeb": false,
+  "offline": true,
+  "keyless": false,
+  "code": {
+   "commit": "6109b1b",
+   "libChanged": true
+  }
+ },
+ "at": "2026-10-29T20:10:19.147Z",
+ "cases": [
+  {
+   "id": "g01",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "CPSC 27-015",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 320,
+     "completion": 442,
+     "usd": 0.001646
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Giant",
+     "product": "SureLock Flex Key Coil 15 bike lock",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Giant”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Giant SureLock Flex Key Coil 15 bike lock recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 320,
+    "completion": 442
+   },
+   "usd": 0.00165,
+   "ms": 2025,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 14,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g02",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 27-015",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 320,
+     "completion": 671,
+     "usd": 0.002333
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Giant",
+     "product": "SureLock Flex Key Coil 15 bike lock",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Giant”",
+     "found": 12,
+     "fresh": 12
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Giant SureLock Flex Key Coil 15 bike lock recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 320,
+    "completion": 671
+   },
+   "usd": 0.00233,
+   "ms": 2051,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 14,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g03",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "CPSC 26-741",
+   "headline": "PR01 is listed, but only units made between 1 Apr 2025 and 17 Jun 2026. Check the date of manufacture on the label.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 3,
+     "prompt": 1332,
+     "completion": 4309,
+     "usd": 0.0053554,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Lestoil",
+     "product": "Heavy Duty Multi-Purpose Cleaner, Fuerza de Lavanda Tropical",
+     "codes": [
+      "date code PR01 25230"
+     ],
+     "made": "PR01 25230",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lestoil”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lestoil Heavy Duty Multi-Purpose Cleaner, Fuerza de Lavanda Tropical recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 3,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1332,
+    "completion": 4309
+   },
+   "usd": 0.00536,
+   "ms": 62,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g04",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "CPSC 26-741",
+   "headline": "This product line is recalled. Check the model number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 3,
+     "prompt": 1332,
+     "completion": 3653,
+     "usd": 0.0033874,
+     "truncated": 1,
+     "retried": 1
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Lestoil",
+     "product": "Heavy Duty Multi-Purpose Cleaner, Fuerza de Lavanda Tropical",
+     "made": "PR01 26200",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Lestoil”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Lestoil Heavy Duty Multi-Purpose Cleaner, Fuerza de Lavanda Tropical recall”",
+     "found": 1,
+     "fresh": 0
+    }
+   ],
+   "calls": 3,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1332,
+    "completion": 3653
+   },
+   "usd": 0.00339,
+   "ms": 63,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 1,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g05",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-010",
+   "headline": "XG1310700206 is listed in this recall.",
+   "basis": "text",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 333,
+     "completion": 542,
+     "usd": 0.001959
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Expert Grill",
+     "product": "21 inch 3-head grill brush",
+     "model": "XG1310700206",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Expert Grill”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “XG1310700206”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Expert Grill 21 inch 3-head grill brush recall”",
+     "found": 4,
+     "fresh": 3
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 333,
+    "completion": 542
+   },
+   "usd": 0.00196,
+   "ms": 1360,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g06",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "inspected",
+   "headline": "No recall found for St Francis Apizza cheese pizza, UPC 666186277591, best by 2/14/27.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 325,
+     "completion": 904,
+     "usd": 0.003037
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "St Francis",
+     "product": "cheese pizza",
+     "upc": "666186277591",
+     "made": "best by 2/14/27",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 666186277591, brand “St Francis”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “St Francis cheese pizza recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 325,
+    "completion": 904
+   },
+   "usd": 0.00304,
+   "ms": 20,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g07",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "FDA H-0021-2027",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "allergen": "soy",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 1322,
+     "completion": 943,
+     "usd": 0.0020925600000000003
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Saint Francis",
+     "product": "Apizza frozen cheese pizza 17 oz",
+     "upc": "666186277591",
+     "made": "06/20/2027",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 666186277591, brand “Saint Francis”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Saint Francis Apizza frozen cheese pizza 17 oz recall”",
+     "found": 1,
+     "fresh": 1
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1322,
+    "completion": 943
+   },
+   "usd": 0.00209,
+   "ms": 26,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g08",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "FDA H-0008-2027",
+   "headline": "UPC 267173510983 is listed in this recall.",
+   "basis": "record-list",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 5,
+     "prompt": 2471,
+     "completion": 1844,
+     "usd": 0.00392704
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "WinCo",
+     "product": "salsa bean dip express tray 54 oz",
+     "upc": "267173510983",
+     "made": "9/2/2026",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 267173510983, brand “WinCo”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “WinCo salsa bean dip express tray 54 oz recall”",
+     "found": 1,
+     "fresh": 1
+    }
+   ],
+   "calls": 5,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 2471,
+    "completion": 1844
+   },
+   "usd": 0.00393,
+   "ms": 848,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 8,
+   "missed": [
+    "api.fda.gov /food/enforcement.json"
+   ]
+  },
+  {
+   "id": "g09",
+   "group": "no-code",
+   "set": "database",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This recall is limited to certain lots. Check the lot number printed on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 6,
+     "prompt": 3708,
+     "completion": 1727,
+     "usd": 0.0022073600000000002
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "FreshPoint",
+     "product": "cranberry chicken salad wedge",
+     "made": "9/10/2026",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “FreshPoint”",
+     "found": 6,
+     "fresh": 6
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “FreshPoint cranberry chicken salad wedge recall”",
+     "found": 1,
+     "fresh": 1
+    }
+   ],
+   "calls": 6,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 3708,
+    "completion": 1727
+   },
+   "usd": 0.00221,
+   "ms": 19,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g10",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "modelUnavailable": 1,
+    "tokens": {
+     "calls": 13,
+     "prompt": 38153,
+     "completion": 20146,
+     "usd": 0.00861388,
+     "truncated": 7,
+     "retried": 4
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "device",
+     "brand": "Medline",
+     "product": "bariatric rollator",
+     "model": "MDS86800XWS",
+     "lot": "05425110001",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA device recalls, lot 05425110001, brand “Medline”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Medline bariatric rollator recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 13,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 38153,
+    "completion": 20146
+   },
+   "usd": 0.00861,
+   "ms": 123,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 7,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g11",
+   "group": "positive",
+   "set": "database",
+   "form": "messy",
+   "expect": "danger",
+   "level": "warning",
+   "notice": "WEB CPSC newsroom",
+   "headline": "This product line is recalled. Check the lot number on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 316,
+     "completion": 401,
+     "usd": 0.001519
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "apothecary",
+     "product": "tirzepatide 18mg/ml",
+     "lot": "AP202630",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot AP202630, brand “apothecary”",
+     "found": 10,
+     "fresh": 10
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “apothecary tirzepatide 18mg/ml recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 316,
+    "completion": 401
+   },
+   "usd": 0.00152,
+   "ms": 1789,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 18,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g12",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "headline": "Model unavailable: not cleared.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "modelUnavailable": 1,
+    "tokens": {
+     "calls": 1,
+     "prompt": 329,
+     "completion": 440,
+     "usd": 0.001649
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "drug",
+     "brand": "Apothecary Pharma",
+     "product": "tirzepatide injection 18 mg/mL, 4 mL vial",
+     "lot": "AP-202626",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA drug recalls, lot AP-202626, brand “Apothecary Pharma”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Apothecary Pharma tirzepatide injection 18 mg/mL, 4 mL vial recall”",
+     "found": 1,
+     "fresh": 1
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 329,
+    "completion": 440
+   },
+   "usd": 0.00165,
+   "ms": 1833,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 4,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g13",
+   "group": "positive",
+   "set": "database",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "CPSC 27-017",
+   "headline": "GRVL is listed in this recall.",
+   "basis": "reader-list",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1723,
+     "completion": 1157,
+     "usd": 0.00351544
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Van Rysel",
+     "product": "GRVL AF GRX Black gravel bike",
+     "model": "5476622",
+     "codes": [
+      "GRVL AF GRX"
+     ],
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Van Rysel”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “5476622”",
+     "found": 1,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Van Rysel GRVL AF GRX Black gravel bike recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1723,
+    "completion": 1157
+   },
+   "usd": 0.00352,
+   "ms": 12,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g14",
+   "group": "near-miss",
+   "set": "database",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "danger",
+   "notice": "CPSC 27-017",
+   "headline": "GRVL is listed in this recall.",
+   "basis": "reader-list",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1723,
+     "completion": 1259,
+     "usd": 0.00382144
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Van Rysel",
+     "product": "GRVL AF GRX Black gravel bike",
+     "model": "5476625",
+     "codes": [
+      "GRVL AF GRX"
+     ],
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Van Rysel”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “5476625”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Van Rysel GRVL AF GRX Black gravel bike recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1723,
+    "completion": 1259
+   },
+   "usd": 0.00382,
+   "ms": 11,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g15",
+   "group": "no-code",
+   "set": "lag",
+   "form": "clean",
+   "expect": "flag",
+   "level": "warning",
+   "notice": "WEB FDA website",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 308,
+     "completion": 349,
+     "usd": 0.001355
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Haifa Smoked Fish",
+     "product": "cold smoked sprats",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Haifa Smoked Fish”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Haifa Smoked Fish cold smoked sprats recall”",
+     "found": 4,
+     "fresh": 4
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 308,
+    "completion": 349
+   },
+   "usd": 0.00136,
+   "ms": 1566,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 6,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g16",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "WEB FDA website",
+   "headline": "Do not eat if anyone in your home is allergic to sesame; follow the recall's remedy below.",
+   "basis": "text",
+   "allergen": "sesame",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1736,
+     "completion": 1079,
+     "usd": 0.00319232
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 2,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Pepin",
+     "product": "Pan Para Bien Al Grano",
+     "lot": "3B1 280",
+     "upc": "0 21425 01513 4",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 3B1 280, UPC 0 21425 01513 4, brand “Pepin”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Pepin Pan Para Bien Al Grano recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1736,
+    "completion": 1079
+   },
+   "usd": 0.00319,
+   "ms": 1545,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 2,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g17",
+   "group": "near-miss",
+   "set": "lag",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your lot code.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 1736,
+     "completion": 1297,
+     "usd": 0.00384632
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 1,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Pan Pepin",
+     "product": "Para Bien Al Grano",
+     "lot": "3B1 279",
+     "upc": "0 21425 01513 4",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 3B1 279, UPC 0 21425 01513 4, brand “Pan Pepin”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Pan Pepin Para Bien Al Grano recall”",
+     "found": 3,
+     "fresh": 3
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 1736,
+    "completion": 1297
+   },
+   "usd": 0.00385,
+   "ms": 20,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  },
+  {
+   "id": "g18",
+   "group": "car",
+   "set": "database",
+   "form": "clean",
+   "expect": "warning",
+   "level": "warning",
+   "notice": "NHTSA 26V689000",
+   "headline": "This recall covers your make, model and year. Enter your VIN on NHTSA's site to see if your car is one of them.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 1,
+     "prompt": 306,
+     "completion": 384,
+     "usd": 0.001458
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 1,
+     "extractUrls": 2,
+     "credits": 2
+    }
+   },
+   "items": [
+    {
+     "kind": "vehicle",
+     "brand": "Ford",
+     "product": "F-150",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_vehicle_recalls",
+     "label": "NHTSA vehicle recalls for 2026 Ford F-150",
+     "found": 8,
+     "fresh": 8
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Ford F-150 recall”",
+     "found": 6,
+     "fresh": 6
+    }
+   ],
+   "calls": 1,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 306,
+    "completion": 384
+   },
+   "usd": 0.00146,
+   "ms": 1960,
+   "msFresh": false,
+   "tavily": 2,
+   "tavilySearch": 1,
+   "tavilyExtract": 1,
+   "tavilyCredits": 2,
+   "truncated": 0,
+   "cacheMisses": 6,
+   "missed": [
+    "api.tokenfactory.nebius.com nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B"
+   ]
+  },
+  {
+   "id": "g19",
+   "group": "clean",
+   "set": "database",
+   "form": "clean",
+   "expect": "inspected",
+   "level": "inspected",
+   "headline": "A recall exists for this brand, but none lists your model number.",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "noticeReader": "Nemotron 3 Nano",
+    "tokens": {
+     "calls": 2,
+     "prompt": 687,
+     "completion": 901,
+     "usd": 0.0028055999999999997
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 0,
+     "extractUrls": 0,
+     "credits": 1
+    }
+   },
+   "items": [
+    {
+     "kind": "product",
+     "brand": "Dyson",
+     "product": "V15 Detect cordless vacuum",
+     "model": "SV47",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, title “Dyson”",
+     "found": 1,
+     "fresh": 1
+    },
+    {
+     "tool": "search_cpsc",
+     "label": "CPSC recalls, text “SV47”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Dyson V15 Detect cordless vacuum recall”",
+     "found": 5,
+     "fresh": 4
+    }
+   ],
+   "calls": 2,
+   "liveCalls": 0,
+   "tokens": {
+    "prompt": 687,
+    "completion": 901
+   },
+   "usd": 0.00281,
+   "ms": 10,
+   "msFresh": false,
+   "tavily": 1,
+   "tavilySearch": 1,
+   "tavilyExtract": 0,
+   "tavilyCredits": 1,
+   "truncated": 0,
+   "cacheMisses": 0,
+   "missed": []
+  }
+ ]
+}

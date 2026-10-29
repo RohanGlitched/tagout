@@ -1,0 +1,232 @@
+{
+ "arm": "tagout",
+ "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+ "config": {
+  "kind": "pipeline",
+  "intake": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "agent": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "reader": [
+   "nvidia/Nemotron-3-Ultra-550b-a55b"
+  ],
+  "useAgent": true,
+  "useModel": true,
+  "label": "Tagout: Ultra reads the list, runs the agent and reads the notices; rules decide",
+  "cases": "cases-fsis-probe.json",
+  "today": "2026-10-30",
+  "noWeb": false,
+  "offline": false,
+  "keyless": true,
+  "code": {
+   "commit": "6109b1b",
+   "libChanged": true
+  }
+ },
+ "at": "2026-10-29T20:07:15.397Z",
+ "cases": [
+  {
+   "id": "k1",
+   "group": "positive",
+   "set": "lag",
+   "form": "clean",
+   "expect": "danger",
+   "level": "danger",
+   "notice": "WEB USDA FSIS",
+   "headline": "Lot 26-225 is printed in this recall.",
+   "basis": "text",
+   "planned": "fixed",
+   "engine": {
+    "planned": "fixed",
+    "reader": "Nemotron 3 Ultra",
+    "lateLite": 1,
+    "tokens": {
+     "calls": 4,
+     "prompt": 8038,
+     "completion": 1204,
+     "usd": 0.01165
+    },
+    "tavily": {
+     "searches": 2,
+     "extracts": 5,
+     "extractUrls": 5,
+     "credits": 4
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Kayem",
+     "product": "8:1 lower sodium hot dogs",
+     "lot": "26-225",
+     "upc": "030771010182",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 26-225, UPC 030771010182, brand “Kayem”, “8:1 lower sodium hot dogs”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, brand “Kayem”, “hot dogs”",
+     "found": 3,
+     "fresh": 3
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, UPC 030771010182",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 26-225",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kayem hot dogs recall”",
+     "found": 4,
+     "fresh": 4
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Kayem Foods Inc. Recalls Ready-To-Eat Chicken Sausage Products Due t…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Kayem Foods Inc. Recalls Meat and Poultry Products Due to Possible T…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Kayem Foods Recalls Sausage Products Due To Possible Foreign Matter…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Kayem Foods Inc. Recalls Chicken Sausage Products Due To Misbranding”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 26-225, UPC 030771010182, brand “Kayem”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kayem 8:1 lower sodium hot dogs recall”",
+     "found": 2,
+     "fresh": 2
+    }
+   ],
+   "calls": 4,
+   "liveCalls": 4,
+   "tokens": {
+    "prompt": 8038,
+    "completion": 1204
+   },
+   "usd": 0.01165,
+   "ms": 633343,
+   "msFresh": true,
+   "tavily": 7,
+   "tavilySearch": 2,
+   "tavilyExtract": 5,
+   "tavilyCredits": 4,
+   "truncated": 0
+  },
+  {
+   "id": "k2",
+   "group": "near-miss",
+   "set": "lag",
+   "form": "clean",
+   "expect": "not-danger",
+   "level": "warning",
+   "notice": "WEB USDA FSIS",
+   "headline": "This product line is recalled. Check the lot code and dates on yours.",
+   "planned": "model",
+   "engine": {
+    "planned": "model",
+    "reader": "Nemotron 3 Ultra",
+    "agent": "Nemotron 3 Ultra",
+    "tokens": {
+     "calls": 9,
+     "prompt": 47062,
+     "completion": 11857,
+     "usd": 0.082633,
+     "truncated": 4,
+     "retried": 2
+    },
+    "tavily": {
+     "searches": 1,
+     "extracts": 2,
+     "extractUrls": 3,
+     "credits": 3
+    }
+   },
+   "items": [
+    {
+     "kind": "food",
+     "brand": "Kayem",
+     "product": "8:1 lower sodium hot dogs",
+     "lot": "26-203",
+     "upc": "030771010182",
+     "readFrom": "typed"
+    }
+   ],
+   "steps": [
+    {
+     "tool": "search_fda",
+     "label": "FDA food recalls, lot 26-203, UPC 030771010182, brand “Kayem”, “8:1 lower sodium hot dogs”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "search_web",
+     "label": "Tavily web search “Kayem hot dogs recall”",
+     "found": 2,
+     "fresh": 2
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “Kayem Foods Inc. Recalls Meat and Poultry Products Due to Possible T…”",
+     "found": 0,
+     "fresh": 0
+    },
+    {
+     "tool": "read_page",
+     "label": "Tavily read the page “SKU”",
+     "found": 0,
+     "fresh": 0
+    }
+   ],
+   "calls": 9,
+   "liveCalls": 9,
+   "tokens": {
+    "prompt": 47062,
+    "completion": 11857
+   },
+   "usd": 0.08263,
+   "ms": 80682,
+   "msFresh": true,
+   "tavily": 3,
+   "tavilySearch": 1,
+   "tavilyExtract": 2,
+   "tavilyCredits": 3,
+   "truncated": 4
+  }
+ ]
+}

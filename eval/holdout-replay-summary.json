@@ -1,5 +1,5 @@
 {
- "at": "2026-10-24T22:34:35.373Z",
+ "at": "2026-10-29T20:10:54.813Z",
  "firstRun": null,
  "cases": 39,
  "groups": {
@@ -25,7 +25,7 @@
     0.669,
     0.987
    ],
-   "reds": 19,
+   "reds": 20,
    "truePositives": 17,
    "positives": 19,
    "falseRed": [],
@@ -97,11 +97,11 @@
      "falseClear": []
     }
    },
-   "usdPerItem": 0.028109743589743587,
-   "usdTotal": 1.09628,
-   "tavilyPerItem": 2.2051282051282053,
-   "tavilyUsdPerItem": 0.017641025641025643,
-   "usdPerItemWithTavily": 0.045750769230769234,
+   "usdPerItem": 0.02877358974358974,
+   "usdTotal": 1.12217,
+   "tavilyPerItem": 2.2564102564102564,
+   "tavilyUsdPerItem": 0.01805128205128205,
+   "usdPerItemWithTavily": 0.04682487179487179,
    "medianMs": null,
    "webOnlyReds": [
     "h32",
@@ -123,19 +123,20 @@
     "h42",
     "h43"
    ],
-   "fellBack": [],
+   "fellBack": [
+    "h38",
+    "h39"
+   ],
    "cacheMisses": [
-    "h10",
-    "h11",
     "h12",
     "h19",
-    "h20",
     "h32",
     "h33",
     "h34",
     "h35",
     "h36",
-    "h37",
+    "h38",
+    "h39",
     "h40",
     "h41",
     "h42",
@@ -147,7 +148,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "836f185",
+     "commit": "6109b1b",
      "libChanged": true
     }
    },
@@ -185,7 +186,7 @@
     "h35": "danger",
     "h36": "inspected",
     "h37": "warning",
-    "h38": "warning",
+    "h38": "danger",
     "h39": "warning",
     "h40": "danger",
     "h41": "danger",
@@ -193,13 +194,14 @@
     "h43": "warning"
    },
    "redBasis": {
-    "n": 19,
+    "n": 20,
     "by": {
      "reader-list": 15,
-     "record-list": 4
+     "record-list": 4,
+     "text": 1
     },
     "how": {
-     "exact": 19
+     "exact": 20
     },
     "window": 0,
     "cases": {
@@ -220,6 +222,7 @@
      "h32": "reader-list",
      "h34": "reader-list",
      "h35": "reader-list",
+     "h38": "text",
      "h40": "reader-list",
      "h41": "reader-list"
     }
@@ -368,7 +371,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "836f185",
+     "commit": "6109b1b",
      "libChanged": true
     }
    },
@@ -533,11 +536,11 @@
      "falseClear": []
     }
    },
-   "usdPerItem": 0.012798974358974362,
-   "usdTotal": 0.4991600000000001,
-   "tavilyPerItem": 1.564102564102564,
-   "tavilyUsdPerItem": 0.012512820512820513,
-   "usdPerItemWithTavily": 0.025311794871794874,
+   "usdPerItem": 0.013572820512820516,
+   "usdTotal": 0.5293400000000001,
+   "tavilyPerItem": 1.5897435897435896,
+   "tavilyUsdPerItem": 0.012717948717948718,
+   "usdPerItemWithTavily": 0.026290769230769236,
    "medianMs": null,
    "webOnlyReds": [
     "h32",
@@ -561,12 +564,8 @@
    "fellBack": [],
    "cacheMisses": [
     "h06",
-    "h10",
-    "h11",
-    "h12",
     "h18",
     "h19",
-    "h20",
     "h21",
     "h24",
     "h28",
@@ -575,7 +574,6 @@
     "h34",
     "h35",
     "h36",
-    "h37",
     "h38",
     "h40",
     "h41",
@@ -587,7 +585,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "836f185",
+     "commit": "6109b1b",
      "libChanged": true
     }
    },
@@ -757,11 +755,11 @@
      "falseClear": []
     }
    },
-   "usdPerItem": 0.0019735897435897436,
-   "usdTotal": 0.07697,
-   "tavilyPerItem": 1.564102564102564,
-   "tavilyUsdPerItem": 0.012512820512820513,
-   "usdPerItemWithTavily": 0.014486410256410256,
+   "usdPerItem": 0.001971025641025641,
+   "usdTotal": 0.07687,
+   "tavilyPerItem": 1.5897435897435896,
+   "tavilyUsdPerItem": 0.012717948717948718,
+   "usdPerItemWithTavily": 0.014688974358974358,
    "medianMs": null,
    "webOnlyReds": [
     "h32",
@@ -784,18 +782,14 @@
    ],
    "fellBack": [],
    "cacheMisses": [
-    "h10",
-    "h11",
-    "h12",
     "h18",
     "h19",
-    "h20",
     "h32",
     "h33",
     "h34",
     "h35",
     "h36",
-    "h37",
+    "h39",
     "h40",
     "h41",
     "h42"
@@ -806,7 +800,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "836f185",
+     "commit": "6109b1b",
      "libChanged": true
     }
    },
@@ -1017,7 +1011,7 @@
     "offline": true,
     "keyless": false,
     "code": {
-     "commit": "836f185",
+     "commit": "6109b1b",
      "libChanged": true
     }
    },
