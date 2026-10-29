@@ -361,7 +361,7 @@
 .heldCards {
   margin: 4px 0 30px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 .heldCard {
@@ -415,7 +415,7 @@
   font-weight: 650;
   text-decoration: underline;
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .heldCards {
     grid-template-columns: minmax(0, 1fr);
   }

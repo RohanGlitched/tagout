@@ -19,7 +19,7 @@
 
 ---
 
-**On two held-out sets it had never seen, each run once (39 cases, then 19 pre-registered with a public git tag), Tagout got 46 of 58 right and wrongly told one person to stop using something: a pizza whose best-by date was outside the recall's window. Tavily was the difference on recalls no database listed yet: with it off, all 10 in the first set were cleared green; with it on, 8 were flagged. On the 105 cases it was tuned on, it now tags all 46 recalled units Do not use with no false alarm; NVIDIA Nemotron 3 Ultra on its own caught 5 of the 46.**
+**On three held-out sets it had never seen, each run once (39 cases, then 19 and 8 pre-registered with public git tags), Tagout got 50 of 66 right, flagged 42 of 46 recalled items, and raised 3 false alarms, all published with their causes. Tavily was the difference on recalls no database listed yet: with it off, all 10 in the first set were cleared green; with it on, 8 were flagged. On the 105 cases it was tuned on, it now tags all 46 recalled units Do not use with no false alarm; NVIDIA Nemotron 3 Ultra on its own caught 5 of the 46.**
 
 Tagout checks what a household owns against live U.S. recalls. List what you own, or photograph the label. An agent on **NVIDIA Nemotron** (served by **Nebius Token Factory**) searches NHTSA, CPSC and the FDA with tools, and **Tavily** searches the agencies' newsrooms and USDA for anything the databases don't have yet. Nemotron reads each notice's list of affected models and lots, every code is checked against the notice's own text, and plain rules hang the tag. Save the list as a watch and a daily sweep reads every new recall once and matches it against the list; the watch's Atom feed tells you when one covers something you own.
 
@@ -155,6 +155,17 @@ All model calls go to **Nebius Token Factory**'s OpenAI-compatible API (`https:/
 The track says to reach for Nemotron 3 Ultra for serious reasoning and let Nano or Super handle the fast, everyday calls. Measured: Ultra keeps the list reader and the agent (Nano dropped a car's year; Super filed medicines as products, the wrong database); Nano reads the notices in the lite tier (101/105 at 0.23¢); Super VL reads plates; the daily sweep reads each new recall once. On unseen data, held out #2's seven Tagout reds came 2 from the reader's list, 3 from the record's own list and 2 from the notice text, and the same code with no model got 10/19 against Tagout's 15/19. The agent's edge over the fixed plan is small (31 vs 30 and 15 vs 13 held out); only the agent got h07, h43, g06 and g14. We measured each size in each role and kept Ultra where a cheaper model made a mistake that matters (a wrong red tag, a medicine searched in the wrong database). Where Nano held up, it now runs: when the demo's daily Ultra allowance is spent, checks drop to the **lite tier** (fixed plan plus Nano reading the notices: 0.23¢ of Nemotron an item, 1.4¢ all in), where they used to drop to no model at all (87 of 105 on Oct 15, 10 recalled units cleared). Past the lite allowance too, the rules-only plan still runs, and the page says which tier a check used.
 
 On the 105 cases at today's code a full check averages **2.6¢ of Nemotron an item**, plus 1.7¢ of Tavily (2.16 credits as billed, at $0.008): about 4.4¢ all in; the five-item showcase took 37 Token Factory calls and about 114k tokens (15.5¢, 3.1¢ an item). Each finished check reports its own calls and tokens under "How this check ran". Model chains are set by env (`NEBIUS_AGENT_MODELS`, `NEBIUS_READER_MODELS`, `NEBIUS_INTAKE_MODELS`, `NEBIUS_LITE_READER_MODELS`, `NEBIUS_VISION_MODELS`).
+
+## Held out #3: 8 cases, pre-registered Oct 30
+
+Written after the fixes that set #2 led to, to test them on recalls they had never seen: four recalls posted Oct 15-29 that bound their codes or dates (a made-date window, two windows with a gap, a serial interval, a serial run), one unit inside and one outside each. Pushed with the tag [`prereg-2026-10-30`](https://github.com/RohanGlitched/tagout/releases/tag/prereg-2026-10-30) (sha256 `e51b6ea5…`) and run once at `aa53b04`; results unedited in [`eval/results-holdout3/`](eval/results-holdout3).
+
+| Arm | Right | False alarms | Recalled items cleared green |
+|---|---|---|---|
+| **Tagout** | **4/8** | **2/4** | 0/4 |
+| Lite tier | 5/8 | 2/4 | 0/4 |
+
+Both false alarms come from a code or a date that never reached the matcher: a made-date window in CPSC's prose that wasn't read (j2), and a serial the list reader dropped, so the product code matched an older recall (j6). Nothing has been fixed since; details in [`eval/HOLDOUT.md`](eval/HOLDOUT.md#held-out-3-pre-registered-oct-30). Across the three held-out sets: **50 of 66 right, 3 false alarms, 42 of 46 recalled items flagged**.
 
 ## What Tavily does here
 

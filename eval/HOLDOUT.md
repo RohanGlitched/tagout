@@ -288,6 +288,20 @@ node eval/score.mjs --cases cases-holdout3.json --verified verified-holdout3.jso
 
 The result is published as it comes out, misses included.
 
+**Run once on Oct 30 at `aa53b04` (the tag), results unedited in `0a6ded3`:**
+
+| Arm (8 cases) | Right | False alarms | Recalled items cleared green | Coded units red | Spend |
+|---|---|---|---|---|---|
+| **Tagout** | **4/8** | **2/4** (j2, j6) | **0/4** | 2/4 | $0.3298 |
+| Lite tier | 5/8 | 2/4 (j2, j6) | 0/4 | 3/4 | $0.0069 |
+
+- **j2, a false alarm:** the DREO heater's model is listed, but only units made April 2025 through January 2026 are recalled, and this one says 2026/03. The made-date window in CPSC's prose was not read, so the model match decided red. The best-by rule added after set #2 covers food and drug records only.
+- **j6, a false alarm:** the serial (8455120, outside 8400054-8450499) was not carried into the item, so the Likorall 200's product code matched an older recall (Z-0783-2022) that lists it. j5 (inside the interval) came out red the same way, right for the wrong reason.
+- **j3, orange where red is right:** CPSC 27-041 prints two made-date windows; the item's 2025/06 is inside the second. Orange, the safe miss. j4 (in the gap) is orange too, which is right.
+- **j7, orange where red is right; j8 right:** the serial (A62881-020) was dropped from the item, and the check cited the neighbouring record Z-0137-2027 instead of Z-0138-2027. The lite tier got j7 red from the right record.
+- **What this says:** on unseen bounded codes and dates, the rules added after set #2 did not generalise to CPSC made-date windows or to serials the list reader drops; both false alarms come from a code or date that never reached the matcher. Nothing is fixed here; it is published as it came out.
+- **Spend:** $0.3367 of Token Factory (the lite arm's cap was lowered from the pre-registered $0.05 to $0.02 to stay inside the $0.35 budget; it used $0.0069), Tavily keyless.
+
 ## Replaying (`npm run eval:replay`)
 
 - **What it does.** It re-runs every recorded arm offline from `eval/.cache` against the checked-out code: no network, no keys, no spend. Then it re-scores into `replay-summary.json` and compares with the recorded tags and with the committed replay. It exits 1 if any tag moved since the committed replay.

@@ -21,6 +21,7 @@ import summary from "@/eval/summary.json";
 import current from "@/eval/summary-current.json";
 import holdout from "@/eval/holdout-summary.json";
 import held2 from "@/eval/holdout2-summary.json";
+import held3 from "@/eval/holdout3-summary.json";
 import s from "./home.module.css";
 
 export const revalidate = 600;
@@ -70,6 +71,7 @@ export default async function Home() {
 
   const held = holdout.arms.find((a) => a.arm === "tagout");
   const t2 = held2.arms.find((a) => a.arm === "tagout");
+  const t3 = held3.arms.find((a) => a.arm === "tagout");
   const rb = current.arms.find((a) => a.arm === "tagout")?.redBasis;
   const basis = rb ? { reader: rb.by["reader-list"] ?? 0, n: rb.n } : null;
   const months = wall ? wall.months.length : 0;
@@ -183,6 +185,17 @@ export default async function Home() {
                   right · {t2.falseRed.length} false alarm (a best-by date outside the window) · {t2.falseClear.length} of {t2.falseClearOf} recalled items cleared
                 </span>
               </div>
+              {t3 ? (
+                <div className={s.heldCard}>
+                  <span className={s.heldKick}>Held out #3 · {held3.cases} cases, pre-registered Oct 30</span>
+                  <b className={s.heldBig}>
+                    {t3.right}/{t3.n}
+                  </b>
+                  <span>
+                    right · {t3.falseRed.length} false alarms (a date and a serial that never reached the matcher) · {t3.falseClear.length} of {t3.falseClearOf} recalled items cleared
+                  </span>
+                </div>
+              ) : null}
               <p className={s.heldBand}>
                 <span>Tavily off → on</span> Set 1: <b>0/10 → 8/10</b> recalls not yet in a database flagged · Set 2: <b>0/2 → 2/2</b>{" "}
                 <Link href="/proof#held-h">Both held-out sets, every case</Link>

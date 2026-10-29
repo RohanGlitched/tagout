@@ -10,6 +10,8 @@ import holdout from "@/eval/holdout-summary.json";
 import heldAfter from "@/eval/holdout-after-fixes.json";
 import heldExtra from "@/eval/holdout-arms-extra.json";
 import held2 from "@/eval/holdout2-summary.json";
+import held3 from "@/eval/holdout3-summary.json";
+import cases3File from "@/eval/cases-holdout3.json";
 import cases2File from "@/eval/cases-holdout2.json";
 import caseFile from "@/eval/cases.json";
 import notes from "@/eval/notes.json";
@@ -82,6 +84,8 @@ const lite2 = held2.arms.find((a) => a.arm === "fixed-plan-nano")!;
 const rules2 = held2.arms.find((a) => a.arm === "rules");
 const noweb2 = held2.arms.find((a) => a.arm === "tagout-noweb");
 const CODE_NOW = "019d39e";
+const h3t = held3.arms.find((a) => a.arm === "tagout")!;
+const cases3 = cases3File.cases as { id: string; text: string }[];
 const after = heldAfter.arms.find((a) => a.arm === "tagout")!;
 const cents = (x: number) => (x < 0.0005 ? "0¢" : `${(x * 100).toFixed(x < 0.01 ? 2 : 1)}¢`);
 const secs = (ms: number | null) => (ms == null ? "–" : `${(ms / 1000).toFixed(0)} s`);
@@ -174,12 +178,11 @@ export default function Proof() {
       <main className={s.main}>
         <header className={s.top}>
           <h1 className={s.h1}>
-            Measured on {holdout.cases + held2.cases} cases it had never seen, then on {summary.cases} it was tuned on.
+            Measured on {holdout.cases + held2.cases + held3.cases} cases it had never seen, then on {summary.cases} it was tuned on.
           </h1>
           <p className={s.lede}>
             Every case is a real 2025–26 recall record: units whose code is printed in a CPSC, FDA or NHTSA notice, the same products with a neighbouring lot or model, recalled lines
-            with no code, cars, and things no recall lists. Every answer was checked against the agency&apos;s own record, not against Tagout. Two sets were held out and run once;
-            the second was published with a git tag before anything ran on it.
+            with no code, cars, and things no recall lists. Every answer was checked against the agency&apos;s own record, not against Tagout. Three sets were held out and run once; the second and third were published with a git tag before anything ran on them.
           </p>
         </header>
         <nav className={s.index} aria-label="On this page">
@@ -187,6 +190,7 @@ export default function Proof() {
             ["head-h", "Short answer"],
             ["held-h", "Held out #1"],
             ["held2-h", "Held out #2"],
+            ["held3-h", "Held out #3"],
             ["tavily-h", "What Tavily does"],
             ["agent-h", "Is the agent worth it"],
             ["arms-h", "Each setup"],
@@ -228,6 +232,14 @@ export default function Proof() {
               </b>{" "}
               right, <b>{t2.falseRed.length}</b> of {t2.falseRedOf} false alarms, and <b>{t2.falseClear.length}</b> of {t2.falseClearOf} recalled items cleared green. The set
               tests printed ranges, code families and date windows, which the first sets never did on a recalled unit; <a href="#held2-h">what it found</a>.
+            </li>
+            <li data-kind="held">
+              <span className={s.claimKick}>Held out #3 · {held3.cases} cases, pre-registered, run once on Oct 30</span>
+              <span className={s.claimBig}>
+                {h3t.right}/{h3t.n}
+              </span>
+              right, <b>{h3t.falseRed.length}</b> of {h3t.falseRedOf} false alarms and <b>{h3t.falseClear.length}</b> of {h3t.falseClearOf} recalled items cleared green, on bounded codes and
+              dates the fixes after set #2 had never seen. <a href="#held3-h">What went wrong</a>.
             </li>
             <li>
               <span className={s.claimKick}>Tavily, on and off, same cases</span>
@@ -497,6 +509,72 @@ export default function Proof() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className={s.section} aria-labelledby="held3-h">
+          <h2 id="held3-h" className={s.h2}>
+            Held out #3: {held3.cases} cases, pre-registered Oct 30, run once
+          </h2>
+          <p className={s.sub}>
+            Written after the fixes above, to test them on recalls they had never seen: four recalls posted Oct 15-29 that bound their codes or dates instead of listing them (a
+            made-date window, two windows with a gap, a serial interval, a serial run), each with one unit inside the bound and one outside. Pushed with the tag{" "}
+            <a href={`${REPO_URL}/releases/tag/prereg-2026-10-30`}>
+              <span className="code">prereg-2026-10-30</span>
+            </a>{" "}
+            before any run and run once at <span className="code">{h3t.config?.code?.commit}</span>. It came out worse than the first two sets, and it is published as it came out.
+          </p>
+          <div className={s.tableWrap}>
+            <table className={`${s.table} ${s.stack} ${s.stackB}`}>
+              <thead>
+                <tr>
+                  <th scope="col">Setup</th>
+                  <th scope="col">Right</th>
+                  <th scope="col">Wrongly red</th>
+                  <th scope="col">Recalled items cleared green</th>
+                  <th scope="col">Coded recalled units red</th>
+                  <th scope="col">Cost per item, Tavily included</th>
+                </tr>
+              </thead>
+              <tbody>
+                {held3.arms.map((a) => (
+                  <tr key={a.arm} data-us={a.arm === "tagout" || undefined}>
+                    <th scope="row">
+                      {HELD_NAME[a.arm] ?? a.label}
+                      <small>pre-registered arm, run once</small>
+                    </th>
+                    <td>
+                      <b>{a.right}</b>/{a.n}
+                    </td>
+                    <td>
+                      {a.falseRed.length}/{a.falseRedOf}
+                    </td>
+                    <td>
+                      {a.falseClear.length}/{a.falseClearOf}
+                    </td>
+                    <td>
+                      {a.truePositives}/{a.positives}
+                    </td>
+                    <td>{cents(a.usdPerItemWithTavily)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <ul className={s.wrong}>
+            {["j2", "j6", "j3", "j7"].map((id) => (
+              <li key={id}>
+                <p className={s.wrongHead}>
+                  <span className="code">{id}</span> {cases3.find((c) => c.id === id)?.text}{" "}
+                  <i data-level={(h3t.levels as Record<string, string>)[id]}>{TAG_WORDS[(h3t.levels as Record<string, string>)[id] as TagLevel]}</i>
+                </p>
+                <p>{note(`h3:${id}`)}</p>
+              </li>
+            ))}
+          </ul>
+          <p className={s.sub}>
+            Both false alarms come from a code or a date that never reached the matcher: a made-date window in CPSC&apos;s prose that wasn&apos;t read, and a serial the list reader
+            dropped. Nothing has been fixed since; these are the next things to fix and to test on a fourth set.
+          </p>
         </section>
 
         <section className={s.section} aria-labelledby="tavily-h">
