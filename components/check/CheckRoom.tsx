@@ -7,6 +7,7 @@ import type { Event } from "@/lib/agent/run";
 import type { Item, Verdict } from "@/lib/types";
 import { plural } from "@/lib/format";
 import Tag from "@/components/tag/Tag";
+import { SHOWCASE } from "@/lib/site";
 import ItemRow from "./ItemRow";
 import s from "./room.module.css";
 
@@ -122,6 +123,8 @@ export default function CheckRoom({ initial, onDone, embedded = false }: { initi
   const pending = items.length - verdicts.size;
   const order = { danger: 0, warning: 1, inspected: 2 } as const;
   // Once everything is decided, red first; while running, keep the order the person typed.
+  // Tavily web searches that didn't answer (its free tier refuses with 429 once capped, or today's allowance is spent).
+  const webRefused = (rec.log ?? []).filter((l) => l.t === "step" && l.step.source === "web" && l.step.error).length;
   const sorted = rec.status === "done" ? [...items].sort((a, b) => order[verdicts.get(a.id)?.level ?? "inspected"] - order[verdicts.get(b.id)?.level ?? "inspected"]) : items;
 
   return (
@@ -151,6 +154,15 @@ export default function CheckRoom({ initial, onDone, embedded = false }: { initi
       {error ? (
         <p className={s.error} role="alert">
           {error}
+        </p>
+      ) : null}
+
+      {webRefused ? (
+        <p className={s.note} role="status">
+          <b>Web search is limited right now.</b> Tavily refused {plural(webRefused, "of this check's web searches", "of this check's web searches")} (its free
+          tier is capped), so the check leaned on the agency databases. To see the web half working, open two saved checks that ran with Tavily on:{" "}
+          <a href={`/check/${SHOWCASE.webcatch}`}>recalls caught on the web before the databases</a> and{" "}
+          <a href={`/check/${SHOWCASE.household}`}>a household of five things</a>. They are saved checks, not this one.
         </p>
       ) : null}
 

@@ -159,6 +159,22 @@ function Plate({ a, lead = false }: { a: Arm; lead?: boolean }) {
   );
 }
 
+/** Per-case write-ups: open on desktop, one tap away on phones (two copies; CSS shows one per width). */
+function CaseNotes({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <>
+      <details className={s.wideOpen} open>
+        <summary>{label}</summary>
+        {children}
+      </details>
+      <details className={s.phoneOnly}>
+        <summary>{label}</summary>
+        {children}
+      </details>
+    </>
+  );
+}
+
 export default function Proof() {
   const t = arm("tagout")!;
   const lite = arm("fixed-plan-nano")!;
@@ -272,7 +288,7 @@ export default function Proof() {
           </ul>
           <p className={s.sub}>
             Across the three held-out sets: <b>{sumOf((a) => a.right)}</b> of {sumOf((a) => a.n)} right; <b>{sumOf((a) => a.falseRed.length)}</b> false alarms on{" "}
-            {sumOf((a) => a.falseRedOf)} clean items ({heldAll.map((a) => `${a.falseRed.length}/${a.falseRedOf}`).join(", ")}); <b>{sumOf((a) => a.falseClearOf - a.falseClear.length)}</b> of{" "}
+            {sumOf((a) => a.n - a.falseClearOf)} clean items ({heldAll.map((a) => `${a.falseRed.length} of ${a.n - a.falseClearOf}`).join(", ")}); <b>{sumOf((a) => a.falseClearOf - a.falseClear.length)}</b> of{" "}
             {sumOf((a) => a.falseClearOf)} recalled items flagged. Since set 1&apos;s fixes, {t2.falseClear.length + h3t.falseClear.length} of {t2.falseClearOf + h3t.falseClearOf} recalled
             items were cleared green across the {t2.n + h3t.n} pre-registered cases.
           </p>
@@ -372,7 +388,8 @@ export default function Proof() {
           </div>
           <p className={s.sub}>
             Right means the exact expected tag. &ldquo;Not in a database yet&rdquo; counts all 12 such cases (10 recalled units and 2 that aren&apos;t). Wrongly red is out of the 10 cases
-            where red would be wrong. The last two rows ran later, on newer code, so compare them with each other, not with the rows above.
+            where red would be wrong: the 8 clean items plus 2 recalled lines expected Check the label, which are also among the recalled items. That overlap is why the
+            &ldquo;clean items&rdquo; totals above (20 across the three sets) are smaller than the wrongly-red denominators (23). The last two rows ran later, on newer code, so compare them with each other, not with the rows above.
           </p>
           <ul className={s.claims}>
             <li>
@@ -559,6 +576,7 @@ export default function Proof() {
             rule {coverage.rules.pair.parsed} of {coverage.rules.pair.printsOne}, the family rule {coverage.rules.family.parsed} of {coverage.rules.family.printsOne} (it misses a
             list of serial prefixes).
           </p>
+          <CaseNotes label="Every case write-up, set #2">
           <ul className={s.wrong}>
             {wrong2.map((c) => (
               <li key={c.id}>
@@ -569,6 +587,7 @@ export default function Proof() {
               </li>
             ))}
           </ul>
+          </CaseNotes>
         </section>
 
         <section className={s.section} aria-labelledby="held3-h">
@@ -624,6 +643,7 @@ export default function Proof() {
               </tbody>
             </table>
           </div>
+          <CaseNotes label="Every case write-up, set #3">
           <ul className={s.wrong}>
             {["j2", "j6", "j3", "j7"].map((id) => (
               <li key={id}>
@@ -635,6 +655,7 @@ export default function Proof() {
               </li>
             ))}
           </ul>
+          </CaseNotes>
           <p className={s.sub}>
             Both false alarms were in the matcher: a made-date window in CPSC&apos;s prose that wasn&apos;t read (j2), and a bare product-code match in an older recall accepted
             without checking the serial intervals the new record prints for the same code (j6). j7 cited the sibling record that doesn&apos;t print its serial. The earlier write-up
@@ -644,8 +665,21 @@ export default function Proof() {
             <b>Fixed since, in-sample.</b> The notice&apos;s own made-date windows are read (j2 replays Checked); serial intervals for the item&apos;s own product code hold a bare
             product-code match in another recall at orange (j6 replays Check the label); a serial printed in a record&apos;s own text decides like a printed lot, so of two sibling
             records the one that prints it is the red one (j7 replays Do not use, from Z-0138-2027; j8 stays orange). Offline replays at <span className="code">{CODE_NOW}</span>: the
-            105 and every arm of sets #1 and #2 unchanged; set #3&apos;s Tagout arm replays 7 of 8 with no false alarm, j5-j8 approximately (some agent turns miss the cache). j3
+            105 and every arm of sets #1 and #2 unchanged; set #3&apos;s Tagout arm replays 7 of 8 with no false alarm, in-sample; j5-j8 needed Ultra calls the cache lacked, so j7 and j8
+            fell back to the fixed plan: j7&apos;s red is shown on the fallback path, and the agent path for it is untested offline. j3
             stays orange: both of its windows are read, but its record names the parts by letter-only codes (AASP), which the matcher doesn&apos;t match. A fourth set is the test.
+          </p>
+          <p className={s.sub}>
+            <b>Are the new rules general, or fitted to these eight?</b> Run over all {coverage.notices.toLocaleString("en-US")} CPSC and openFDA notices of 2026 (in-sample,{" "}
+            <a href={`${REPO_URL}/blob/main/docs/bound-coverage.json`}>docs/bound-coverage.json</a>): made-date windows are read in {coverage.rules.made.parsed} of the{" "}
+            {coverage.rules.made.printsOne} notices that print one (85 before the three wordings added after set #3), serial intervals in {coverage.rules.serial.parsed} of{" "}
+            {coverage.rules.serial.printsOne}. That says the rules reach beyond these cases; it is not a score. The fair estimate is still set #3 as run: {h3t.right} of{" "}
+            {h3t.n}.
+          </p>
+          <p className={s.sub}>
+            <b>Checkable from outside:</b> GitHub Actions shows <span className="code">aa53b04</span> pushed at 21:37:06 UTC on Oct 29; the Tagout arm&apos;s results file
+            records its finish at 21:39:35 UTC, after 334 s of case time on 3 workers (at least 112 s of wall time). So the run cannot have finished before the code was
+            public; GitHub alone can&apos;t prove it started after, which is why the cases were tagged first.
           </p>
         </section>
 
@@ -752,7 +786,21 @@ export default function Proof() {
             <li>
               <span className={s.claimKick}>Held out #3</span>
               The fixed plan won: the lite tier got <b>{lite3.right}</b>, the agent <b>{h3t.right}</b>. The lite tier got j7 red from the right record while the agent cited its
-              sibling. Over the three sets the agent leads {held.right + t2.right + h3t.right} to {heldLite.right + lite2.right + lite3.right}.
+              sibling.
+            </li>
+            <li>
+              <span className={s.claimKick}>Against which plan</span>
+              Against the lite tier (fixed plan, Nano reader): <b>{held.right + t2.right + h3t.right}</b> vs <b>{heldLite.right + lite2.right + lite3.right}</b> over the three
+              sets; the lite tier won set 3, {lite3.right} vs {h3t.right}. The fixed plan with Ultra readers ran on set 1 only (agent {held.right}, plan 29).
+            </li>
+            <li>
+              <span className={s.claimKick}>What only the agent did</span>
+              <b>h07</b>, a brand-less price-tag photo: it searched CPSC by each number on the tag, then by product words (garment, clothing, sleepwear), and found CPSC 27-028;
+              the plan ran one CPSC search with the whole description and found nothing. <b>h43</b>, a veterinary drug: it searched the FDA by brand and drug name, then the
+              web, and read the company&apos;s recall page; the plan&apos;s brand-only FDA search found nothing. <b>g06</b>, a frozen pizza: when the UPC search came back empty,
+              it searched the FDA again by brand and product and found H-0022-2027; the plan stopped at the UPC. <b>g14</b>, a bike that isn&apos;t the recalled model: it
+              searched CPSC by the model words and left it Checked; the lite tier&apos;s reader kept the product name as a model code and tagged it red. Every step is in the
+              run files (<span className="code">eval/results-holdout*/</span>).
             </li>
             <li>
               <span className={s.claimKick}>The cascade</span>
@@ -906,6 +954,7 @@ export default function Proof() {
           <p className={s.sub}>
             {wrong.length ? `${wrong.length} of ${t.n} answers at today's code. Each one, and why.` : `Nothing at today's code. On Oct 15 it got ${oct15Wrong.length} of ${t.n} wrong:`}
           </p>
+          <CaseNotes label="Each miss, the tuned cases">
           <ul className={s.wrong}>
             {(wrong.length ? wrong : oct15Wrong).map((c) => {
               const lv = (wrong.length ? t.levels : oct15Tagout.levels)[c.id as keyof typeof t.levels] as TagLevel;
@@ -919,6 +968,7 @@ export default function Proof() {
               );
             })}
           </ul>
+          </CaseNotes>
         </section>
 
         {first ? (
@@ -931,6 +981,7 @@ export default function Proof() {
               {first.falseClear.length} recalled units cleared. Each miss was traced to its cause and fixed in code, with a unit test. The later numbers are therefore measured on cases
               that shaped the fixes; the held-out sets above are the fairer estimate for things Tagout hasn&apos;t seen.
             </p>
+            <CaseNotes label="Each first-run miss">
             <ul className={s.wrong}>
               {[...first.wrong.map((w) => w.id), "n21", "k07"]
                 .filter((id, i, a) => a.indexOf(id) === i && note(`first:${id}`))
@@ -942,6 +993,7 @@ export default function Proof() {
                   </li>
                 ))}
             </ul>
+            </CaseNotes>
           </section>
         ) : null}
 
@@ -1008,8 +1060,10 @@ export default function Proof() {
             </li>
             <li>
               Each arm ran each case once. Model answers vary between runs; this is one sample, not an average. Every HTTP response was cached, so all arms read the same agency data and
-              the whole run can be replayed for free: download the scrubbed <a href={`${REPO_URL}/releases/download/eval-2026-10-25/eval-cache.tgz`}>cache archive</a> (5.2 MB), unpack
-              it in the repo and run <span className="code">npm run eval:replay</span>.
+              the whole run can be replayed for free: download the scrubbed{" "}
+              <a href={`${REPO_URL}/releases/download/eval-2026-10-30/eval-cache-2026-10-30.tgz`}>cache archive</a> (6.3 MB, release eval-2026-10-30; the 105 and all three
+              held-out sets), unpack it in the repo and run <span className="code">npm run eval:replay</span> (sets #2 and #3: the commands in{" "}
+              <a href={`${REPO_URL}/blob/main/eval/HOLDOUT.md`}>HOLDOUT.md</a>).
             </li>
             <li>
               Small sets: {held2.cases} cases give wide intervals ({t2.right}/{t2.n} is {pct(t2.rightInterval[0])}–{pct(t2.rightInterval[1])}). Held out #2 ran with Tavily in keyless

@@ -113,6 +113,19 @@ export default function WatchRoom({ watch, checks: initial, feed }: { watch: Wat
               </>
             )}
           </p>
+          {replay ? null : (
+            <p className={s.reach}>
+              Alerts reach you today through this watch&apos;s feed:{" "}
+              <a href={`https://feedly.com/i/subscription/feed/${encodeURIComponent(feed.feedUrl)}`} target="_blank" rel="noreferrer">
+                add it to your phone&apos;s feed reader
+              </a>{" "}
+              or{" "}
+              <a href={`https://blogtrottr.com/?subscribe=${encodeURIComponent(feed.feedUrl)}`} target="_blank" rel="noreferrer">
+                get these by email
+              </a>{" "}
+              (Feedly and Blogtrottr are free outside services; the feed address is filled in). Built-in email and push are next.
+            </p>
+          )}
         </div>
         <div className={s.actions}>
           <a className={replay ? s.ghost : s.feedBtn} href={feed.feedUrl}>

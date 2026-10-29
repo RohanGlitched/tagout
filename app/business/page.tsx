@@ -78,7 +78,7 @@ export default function Business() {
           <div className={s.split}>
             <div>
               <h2 id="first-h" className={s.h2}>
-                First customer: property managers and home-warranty firms
+                First target customer (none paying yet): property managers and home-warranty firms
               </h2>
               <p>
                 They keep each unit&apos;s appliances (brand, model, serial) for service calls and inspections. Tagout watches that list, and a recall that names one of those

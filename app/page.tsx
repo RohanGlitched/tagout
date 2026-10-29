@@ -94,6 +94,11 @@ export default async function Home() {
               <div className={s.formCard}>
                 <CheckForm examples={EXAMPLES} />
                 <p className={s.fine}>Searches NHTSA, CPSC, FDA, USDA and the web. No account, nothing to install.</p>
+                <p className={s.fine}>
+                  If web search or the model is capped when you try it, the check says so. Two saved checks that ran with everything on:{" "}
+                  <Link href={`/check/${SHOWCASE.household}`}>a household of five things</Link> and{" "}
+                  <Link href={`/check/${SHOWCASE.webcatch}`}>recalls caught on the web first</Link>.
+                </p>
                 <MyWatches className={s.fine} />
               </div>
             </div>
@@ -197,7 +202,10 @@ export default async function Home() {
                 </div>
               ) : null}
               <p className={s.heldBand}>
-                <span>Tavily off → on</span> Set 1: <b>0/10 → 8/10</b> recalls not yet in a database flagged · Set 2: <b>0/2 → 2/2</b>{" "}
+                <span>Together</span> <b>{held.right + t2.right + (t3?.right ?? 0)}/{held.n + t2.n + (t3?.n ?? 0)}</b> right ·{" "}
+                <b>{held.falseRed.length + t2.falseRed.length + (t3?.falseRed.length ?? 0)}</b> false alarms on{" "}
+                {held.n - held.falseClearOf + (t2.n - t2.falseClearOf) + (t3 ? t3.n - t3.falseClearOf : 0)} clean items · <span>Tavily off → on</span> Set 1:{" "}
+                <b>0/10 → 8/10</b> recalls not yet in a database flagged · Set 2: <b>0/2 → 2/2</b>{" "}
                 <Link href="/proof#held-h">All three held-out sets, every case</Link>
               </p>
             </div>
